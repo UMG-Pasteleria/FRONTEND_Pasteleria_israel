@@ -1,4 +1,5 @@
 import "../styles/navbar.css";
+import logo from "../assets/04.jpg";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,14 +18,18 @@ function Navbar() {
     <>
       <header className="header">
         <h2>Pasteleria Israel</h2>
+
+        <div className="logoPI">
+          <img
+            src={logo}
+            className="logoLogin"
+            onClick={() => navegate("/Inicio")}
+          />
+        </div>
       </header>
 
       <nav className="navbarUMG">
-        <button
-          type="button"
-          className="navB"
-          onClick={() => navegate("/Inicio")}
-        >
+        <button type="button" className="navB">
           <div className="Reportes">
             <span className="material-symbols-outlined">bar_chart</span>
             <span>Reportes</span>
@@ -56,7 +61,11 @@ function Navbar() {
           </div>
         </button>
 
-        <button type="button" className="navB">
+        <button
+          type="button"
+          className="navB"
+          onClick={() => navegate("/Proveedor")}
+        >
           <div className="Inventario">
             <span className="material-symbols-outlined">local_shipping</span>
             <span>Compras</span>

@@ -88,20 +88,27 @@
         font-size: large;
         height: 100px;
         width: 100%;
-        z-index: 99;
+        z-index: 95;
         transition: 0.3s;
     }
     .header h2{
-        color: #dfdfdf;
+        color: #ffffff;
         text-align: center;
         justify-content: center;
         padding-top: 20px;
         font-family: 'Istok Web';
-        text-shadow: 1px 3px 25px rgba(0, 0, 0, 0.9);
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.70);
     }
     .header img{
-        width: 50px;
-        z-index: 50;
+        width: 65px;
+        height: 65px;
+        border: #ffffff80 solid 3px;
+        border-radius: 50%;
+        position:absolute;
+        top: 17%;
+        left: 5%;
+        z-index: 92;
+        cursor: pointer;
     }
     .navbarUMG{
         /*grid-area: navbar; */
@@ -112,6 +119,7 @@
         /* margin-top: 100px; */
         width: 160px ;
         height: 100%;
+        z-index: 90;
         background-color:#ffffff;
         font-family: 'Istok Web';
         font-size: small;
@@ -217,6 +225,17 @@
         "footer " 100px;
         transition: 0.3s;       
     }*/
+    .header img{
+        width: 50px;
+        height: 50px;
+        border: #ffffff80 solid 3px;
+        border-radius: 50%;
+        position:absolute;
+        top: 15%;
+        left: 5%;
+        z-index: 90;
+        cursor: pointer;
+    }
     .navbarUMG{
         
         display: flex;

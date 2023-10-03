@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-const Modal = ({ children, estado, cambiarEstado, titulo }) => {
+const Modal = ({ children, estado, cambiarEstado }) => {
   return (
     <>
       {estado && (
         <Overlay>
           <ContenedorModal>
             <EncabezadoModal>
-              <h3>{titulo}</h3>
+              <h3>Nuevo proveedor</h3>
             </EncabezadoModal>
             <BotonCerrar onClick={() => cambiarEstado(false)}>
               <span className="material-symbols-outlined">close</span>
@@ -33,7 +33,6 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 98;
 `;
 
 const ContenedorModal = styled.div`
@@ -44,7 +43,6 @@ const ContenedorModal = styled.div`
   border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 20px;
-  z-index: 99;
 `;
 
 const EncabezadoModal = styled.div`
