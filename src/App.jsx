@@ -3,39 +3,15 @@ import Login from "./pages/Login";
 import Inicio from "./pages/Inicio";
 import Proveedor from "./pages/Proveedor";
 import Usuario from "./pages/Usuario";
-import ProtectedRoute from "./protectedPage";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  createBrowserRouter,
-} from "react-router-dom";
-
-const router = createBrowserRouter(
-  {
-    path: "/",
-    element: <Login />,
-  },
-
-  {
-    path: "/",
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: "/Inicio",
-        element: <Inicio />,
-      },
-    ],
-  }
-);
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/Inicio" element={<Inicio />} />
@@ -47,7 +23,7 @@ function App() {
             element={<Proveedor />}
           />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }
