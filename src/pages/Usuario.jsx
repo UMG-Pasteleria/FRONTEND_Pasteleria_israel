@@ -347,35 +347,40 @@ const Usuario = () => {
           {/* //------------------------------ FIN MODAL EDITAR USUARIO */}
 
           {/* //----------------------------------ELIMINAR USUARIO ----------------------------------*/}
-          <div className="controlesUsuario">
-            <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-              <span className="material-symbols-outlined">person_add</span>
-            </button>
+          <div className="centrarControles">
+            <div className="controlesUsuario">
+              <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                <span className="material-symbols-outlined">person_add</span>
+              </button>
 
-            <div className="busqueda">
-              <form
-                action="http://localhost:3000/usuario"
-                method="get"
-                className="cuadroBusqueda"
-              >
-                <input
-                  type="text"
-                  placeholder="Buscar usuario"
-                  name="q"
-                ></input>
-                <button type="submit">
-                  <span className="material-symbols-outlined">search</span>
-                </button>
-              </form>
+              <div className="busqueda">
+                <form
+                  action="http://localhost:3000/usuario"
+                  method="get"
+                  className="cuadroBusqueda"
+                >
+                  <input
+                    type="text"
+                    placeholder="Buscar usuario"
+                    name="q"
+                  ></input>
+                  <button type="submit">
+                    <span className="material-symbols-outlined">search</span>
+                  </button>
+                </form>
+              </div>
+
+              <button>
+                <span className="material-symbols-outlined">print</span>
+              </button>
+              <button>
+                <span className="material-symbols-outlined">
+                  calendar_month
+                </span>
+              </button>
             </div>
-
-            <button>
-              <span className="material-symbols-outlined">print</span>
-            </button>
-            <button>
-              <span className="material-symbols-outlined">calendar_month</span>
-            </button>
           </div>
+
           <hr></hr>
           <br />
           <div className="usuarioMovil">
@@ -385,8 +390,47 @@ const Usuario = () => {
                   <img
                     src={avatar}
                     className="avatar"
-                    // onClick={() => navegate("/Inicio")}
+                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
                   />
+                </div>
+                <div
+                  className="datoUsuario"
+                  onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                >
+                  <div>
+                    <h3>
+                      {usuario.nombre} {usuario.apellido}
+                    </h3>
+                  </div>
+                  <div>
+                    <h5>{usuario.email}</h5>
+                  </div>
+                  <div> Telefono: {usuario.telefono}</div>
+                </div>
+                <div className="btControlU">
+                  <button
+                    className="btEditarU"
+                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <br />
+                  <button
+                    className="btEliminarU"
+                    onClick={() => mostrarAlerta(usuario.iduser)}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="usuarioEscritorio">
+            {usuario.map((usuario, index) => (
+              <div className="conenedorPusuario" key={index}>
+                <div className="imgPerfil">
+                  <img src={avatar} className="avatar" />
                 </div>
                 <div className="datoUsuario">
                   <div>
@@ -399,15 +443,16 @@ const Usuario = () => {
                   </div>
                   <div> Telefono: {usuario.telefono}</div>
                 </div>
-                <div className="btControl">
+                <div className="btControlU">
                   <button
-                    className="btEditar"
+                    className="btEditarU"
                     onClick={() => cambiarEstadoModal2(!estadoModal2)}
                   >
                     <span className="material-symbols-outlined">edit</span>
                   </button>
+
                   <button
-                    className="btEditar"
+                    className="btEliminarU"
                     onClick={() => mostrarAlerta(usuario.iduser)}
                   >
                     <span className="material-symbols-outlined">delete</span>

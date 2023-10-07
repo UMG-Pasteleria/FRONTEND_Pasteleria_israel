@@ -61,7 +61,7 @@
     padding: 30px;
 }
 /*------------ VERSION ESCRITORIO----------------------*/
-@media(max-width: 1600px){
+@media(min-width: 1201px){
     /*.grid-container{
         display: grid;
         gap:0px;
@@ -197,8 +197,10 @@
 }
 /* -------------------------------------FIN VERSION ESCRITORIO---------------------------------------------*/
 
-/*------------------------------------------ VERSION MOVIL--------------------------------------*/
-@media(max-width: 600px){
+
+/*------------------------------------------ VERSION TABLET-----------------------------------------------*/
+
+@media(min-width: 601px) and (max-width: 1200px){
     .header{
         box-shadow: -1px 1px 7px 0px rgba(0,0,0,0.75);
         grid-area: header;
@@ -210,7 +212,7 @@
         top: 0; 
         height: 65px;
         width: 100%;
-        z-index: 99;
+        z-index: 90;
         transition: 0.3s;
     }
     
@@ -225,6 +227,14 @@
         "footer " 100px;
         transition: 0.3s;       
     }*/
+    .header h2{
+        color: #ffffff;
+        text-align: center;
+        justify-content: center;
+        padding-top: 20px;
+        font-family: 'Istok Web';
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.70);
+    }
     .header img{
         width: 50px;
         height: 50px;
@@ -241,13 +251,13 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         position: fixed;
         bottom: 0px;
         left: 0px;
         height: 75px;
         width: 100%;
-        
+        z-index: 89;
         background-color:#ffffff;
         font-family: 'Istok Web';
         font-size: small;
@@ -274,6 +284,142 @@
     }
 
     .navbarUMG button::before{
+        border: none;
+        justify-content: center;
+        background-color: transparent;
+        color: #ff6600;
+        width: auto;
+        height: auto;
+        border-radius: 5px;
+        transition: 0.5s;
+    }
+   /*--------------------BOTONES DE NAVEGACION-------------------*/
+.Reportes{
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    padding: 5px;
+}
+.Pedidos{
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    padding: 5px;
+}
+.Administrar{
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    padding: 5px;
+}
+.Inventario{
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    padding: 5px;
+}
+/*-------------------- FIN BOTONES DE NAVEGACION-------------------*/
+.butonReport{
+    width: 190px;
+    height: 35px;
+    flex-shrink: 0;
+    border: none;
+    color: #ffffff;
+    border-radius: 50px;
+    background-color: #ff0000;
+    transition: 0.3s;
+}
+}
+
+/*-------------------------------------------FIN VERSION TABLET-----------------------------------------*/
+
+/*------------------------------------------ VERSION MOVIL--------------------------------------*/
+@media(max-width: 600px){
+    .header{
+        box-shadow: -1px 1px 7px 0px rgba(0,0,0,0.75);
+        grid-area: header;
+        background: url(../assets/panes.jpg);
+        background-size:cover;
+        background-position: center;
+        font-size: small;
+        position: fixed;
+        top: 0; 
+        height: 65px;
+        width: 100%;
+        min-width: 400px;
+        z-index: 90;
+        transition: 0.3s;
+    }
+    
+    /*.grid-container{
+        display: grid;
+        gap:0px;
+        transition: 1s;
+        height: 100%;
+        grid-template: 
+        "header" 65px
+        "main" auto
+        "footer " 100px;
+        transition: 0.3s;       
+    }*/
+    .header h2{
+        color: #ffffff;
+        text-align: center;
+        justify-content: center;
+        padding-top: 20px;
+        font-family: 'Istok Web';
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.70);
+    }
+    .header img{
+        width: 50px;
+        height: 50px;
+        border: #ffffff80 solid 3px;
+        border-radius: 50%;
+        position:absolute;
+        top: 15%;
+        left: 5%;
+        z-index: 90;
+        cursor: pointer;
+    }
+    .navbarUMG{
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        height: 75px;
+        width: 100%;
+         min-width: 400px;
+        z-index: 90;
+        background-color:#ffffff;
+        font-family: 'Istok Web';
+        font-size: small;
+        padding: 15px;
+        color: #5C5C5C;
+        box-shadow: 0px 1px 10px 6px rgba(0, 0, 0, 0.20);
+        transition: 0.3s;
+    }
+    .navbarUMG button{
+        border: none;
+        background-color: transparent;
+        color: #5C5C5C;
+        transition: 0.5s;
+    }
+    .navbarUMG button:hover{
+        border: none;
+        justify-content: center;
+        background-color: transparent;
+        color: #ff6600;
+        width: auto;
+        height: auto;
+        border-radius: 5px;
+        transition: 0.5s;
+    }
+
+    .navbarUMG button::after{
         border: none;
         justify-content: center;
         background-color: transparent;
