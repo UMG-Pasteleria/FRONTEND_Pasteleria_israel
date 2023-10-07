@@ -25,12 +25,6 @@
 
 
 
-.sidebar{
-    /*grid-area: sidebar;*/
-    background-color:#83d18d;
-    font-family: 'Istok Web';
-    padding: 30px;
-}
 .main{
     /*grid-area: main;*/
     background-color:#dfdfdf;
@@ -54,28 +48,10 @@
     height: 300px;
     
 }
-.footer{
-    /*grid-area: footer;*/
-    background-color:#ffffff;
-    font-family: 'Istok Web';
-    padding: 30px;
-}
+
 /*------------ VERSION ESCRITORIO----------------------*/
 @media(min-width: 1201px){
-    /*.grid-container{
-        display: grid;
-        gap:0px;
-        transition: 1s;
-        height: 100%;
-        grid-template: 
-        "header header header" 70px
-        "navbar main main" auto
-        "navbar main main" auto
-        "footer footer footer" 100px/
-        160px   auto   200px
-        ;
-        transition: 0.3s;
-    }*/
+  
     .header{
         box-shadow: -1px 1px 7px 0px rgba(0,0,0,0.75);
         /*grid-area: header;*/
@@ -216,17 +192,7 @@
         transition: 0.3s;
     }
     
-    /*.grid-container{
-        display: grid;
-        gap:0px;
-        transition: 1s;
-        height: 100%;
-        grid-template: 
-        "header" 65px
-        "main" auto
-        "footer " 100px;
-        transition: 0.3s;       
-    }*/
+    
     .header h2{
         color: #ffffff;
         text-align: center;
@@ -350,18 +316,6 @@
         z-index: 90;
         transition: 0.3s;
     }
-    
-    /*.grid-container{
-        display: grid;
-        gap:0px;
-        transition: 1s;
-        height: 100%;
-        grid-template: 
-        "header" 65px
-        "main" auto
-        "footer " 100px;
-        transition: 0.3s;       
-    }*/
     .header h2{
         color: #ffffff;
         text-align: center;

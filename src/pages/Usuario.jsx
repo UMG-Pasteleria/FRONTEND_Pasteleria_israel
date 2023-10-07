@@ -41,6 +41,19 @@ const Usuario = () => {
     });
     getData();
     cambiarEstadoModal1(!estadoModal1);
+    swal.fire({
+      title: "¡Usuario agregado!",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1200,
+      customClass: {
+        confirmButton: "btEliminar",
+        cancelButton: "btCancelar",
+        popup: "popus-eliminado",
+        title: "titulo-pop",
+        container: "contenedor-alert",
+      },
+    });
   });
 
   // ------------------------- ACTUALIZAR USUARIO ------------------------------------
