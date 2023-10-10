@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Modal from "../components/modals/modalUsuario";
+import ModalupUser from "../components/modals/ModalUpdateU";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
 import "../styles/usuarios.css";
+import { ModalEditUser } from "../components/modals/modalUserUp2";
 
 const Usuario = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
@@ -58,55 +60,12 @@ const Usuario = () => {
 
   // ------------------------- ACTUALIZAR USUARIO ------------------------------------
 
-  const enviarActualizarUsuario = handleSubmit((dataU) => {
-    console.log(dataU);
-    fetch(`https://8086zfpm-3000.use.devtunnels.ms/usuario/${iduser}`, {
-      method: "PUT",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify(dataU),
-    });
-    getData();
-    cambiarEstadoModal2(!estadoModal2);
-  });
+  //--------------------------------- OBTENER DATOS DE USUARIOA A ACTUALIZAR
+  const [idUserEdit, setIdUserEdit] = useState("");
 
-  //---------------------------------
+  // //----------------------------------
 
-  // const URLup = `https://8086zfpm-3000.use.devtunnels.ms/usuario/${iduser}`;
-  // const getDataUp = async () => {
-  //   try {
-  //     const response = await fetch(URLup);
-  //     const json = await response.json();
-  //     setUsuario(json);
-  //     console.log(json);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getDataUp();
-  // }, []);
-  //-------------version mejorada-------------------
-
-  const [state, setState] = useState({
-    nombre: "",
-    apellido: "",
-    telefono: "",
-    email: "",
-    contrasenia: "",
-  });
-  const handleChange = (event) => {
-    setState((prevProps) => ({
-      ...prevProps,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleSubmitU = (event) => {
-    // getDataUp();
-  };
-  //----------------------------------
-
-  // ------------------------ FIN ACTUALIZAR USUARIO ---------------------------------
+  // // ------------------------ FIN ACTUALIZAR USUARIO ---------------------------------
 
   //------------ELIMINAR USUARIO------------------
   const handleDelete = async (iduser) => {
@@ -253,110 +212,6 @@ const Usuario = () => {
           {/* --------------------------- FIN MODAL INGRESAR NUEVO USUARIO ------------------ */}
           {/* //------------------------------- MODAL PARA EDITAR USUARIO */}
 
-          <Modal
-            estado={estadoModal2}
-            cambiarEstado={cambiarEstadoModal2}
-            titulo="Editar usuario"
-          >
-            <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm" onSubmit={handleSubmitU}>
-                <div className="itemUser">
-                  <label>id: </label>
-                  <input
-                    // {...register("iduser")}
-                    type="text"
-                    id="idUser"
-                    placeholder="ID"
-                    value={state.iduser}
-                    onChange={handleChange}
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Nombre: </label>
-                  <input
-                    // {...register("nombre")}
-                    value={state.nombre}
-                    onChange={handleChange}
-                    type="text"
-                    id="nombreUser"
-                    placeholder="Nombre"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Apellido: </label>
-                  <input
-                    // {...register("apellido")}
-                    value={state.apellido}
-                    onChange={handleChange}
-                    type="text"
-                    id="apellidoUser"
-                    placeholder="Apellido"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Telefono: </label>
-                  <input
-                    // {...register("telefono")}
-                    value={state.telefono}
-                    onChange={handleChange}
-                    type="number"
-                    id="telefonoUser"
-                    placeholder="Telefono"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Correo: </label>
-                  <input
-                    // {...register("email")}
-                    value={state.email}
-                    onChange={handleChange}
-                    type="text"
-                    id="emailUser"
-                    placeholder="Correo electronico"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Contraeña: </label>
-                  <input
-                    // {...register("contrasenia")}
-                    value={state.contrasenia}
-                    onChange={handleChange}
-                    type="text"
-                    id="passwordUser"
-                    placeholder="Contraseña"
-                  ></input>
-                </div>
-
-                <br />
-
-                <div className="bonotesNewUser">
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                      className="btcancelar"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      type="submit"
-                      className="btGuardar"
-                      // onSubmit={() => cambiarEstadoModal1(!estadoModal1)}
-                    >
-                      Guardar
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </Modal>
           {/* //------------------------------ FIN MODAL EDITAR USUARIO */}
 
           {/* //----------------------------------ELIMINAR USUARIO ----------------------------------*/}
@@ -457,12 +312,10 @@ const Usuario = () => {
                   <div> Telefono: {usuario.telefono}</div>
                 </div>
                 <div className="btControlU">
-                  <button
-                    className="btEditarU"
-                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
+                  <ModalEditUser
+                    titulo2={"Actualizar Usuario"}
+                    idUserEdit={usuario.iduser}
+                  />
 
                   <button
                     className="btEliminarU"

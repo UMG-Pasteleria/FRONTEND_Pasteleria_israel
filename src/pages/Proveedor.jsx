@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Modal from "../components/modals/modalProveedor";
+import ModalP from "../components/modals/modalProveedor";
 import Navbar from "../components/navbar";
 import SidebarCompras from "../components/sidebarCompras";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/proveedores.css";
 
 const Proveedor = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
+  const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
   const [proveedor, setProveedor] = useState([]);
 
@@ -112,6 +114,12 @@ const Proveedor = () => {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
+  const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    console.log(params);
+  }, []);
 
   return (
     <>
@@ -124,7 +132,11 @@ const Proveedor = () => {
           <h2>Listado de Proveedores</h2>
           <br></br>
           {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
-          <Modal estado={estadoModal1} cambiarEstado={cambiarEstadoModal1}>
+          <ModalP
+            estado={estadoModal1}
+            cambiarEstado={cambiarEstadoModal1}
+            titulo="Nuevo proveedor"
+          >
             <div className="containerNewProv">
               <form className="nuevoProvForm" onSubmit={enviarProveedor}>
                 <div className="itemProv">
@@ -196,8 +208,89 @@ const Proveedor = () => {
                 </div>
               </form>
             </div>
-          </Modal>
+          </ModalP>
           {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
+
+          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
+          <ModalP
+            estado={estadoModal2}
+            cambiarEstado={cambiarEstadoModal2}
+            titulo={`Actualizar proveedor \n ${proveedor.idprov}`}
+          >
+            <div className="containerNewProv">
+              <form className="nuevoProvForm" onSubmit={enviarProveedor}>
+                <div className="itemProv">
+                  <label>Codigo: </label>
+                  <input
+                    {...register("nit")}
+                    type="number"
+                    id="nit"
+                    placeholder="NIT"
+                  ></input>
+                </div>
+
+                <div className="itemProv">
+                  <label>Proveedor: </label>
+                  <input
+                    // {...register("proveedor")}
+                    type="text"
+                    id="nombreProv"
+                    placeholder="Proveedor"
+                  ></input>
+                </div>
+
+                <div className="itemProv">
+                  <label>Telefono: </label>
+                  <input
+                    // {...register("telefono")}
+                    type="number"
+                    id="telefonoProv"
+                    placeholder="Telefono"
+                  ></input>
+                </div>
+
+                <div className="itemProv">
+                  <label>Correo: </label>
+                  <input
+                    // {...register("email")}
+                    type="text"
+                    id="emailProv"
+                    placeholder="Correo electronico"
+                  ></input>
+
+                  <div className="itemProv">
+                    <label>Direccion: </label>
+                    <input
+                      // {...register("direccion")}
+                      type="text"
+                      id="emailUser"
+                      placeholder="direccion"
+                    ></input>
+                  </div>
+                </div>
+                <br />
+
+                <div className="bonotesNewProv">
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                      className="btcancelar"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                  <div>
+                    <button type="submit" className="btGuardar">
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ModalP>
+          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
+
           {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
 
           <div className="centrarControles">
@@ -237,7 +330,7 @@ const Proveedor = () => {
           <br></br>
           <div className="proveedorMovil">
             {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores">
+              <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
                     <p>ID</p>
@@ -313,7 +406,7 @@ const Proveedor = () => {
             </div>
 
             {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores">
+              <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
                     <p>ID</p>
@@ -347,7 +440,10 @@ const Proveedor = () => {
                   </div>
                 </div>
                 <div className="controlBtP">
-                  <button className="btEditarU">
+                  <button
+                    className="btEditarU"
+                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
                     <span className="material-symbols-outlined">edit</span>
                   </button>
                   <br />

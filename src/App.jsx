@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Inicio from "./pages/Inicio";
 import Proveedor from "./pages/Proveedor";
 import Usuario from "./pages/Usuario";
-
+import ModalP from "../src/components/modals/modalProveedor";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,10 +18,7 @@ function App() {
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/Proveedor" element={<Proveedor />} />
           <Route path="/Usuario/:iduser/editar" element={<Usuario />} />
-          <Route
-            path="/Proveedor/:idproveedor/editar"
-            element={<Proveedor />}
-          />
+          <Route path="/Proveedor/:idprov/editar" element={<ModalP />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -195,7 +195,7 @@ height: 100%;
 /*---------------------------------- VERSION ESCRITORIO --------------------------*/
 @media(min-width: 1201px){
     .bodyProv{
-        margin-top: 100px;
+        margin-top: 115px;  /*--------------------------cambiar esto --------*/
     }
     .ContainerP{
         margin-left: 160px;
@@ -426,7 +426,7 @@ font-weight:bolder ;
 /*---------------------------------- VERSION TABLET --------------------------*/
 @media(max-width: 1200px){
     .bodyProv{
-        margin-top: 5px;
+        margin-top: 115px;
     }
     .ContainerP{
         margin-left: 0px;
@@ -658,7 +658,7 @@ font-weight:bolder ;
 
 @media(max-width: 600px){
     .bodyProv{
-        margin-top: 70px;
+        margin-top: 115px;
     }
     .ContainerP{
         margin-left: 0px;

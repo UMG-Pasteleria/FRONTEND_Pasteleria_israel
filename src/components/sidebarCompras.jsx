@@ -1,5 +1,4 @@
 import "../styles/sidebarCompras.css";
-import logo from "../assets/04.jpg";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,33 +7,37 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function SidebarCompras() {
+  const navegate = useNavigate();
   return (
     <>
-      <nav className="sidebar">
-        <button className="BTcompras" onClick={() => navegate("/Usuarios")}>
-          <div>
-            <h3>Compras</h3>
-          </div>
-        </button>
+      <div className="ContenedorSBC">
+        <nav className="sidebar">
+          <button className="BTcompras" onClick={() => navegate("/Usuario")}>
+            <div>
+              <h3>Compras</h3>
+            </div>
+          </button>
 
-        <button
-          className="BTproveedores"
-          onClick={() => navegate("/Proveedores")}
-        >
-          <div>
-            <h3>Proveedores</h3>
-          </div>
-        </button>
+          <button
+            className="BTproveedores"
+            onClick={() => navegate("/Proveedor")}
+          >
+            <div>
+              <h3>Proveedores</h3>
+              {/* <a href="#">Proveeedores</a> */}
+            </div>
+          </button>
 
-        <button
-          className="BTdevoluciones"
-          onClick={() => navegate("/Proveedores")}
-        >
-          <div>
-            <h3>Devoluciones</h3>
-          </div>
-        </button>
-      </nav>
+          <button
+            className="BTdevoluciones"
+            onClick={() => navegate("/Proveedor")}
+          >
+            <div>
+              <h3>Devoluciones</h3>
+            </div>
+          </button>
+        </nav>
+      </div>
     </>
   );
 }
