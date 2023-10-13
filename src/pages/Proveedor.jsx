@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ModalP from "../components/modals/modalProveedor";
+import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
 import Navbar from "../components/navbar";
 import SidebarCompras from "../components/sidebarCompras";
 import swal from "sweetalert2";
@@ -8,13 +9,13 @@ import avatar from "../assets/avatar.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/proveedores.css";
 
-const Proveedor = () => {
+function Proveedor() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
   const [proveedor, setProveedor] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
+  const URL = "http://localhost:3000/proveedores";
 
   const getData = async () => {
     try {
@@ -33,7 +34,7 @@ const Proveedor = () => {
   const { handleSubmit, register } = useForm();
   const enviarProveedor = handleSubmit((data) => {
     console.log(data);
-    fetch("http://localhost:3000/proveedores", {
+    fetch(URL, {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -116,6 +117,11 @@ const Proveedor = () => {
   //----------------------------FIN DE ALERTAS --------------------------------
   const navigate = useNavigate();
   const params = useParams();
+  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
+
+  const [idEdit, setIdEdit] = useState("");
+
+  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
   useEffect(() => {
     console.log(params);
@@ -212,83 +218,13 @@ const Proveedor = () => {
           {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
 
           {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
-          <ModalP
-            estado={estadoModal2}
-            cambiarEstado={cambiarEstadoModal2}
-            titulo={`Actualizar proveedor \n ${proveedor.idprov}`}
-          >
-            <div className="containerNewProv">
-              <form className="nuevoProvForm" onSubmit={enviarProveedor}>
-                <div className="itemProv">
-                  <label>Codigo: </label>
-                  <input
-                    {...register("nit")}
-                    type="number"
-                    id="nit"
-                    placeholder="NIT"
-                  ></input>
-                </div>
 
-                <div className="itemProv">
-                  <label>Proveedor: </label>
-                  <input
-                    // {...register("proveedor")}
-                    type="text"
-                    id="nombreProv"
-                    placeholder="Proveedor"
-                  ></input>
-                </div>
-
-                <div className="itemProv">
-                  <label>Telefono: </label>
-                  <input
-                    // {...register("telefono")}
-                    type="number"
-                    id="telefonoProv"
-                    placeholder="Telefono"
-                  ></input>
-                </div>
-
-                <div className="itemProv">
-                  <label>Correo: </label>
-                  <input
-                    // {...register("email")}
-                    type="text"
-                    id="emailProv"
-                    placeholder="Correo electronico"
-                  ></input>
-
-                  <div className="itemProv">
-                    <label>Direccion: </label>
-                    <input
-                      // {...register("direccion")}
-                      type="text"
-                      id="emailUser"
-                      placeholder="direccion"
-                    ></input>
-                  </div>
-                </div>
-                <br />
-
-                <div className="bonotesNewProv">
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                      className="btcancelar"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                  <div>
-                    <button type="submit" className="btGuardar">
-                      Guardar
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </ModalP>
+          <ModalupProiveedor
+            estado2={estadoModal2}
+            cambiarEstado2={cambiarEstadoModal2}
+            titulo2={`Actualizar proveedor \n ${proveedor.idprov}`}
+            idEdit={idEdit}
+          ></ModalupProiveedor>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
           {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
@@ -339,13 +275,19 @@ const Proveedor = () => {
                   <img
                     src={avatar}
                     className="avatar"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(proveedor.idprov)
+                    }
                   />
                 </div>
 
                 <div
                   className="datoProveedor"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  onClick={() =>
+                    cambiarEstadoModal2(!estadoModal2) &
+                    setIdEdit(proveedor.idprov)
+                  }
                 >
                   <div>
                     <h3>{proveedor.proveedor}</h3>
@@ -419,7 +361,7 @@ const Proveedor = () => {
                   />
                 </div>
 
-                <div
+                <form
                   className="datoProveedor"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
@@ -438,11 +380,14 @@ const Proveedor = () => {
                   <div>
                     <p>{proveedor.direccion}</p>
                   </div>
-                </div>
+                </form>
                 <div className="controlBtP">
                   <button
                     className="btEditarU"
-                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(proveedor.idprov)
+                    }
                   >
                     <span className="material-symbols-outlined">edit</span>
                   </button>
@@ -461,6 +406,6 @@ const Proveedor = () => {
       </div>
     </>
   );
-};
+}
 
 export default Proveedor;

@@ -1,68 +1,70 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const ModalupUser = ({
+const ModalupProiveedor = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
-  idUserEdit,
+  idEdit,
 }) => {
-  const [usuario, setUsuario] = useState([]);
+  const [proveedor, setProveedor] = useState([]);
 
-  const getDataUp = async (iduser) => {
+  const getDataUp = async (idprov) => {
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/usuario/${iduser}`,
+        `http://localhost:3000/proveedores/${idprov}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const json = await response.json();
-      setUsuario(json);
-      setUserUP({
-        nombre: usuario.nombre,
-        apellido: usuario.apellido,
-        telefono: usuario.telefono,
-        email: usuario.email,
-        contrasenia: usuario.contrasenia,
+      const proveedor = await response.json();
+      setProveedor(proveedor);
+      setProveedroUP({
+        idprov: proveedor.idprov,
+        proveedor: proveedor.proveedor,
+        nit: proveedor.nit,
+        telefono: proveedor.telefono,
+        email: proveedor.email,
+        direccion: proveedor.direccion,
       });
-      console.log(json);
+      console.log(proveedor);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(idUserEdit);
-  //   useEffect(() => {
-  //     if (idUserEdit) {
-  //       getDataUp(idUserEdit);
-  //     }
-  //   }, [idUserEdit]);
+  console.log(proveedor);
+  useEffect(() => {
+    if (idEdit) {
+      getDataUp(idEdit);
+    }
+  }, [idEdit]);
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [userUP, setUserUP] = useState({
-    nombre: "",
-    apellido: "",
+  const [proveedorUP, setProveedroUP] = useState({
+    idprov: "",
+    proveedor: "",
+    nit: "",
     telefono: "",
     email: "",
-    contrasenia: "",
+    direccion: "",
   });
 
   const onChangeData = (e) => {
-    setUserUP({ ...userUP, [e.target.name]: e.target.value });
+    setProveedroUP({ ...proveedorUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
   //----------------------Evento de envio del formulario
-  const onSubmitForm = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/usuario/${iduser}`,
+        `http://localhost:3000/proveedores/${idprov}`,
         {
           method: "PUT",
-          body: JSON.stringify(userUP),
+          body: JSON.stringify(proveedorUP),
           headers: {
             "Content-Type": "application/json",
           },
@@ -97,7 +99,7 @@ const ModalupUser = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm" onSubmit={onSubmitForm}>
+              <form className="nuevoUserForm" onSubmit={handleSubmit}>
                 <div className="itemUser">
                   <label>id: </label>
                   <input
@@ -105,32 +107,35 @@ const ModalupUser = ({
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    value={userUP.iduser}
+                    value={proveedorUP.idprov}
+                    name="idprov"
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Nombre: </label>
+                  <label>Proveedor: </label>
                   <input
                     // {...register("nombre")}
-                    value={userUP.nombre}
+                    value={proveedorUP.proveedor}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
+                    name="proveedor"
                     placeholder="Nombre"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Apellido: </label>
+                  <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={userUP.apellido}
+                    value={proveedorUP.nit}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    placeholder="Apellido"
+                    name="nit"
+                    placeholder="NIT"
                   ></input>
                 </div>
 
@@ -138,10 +143,11 @@ const ModalupUser = ({
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={userUP.telefono}
+                    value={proveedorUP.telefono}
                     onChange={(e) => onChangeData(e)}
                     type="number"
                     id="telefonoUser"
+                    name="telefono"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -150,22 +156,24 @@ const ModalupUser = ({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={userUP.email}
+                    value={proveedorUP.email}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
+                    name="email"
                     placeholder="Correo electronico"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Contraeña: </label>
+                  <label>direccion: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={userUP.contrasenia}
+                    value={proveedorUP.direccion}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
+                    name="direccion"
                     placeholder="Contraseña"
                   ></input>
                 </div>
@@ -202,7 +210,7 @@ const ModalupUser = ({
   );
 };
 
-export default ModalupUser;
+export default ModalupProiveedor;
 
 const Overlay = styled.div`
   width: 100vw;

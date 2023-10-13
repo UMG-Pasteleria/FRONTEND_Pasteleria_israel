@@ -5,9 +5,8 @@ import ChartDias from "../components/chart/grafica1";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Pie1 from "../components/chart/Pie1";
-import logo from "../assets/04.jpg";
 
-function Inicio() {
+function Reportes() {
   const { handleSubmit, register } = useForm();
   const enviarInicio = handleSubmit((data) => {
     console.log(data);
@@ -23,20 +22,12 @@ function Inicio() {
         <section className="main">
           <article className="contenido">
             <div className="reportes">
-              <img src={logo} className="logoLogin" />
-              <br />
-              <h1>Bienvenido</h1>
+              <h1>Reportes</h1>
               <br />
               <ChartDias />
             </div>
             <br></br>
-            <button
-              type="button"
-              className="butonReport"
-              onClick={() => navegate("/Reportes")}
-            >
-              Ver completo
-            </button>
+
             <div className="ContenedorPie">
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles vendidos</span>
@@ -52,7 +43,7 @@ function Inicio() {
               </div>
             </div>
           </article>
-          <article className="MenuInicio">
+          {/* <article className="MenuInicio">
             <div className="ElementoMenu1">
               <span className="TituloItem">Productos</span>
             </div>
@@ -69,14 +60,14 @@ function Inicio() {
               <span className="TituloItemWEB">Pagina WEB</span>
               <div className="Logo"></div>
             </div>
-          </article>
+          </article> */}
         </section>
       </div>
     </>
   );
 }
 
-export default Inicio;
+export default Reportes;
 
 // style={{
 //   width: "200px",

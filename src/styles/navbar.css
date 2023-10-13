@@ -161,15 +161,7 @@
 }
 
 /*-------------------- FIN BOTONES DE NAVEGACION-------------------*/
-    .butonReport{
-        width: 284px;
-        height: 35px;
-        border: none;
-        color: #ffffff;
-        border-radius: 50px;
-        background-color: #ff0000;
-        transition: 0.3s;
-    }
+
 }
 /* -------------------------------------FIN VERSION ESCRITORIO---------------------------------------------*/
 
@@ -285,16 +277,7 @@
     padding: 5px;
 }
 /*-------------------- FIN BOTONES DE NAVEGACION-------------------*/
-.butonReport{
-    width: 190px;
-    height: 35px;
-    flex-shrink: 0;
-    border: none;
-    color: #ffffff;
-    border-radius: 50px;
-    background-color: #ff0000;
-    transition: 0.3s;
-}
+
 }
 
 /*-------------------------------------------FIN VERSION TABLET-----------------------------------------*/
@@ -409,14 +392,5 @@
     padding: 5px;
 }
 /*-------------------- FIN BOTONES DE NAVEGACION-------------------*/
-.butonReport{
-    width: 190px;
-    height: 35px;
-    flex-shrink: 0;
-    border: none;
-    color: #ffffff;
-    border-radius: 50px;
-    background-color: #ff0000;
-    transition: 0.3s;
-}
+
 }

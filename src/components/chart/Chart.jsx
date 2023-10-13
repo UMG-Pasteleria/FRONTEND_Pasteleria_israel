@@ -10,19 +10,19 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Enero", Total: 1200 },
-  { name: "Febrero", Total: 2200 },
-  { name: "Marzo", Total: 3200 },
-  { name: "Abril", Total: 4200 },
-  { name: "Mayo", Total: 1100 },
-  { name: "Junio", Total: 3200 },
+  { name: "Lunes", Total: 3200 },
+  { name: "Martes", Total: 2200 },
+  { name: "Miercoles", Total: 3200 },
+  { name: "Jueves", Total: 1200 },
+  { name: "Viernes", Total: 3100 },
+  { name: "Sabado", Total: 3200 },
 ];
 
 const Chart = () => {
   return (
     <div className="chart">
-      <div className="title">Ingresos de los ultimos 6 meses</div>
-      <ResponsiveContainer width="100%" aspect={2 / 1}>
+      <div className="title">Ingresos de los ultimos 7 dias</div>
+      <ResponsiveContainer width="100%" aspect={2 / 0.5}>
         <AreaChart
           width={730}
           height={250}
@@ -30,9 +30,9 @@ const Chart = () => {
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
-            <linearGradient id="Total" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="Total" x1="0" y1="1" x2="2" y2="0">
               <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="90%" stopColor="#8884d8" stopOpacity={0.8} />
             </linearGradient>
             {/* <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />

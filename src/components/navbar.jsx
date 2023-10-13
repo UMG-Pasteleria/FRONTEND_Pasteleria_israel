@@ -29,7 +29,11 @@ function Navbar() {
       </header>
 
       <nav className="navbarUMG">
-        <button type="button" className="navB">
+        <button
+          type="button"
+          className="navB"
+          onClick={() => navegate("/Reportes")}
+        >
           <div className="Reportes">
             <span className="material-symbols-outlined">bar_chart</span>
             <span>Reportes</span>

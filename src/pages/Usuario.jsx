@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import Modal from "../components/modals/modalUsuario";
-import ModalupUser from "../components/modals/ModalUpdateU";
+import ModalupUser from "../components/modals/ModalUpdateProveedor";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
 import "../styles/usuarios.css";
-import { ModalEditUser } from "../components/modals/modalUserUp2";
+import ModalEditUser from "../components/modals/modalUserUp2";
 
 const Usuario = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
@@ -15,7 +15,7 @@ const Usuario = () => {
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuario, setUsuario] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/usuario";
+  const URL = "http://localhost:3000/usuario";
   const getData = async () => {
     try {
       const response = await fetch(URL);
@@ -61,7 +61,7 @@ const Usuario = () => {
   // ------------------------- ACTUALIZAR USUARIO ------------------------------------
 
   //--------------------------------- OBTENER DATOS DE USUARIOA A ACTUALIZAR
-  const [idUserEdit, setIdUserEdit] = useState("");
+  // const [idUserEdit, setIdUserEdit] = useState("");
 
   // //----------------------------------
 
@@ -69,12 +69,9 @@ const Usuario = () => {
 
   //------------ELIMINAR USUARIO------------------
   const handleDelete = async (iduser) => {
-    const res = await fetch(
-      `https://8086zfpm-3000.use.devtunnels.ms/usuario/${iduser}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const res = await fetch(`http://localhost:3000/susuario/${iduser}`, {
+      method: "DELETE",
+    });
     // const data = await res.json();
     console.log(res);
     // setUsuario(usuario.filter((usuario) => usuario.iduser !== iduser));
@@ -258,12 +255,14 @@ const Usuario = () => {
                   <img
                     src={avatar}
                     className="avatar"
-                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    onClick={() => (
+                      <ModalEditUser idUserEdit={usuario.iduser} />
+                    )}
                   />
                 </div>
                 <div
                   className="datoUsuario"
-                  onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
                     <h3>
@@ -312,10 +311,7 @@ const Usuario = () => {
                   <div> Telefono: {usuario.telefono}</div>
                 </div>
                 <div className="btControlU">
-                  <ModalEditUser
-                    titulo2={"Actualizar Usuario"}
-                    idUserEdit={usuario.iduser}
-                  />
+                  <ModalEditUser idUserEdit={usuario.iduser} />
 
                   <button
                     className="btEliminarU"
