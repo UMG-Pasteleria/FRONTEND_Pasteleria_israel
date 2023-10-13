@@ -17,20 +17,23 @@ function ModalEditUser({
 
   const [usuario, setUsuario] = useState([]);
 
-  const getDataUp = async (iduser) => {
+  const getDataUp = async (idusuario) => {
     try {
-      const response = await fetch(`http://localhost:3000/usuario/${iduser}`, {
-        headers: { "content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `http://localhost:3000/usuario/${idusuario}`,
+        {
+          headers: { "content-Type": "application/json" },
+        }
+      );
       const json = await response.json();
       setUsuario(json);
       setUserUP({
-        iduser: json.iduser,
-        nombre: json.nombre,
-        apellido: json.apellido,
+        idusuario: json.idusuario,
+        nombre_u: json.nombre_u,
+        apellido_u: json.apellido_u,
         telefono: json.telefono,
-        email: json.email,
-        contrasenia: json.contrasenia,
+        correo: json.correo,
+        password: json.password,
       });
       console.log(json);
     } catch (err) {
@@ -42,11 +45,11 @@ function ModalEditUser({
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
   const [userUP, setUserUP] = useState({
-    nombre: "",
-    apellido: "",
+    nombre_u: "",
+    apellido_u: "",
     telefono: "",
-    email: "",
-    contrasenia: "",
+    correo: "",
+    password: "",
   });
 
   const onChangeData = (e) => {
@@ -104,8 +107,8 @@ function ModalEditUser({
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    name="iduser"
-                    value={userUP.iduser}
+                    name="idusuario"
+                    value={userUP.idusuario}
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
@@ -114,11 +117,11 @@ function ModalEditUser({
                   <label>Nombre: </label>
                   <input
                     // {...register("nombre")}
-                    value={userUP.nombre}
+                    value={userUP.nombre_u}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre"
+                    name="nombre_u"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -127,11 +130,11 @@ function ModalEditUser({
                   <label>Apellido: </label>
                   <input
                     // {...register("apellido")}
-                    value={userUP.apellido}
+                    value={userUP.apellido_u}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="apellido"
+                    name="apellido_u"
                     placeholder="Apellido"
                   ></input>
                 </div>
@@ -153,11 +156,11 @@ function ModalEditUser({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={userUP.email}
+                    value={userUP.correo}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="email"
+                    name="correo"
                     placeholder="Correo electronico"
                   ></input>
                 </div>
@@ -166,11 +169,11 @@ function ModalEditUser({
                   <label>Contraeña: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={userUP.contrasenia}
+                    value={userUP.password}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
-                    name="contrasenia"
+                    name="password"
                     placeholder="Contraseña"
                   ></input>
                 </div>

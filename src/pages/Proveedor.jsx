@@ -127,6 +127,10 @@ function Proveedor() {
     console.log(params);
   }, []);
 
+  function validar() {
+    FormularioP.reset();
+  }
+
   return (
     <>
       <Navbar />
@@ -144,13 +148,17 @@ function Proveedor() {
             titulo="Nuevo proveedor"
           >
             <div className="containerNewProv">
-              <form className="nuevoProvForm" onSubmit={enviarProveedor}>
+              <form
+                className="nuevoProvForm"
+                id="FormularioP"
+                onSubmit={enviarProveedor}
+              >
                 <div className="itemProv">
-                  <label>Codigo: </label>
+                  <label>NIT: </label>
                   <input
-                    {...register("nit")}
+                    {...register("nit_pr")}
                     type="number"
-                    id="nit"
+                    id="nit_pr"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -158,9 +166,9 @@ function Proveedor() {
                 <div className="itemProv">
                   <label>Proveedor: </label>
                   <input
-                    {...register("proveedor")}
+                    {...register("nombre_pr")}
                     type="text"
-                    id="nombreProv"
+                    id="nombre_pr"
                     placeholder="Proveedor"
                   ></input>
                 </div>
@@ -168,9 +176,9 @@ function Proveedor() {
                 <div className="itemProv">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono")}
+                    {...register("telefono_pr")}
                     type="number"
-                    id="telefonoProv"
+                    id="telefono_pr"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -178,18 +186,18 @@ function Proveedor() {
                 <div className="itemProv">
                   <label>Correo: </label>
                   <input
-                    {...register("email")}
+                    {...register("correo_pr")}
                     type="text"
-                    id="emailProv"
+                    id="correo_pr"
                     placeholder="Correo electronico"
                   ></input>
 
                   <div className="itemProv">
                     <label>Direccion: </label>
                     <input
-                      {...register("direccion")}
+                      {...register("direccion_pr")}
                       type="text"
-                      id="emailUser"
+                      id="direccion_pr"
                       placeholder="direccion"
                     ></input>
                   </div>
@@ -207,7 +215,11 @@ function Proveedor() {
                     </button>
                   </div>
                   <div>
-                    <button type="submit" className="btGuardar">
+                    <button
+                      type="submit"
+                      className="btGuardar"
+                      onClick={validar}
+                    >
                       Guardar
                     </button>
                   </div>
@@ -222,7 +234,7 @@ function Proveedor() {
           <ModalupProiveedor
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={`Actualizar proveedor \n ${proveedor.idprov}`}
+            titulo2={"Actualizar proveedor"}
             idEdit={idEdit}
           ></ModalupProiveedor>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
@@ -255,15 +267,15 @@ function Proveedor() {
               <button>
                 <span className="material-symbols-outlined">print</span>
               </button>
-              <button>
-                <span className="material-symbols-outlined">
-                  calendar_month
-                </span>
+              <button onClick={getData}>
+                <span className="material-symbols-outlined">refresh</span>
               </button>
             </div>
           </div>
           <hr></hr>
           <br></br>
+
+          {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
             {proveedor.map((proveedor, index) => (
               <div className="ContenedorProveedores" key={index}>
@@ -290,13 +302,13 @@ function Proveedor() {
                   }
                 >
                   <div>
-                    <h3>{proveedor.proveedor}</h3>
+                    <h3>{proveedor.nombre_pr}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {proveedor.nit}</h5>
+                    <h5>NIT: {proveedor.nit_pr}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {proveedor.telefono}</p>
+                    <p>Telefono: {proveedor.telefono_pr}</p>
                   </div>
                 </div>
                 <div className="controlBtP">
@@ -314,7 +326,7 @@ function Proveedor() {
               </div>
             ))}
           </div>
-
+          {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
           <div className="proveedorEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
@@ -366,19 +378,19 @@ function Proveedor() {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{proveedor.proveedor}</h3>
+                    <h3>{proveedor.nombre_pr}</h3>
                   </div>
                   <div>
-                    <h5>{proveedor.nit}</h5>
+                    <h5>{proveedor.nit_pr}</h5>
                   </div>
                   <div>
-                    <p>{proveedor.telefono}</p>
+                    <p>{proveedor.telefono_pr}</p>
                   </div>
                   <div>
-                    <p>{proveedor.email}</p>
+                    <p>{proveedor.correo_pr}</p>
                   </div>
                   <div>
-                    <p>{proveedor.direccion}</p>
+                    <p>{proveedor.direccion_pr}</p>
                   </div>
                 </form>
                 <div className="controlBtP">

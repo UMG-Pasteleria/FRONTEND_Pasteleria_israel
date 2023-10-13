@@ -68,8 +68,8 @@ const Usuario = () => {
   // // ------------------------ FIN ACTUALIZAR USUARIO ---------------------------------
 
   //------------ELIMINAR USUARIO------------------
-  const handleDelete = async (iduser) => {
-    const res = await fetch(`http://localhost:3000/susuario/${iduser}`, {
+  const handleDelete = async (idusuario) => {
+    const res = await fetch(`http://localhost:3000/susuario/${idusuario}`, {
       method: "DELETE",
     });
     // const data = await res.json();
@@ -80,7 +80,7 @@ const Usuario = () => {
   // --------------------FIN ELIMINAR USUARIO----------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (iduser) => {
+  const mostrarAlerta = (idusuario) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
@@ -106,7 +106,7 @@ const Usuario = () => {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(iduser);
+          handleDelete(idusuario);
 
           swal.fire({
             title: "¡Eliminado!",
@@ -145,7 +145,7 @@ const Usuario = () => {
                 <div className="itemUser">
                   <label>Nombre: </label>
                   <input
-                    {...register("nombre")}
+                    {...register("nombre_u")}
                     type="text"
                     id="nombreUser"
                     placeholder="Nombre"
@@ -155,7 +155,7 @@ const Usuario = () => {
                 <div className="itemUser">
                   <label>Apellido: </label>
                   <input
-                    {...register("apellido")}
+                    {...register("apellido_u")}
                     type="text"
                     id="apellidoUser"
                     placeholder="Apellido"
@@ -175,7 +175,7 @@ const Usuario = () => {
                 <div className="itemUser">
                   <label>Correo: </label>
                   <input
-                    {...register("email")}
+                    {...register("correo")}
                     type="text"
                     id="emailUser"
                     placeholder="Correo electronico"
@@ -239,8 +239,8 @@ const Usuario = () => {
                 <span className="material-symbols-outlined">print</span>
               </button>
               <button>
-                <span className="material-symbols-outlined">
-                  calendar_month
+                <span className="material-symbols-outlined" onClick={getData}>
+                  refresh
                 </span>
               </button>
             </div>
@@ -256,7 +256,7 @@ const Usuario = () => {
                     src={avatar}
                     className="avatar"
                     onClick={() => (
-                      <ModalEditUser idUserEdit={usuario.iduser} />
+                      <ModalEditUser idUserEdit={usuario.idusuario} />
                     )}
                   />
                 </div>
@@ -266,11 +266,11 @@ const Usuario = () => {
                 >
                   <div>
                     <h3>
-                      {usuario.nombre} {usuario.apellido}
+                      {usuario.nombre_u} {usuario.apellido_u}
                     </h3>
                   </div>
                   <div>
-                    <h5>{usuario.email}</h5>
+                    <h5>{usuario.correo}</h5>
                   </div>
                   <div> Telefono: {usuario.telefono}</div>
                 </div>
@@ -284,7 +284,7 @@ const Usuario = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(usuario.iduser)}
+                    onClick={() => mostrarAlerta(usuario.idusuario)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -302,20 +302,20 @@ const Usuario = () => {
                 <div className="datoUsuario">
                   <div>
                     <h3>
-                      {usuario.nombre} {usuario.apellido}
+                      {usuario.nombre_u} {usuario.apellido_u}
                     </h3>
                   </div>
                   <div>
-                    <h5>{usuario.email}</h5>
+                    <h5>{usuario.correo}</h5>
                   </div>
                   <div> Telefono: {usuario.telefono}</div>
                 </div>
                 <div className="btControlU">
-                  <ModalEditUser idUserEdit={usuario.iduser} />
+                  <ModalEditUser idUserEdit={usuario.idusuario} />
 
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(usuario.iduser)}
+                    onClick={() => mostrarAlerta(usuario.idusuario)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>

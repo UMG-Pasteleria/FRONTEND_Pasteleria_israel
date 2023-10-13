@@ -427,9 +427,11 @@ font-weight:bolder ;
 @media(max-width: 1200px){
     .bodyProv{
         margin-top: 115px;
+        margin-bottom: 75px;
     }
     .ContainerP{
         margin-left: 0px;
+       
     }
 
     .Proveedores{

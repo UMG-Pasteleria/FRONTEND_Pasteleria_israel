@@ -20,11 +20,11 @@ const ModalupProiveedor = ({
       setProveedor(proveedor);
       setProveedroUP({
         idprov: proveedor.idprov,
-        proveedor: proveedor.proveedor,
-        nit: proveedor.nit,
-        telefono: proveedor.telefono,
-        email: proveedor.email,
-        direccion: proveedor.direccion,
+        nombre_pr: proveedor.nombre_pr,
+        nit_pr: proveedor.nit_pr,
+        telefono_pr: proveedor.telefono_pr,
+        correo_pr: proveedor.correo_pr,
+        direccion_pr: proveedor.direccion_pr,
       });
       console.log(proveedor);
     } catch (err) {
@@ -42,11 +42,11 @@ const ModalupProiveedor = ({
 
   const [proveedorUP, setProveedroUP] = useState({
     idprov: "",
-    proveedor: "",
-    nit: "",
-    telefono: "",
-    email: "",
-    direccion: "",
+    nombre_pr: "",
+    nit_pr: "",
+    telefono_pr: "",
+    correo_pr: "",
+    direccion_pr: "",
   });
 
   const onChangeData = (e) => {
@@ -117,11 +117,11 @@ const ModalupProiveedor = ({
                   <label>Proveedor: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.proveedor}
+                    value={proveedorUP.nombre_pr}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="proveedor"
+                    name="nombre_pr"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -130,11 +130,11 @@ const ModalupProiveedor = ({
                   <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={proveedorUP.nit}
+                    value={proveedorUP.nit_pr}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="nit"
+                    name="nit_pr"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -143,11 +143,11 @@ const ModalupProiveedor = ({
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={proveedorUP.telefono}
+                    value={proveedorUP.telefono_pr}
                     onChange={(e) => onChangeData(e)}
                     type="number"
                     id="telefonoUser"
-                    name="telefono"
+                    name="telefono_pr"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -156,11 +156,11 @@ const ModalupProiveedor = ({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={proveedorUP.email}
+                    value={proveedorUP.correo_pr}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="email"
+                    name="correo_pr"
                     placeholder="Correo electronico"
                   ></input>
                 </div>
@@ -169,11 +169,11 @@ const ModalupProiveedor = ({
                   <label>direccion: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={proveedorUP.direccion}
+                    value={proveedorUP.direccion_pr}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
-                    name="direccion"
+                    name="direccion_pr"
                     placeholder="Contraseña"
                   ></input>
                 </div>
