@@ -12,7 +12,7 @@ function SidebarCompras() {
     <>
       <div className="ContenedorSBC">
         <nav className="sidebar">
-          <button className="BTcompras" onClick={() => navegate("/Usuario")}>
+          <button className="BTcompras" onClick={() => navegate("/Compras")}>
             <div>
               <h3>Compras</h3>
             </div>
