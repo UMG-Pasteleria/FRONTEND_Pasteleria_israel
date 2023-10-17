@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
-import ModalupClient from "../components/modals/ModalUpdateProveedor";
-import ModalP from "../components/modals/nuevoCliente";
+import ModalupClient from "../components/modals/ModalUpdateCliente";
+import ModalC from "../components/modals/modalUsuario";
 import Navbar from "../components/navbar";
 import SidebarCompras from "../components/sidebarCompras";
 import "../styles/clientes.css";
@@ -135,14 +135,14 @@ function Cliente() {
     <>
       <Navbar />
       <SidebarCompras />
-      <div className="bodyProv">
-        <div className="ContainerP"></div>
+      <div className="bodyClient">
+        <div className="ContainerC"></div>
         <div className="Clientes">
           <br></br>
           <h2>Listado de Clientes</h2>
           <br></br>
           {/* ------------------- MODAL AGREGAR NUEVO CLIENTE-------------- */}
-          <ModalP
+          <ModalC
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
             titulo="Nuevo cliente"
@@ -226,7 +226,7 @@ function Cliente() {
                 </div>
               </form>
             </div>
-          </ModalP>
+          </ModalC>
           {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
 
           {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
@@ -277,7 +277,7 @@ function Cliente() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="clienteMovil">
-            {cliente.map((proveedor, index) => (
+            {cliente.map((cliente, index) => (
               <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
                   <div className="clienteID">
@@ -311,7 +311,7 @@ function Cliente() {
                     <p>Telefono: {cliente.telefono_client}</p>
                   </div>
                 </div>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button className="btEditarU">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
@@ -393,7 +393,7 @@ function Cliente() {
                     <p>{cliente.direccion_client}</p>
                   </div>
                 </form>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button
                     className="btEditarU"
                     onClick={() =>

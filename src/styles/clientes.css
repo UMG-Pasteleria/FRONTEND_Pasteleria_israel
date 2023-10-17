@@ -25,7 +25,7 @@ background-color: #b1b1b1;
     flex-direction: row;
     justify-content: center;
 }
-.centrarControles .controlesCliente{
+.centrarControles .controlesUsuario{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -33,7 +33,7 @@ background-color: #b1b1b1;
     width: 50%;
     min-width: 350px;
 }
-.centrarControles .controlesCliente .busqueda{
+.centrarControles .controlesUsuario .busqueda{
     width: 60%;
     min-width: 200px;
     height: 30px;
@@ -48,14 +48,14 @@ background-color: #b1b1b1;
    
 
 }
-.centrarControles .controlesCliente .busqueda .cuadroBusqueda {
+.centrarControles .controlesUsuario .busqueda .cuadroBusqueda {
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
 width: 100%;
 height: 100%;
 }
-.controlesCliente .busqueda .cuadroBusqueda input{
+.controlesUsuario .busqueda .cuadroBusqueda input{
     display: flex;
 flex-direction: row;
 justify-content: space-evenly;
@@ -67,7 +67,7 @@ height: 100%;
     text-align: center;
     background-color: #EEE;
 }
-.controlesCliente .busqueda .cuadroBusqueda  button{
+.controlesUsuario .busqueda .cuadroBusqueda  button{
     border: none;
     border-radius:0px 25px 25px 0px;
     background-color:#5c5c5c15;
@@ -76,7 +76,7 @@ height: 100%;
     height:100%;
     transition: 0.3s;
 }
-.controlesCliente .busqueda .cuadroBusqueda  button:hover{
+.controlesUsuario .busqueda .cuadroBusqueda  button:hover{
     border: none;
     border-radius:0px 25px 25px 0px;
     background-color:#FF8A00;
@@ -85,14 +85,14 @@ height: 100%;
     height:100%;
     transition: 0.3s;
 }
-.controlesCliente button{
+.controlesUsuario button{
     border: none;
     background-color: transparent;
     color: #5C5C5C;
     cursor: pointer;
     transition: 0.3s;
 }
-.controlesCliente button:hover{
+.controlesUsuario button:hover{
     border: none;
     background-color: transparent;
     color: #FF8A00;
@@ -379,7 +379,7 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarC:hover{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarU:hover{
         display: block;
         justify-content: center;
         background-color: rgba(92, 92, 92, 0.5);
@@ -394,7 +394,7 @@ font-weight:bolder ;
         transition: 0,3s;
     }
 
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarC{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarU{
         justify-content: center;
         background-color: rgba(255, 136, 0, 1);
         color: #ffffff;
@@ -407,7 +407,7 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarC:hover{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarU:hover{
         justify-content: center;
         background-color: rgba(255, 136, 0, 0.5);
         color: #ffffff;
@@ -598,7 +598,7 @@ font-weight:bolder ;
         transition: 0.3s all ease-out;
     }
 
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarC{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarU{
         display: block;
         justify-content: center;
         background-color: rgba(92, 92, 92, 1);
@@ -612,7 +612,7 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarC:hover{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEditarU:hover{
         display: block;
         justify-content: center;
         background-color: rgba(92, 92, 92, 0.5);
@@ -627,7 +627,7 @@ font-weight:bolder ;
         transition: 0,3s;
     }
 
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarC{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarU{
         justify-content: center;
         background-color: rgba(255, 136, 0, 1);
         color: #ffffff;
@@ -640,7 +640,7 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarC:hover{
+    .clienteEscritorio .ContenedorClientes .controlBtC .btEliminarU:hover{
         justify-content: center;
         background-color: rgba(255, 136, 0, 0.5);
         color: #ffffff;
@@ -789,7 +789,7 @@ font-weight:bolder ;
         transition: 0.3s all ease-out;
     }
 
-    .clienteMovil .ContenedorClientes .controlBtC .btEditarC{
+    .clienteMovil .ContenedorClientes .controlBtC .btEditarU{
         display: none;
         background-color: #5C5C5C;
         color: #ffffff;
@@ -801,7 +801,7 @@ font-weight:bolder ;
         padding-left: 5px;
         padding-right: 5px ;
     }
-    .clienteMovil .ContenedorClientes .controlBtC .btEliminarC{
+    .clienteMovil .ContenedorClientes .controlBtC .btEliminarU{
         background-color: #5C5C5C;
         color: #ffffff;
         border: none;
@@ -813,7 +813,7 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0.3s all ease-out;
     }
-    .clienteMovil .ContenedorClientes .controlBtC .btEliminarC:hover{
+    .clienteMovil .ContenedorClientes .controlBtC .btEliminarU:hover{
         background-color: #5c5c5c6a;
         color: #ffffff;
     }

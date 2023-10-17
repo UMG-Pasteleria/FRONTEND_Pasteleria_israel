@@ -121,7 +121,7 @@ const ModalupClient = ({
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre_pr"
+                    name="nombre_client"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -134,7 +134,7 @@ const ModalupClient = ({
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="nit_pr"
+                    name="nit_client"
                     placeholder="NIT"
                   ></input>
                 </div>
