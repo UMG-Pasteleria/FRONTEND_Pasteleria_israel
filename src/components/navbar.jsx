@@ -40,7 +40,11 @@ function Navbar() {
           </div>
         </button>
 
-        <button type="button" className="navB">
+        <button 
+        type="button" 
+        className="navB"
+        onClick={() => navegate("/Pedido")}
+        >
           <div className="Pedidos">
             <span className="material-symbols-outlined">smartphone</span>
             <span>Pedidos</span>
