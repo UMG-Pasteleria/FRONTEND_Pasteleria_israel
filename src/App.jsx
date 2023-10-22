@@ -7,6 +7,9 @@ import ModalP from "../src/components/modals/modalProveedor";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Reportes from "./pages/Reportes";
 import Compras from "./pages/Compras";
+import Web from "./pages/webInicio";
+import ProductosWEB from "./pages/ProductosWEB";
+import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -21,6 +24,9 @@ function App() {
           <Route path="/Proveedor" element={<Proveedor />} />
           <Route path="/Reportes" element={<Reportes />} />
           <Route path="/Compras" element={<Compras />} />
+          <Route path="/productos" element={<ProductosWEB />} />
+          <Route path="/pastelcumpleaños" element={<PastelCumpleWEB />} />
+          <Route path="/web" element={<Web />} />
           <Route path="/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Proveedor/:idprov/editar" element={<ModalP />} />
         </Routes>
