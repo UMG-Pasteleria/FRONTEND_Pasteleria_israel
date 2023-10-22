@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Caveat:wght@400;500;600;700&family=Indie+Flower&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&family=Work+Sans:wght@400;800&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.ContenedorWeb{
+    width: 100%;
+    height: 100%;
+    min-width: 400px;
+    margin-bottom: 60px;
+
+}
+.ContenedorWeb .main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+
+}
+.ContenedorWeb .main .bannerEncabezado {
+    width: 100%;
+    height: 200px;
+    min-width: 400px;
+    background: url(../assets/panes.jpg);
+    background-size:cover;
+    background-position: center;
+    position: absolute;
+    margin: -5px;
+    z-index: 80;
+}
+
+.ContenedorWeb .main .bannerEncabezado .logoLogin{
+    width: 120px;
+    height: 120px;
+    border: #cfcfcf80 solid 5px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    top: 50%;
+    left: 50%;
+    position:absolute;
+    transform: translate(-50%, -50%);
+}
+
+.ContenedorWeb .main .sectionMain{
+    margin-top: 200px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #dcdcdc;
+    padding: 10px;
+}
+.ContenedorWeb .main .sectionMain .contenedorDatosWeb{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb h2{
+    color: #000;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Istok Web;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 15px;
+}
+.ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb p{
+    color: #000;
+
+text-align: center;
+font-family: Istok Web;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+padding: 15px;
+    }
+ 
+
+    .ContenedorWeb .footer{
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family:  Istok Web;
+    }

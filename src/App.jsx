@@ -6,7 +6,14 @@ import Login from "./pages/Login";
 import Pedido from "./pages/Pedido";
 import Proveedor from "./pages/Proveedor";
 import Reportes from "./pages/Reportes";
+
 import Usuario from "./pages/Usuario";
+
+import Compras from "./pages/Compras";
+import Web from "./pages/webInicio";
+import ProductosWEB from "./pages/ProductosWEB";
+import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
+
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -22,6 +29,10 @@ function App() {
           <Route path="/Cliente" element={<Cliente />} />
           <Route path="/Pedido" element={<Pedido />} />
           <Route path="/Reportes" element={<Reportes />} />
+          <Route path="/Compras" element={<Compras />} />
+          <Route path="/productos" element={<ProductosWEB />} />
+          <Route path="/pastelcumpleaños" element={<PastelCumpleWEB />} />
+          <Route path="/web" element={<Web />} />
           <Route path="/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Proveedor/:idprov/editar" element={<ModalP />} />
           <Route path="/Cliente/:idclient/editar" element={<ModalP />} />

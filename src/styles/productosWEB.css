@@ -1,0 +1,340 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.ContenedorWeb {
+    width: 100%;
+    height: 100%;
+    min-width: 400px;
+    margin-bottom: 60px;
+
+}
+
+/*---------------------------------- VERSION TABLET --------------------*/
+@media (max-width: 1200px) {
+    .ContenedorWeb .main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+    
+    
+        }
+    
+        .ContenedorWeb .main .log .logoLogin {
+            width: 140px;
+            height: 140px;
+            border: #cfcfcf80 solid 5px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            top: 8%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+    
+        .ContenedorWeb .main .sectionMain {
+            margin-top: 200px;
+            width: 100%;
+            height: 100%;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: #ffffff;
+            padding: 30px;
+            border-top: #cfcfcf80 solid 2px;
+        }
+    
+        .ContenedorWeb .main .sectionMain .Cumple {
+            min-width: 250px;
+                max-width: 300px;
+                width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            background: url(../assets/PastelAzul.jpg);
+            background-size: cover;
+            background-position: center;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        .ContenedorWeb .main .sectionMain .Bodas {
+    min-width: 250px;
+        max-width: 300px;
+        width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            background: url(../assets/boda2.jpeg);
+            background-size: cover;
+            background-position: center;
+            margin-top: 10px;
+                margin-bottom: 5px;
+                margin-left: 10px;
+                margin-right: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        .ContenedorWeb .main .sectionMain .Festivos {
+min-width: 250px;
+    max-width: 300px;
+    width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            background: url(../assets/mama.jpg);
+            background-size: cover;
+            background-position: center;
+            margin-top: 10px;
+                margin-bottom: 5px;
+                margin-left: 10px;
+                margin-right: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        .ContenedorWeb .main .sectionMain .Frios {
+    min-width: 250px;
+        max-width: 300px;
+        width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            background: url(../assets/frio.jpg);
+            background-size: cover;
+            background-position: center;
+                margin-top: 10px;
+                    margin-bottom: 5px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        .ContenedorWeb .main .sectionMain .Pies {
+        min-width: 250px;
+        max-width: 300px;
+        width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            background: url(../assets/pie.jpg);
+            background-size: cover;
+            background-position: center;
+    margin-top: 10px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        .ContenedorWeb .main .sectionMain .TituloProducto {
+            color: #ffffff;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-family: Istok Web;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            /* background-color: rgba(0, 0, 0, 0.1);
+        width: auto;
+        height: 40px;
+        border-radius: 25px;
+        padding: 0px 25px; */
+        }
+}
+
+/*------------------- FIN VERSION TABLET --------------------------*/
+
+/*-------------------VERSION MOVIL----------------------------*/
+@media (max-width: 600px) {
+    
+
+.ContenedorWeb .main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+
+
+}
+.ContenedorWeb .main .log .logoLogin {
+    width: 140px;
+    height: 140px;
+    border: #cfcfcf80 solid 5px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    top: 8%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.ContenedorWeb .main .sectionMain {
+    margin-top: 200px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-top: #cfcfcf80 solid 2px;
+}
+
+.ContenedorWeb .main .sectionMain .Cumple {
+    min-width: 350px;
+    width: 100%;
+    max-width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background: url(../assets/PastelAzul.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+        margin-left: 0px;
+            margin-right: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.ContenedorWeb .main .sectionMain .Bodas {
+    min-width: 350px;
+        width: 100%;
+        max-width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background: url(../assets/boda2.jpeg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+        margin-right: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.ContenedorWeb .main .sectionMain .Festivos {
+    min-width: 350px;
+        width: 100%;
+        max-width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background: url(../assets/mama.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+        margin-right: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.ContenedorWeb .main .sectionMain .Frios {
+    min-width: 350px;
+        width: 100%;
+        max-width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background: url(../assets/frio.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+        margin-right: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+.ContenedorWeb .main .sectionMain .Pies {
+    min-width: 350px;
+        width: 100%;
+        max-width: 600px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background: url(../assets/pie.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+        margin-right: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.ContenedorWeb .main .sectionMain .TituloProducto{
+ color: #ffffff;   
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Istok Web;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    /* background-color: rgba(0, 0, 0, 0.1);
+    width: auto;
+    height: 40px;
+    border-radius: 25px;
+    padding: 0px 25px; */
+}
+
+}

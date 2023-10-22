@@ -76,7 +76,7 @@ function Navbar() {
         <button
           type="button"
           className="navB"
-          onClick={() => navegate("/Proveedor")}
+          onClick={() => navegate("/Compras")}
         >
           <div className="Inventario">
             <span className="material-symbols-outlined">local_shipping</span>
