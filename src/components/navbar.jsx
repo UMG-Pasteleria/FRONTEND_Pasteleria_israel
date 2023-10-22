@@ -1,7 +1,7 @@
+import "../styles/navbar.css";
+import logo from "../assets/04.jpg";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/04.jpg";
-import "../styles/navbar.css";
 
 //import styled from 'styled-components';
 //import Modal from './componentes/modal';
@@ -40,11 +40,7 @@ function Navbar() {
           </div>
         </button>
 
-        <button 
-        type="button" 
-        className="navB"
-        onClick={() => navegate("/Pedido")}
-        >
+        <button type="button" className="navB">
           <div className="Pedidos">
             <span className="material-symbols-outlined">smartphone</span>
             <span>Pedidos</span>
@@ -62,11 +58,7 @@ function Navbar() {
           </div>
         </button>
 
-        <button 
-          type="button" 
-          className="navB"
-          onClick={() => navegate("/Cliente")}
-          >
+        <button type="button" className="navB">
           <div className="Inventario">
             <span className="material-symbols-outlined">package_2</span>
             <span>Inventario</span>

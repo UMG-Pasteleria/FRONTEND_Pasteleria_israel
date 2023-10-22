@@ -1,19 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ModalP from "../src/components/modals/modalProveedor";
-import Cliente from "./pages/Cliente";
-import Inicio from "./pages/Inicio";
+import { useState } from "react";
 import Login from "./pages/Login";
-import Pedido from "./pages/Pedido";
+import Inicio from "./pages/Inicio";
 import Proveedor from "./pages/Proveedor";
-import Reportes from "./pages/Reportes";
-
 import Usuario from "./pages/Usuario";
-
+import ModalP from "../src/components/modals/modalProveedor";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Reportes from "./pages/Reportes";
 import Compras from "./pages/Compras";
 import Web from "./pages/webInicio";
 import ProductosWEB from "./pages/ProductosWEB";
 import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
-
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -26,8 +22,6 @@ function App() {
           <Route path="/Inicio" element={<Inicio />} />
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/Proveedor" element={<Proveedor />} />
-          <Route path="/Cliente" element={<Cliente />} />
-          <Route path="/Pedido" element={<Pedido />} />
           <Route path="/Reportes" element={<Reportes />} />
           <Route path="/Compras" element={<Compras />} />
           <Route path="/productos" element={<ProductosWEB />} />
@@ -35,8 +29,6 @@ function App() {
           <Route path="/web" element={<Web />} />
           <Route path="/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Proveedor/:idprov/editar" element={<ModalP />} />
-          <Route path="/Cliente/:idclient/editar" element={<ModalP />} />
-          <Route path="/Pedido/:idpedido/editar" element={<ModalP />} />
         </Routes>
       </BrowserRouter>
     </>
