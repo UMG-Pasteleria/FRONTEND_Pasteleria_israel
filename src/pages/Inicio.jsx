@@ -33,7 +33,7 @@ function Inicio() {
             <button
               type="button"
               className="butonReport"
-              onClick={() => navegate("/Reportes")}
+              onClick={() => navegate("/Admin/Reportes")}
             >
               Ver completo
             </button>
@@ -61,7 +61,10 @@ function Inicio() {
               <span className="TituloItem">Clientes</span>
             </div>
 
-            <div className="ElementoMenu3" onClick={() => navegate("/Usuario")}>
+            <div
+              className="ElementoMenu3"
+              onClick={() => navegate("/Admin/Usuario")}
+            >
               <span className="TituloItem">Empleados</span>
             </div>
 

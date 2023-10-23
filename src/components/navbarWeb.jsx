@@ -14,7 +14,7 @@ function NavbarWEB() {
   return (
     <>
       <nav className="navbarUMG">
-        <button type="button" className="navB" onClick={() => navegate("/web")}>
+        <button type="button" className="navB" onClick={() => navegate("/")}>
           <div className="Reportes">
             <span className="material-symbols-outlined">home</span>
 

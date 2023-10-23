@@ -23,7 +23,7 @@ function Navbar() {
           <img
             src={logo}
             className="logoLogin"
-            onClick={() => navegate("/Inicio")}
+            onClick={() => navegate("/Admin/Inicio")}
           />
         </div>
       </header>
@@ -32,7 +32,7 @@ function Navbar() {
         <button
           type="button"
           className="navB"
-          onClick={() => navegate("/Reportes")}
+          onClick={() => navegate("/Admin/Reportes")}
         >
           <div className="Reportes">
             <span className="material-symbols-outlined">bar_chart</span>
@@ -40,7 +40,11 @@ function Navbar() {
           </div>
         </button>
 
-        <button type="button" className="navB">
+        <button
+          type="button"
+          className="navB"
+          onClick={() => navegate("/Admin/Pedido")}
+        >
           <div className="Pedidos">
             <span className="material-symbols-outlined">smartphone</span>
             <span>Pedidos</span>
@@ -50,7 +54,7 @@ function Navbar() {
         <button
           type="button"
           className="navB"
-          onClick={() => navegate("/Usuario")}
+          onClick={() => navegate("/Admin/Usuario")}
         >
           <div className="Administrar">
             <span className="material-symbols-outlined">apartment</span>
@@ -68,7 +72,7 @@ function Navbar() {
         <button
           type="button"
           className="navB"
-          onClick={() => navegate("/Compras")}
+          onClick={() => navegate("/Admin/Compras")}
         >
           <div className="Inventario">
             <span className="material-symbols-outlined">local_shipping</span>

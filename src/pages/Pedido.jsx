@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalP from "../components/modals/modalProveedor";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
+import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
-import { useNavigate, useParams } from "react-router-dom";
-import "../styles/proveedores.css";
+import ModalupPedido from "../components/modals/ModalUpdatePedido";
+import ModalPed from "../components/modals/modalPedido";
+import Navbar from "../components/navbar";
+//import SidebarCompras from "../components/sidebarCompras";
+import SidebarPedidos from "../components/sidebarPedido";
+import "../styles/pedido.css";
 
-const Proveedor = () => {
+function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
-  const [proveedor, setProveedor] = useState([]);
+  const [pedido, setPedido] = useState([]);
 
-  const URL = "http://localhost:3000/proveedores";
+  const URL = "http://localhost:3000/pedidos";
 
   const getData = async () => {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setProveedor(json);
+      setPedido(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -30,9 +31,9 @@ const Proveedor = () => {
   useEffect(() => {
     getData();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
+  // // // // //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
   const { handleSubmit, register } = useForm();
-  const enviarProveedor = handleSubmit((data) => {
+  const enviarPedido = handleSubmit((data) => {
     console.log(data);
     fetch(URL, {
       method: "POST",
@@ -42,7 +43,7 @@ const Proveedor = () => {
     getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
-      title: "Proveedor Agregado!",
+      title: "Pedido Agregado!",
       icon: "success",
       showConfirmButton: false,
       timer: 1200,
@@ -54,33 +55,28 @@ const Proveedor = () => {
         container: "contenedor-alert",
       },
     });
-    (document.getElementById("correo_pr").value = null),
-      (document.getElementById("nit_pr").value = null),
-      (document.getElementById("nombre_pr").value = null),
-      (document.getElementById("telefono_pr").value = null),
-      (document.getElementById("direccion_pr").value = null);
   });
 
-  //-----------------ELIMINAR PORVEEDOR---------------------------------
+  //-----------------ELIMINAR PEDIDO---------------------------------
 
-  const handleDelete = async (idprov) => {
-    const res = await fetch(`http://localhost:3000/proveedores/${idprov}`, {
+  const handleDelete = async (idpedido) => {
+    const res = await fetch(`http://localhost:3000/pedidos/${idpedido}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setProveedor(proveedor.filter((proveedor) => proveedor.idprov !== idprov));
+    setPedido(pedido.filter((pedido) => pedido.idpedido !== idpedido));
   };
 
-  //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
+  //------------------------------------FIN ELIMINA PEDIDO -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idprov) => {
+  const mostrarAlerta = (idpedido) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
         icon: "question",
-        text: "Se eliminaran los datos del Proveedor",
+        text: "Se eliminaran los datos del Pedido",
         confirmButtonText: "Eliminar",
         confirmButtonColor: "#FF8A00",
         showCancelButton: true,
@@ -101,7 +97,7 @@ const Proveedor = () => {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idprov);
+          handleDelete(idpedido);
 
           swal.fire({
             title: "¡Eliminado!",
@@ -122,78 +118,82 @@ const Proveedor = () => {
   //----------------------------FIN DE ALERTAS --------------------------------
   const navigate = useNavigate();
   const params = useParams();
-  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- EDITAR PEDIDO ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
 
   useEffect(() => {
     console.log(params);
   }, []);
 
+  function validar() {
+    FormularioP.reset();
+  }
+
   return (
     <>
       <Navbar />
-      <SidebarCompras />
-      <div className="bodyProv">
-        <div className="ContainerP"></div>
-        <div className="Proveedores">
+      <SidebarPedidos />
+      <div className="bodyPedid">
+        <div className="ContainerPed"></div>
+        <div className="Pedidoss">
           <br></br>
-          <h2>Listado de Proveedores</h2>
+          <h2>Listado de Pedidos</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
-          <ModalP
+          {/* ------------------- MODAL AGREGAR NUEVO PEDIDO-------------- */}
+          <ModalPed
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nuevo proveedor"
+            titulo="Nuevo pedido"
           >
-            <div className="containerNewProv">
+            <div className="containerNewPedid">
               <form
-                className="nuevoProvForm"
-                id="FormularioP"
-                onSubmit={enviarProveedor}
+                className="nuevoPedidForm"
+                id="FormularioPedid"
+                onSubmit={enviarPedido}
               >
-                <div className="itemProv">
-                  <label>NIT: </label>
+                <div className="itemPedid">
+                  <label>No. </label>
                   <input
-                    {...register("nit_pr")}
+                    {...register("nit_pd")}
                     type="number"
                     id="nit_pr"
-                    placeholder="NIT"
+                    placeholder="No."
                   ></input>
                 </div>
 
-                <div className="itemProv">
-                  <label>Proveedor: </label>
+                <div className="itemPedid">
+                  <label>Productos: </label>
                   <input
-                    {...register("nombre_pr")}
+                    {...register("productos_pd")}
                     type="text"
-                    id="nombre_pr"
-                    placeholder="Proveedor"
+                    id="productos_pd"
+                    placeholder="Productos"
                   ></input>
                 </div>
 
-                <div className="itemProv">
+                <div className="itemPedid">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono_pr")}
+                    {...register("telefono_pd")}
                     type="number"
-                    id="telefono_pr"
+                    id="telefono_pd"
                     placeholder="Telefono"
                   ></input>
                 </div>
 
-                <div className="itemProv">
-                  <label>Correo: </label>
+                <div className="itemPedid">
+                  <label>Estado: </label>
                   <input
-                    {...register("correo_pr")}
+                    {...register("estado_pd")}
                     type="text"
-                    id="correo_pr"
-                    placeholder="Correo electronico"
+                    id="estado_pd"
+                    placeholder="Estado"
                   ></input>
 
-                  <div className="itemProv">
+                  {/* <div className="itemProv">
                     <label>Direccion: </label>
                     <input
                       {...register("direccion_pr")}
@@ -201,11 +201,11 @@ const Proveedor = () => {
                       id="direccion_pr"
                       placeholder="direccion"
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <br />
 
-                <div className="bonotesNewProv">
+                <div className="bonotesNewPedid">
                   <div>
                     <button
                       type="button"
@@ -219,7 +219,7 @@ const Proveedor = () => {
                     <button
                       type="submit"
                       className="btGuardar"
-                      // onClick={validar}
+                      onClick={validar}
                     >
                       Guardar
                     </button>
@@ -227,20 +227,20 @@ const Proveedor = () => {
                 </div>
               </form>
             </div>
-          </ModalP>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
+          </ModalPed>
+          {/* --------------------------- FIN MODAL INGRESAR NUEVO PEDIDO ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
+          {/* ------------------- MODAL EDITAR  PEDIDO-------------- */}
 
-          <ModalupProiveedor
+          <ModalupPedido
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar proveedor"}
+            titulo2={"Actualizar pedido"}
             idEdit={idEdit}
-          ></ModalupProiveedor>
-          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
+          ></ModalupPedido>
+          {/* --------------------------- FIN MODAL EDITAR PEDIDO ------------------ */}
 
-          {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
+          {/* //----------------------------------ELIMINAR PEDIDO ----------------------------------*/}
 
           <div className="centrarControles">
             <div className="controlesUsuario">
@@ -250,13 +250,13 @@ const Proveedor = () => {
 
               <div className="busqueda">
                 <form
-                  action="http://localhost:3000/usuario"
+                  action="http://localhost:3000/pedidos"
                   method="get"
                   className="cuadroBusqueda"
                 >
                   <input
                     type="text"
-                    placeholder="Buscar proveedor"
+                    placeholder="Buscar pedido"
                     name="q"
                   ></input>
                   <button type="submit">
@@ -277,42 +277,42 @@ const Proveedor = () => {
           <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
-          <div className="proveedorMovil">
-            {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores" key={index}>
+          <div className="pedidoMovil">
+            {pedido.map((pedido, index) => (
+              <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
-                  <div className="proveedorID">
-                    <p>ID</p>
-                    <span>{proveedor.idprov}</span>
+                  <div className="pedidoID">
+                    <p>No.</p>
+                    <span>{pedido.idpedido}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(proveedor.idprov)
+                      setIdEdit(pedido.idpedido)
                     }
                   />
                 </div>
 
                 <div
-                  className="datoProveedor"
+                  className="datoPedido"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(proveedor.idprov)
+                    setIdEdit(pedido.idpedido)
                   }
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{pedido.producto_pd}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {proveedor.nit_pr}</h5>
+                    <h5>Cliente: {pedido.cliente_pd}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {proveedor.telefono_pr}</p>
+                    <p>Telefono: {pedido.telefono_pd}</p>
                   </div>
                 </div>
-                <div className="controlBtP">
+                <div className="controlBtPd">
                   <button className="btEditarU">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
@@ -328,30 +328,30 @@ const Proveedor = () => {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="proveedorEscritorio">
+          <div className="pedidoEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>ID: </h3>
+                  <h3>No. </h3>
                 </div>
               </div>
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Proveedor: </h3>
+                  <h3>Producto: </h3>
                 </div>
                 <div className="encD">
-                  <h3>NIT: </h3>
+                  <h3>Cliente: </h3>
                 </div>
                 <div className="encD">
                   <h3>Telefono: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Correo: </h3>
+                  <h3>Estado: </h3>
                 </div>
-                <div className="encD">
+                {/* <div className="encD">
                   <h3>Direccion: </h3>
-                </div>
+                </div> */}
               </div>
               <div className="encBT">
                 <div>
@@ -360,12 +360,12 @@ const Proveedor = () => {
               </div>
             </div>
 
-            {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores" key={index}>
+            {pedido.map((pedido, index) => (
+              <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
-                  <div className="proveedorID">
-                    <p>ID</p>
-                    <span>{proveedor.idprov}</span>
+                  <div className="pedidosID">
+                    <p>No.</p>
+                    <span>{pedido.idpedido}</span>
                   </div>
                   <img
                     src={avatar}
@@ -375,31 +375,31 @@ const Proveedor = () => {
                 </div>
 
                 <form
-                  className="datoProveedor"
+                  className="datoPedido"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{pedido.producto_pd}</h3>
                   </div>
                   <div>
-                    <h5>{proveedor.nit_pr}</h5>
+                    <h5>{pedido.cliente_pd}</h5>
                   </div>
                   <div>
-                    <p>{proveedor.telefono_pr}</p>
+                    <p>{pedido.telefono_pd}</p>
                   </div>
                   <div>
-                    <p>{proveedor.correo_pr}</p>
+                    <p>{pedido.estado_pd}</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <p>{proveedor.direccion_pr}</p>
-                  </div>
+                  </div> */}
                 </form>
-                <div className="controlBtP">
+                <div className="controlBtPd">
                   <button
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(proveedor.idprov)
+                      setIdEdit(pedido.idpedido)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -407,7 +407,7 @@ const Proveedor = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(proveedor.idprov)}
+                    onClick={() => mostrarAlerta(pedido.idpedido)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -419,6 +419,6 @@ const Proveedor = () => {
       </div>
     </>
   );
-};
+}
 
-export default Proveedor;
+export default Pedido;

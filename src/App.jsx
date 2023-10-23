@@ -10,6 +10,8 @@ import Compras from "./pages/Compras";
 import Web from "./pages/webInicio";
 import ProductosWEB from "./pages/ProductosWEB";
 import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
+import Cliente from "./pages/Cliente";
+import Pedido from "./pages/Pedido";
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -18,17 +20,19 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Inicio" element={<Inicio />} />
-          <Route path="/Usuario" element={<Usuario />} />
-          <Route path="/Proveedor" element={<Proveedor />} />
-          <Route path="/Reportes" element={<Reportes />} />
-          <Route path="/Compras" element={<Compras />} />
-          <Route path="/productos" element={<ProductosWEB />} />
+          <Route path="/" element={<Web />} />
           <Route path="/pastelcumpleaños" element={<PastelCumpleWEB />} />
-          <Route path="/web" element={<Web />} />
-          <Route path="/Usuario/:iduser/editar" element={<Usuario />} />
-          <Route path="/Proveedor/:idprov/editar" element={<ModalP />} />
+          <Route path="/productos" element={<ProductosWEB />} />
+          <Route path="/Admin" element={<Login />} />
+          <Route path="/Admin/Inicio" element={<Inicio />} />
+          <Route path="/Admin/Usuario" element={<Usuario />} />
+          <Route path="/Admin/Proveedor" element={<Proveedor />} />
+          <Route path="/Admin/Reportes" element={<Reportes />} />
+          <Route path="/Admin/Compras" element={<Compras />} />
+          <Route path="/Admin/Cliente" element={<Cliente />} />
+          <Route path="/Admin/Pedido" element={<Pedido />} />
+          <Route path="/Admin/Usuario/:iduser/editar" element={<Usuario />} />
+          <Route path="/Admin/Proveedor/:idprov/editar" element={<ModalP />} />
         </Routes>
       </BrowserRouter>
     </>

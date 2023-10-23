@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalP from "../components/modals/modalProveedor";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
+import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
-import { useNavigate, useParams } from "react-router-dom";
-import "../styles/proveedores.css";
+import ModalupClient from "../components/modals/ModalUpdateCliente";
+import ModalCli from "../components/modals/modalCliente";
+import Navbar from "../components/navbar";
+//import SidebarCompras from "../components/sidebarCompras";
+import SidebarPedidos from "../components/sidebarPedido";
+import "../styles/clientes.css";
 
-const Proveedor = () => {
+function Cliente() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
-  const [proveedor, setProveedor] = useState([]);
+  const [cliente, setCliente] = useState([]);
 
-  const URL = "http://localhost:3000/proveedores";
+  const URL = "http://localhost:3000/clientes";
 
   const getData = async () => {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setProveedor(json);
+      setCliente(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -30,9 +31,9 @@ const Proveedor = () => {
   useEffect(() => {
     getData();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
+  // // // // //-----CAPTURAR DATOS DE NUEVO CLIENTE------//
   const { handleSubmit, register } = useForm();
-  const enviarProveedor = handleSubmit((data) => {
+  const enviarCliente = handleSubmit((data) => {
     console.log(data);
     fetch(URL, {
       method: "POST",
@@ -42,7 +43,7 @@ const Proveedor = () => {
     getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
-      title: "Proveedor Agregado!",
+      title: "Cliente Agregado!",
       icon: "success",
       showConfirmButton: false,
       timer: 1200,
@@ -54,33 +55,28 @@ const Proveedor = () => {
         container: "contenedor-alert",
       },
     });
-    (document.getElementById("correo_pr").value = null),
-      (document.getElementById("nit_pr").value = null),
-      (document.getElementById("nombre_pr").value = null),
-      (document.getElementById("telefono_pr").value = null),
-      (document.getElementById("direccion_pr").value = null);
   });
 
-  //-----------------ELIMINAR PORVEEDOR---------------------------------
+  //-----------------ELIMINAR CLIENTE---------------------------------
 
-  const handleDelete = async (idprov) => {
-    const res = await fetch(`http://localhost:3000/proveedores/${idprov}`, {
+  const handleDelete = async (idclient) => {
+    const res = await fetch(`http://localhost:3000/clientes/${idclient}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setProveedor(proveedor.filter((proveedor) => proveedor.idprov !== idprov));
+    setCliente(cliente.filter((cliente) => cliente.idclient !== idclient));
   };
 
-  //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
+  //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idprov) => {
+  const mostrarAlerta = (idclient) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
         icon: "question",
-        text: "Se eliminaran los datos del Proveedor",
+        text: "Se eliminaran los datos del Cliente",
         confirmButtonText: "Eliminar",
         confirmButtonColor: "#FF8A00",
         showCancelButton: true,
@@ -101,7 +97,7 @@ const Proveedor = () => {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idprov);
+          handleDelete(idclient);
 
           swal.fire({
             title: "¡Eliminado!",
@@ -122,90 +118,94 @@ const Proveedor = () => {
   //----------------------------FIN DE ALERTAS --------------------------------
   const navigate = useNavigate();
   const params = useParams();
-  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- EDITAR CLIENTE ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
 
   useEffect(() => {
     console.log(params);
   }, []);
 
+  function validar() {
+    FormularioP.reset();
+  }
+
   return (
     <>
       <Navbar />
-      <SidebarCompras />
-      <div className="bodyProv">
-        <div className="ContainerP"></div>
-        <div className="Proveedores">
+      <SidebarPedidos />
+      <div className="bodyClient">
+        <div className="ContainerC"></div>
+        <div className="Clientes">
           <br></br>
-          <h2>Listado de Proveedores</h2>
+          <h2>Listado de Clientes</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
-          <ModalP
+          {/* ------------------- MODAL AGREGAR NUEVO CLIENTE-------------- */}
+          <ModalCli
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nuevo proveedor"
+            titulo="Nuevo cliente"
           >
-            <div className="containerNewProv">
+            <div className="containerNewClient">
               <form
-                className="nuevoProvForm"
-                id="FormularioP"
-                onSubmit={enviarProveedor}
+                className="nuevoClientForm"
+                id="FormularioC"
+                onSubmit={enviarCliente}
               >
-                <div className="itemProv">
+                <div className="itemClient">
                   <label>NIT: </label>
                   <input
-                    {...register("nit_pr")}
+                    {...register("nit_client")}
                     type="number"
-                    id="nit_pr"
+                    id="nit_client"
                     placeholder="NIT"
                   ></input>
                 </div>
 
-                <div className="itemProv">
-                  <label>Proveedor: </label>
+                <div className="itemClient">
+                  <label>Cliente: </label>
                   <input
-                    {...register("nombre_pr")}
+                    {...register("nombre_client")}
                     type="text"
-                    id="nombre_pr"
-                    placeholder="Proveedor"
+                    id="nombre_client"
+                    placeholder="Cliente"
                   ></input>
                 </div>
 
-                <div className="itemProv">
+                <div className="itemClient">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono_pr")}
+                    {...register("telefono_client")}
                     type="number"
-                    id="telefono_pr"
+                    id="telefono_client"
                     placeholder="Telefono"
                   ></input>
                 </div>
 
-                <div className="itemProv">
+                <div className="itemClient">
                   <label>Correo: </label>
                   <input
-                    {...register("correo_pr")}
+                    {...register("correo_client")}
                     type="text"
-                    id="correo_pr"
+                    id="correo_client"
                     placeholder="Correo electronico"
                   ></input>
 
-                  <div className="itemProv">
+                  <div className="itemClient">
                     <label>Direccion: </label>
                     <input
-                      {...register("direccion_pr")}
+                      {...register("direccion_client")}
                       type="text"
-                      id="direccion_pr"
-                      placeholder="direccion"
+                      id="direccion_client"
+                      placeholder="Direccion"
                     ></input>
                   </div>
                 </div>
                 <br />
 
-                <div className="bonotesNewProv">
+                <div className="bonotesNewClient">
                   <div>
                     <button
                       type="button"
@@ -219,7 +219,7 @@ const Proveedor = () => {
                     <button
                       type="submit"
                       className="btGuardar"
-                      // onClick={validar}
+                      onClick={validar}
                     >
                       Guardar
                     </button>
@@ -227,17 +227,17 @@ const Proveedor = () => {
                 </div>
               </form>
             </div>
-          </ModalP>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
+          </ModalCli>
+          {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
+          {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
 
-          <ModalupProiveedor
+          <ModalupClient
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar proveedor"}
+            titulo2={"Actualizar cliente"}
             idEdit={idEdit}
-          ></ModalupProiveedor>
+          ></ModalupClient>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
           {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
@@ -250,13 +250,13 @@ const Proveedor = () => {
 
               <div className="busqueda">
                 <form
-                  action="http://localhost:3000/usuario"
+                  action="http://localhost:3000/clientes"
                   method="get"
                   className="cuadroBusqueda"
                 >
                   <input
                     type="text"
-                    placeholder="Buscar proveedor"
+                    placeholder="Buscar cliente"
                     name="q"
                   ></input>
                   <button type="submit">
@@ -277,42 +277,42 @@ const Proveedor = () => {
           <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
-          <div className="proveedorMovil">
-            {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores" key={index}>
+          <div className="clienteMovil">
+            {cliente.map((cliente, index) => (
+              <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
-                  <div className="proveedorID">
+                  <div className="clienteID">
                     <p>ID</p>
-                    <span>{proveedor.idprov}</span>
+                    <span>{cliente.idclient}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(proveedor.idprov)
+                      setIdEdit(cliente.idclient)
                     }
                   />
                 </div>
 
                 <div
-                  className="datoProveedor"
+                  className="datoCliente"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(proveedor.idprov)
+                    setIdEdit(cliente.idclient)
                   }
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{cliente.nombre_client}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {proveedor.nit_pr}</h5>
+                    <h5>NIT: {cliente.nit_client}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {proveedor.telefono_pr}</p>
+                    <p>Telefono: {cliente.telefono_client}</p>
                   </div>
                 </div>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button className="btEditarU">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
@@ -328,7 +328,7 @@ const Proveedor = () => {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="proveedorEscritorio">
+          <div className="clienteEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
@@ -338,7 +338,7 @@ const Proveedor = () => {
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Proveedor: </h3>
+                  <h3>Cliente: </h3>
                 </div>
                 <div className="encD">
                   <h3>NIT: </h3>
@@ -360,12 +360,12 @@ const Proveedor = () => {
               </div>
             </div>
 
-            {proveedor.map((proveedor, index) => (
-              <div className="ContenedorProveedores" key={index}>
+            {cliente.map((cliente, index) => (
+              <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
-                  <div className="proveedorID">
+                  <div className="clienteID">
                     <p>ID</p>
-                    <span>{proveedor.idprov}</span>
+                    <span>{cliente.idclient}</span>
                   </div>
                   <img
                     src={avatar}
@@ -375,31 +375,31 @@ const Proveedor = () => {
                 </div>
 
                 <form
-                  className="datoProveedor"
+                  className="datoCliente"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{cliente.nombre_client}</h3>
                   </div>
                   <div>
-                    <h5>{proveedor.nit_pr}</h5>
+                    <h5>{cliente.nit_client}</h5>
                   </div>
                   <div>
-                    <p>{proveedor.telefono_pr}</p>
+                    <p>{cliente.telefono_client}</p>
                   </div>
                   <div>
-                    <p>{proveedor.correo_pr}</p>
+                    <p>{cliente.correo_client}</p>
                   </div>
                   <div>
-                    <p>{proveedor.direccion_pr}</p>
+                    <p>{cliente.direccion_client}</p>
                   </div>
                 </form>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(proveedor.idprov)
+                      setIdEdit(cliente.idclient)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -407,7 +407,7 @@ const Proveedor = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(proveedor.idprov)}
+                    onClick={() => mostrarAlerta(cliente.idclient)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -419,6 +419,6 @@ const Proveedor = () => {
       </div>
     </>
   );
-};
+}
 
-export default Proveedor;
+export default Cliente;

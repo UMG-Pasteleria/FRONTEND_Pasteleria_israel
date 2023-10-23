@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
-const ModalupProiveedor = ({
+
+const ModalupClient = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
 }) => {
-  const [proveedor, setProveedor] = useState([]);
+  const [cliente, setCliente] = useState([]);
 
-  const getDataUp = async (idprov) => {
+  const getDataUp = async (idclient) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
+        `http://localhost:3000/clientes/${idclient}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const proveedor = await response.json();
-      setProveedor(proveedor);
-      setProveedroUP({
-        idprov: proveedor.idprov,
-        nombre_pr: proveedor.nombre_pr,
-        nit_pr: proveedor.nit_pr,
-        telefono_pr: proveedor.telefono_pr,
-        correo_pr: proveedor.correo_pr,
-        direccion_pr: proveedor.direccion_pr,
+      const cliente = await response.json();
+      setCliente(cliente);
+      setClienteoUP({
+        idclient: cliente.idclient,
+        nombre_client: cliente.nombre_client,
+        nit_client: cliente.nit_client,
+        telefono_client: cliente.telefono_client,
+        correo_client: cliente.correo_client,
+        direccion_client: cliente.direccion_client,
       });
-      console.log(proveedor);
+      console.log(cliente);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(proveedor);
+  console.log(cliente);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -40,32 +40,31 @@ const ModalupProiveedor = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [proveedorUP, setProveedroUP] = useState({
-    idprov: "",
-    nombre_pr: "",
-    nit_pr: "",
-    telefono_pr: "",
-    correo_pr: "",
-    direccion_pr: "",
+  const [clienteUP, setClienteoUP] = useState({
+    idclient: "",
+    nombre_client: "",
+    nit_client: "",
+    telefono_client: "",
+    correo_client: "",
+    direccion_client: "",
   });
 
   const onChangeData = (e) => {
-    setProveedroUP({ ...proveedorUP, [e.target.name]: e.target.value });
+    setClienteoUP({ ...clienteUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
   //----------------------Evento de envio del formulario
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
+        `http://localhost:3000/clientes/${idclient}`,
         {
           method: "PUT",
-          body: JSON.stringify(proveedorUP),
+          body: JSON.stringify(clienteUP),
           headers: {
             "Content-Type": "application/json",
           },
@@ -100,7 +99,7 @@ const ModalupProiveedor = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm">
+              <form className="nuevoUserForm" onSubmit={handleSubmit}>
                 <div className="itemUser">
                   <label>id: </label>
                   <input
@@ -108,21 +107,21 @@ const ModalupProiveedor = ({
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    value={proveedorUP.idprov}
-                    name="idprov"
+                    value={clienteUP.idclient}
+                    name="idclient"
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Proveedor: </label>
+                  <label>Cliente: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.nombre_pr}
+                    value={clienteUP.nombre_client}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre_pr"
+                    name="nombre_client"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -131,11 +130,11 @@ const ModalupProiveedor = ({
                   <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={proveedorUP.nit_pr}
+                    value={clienteUP.nit_client}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="nit_pr"
+                    name="nit_client"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -144,11 +143,11 @@ const ModalupProiveedor = ({
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={proveedorUP.telefono_pr}
+                    value={clienteUP.telefono_client}
                     onChange={(e) => onChangeData(e)}
                     type="number"
                     id="telefonoUser"
-                    name="telefono_pr"
+                    name="telefono_client"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -157,25 +156,25 @@ const ModalupProiveedor = ({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={proveedorUP.correo_pr}
+                    value={clienteUP.correo_client}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="correo_pr"
+                    name="correo_client"
                     placeholder="Correo electronico"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>direccion: </label>
+                  <label>Direccion: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={proveedorUP.direccion_pr}
+                    value={clienteUP.direccion_pr}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
-                    name="direccion_pr"
-                    placeholder="Contraseña"
+                    name="direccion_client"
+                    placeholder="Direccion"
                   ></input>
                 </div>
 
@@ -195,7 +194,7 @@ const ModalupProiveedor = ({
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={() => cambiarEstado2(false) && { handleSubmit }}
+                      onClick={() => cambiarEstado2(false)}
                     >
                       Guardar
                     </button>
@@ -211,7 +210,7 @@ const ModalupProiveedor = ({
   );
 };
 
-export default ModalupProiveedor;
+export default ModalupClient;
 
 const Overlay = styled.div`
   width: 100vw;

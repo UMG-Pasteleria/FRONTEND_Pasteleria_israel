@@ -5,24 +5,24 @@ import "../../styles/pastelCumple.css";
 import NavbarWEB from "../../components/navbarWeb";
 
 const PastelCumpleWEB = () => {
-  // const URL = "http://localhost:3000/web";
+  const URL = "http://localhost:3000/pastel";
 
-  // const [web, setWeb] = useState([]);
+  const [pastel, setPastel] = useState([]);
 
-  // const getWeb = async () => {
-  //   try {
-  //     const response = await fetch(URL);
-  //     const web = await response.json();
-  //     setWeb(web);
-  //     console.log(web);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getPastel = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/pastel");
+      const pastel = await response.json();
+      setPastel(pastel);
+      console.log(pastel);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getWeb();
-  // }, []);
+  useEffect(() => {
+    getPastel();
+  }, []);
 
   const navegate = useNavigate();
 
@@ -30,41 +30,37 @@ const PastelCumpleWEB = () => {
     <>
       <div className="ContenedorWeb">
         <div className="main">
-          <div className="log"></div>
+          <div className="logo">
+            <img src={logo} className="logoLoginC" />
+            <div className="TituloPagina">
+              {" "}
+              <h2>Cumpleaños</h2>
+            </div>
+          </div>
           <hr />
-          <div className="sectionMain">
-            <div className="pastel">
-              <div className="Cumple">
-                <div className="TituloProducto">
-                  <h2>Cumpleaños</h2>
+          {pastel.map((pastel, index) => (
+            <div className="sectionMainCumple" key={index}>
+              <div className="pastel">
+                <div className="Cumple"></div>
+                <div className="datoPastel">
+                  <div className="TituloPastel">
+                    <h3>{pastel.nombre_past}</h3>
+                  </div>
+                  <div className="descripcion">
+                    <h5>{pastel.descripcion_pastel}</h5>
+                  </div>
+                  <div className="precio">
+                    <h3>Q. {pastel.precio_pastel}</h3>
+                  </div>
+                </div>
+                <div className="controles">
+                  <button className="agregar">+</button>
+                  <div className="cantidad">0</div>
+                  <button className="quitar">-</button>
                 </div>
               </div>
             </div>
-
-            <div className="Bodas">
-              <div className="TituloProducto">
-                <h2>Bodas</h2>
-              </div>
-            </div>
-
-            <div className="Festivos">
-              <div className="TituloProducto">
-                <h2>Dias festivos</h2>
-              </div>
-            </div>
-
-            <div className="Frios">
-              <div className="TituloProducto">
-                <h2>Pasteles frios</h2>
-              </div>
-            </div>
-
-            <div className="Pies">
-              <div className="TituloProducto">
-                <h2> Pies </h2>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
         <NavbarWEB />

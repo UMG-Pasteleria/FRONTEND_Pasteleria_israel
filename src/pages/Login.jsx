@@ -42,7 +42,7 @@ function Login() {
               <button
                 type="submit"
                 className="BTenviar"
-                onClick={() => navegate("/Inicio")}
+                onClick={() => navegate("/Admin/Inicio")}
               >
                 Iniciar sesión
               </button>
