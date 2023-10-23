@@ -19,9 +19,213 @@
     display: flex;
     flex-direction: column;
     align-items: center;
- 
-
 }
+
+
+/*---------------------- VERSION ESCRITORIO ------------------------*/
+
+@media (min-width: 1201px) {
+
+    .ContenedorWeb {
+            width: 100%;
+            height: 100%;
+            min-width: 400px;
+            margin-bottom: 0px;
+    
+        }
+    .ContenedorWeb .main .bannerEncabezado {
+        width: 100%;
+        height: 150px;
+        min-width: 400px;
+        background: url(../assets/panes.jpg);
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        margin: -5px;
+        z-index: 80;
+    }
+
+    .ContenedorWeb .main .bannerEncabezado .logoLogin {
+        width: 120px;
+        height: 120px;
+        border: #cfcfcf80 solid 5px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    .ContenedorWeb .main .sectionMain {
+        margin-top: 150px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-evenly;
+        background-color: #ffffff;
+        padding: 10px;
+        padding-top: 51px;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb {
+        width: 100%;
+        min-width: 400px;
+        max-width: 500px;
+        height: 100%;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb h2 {
+        color: #000;
+
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: Istok Web;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 15px;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb p {
+        color: #000;
+
+        text-align: center;
+        font-family: Istok Web;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 15px;
+    }
+
+
+    .ContenedorWeb .footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Istok Web;
+    }
+}
+
+/*-------------------------------------- FIN VERSION ESCRITORIO -----------------------------*/
+
+/*---------------------- VERSION TABLET ------------------------*/
+
+@media (max-width: 1200px) {
+    .ContenedorWeb .main .bannerEncabezado {
+        width: 100%;
+        height: 200px;
+        min-width: 400px;
+        background: url(../assets/panes.jpg);
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        margin: -5px;
+        z-index: 80;
+    }
+
+    .ContenedorWeb .main .bannerEncabezado .logoLogin {
+        width: 120px;
+        height: 120px;
+        border: #cfcfcf80 solid 5px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    .ContenedorWeb .main .sectionMain {
+        margin-top: 200px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #dcdcdc;
+        padding: 10px;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb {
+        width: 100%;
+        min-width: 400px;
+        max-width: 500px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb h2 {
+        color: #000;
+
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: Istok Web;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 15px;
+    }
+
+    .ContenedorWeb .main .sectionMain .contenedorDatosWeb .TituloWeb p {
+        color: #000;
+
+        text-align: center;
+        font-family: Istok Web;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 15px;
+    }
+
+
+    .ContenedorWeb .footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Istok Web;
+    }
+}
+
+/*-------------------------------------- FIN VERSION TABLET -----------------------------*/
+
+
+
+/*---------------------- VERSION MOVIL ------------------------*/
+
+@media (max-width: 600px){
 .ContenedorWeb .main .bannerEncabezado {
     width: 100%;
     height: 200px;
@@ -102,3 +306,6 @@ padding: 15px;
         justify-content: center;
         font-family:  Istok Web;
     }
+}
+
+    /*-------------------------------------- FIN VERSION MOVIL-----------------------------*/

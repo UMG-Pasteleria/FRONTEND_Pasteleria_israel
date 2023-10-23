@@ -127,10 +127,6 @@ function Proveedor() {
     console.log(params);
   }, []);
 
-  function validar() {
-    FormularioP.reset();
-  }
-
   return (
     <>
       <Navbar />
@@ -218,7 +214,7 @@ function Proveedor() {
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={validar}
+                      // onClick={validar}
                     >
                       Guardar
                     </button>
