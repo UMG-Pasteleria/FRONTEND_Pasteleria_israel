@@ -5,6 +5,7 @@ import ChartDias from "../components/chart/grafica1";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Pie1 from "../components/chart/Pie1";
+import Graficas from "../components/Graficas";
 
 function Reportes() {
   const { handleSubmit, register } = useForm();
@@ -42,25 +43,10 @@ function Reportes() {
                 </div>
               </div>
             </div>
+            {}
+            <Graficas />
+
           </article>
-          {/* <article className="MenuInicio">
-            <div className="ElementoMenu1">
-              <span className="TituloItem">Productos</span>
-            </div>
-
-            <div className="ElementoMenu2">
-              <span className="TituloItem">Clientes</span>
-            </div>
-
-            <div className="ElementoMenu3" onClick={() => navegate("/Usuario")}>
-              <span className="TituloItem">Empleados</span>
-            </div>
-
-            <div className="ElementoMenu4">
-              <span className="TituloItemWEB">Pagina WEB</span>
-              <div className="Logo"></div>
-            </div>
-          </article> */}
         </section>
       </div>
     </>
