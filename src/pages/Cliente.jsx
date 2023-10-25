@@ -16,7 +16,7 @@ function Cliente() {
 
   const [cliente, setCliente] = useState([]);
 
-  const URL = "http://localhost:3000/clientes";
+  const URL = "http://localhost:3000/cliente";
 
   const getData = async () => {
     try {
@@ -303,13 +303,13 @@ function Cliente() {
                   }
                 >
                   <div>
-                    <h3>{cliente.nombre_client}</h3>
+                    <h3>{cliente.nombre_cl}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {cliente.nit_client}</h5>
+                    <h5>NIT: {cliente.nit_cl}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {cliente.telefono_client}</p>
+                    <p>Telefono: {cliente.telefono_cl}</p>
                   </div>
                 </div>
                 <div className="controlBtC">
@@ -347,10 +347,10 @@ function Cliente() {
                   <h3>Telefono: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Correo: </h3>
+                  <h3>Direccion: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Direccion: </h3>
+                  <h3>Tipo: </h3>
                 </div>
               </div>
               <div className="encBT">
@@ -365,7 +365,7 @@ function Cliente() {
                 <div className="imgPerfil">
                   <div className="clienteID">
                     <p>ID</p>
-                    <span>{cliente.idclient}</span>
+                    <span>{cliente.id_cliente}</span>
                   </div>
                   <img
                     src={avatar}
@@ -379,19 +379,19 @@ function Cliente() {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{cliente.nombre_client}</h3>
+                    <h3>{cliente.nombre_cl}</h3>
                   </div>
                   <div>
-                    <h5>{cliente.nit_client}</h5>
+                    <h5>{cliente.nit_cl}</h5>
                   </div>
                   <div>
-                    <p>{cliente.telefono_client}</p>
+                    <p>{cliente.telefono_cl}</p>
                   </div>
                   <div>
-                    <p>{cliente.correo_client}</p>
+                    <p>{cliente.direccion_cl}</p>
                   </div>
                   <div>
-                    <p>{cliente.direccion_client}</p>
+                    <p>{cliente.tipo_cliente}</p>
                   </div>
                 </form>
                 <div className="controlBtC">

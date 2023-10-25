@@ -11,8 +11,9 @@ function SidebarPedidos() {
     <>
       <div className="ContenedorSBPd">
         <nav className="sidebar">
-          <button className="BTpedidos" 
-          onClick={() => navegate("/Pedido")}
+          <button
+            className="BTpedidos"
+            onClick={() => navegate("/Admin/Pedido")}
           >
             <div>
               <h3>Pedidos</h3>
@@ -21,7 +22,7 @@ function SidebarPedidos() {
 
           <button
             className="BTclientes"
-            onClick={() => navegate("/Cliente")}
+            onClick={() => navegate("/Admin/Cliente")}
           >
             <div>
               <h3>Clientes</h3>
@@ -31,7 +32,7 @@ function SidebarPedidos() {
 
           <button
             className="BTdevoluciones"
-            onClick={() => navegate("/Proveedor")}
+            onClick={() => navegate("/Admin/Proveedor")}
           >
             <div>
               <h3>Devoluciones</h3>

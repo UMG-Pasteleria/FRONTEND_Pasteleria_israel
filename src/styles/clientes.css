@@ -694,7 +694,7 @@ font-weight:bolder ;
 
         
 /*----------------- DATOS CLIENTES MEJORADO MOVIL---------------*/
-.clientesEscritorio{
+.clienteEscritorio{
     display: none;
 }
 .clienteMovil{

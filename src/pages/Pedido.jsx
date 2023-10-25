@@ -20,7 +20,7 @@ function Pedido() {
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch("http://localhost:3000/pedidos");
       const json = await response.json();
       setPedido(json);
       console.log(json);
@@ -117,16 +117,12 @@ function Pedido() {
   };
   //----------------------------FIN DE ALERTAS --------------------------------
   const navigate = useNavigate();
-  const params = useParams();
+
   //--------------------------------- EDITAR PEDIDO ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
-
-  useEffect(() => {
-    console.log(params);
-  }, []);
 
   function validar() {
     FormularioP.reset();
@@ -285,14 +281,6 @@ function Pedido() {
                     <p>No.</p>
                     <span>{pedido.idpedido}</span>
                   </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(pedido.idpedido)
-                    }
-                  />
                 </div>
 
                 <div
@@ -306,10 +294,10 @@ function Pedido() {
                     <h3>{pedido.producto_pd}</h3>
                   </div>
                   <div>
-                    <h5>Cliente: {pedido.cliente_pd}</h5>
+                    <h5>Cliente: {pedido.id_client}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {pedido.telefono_pd}</p>
+                    <p>Telefono: {pedido.total}</p>
                   </div>
                 </div>
                 <div className="controlBtPd">
@@ -344,10 +332,10 @@ function Pedido() {
                   <h3>Cliente: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Telefono: </h3>
+                  <h3>cantidad: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Estado: </h3>
+                  <h3>Fecha: </h3>
                 </div>
                 {/* <div className="encD">
                   <h3>Direccion: </h3>
@@ -364,14 +352,8 @@ function Pedido() {
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidosID">
-                    <p>No.</p>
                     <span>{pedido.idpedido}</span>
                   </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                  />
                 </div>
 
                 <form
@@ -379,16 +361,16 @@ function Pedido() {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{pedido.producto_pd}</h3>
+                    <h3>{pedido.producto_pro}</h3>
                   </div>
                   <div>
-                    <h5>{pedido.cliente_pd}</h5>
+                    <h5>{pedido.id_client}</h5>
                   </div>
                   <div>
-                    <p>{pedido.telefono_pd}</p>
+                    <p>{pedido.cantidad_pro}</p>
                   </div>
                   <div>
-                    <p>{pedido.estado_pd}</p>
+                    <p>{pedido.fecha_pedido}</p>
                   </div>
                   {/* <div>
                     <p>{proveedor.direccion_pr}</p>

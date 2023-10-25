@@ -284,14 +284,14 @@ function Compras() {
                 <div className="imgPerfil">
                   <div className="proveedorID">
                     <p>ID</p>
-                    <span>{compra.idprov}</span>
+                    <span>{compra.idcompras}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(compra.idprov)
+                      setIdEdit(compra.idcompras)
                     }
                   />
                 </div>
@@ -300,17 +300,17 @@ function Compras() {
                   className="datoProveedor"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(compra.idprov)
+                    setIdEdit(compra.idcompras)
                   }
                 >
                   <div>
-                    <h3>{compra.nombre_pr}</h3>
+                    <h3>{compra.responsable}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {compra.nit_pr}</h5>
+                    <h5>Producto: {compra.nombre_producto}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {compra.telefono_pr}</p>
+                    <p>Entrega: {compra.entrega}</p>
                   </div>
                 </div>
                 <div className="controlBtP">
@@ -371,11 +371,6 @@ function Compras() {
                     <p>ID</p>
                     <span>{compra.idcompras}</span>
                   </div>
-                  {/* <img
-                    src={avatar}
-                    className="avatar"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                  /> */}
                 </div>
 
                 <form
