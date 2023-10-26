@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert2";
+
 const ModalupProiveedor = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
+  setProveedores,
+  proveedores,
 }) => {
-  const [proveedor, setProveedor] = useState([]);
+  const [proveedor, setProveedor] = useState({});
 
   const getDataUp = async (idprov) => {
     try {
@@ -62,7 +66,7 @@ const ModalupProiveedor = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
+        `http://localhost:3000/proveedores/${proveedorUP.idprov}`,
         {
           method: "PUT",
           body: JSON.stringify(proveedorUP),
@@ -71,14 +75,46 @@ const ModalupProiveedor = ({
           },
         }
       );
-      const data = await response.json();
+      const data = response.json();
       console.log(data);
       console.log(response);
-      //Si el servidor devuelve codigo 204 de confirmación
+      setProveedores(
+        proveedores.map((proveedor) =>
+          proveedor.idprov === proveedorUP.idprov ? proveedorUP : proveedor
+        )
+      );
+      cambiarEstado2(false);
+      //Si el servidor devuelve codigo 200 de confirmación
       //lanza alerta de guardado correctamente
-      //   if (response.status === 204) {
-      //     saveSweetalert();
-      //   }
+      if (response.status === 200) {
+        swal.fire({
+          title: "Proveedor Actualizado!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      } else {
+        swal.fire({
+          title: "Error al Actualizar!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      }
     } catch (error) {
       console.log(error.massage);
     }
@@ -195,7 +231,7 @@ const ModalupProiveedor = ({
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={() => cambiarEstado2(false) && { handleSubmit }}
+                      onClick={handleSubmit}
                     >
                       Guardar
                     </button>

@@ -401,7 +401,7 @@ function Compras() {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(compra.idprov)
+                      setIdEdit(compra.idcompras)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -409,7 +409,7 @@ function Compras() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(compra.idprov)}
+                    onClick={() => mostrarAlerta(compra.idcompras)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
