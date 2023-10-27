@@ -1,3 +1,13 @@
+
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert2";
+import avatar from "../assets/avatar.jpg";
+import ModalEditUser from "../components/modals/modalUserUp2";
+import Modal from "../components/modals/modalUsuario";
+import Navbar from "../components/navbar";
+import PDFGenerator from "../generarPDF/gUsuarios";
+
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Navbar from "../components/navbar";
@@ -5,6 +15,7 @@ import Modal from "../components/modals/modalUsuario";
 import ModalEditUser from "../components/modals/modalUserUp2";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
+
 import "../styles/usuarios.css";
 
 const Usuario = () => {
@@ -14,7 +25,7 @@ const Usuario = () => {
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuarios, setUsuarios] = useState([]);
 
-  const URL = "http://localhost:3000/usuario";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/usuario";
   const getData = async () => {
     try {
       const response = await fetch(URL);
@@ -245,9 +256,9 @@ const Usuario = () => {
                 </form>
               </div>
 
-              <button>
-                <span className="material-symbols-outlined">print</span>
-              </button>
+             
+              <PDFGenerator data={usuario}/>
+
               <button>
                 <span className="material-symbols-outlined" onClick={getData}>
                   refresh

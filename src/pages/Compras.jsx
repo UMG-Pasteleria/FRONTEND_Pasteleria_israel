@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalP from "../components/modals/modalProveedor";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
-import { useNavigate, useParams } from "react-router-dom";
+import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
+import ModalP from "../components/modals/modalProveedor";
+import Navbar from "../components/navbar";
+import SidebarCompras from "../components/sidebarCompras";
+import PDFGenerator from "../generarPDF/g.Compras";
 import "../styles/compras.css";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +17,7 @@ function Compras() {
 
   const [compra, setProveedor] = useState([]);
 
-  const URL = "http://localhost:3000/compras";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/compras";
 
   const getData = async () => {
     try {
@@ -119,21 +119,14 @@ function Compras() {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-  const navigate = useNavigate();
-  const params = useParams();
+
   //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
 
-  function validar() {
-    FormularioP.reset();
-  }
 
   return (
     <>
@@ -235,7 +228,7 @@ function Compras() {
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={validar}
+                    
                     >
                       Guardar
                     </button>
@@ -281,9 +274,8 @@ function Compras() {
                 </form>
               </div>
 
-              <button>
-                <span className="material-symbols-outlined">print</span>
-              </button>
+              <PDFGenerator data={compra}/>
+
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>

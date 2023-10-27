@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
 import ModalupClient from "../components/modals/ModalUpdateCliente";
@@ -8,6 +7,7 @@ import ModalCli from "../components/modals/modalCliente";
 import Navbar from "../components/navbar";
 //import SidebarCompras from "../components/sidebarCompras";
 import SidebarPedidos from "../components/sidebarPedido";
+import PDFGenerator from "../generarPDF/g.Cliente";
 import "../styles/clientes.css";
 
 function Cliente() {
@@ -16,7 +16,7 @@ function Cliente() {
 
   const [clientes, setClientes] = useState([]);
 
-  const URL = "http://localhost:3000/cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/cliente";
 
   const getData = async () => {
     try {
@@ -208,7 +208,15 @@ function Cliente() {
                     </button>
                   </div>
                   <div>
+
+                    <button
+                      type="submit"
+                      className="btGuardar"
+                      
+                    >
+
                     <button type="submit" className="btGuardar">
+
                       Guardar
                     </button>
                   </div>
@@ -255,9 +263,8 @@ function Cliente() {
                 </form>
               </div>
 
-              <button>
-                <span className="material-symbols-outlined">print</span>
-              </button>
+              <PDFGenerator data={cliente}/>
+
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>
