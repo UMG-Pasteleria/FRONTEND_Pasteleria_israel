@@ -1,21 +1,19 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import swal from "sweetalert2";
 
 function ModalEditUser({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
-  idUserEdit,
+  idEdit,
+  setUsuarios,
+  usuarios,
 }) {
   // Estados
-  const [modale, setModal] = useState(false);
 
-  // Traemos el token para las peticion
-
-  const toggle = () => setModal(!modale);
-
-  const [usuario, setUsuario] = useState([]);
+  const [usuario, setUsuario] = useState({});
 
   const getDataUp = async (idusuario) => {
     try {
@@ -40,7 +38,13 @@ function ModalEditUser({
       console.error(err);
     }
   };
-  console.log(idUserEdit);
+  console.log(usuario);
+
+  useEffect(() => {
+    if (idEdit) {
+      getDataUp(idEdit);
+    }
+  }, [idEdit]);
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
@@ -58,21 +62,60 @@ function ModalEditUser({
   };
 
   //----------------------Evento de envio del formulario
-  const onSubmitForm = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(`http://localhost:3000/usuario/${iduser}`, {
-        method: "PUT",
-        body: JSON.stringify(userUP),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
+      const response = await fetch(
+        `http://localhost:3000/usuario/${userUP.idusuario}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(userUP),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = response.json();
       console.log(data);
       console.log(response);
+      setUsuarios(
+        usuarios.map((usuario) =>
+          usuario.idusuario === userUP.idusuario ? userUP : usuario
+        )
+      );
+      cambiarEstado2(false);
+
+      if (response.status === 200) {
+        swal.fire({
+          title: "Proveedor Actualizado!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      } else {
+        swal.fire({
+          title: "Error al Actualizar!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      }
     } catch (error) {
       console.log(error.massage);
     }
@@ -80,26 +123,17 @@ function ModalEditUser({
 
   return (
     <>
-      <button
-        className="btEditarU"
-        onClick={() => {
-          toggle();
-          getDataUp(idUserEdit);
-        }}
-      >
-        <span className="material-symbols-outlined">edit</span>
-      </button>
-      {modale && (
+      {estado2 && (
         <Overlay>
           <ContenedorModal>
             <EncabezadoModal>
-              <h3>Actializar usaurio</h3>
+              <h3>{titulo2}</h3>
             </EncabezadoModal>
-            <BotonCerrar onClick={() => toggle()}>
+            <BotonCerrar onClick={() => cambiarEstado2(false)}>
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form onSubmit={(e) => onSubmitForm(e)} className="nuevoUserForm">
+              <form className="nuevoUserForm">
                 <div className="itemUser">
                   <label>id: </label>
                   <input
@@ -184,7 +218,7 @@ function ModalEditUser({
                   <div>
                     <button
                       type="button"
-                      onClick={() => toggle()}
+                      onClick={() => cambiarEstado2(false)}
                       className="btcancelar"
                     >
                       Cancelar
@@ -194,7 +228,7 @@ function ModalEditUser({
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={() => toggle()}
+                      onClick={handleSubmit}
                     >
                       Guardar
                     </button>
@@ -202,6 +236,7 @@ function ModalEditUser({
                 </div>
               </form>
             </div>
+            {children}
           </ContenedorModal>
         </Overlay>
       )}

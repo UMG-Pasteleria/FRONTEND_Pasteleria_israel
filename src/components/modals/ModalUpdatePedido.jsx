@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import swal from "sweetalert2";
 
 const ModalupPedido = ({
   children,
@@ -7,6 +8,8 @@ const ModalupPedido = ({
   cambiarEstado2,
   titulo2,
   idEdit,
+  setPedidos,
+  pedidos,
 }) => {
   const [pedido, setPedido] = useState([]);
 
@@ -20,11 +23,10 @@ const ModalupPedido = ({
       setPedido(pedido);
       setPedidooUP({
         idpedido: pedido.idpedido,
-        producto_pd: pedido.producto_pd,
-        cliente_pd: pedido.cliente_pd,
-        telefono_pd: pedido.telefono_pd,
+        producto_pro: pedido.producto_pro,
+        id_client: pedido.id_client,
+        fecha_pedido: pedido.fecha_pedido,
         estado_pd: pedido.estado_pd,
-
       });
       console.log(pedido);
     } catch (err) {
@@ -42,11 +44,10 @@ const ModalupPedido = ({
 
   const [pedidoUP, setPedidooUP] = useState({
     idpedido: "",
-    producto_pd: "",
-    cliente_pd: "",
+    producto_pro: "",
+    id_client: "",
     telefono_pd: "",
     estado_pd: "",
-
   });
 
   const onChangeData = (e) => {
@@ -61,7 +62,7 @@ const ModalupPedido = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/pedidos/${idpedido}`,
+        `http://localhost:3000/pedidos/${pedidoUP.idpedido}`,
         {
           method: "PUT",
           body: JSON.stringify(pedidoUP),
@@ -73,6 +74,43 @@ const ModalupPedido = ({
       const data = await response.json();
       console.log(data);
       console.log(response);
+      setPedidos(
+        pedidos.map((pedido) =>
+          pedido.idpedido === pedidoUP.idpedido ? pedidoUP : pedido
+        )
+      );
+      cambiarEstado2(false);
+
+      if (response.status === 200) {
+        swal.fire({
+          title: "Proveedor Actualizado!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      } else {
+        swal.fire({
+          title: "Error al Actualizar!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      }
+
       //Si el servidor devuelve codigo 204 de confirmación
       //lanza alerta de guardado correctamente
       //   if (response.status === 204) {
@@ -99,7 +137,7 @@ const ModalupPedido = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm" onSubmit={handleSubmit}>
+              <form className="nuevoUserForm">
                 <div className="itemUser">
                   <label>No. </label>
                   <input
@@ -117,11 +155,11 @@ const ModalupPedido = ({
                   <label>Producto: </label>
                   <input
                     // {...register("nombre")}
-                    value={pedidoUP.producto_pd}
+                    value={pedidoUP.producto_pro}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="producto_pd"
+                    name="producto_pro"
                     placeholder="Producto"
                   ></input>
                 </div>
@@ -130,11 +168,11 @@ const ModalupPedido = ({
                   <label>Cliente: </label>
                   <input
                     // {...register("apellido")}
-                    value={pedidoUP.cliente_pd}
+                    value={pedidoUP.id_client}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="cliente_pd"
+                    name="id_client"
                     placeholder="Cliente"
                   ></input>
                 </div>
@@ -194,7 +232,7 @@ const ModalupPedido = ({
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={() => cambiarEstado2(false)}
+                      onSubmit={handleSubmit}
                     >
                       Guardar
                     </button>

@@ -14,7 +14,7 @@ function Cliente() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
-  const [cliente, setCliente] = useState([]);
+  const [clientes, setClientes] = useState([]);
 
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/cliente";
 
@@ -22,7 +22,7 @@ function Cliente() {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setCliente(json);
+      setClientes(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -59,19 +59,21 @@ function Cliente() {
 
   //-----------------ELIMINAR CLIENTE---------------------------------
 
-  const handleDelete = async (idclient) => {
-    const res = await fetch(`http://localhost:3000/clientes/${idclient}`, {
+  const handleDelete = async (id_cliente) => {
+    const res = await fetch(`http://localhost:3000/cliente/${id_cliente}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setCliente(cliente.filter((cliente) => cliente.idclient !== idclient));
+    setClientes(
+      clientes.filter((cliente) => cliente.id_cliente !== id_cliente)
+    );
   };
 
   //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idclient) => {
+  const mostrarAlerta = (id_cliente) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
@@ -97,8 +99,7 @@ function Cliente() {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idclient);
-
+          handleDelete(id_cliente);
           swal.fire({
             title: "¡Eliminado!",
             icon: "success",
@@ -116,13 +117,12 @@ function Cliente() {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-  
+
   //--------------------------------- EDITAR CLIENTE ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
-
 
   return (
     <>
@@ -149,7 +149,7 @@ function Cliente() {
                 <div className="itemClient">
                   <label>NIT: </label>
                   <input
-                    {...register("nit_client")}
+                    {...register("nit_cl")}
                     type="number"
                     id="nit_client"
                     placeholder="NIT"
@@ -159,7 +159,7 @@ function Cliente() {
                 <div className="itemClient">
                   <label>Cliente: </label>
                   <input
-                    {...register("nombre_client")}
+                    {...register("nombre_cl")}
                     type="text"
                     id="nombre_client"
                     placeholder="Cliente"
@@ -169,7 +169,7 @@ function Cliente() {
                 <div className="itemClient">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono_client")}
+                    {...register("telefono_cl")}
                     type="number"
                     id="telefono_client"
                     placeholder="Telefono"
@@ -179,7 +179,7 @@ function Cliente() {
                 <div className="itemClient">
                   <label>Correo: </label>
                   <input
-                    {...register("correo_client")}
+                    {...register("direccion_cl")}
                     type="text"
                     id="correo_client"
                     placeholder="Correo electronico"
@@ -188,7 +188,7 @@ function Cliente() {
                   <div className="itemClient">
                     <label>Direccion: </label>
                     <input
-                      {...register("direccion_client")}
+                      {...register("tipo_cliente")}
                       type="text"
                       id="direccion_client"
                       placeholder="Direccion"
@@ -208,11 +208,15 @@ function Cliente() {
                     </button>
                   </div>
                   <div>
+
                     <button
                       type="submit"
                       className="btGuardar"
                       
                     >
+
+                    <button type="submit" className="btGuardar">
+
                       Guardar
                     </button>
                   </div>
@@ -229,6 +233,8 @@ function Cliente() {
             cambiarEstado2={cambiarEstadoModal2}
             titulo2={"Actualizar cliente"}
             idEdit={idEdit}
+            setClientes={setClientes}
+            clientes={clientes}
           ></ModalupClient>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
@@ -269,19 +275,19 @@ function Cliente() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="clienteMovil">
-            {cliente.map((cliente, index) => (
+            {clientes.map((cliente, index) => (
               <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
                   <div className="clienteID">
                     <p>ID</p>
-                    <span>{cliente.idclient}</span>
+                    <span>{cliente.id_cliente}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.idclient)
+                      setIdEdit(cliente.id_cliente)
                     }
                   />
                 </div>
@@ -290,7 +296,7 @@ function Cliente() {
                   className="datoCliente"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(cliente.idclient)
+                    setIdEdit(cliente.id_cliente)
                   }
                 >
                   <div>
@@ -351,7 +357,7 @@ function Cliente() {
               </div>
             </div>
 
-            {cliente.map((cliente, index) => (
+            {clientes.map((cliente, index) => (
               <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
                   <div className="clienteID">
@@ -390,7 +396,7 @@ function Cliente() {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.idclient)
+                      setIdEdit(cliente.id_cliente)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -398,7 +404,7 @@ function Cliente() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(cliente.idclient)}
+                    onClick={() => mostrarAlerta(cliente.id_cliente)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>

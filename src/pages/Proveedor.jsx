@@ -14,7 +14,7 @@ const Proveedor = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
-  const [proveedor, setProveedor] = useState([]);
+  const [proveedores, setProveedores] = useState([]);
 
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
 
@@ -22,7 +22,7 @@ const Proveedor = () => {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setProveedor(json);
+      setProveedores(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -70,7 +70,9 @@ const Proveedor = () => {
     });
     // const data = await res.json();
     console.log(res);
-    setProveedor(proveedor.filter((proveedor) => proveedor.idprov !== idprov));
+    setProveedores(
+      proveedores.filter((proveedor) => proveedor.idprov !== idprov)
+    );
   };
 
   //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
@@ -236,6 +238,8 @@ const Proveedor = () => {
             cambiarEstado2={cambiarEstadoModal2}
             titulo2={"Actualizar proveedor"}
             idEdit={idEdit}
+            setProveedores={setProveedores}
+            proveedores={proveedores}
           ></ModalupProiveedor>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
@@ -277,7 +281,7 @@ const Proveedor = () => {
           <br></br>
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
-            {proveedor.map((proveedor, index) => (
+            {proveedores.map((proveedor, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
@@ -359,7 +363,7 @@ const Proveedor = () => {
               </div>
             </div>
 
-            {proveedor.map((proveedor, index) => (
+            {proveedores.map((proveedor, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">

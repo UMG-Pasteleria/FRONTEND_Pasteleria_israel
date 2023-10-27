@@ -8,6 +8,8 @@ import Navbar from "../components/navbar";
 import SidebarCompras from "../components/sidebarCompras";
 import PDFGenerator from "../generarPDF/g.Compras";
 import "../styles/compras.css";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Compras() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
@@ -140,7 +142,7 @@ function Compras() {
           <ModalP
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nuevo proveedor"
+            titulo="Nueva compra"
           >
             <div className="containerNewProv">
               <form
@@ -149,54 +151,66 @@ function Compras() {
                 onSubmit={enviarProveedor}
               >
                 <div className="itemProv">
-                  <label>NIT: </label>
+                  <label>Responsable: </label>
                   <input
-                    {...register("nit_pr")}
+                    {...register("responsable")}
                     type="number"
-                    id="nit_pr"
-                    placeholder="NIT"
+                    id="responsable"
+                    placeholder="Responsable"
                   ></input>
                 </div>
 
                 <div className="itemProv">
                   <label>Proveedor: </label>
                   <input
-                    {...register("nombre_pr")}
+                    {...register("nombre_producto")}
                     type="text"
                     id="nombre_pr"
-                    placeholder="Proveedor"
+                    placeholder="Producto"
                   ></input>
                 </div>
 
                 <div className="itemProv">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono_pr")}
+                    {...register("cantidad")}
                     type="number"
                     id="telefono_pr"
-                    placeholder="Telefono"
+                    placeholder="Cantidad"
                   ></input>
                 </div>
 
                 <div className="itemProv">
                   <label>Correo: </label>
                   <input
-                    {...register("correo_pr")}
+                    {...register("metd_pago")}
                     type="text"
                     id="correo_pr"
-                    placeholder="Correo electronico"
+                    placeholder="Metodo de pago"
                   ></input>
 
                   <div className="itemProv">
                     <label>Direccion: </label>
                     <input
-                      {...register("direccion_pr")}
+                      {...register("emision")}
                       type="text"
                       id="direccion_pr"
-                      placeholder="direccion"
+                      placeholder="Fecha de emision"
                     ></input>
                   </div>
                 </div>
+                <br />
+
+                <div className="itemProv">
+                  <label>Direccion: </label>
+                  <input
+                    {...register("entrega")}
+                    type="text"
+                    id="direccion_pr"
+                    placeholder="Fecha de entrega"
+                  ></input>
+                </div>
+
                 <br />
 
                 <div className="bonotesNewProv">
@@ -209,6 +223,7 @@ function Compras() {
                       Cancelar
                     </button>
                   </div>
+
                   <div>
                     <button
                       type="submit"
@@ -393,7 +408,7 @@ function Compras() {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(compra.idprov)
+                      setIdEdit(compra.idcompras)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -401,7 +416,7 @@ function Compras() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(compra.idprov)}
+                    onClick={() => mostrarAlerta(compra.idcompras)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
