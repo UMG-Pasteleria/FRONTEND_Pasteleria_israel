@@ -121,15 +121,12 @@ function Pedido() {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
- 
 
   //--------------------------------- EDITAR PEDIDO ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
-
-
 
   return (
     <>
@@ -215,11 +212,7 @@ function Pedido() {
                     </button>
                   </div>
                   <div>
-                    <button
-                      type="submit"
-                      className="btGuardar"
-                      
-                    >
+                    <button type="submit" className="btGuardar">
                       Guardar
                     </button>
                   </div>
@@ -266,7 +259,7 @@ function Pedido() {
                 </form>
               </div>
 
-              <PDFGenerator data={pedido}/>
+              <PDFGenerator data={pedidos} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>

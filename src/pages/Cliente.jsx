@@ -208,15 +208,13 @@ function Cliente() {
                     </button>
                   </div>
                   <div>
-
-                    <button
+                    {/* <button
                       type="submit"
                       className="btGuardar"
                       
-                    >
+                    > */}
 
                     <button type="submit" className="btGuardar">
-
                       Guardar
                     </button>
                   </div>
@@ -263,7 +261,7 @@ function Cliente() {
                 </form>
               </div>
 
-              <PDFGenerator data={cliente}/>
+              <PDFGenerator data={clientes} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>

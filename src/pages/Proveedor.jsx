@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
-import swal from "sweetalert2";
-import avatar from "../assets/avatar.jpg";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
 import ModalP from "../components/modals/modalProveedor";
+import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
 import Navbar from "../components/navbar";
 import SidebarCompras from "../components/sidebarCompras";
+import swal from "sweetalert2";
+import avatar from "../assets/avatar.jpg";
 import PDFGenerator from "../generarPDF/gProveedores";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/proveedores.css";
 
 const Proveedor = () => {
@@ -16,7 +16,7 @@ const Proveedor = () => {
 
   const [proveedores, setProveedores] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
+  const URL = "http://localhost:3000/proveedores";
 
   const getData = async () => {
     try {
@@ -123,15 +123,17 @@ const Proveedor = () => {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-
-
+  const navigate = useNavigate();
+  const params = useParams();
   //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
-
+  useEffect(() => {
+    console.log(params);
+  }, []);
 
   return (
     <>
@@ -268,32 +270,31 @@ const Proveedor = () => {
                 </form>
               </div>
 
-           
-              <PDFGenerator data={proveedor}/>
+              <PDFGenerator data={proveedores} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>
             </div>
           </div>
-
           <hr></hr>
           <br></br>
+
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
-            {proveedores.map((proveedor, index) => (
+            {proveedores.map((proveedores, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
                     <p>ID</p>
-                    <span>{proveedor.idprov}</span>
+                    <span>{proveedores.idprov}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(proveedor.idprov)
+                      setIdEdit(proveedores.idprov)
                     }
                   />
                 </div>
@@ -302,17 +303,17 @@ const Proveedor = () => {
                   className="datoProveedor"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(proveedor.idprov)
+                    setIdEdit(proveedores.idprov)
                   }
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{proveedores.nombre_pr}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {proveedor.nit_pr}</h5>
+                    <h5>NIT: {proveedores.nit_pr}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {proveedor.telefono_pr}</p>
+                    <p>Telefono: {proveedores.telefono_pr}</p>
                   </div>
                 </div>
                 <div className="controlBtP">

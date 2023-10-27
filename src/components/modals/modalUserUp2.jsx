@@ -89,7 +89,7 @@ function ModalEditUser({
 
       if (response.status === 200) {
         swal.fire({
-          title: "Proveedor Actualizado!",
+          title: "Usuario Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
