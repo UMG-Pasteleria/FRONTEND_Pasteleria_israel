@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+
 import swal from "sweetalert2";
-import avatar from "../assets/avatar.jpg";
 import ModalupPedido from "../components/modals/ModalUpdatePedido";
 import ModalPed from "../components/modals/modalPedido";
 import Navbar from "../components/navbar";
 //import SidebarCompras from "../components/sidebarCompras";
 import SidebarPedidos from "../components/sidebarPedido";
+import PDFGenerator from "../generarPDF/g.Pedido";
 import "../styles/pedido.css";
 
 function Pedido() {
@@ -16,7 +16,7 @@ function Pedido() {
 
   const [pedido, setPedido] = useState([]);
 
-  const URL = "http://localhost:3000/pedidos";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pedidos";
 
   const getData = async () => {
     try {
@@ -116,7 +116,7 @@ function Pedido() {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-  const navigate = useNavigate();
+ 
 
   //--------------------------------- EDITAR PEDIDO ----------------------------------//
 
@@ -124,9 +124,7 @@ function Pedido() {
 
   //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
 
-  function validar() {
-    FormularioP.reset();
-  }
+
 
   return (
     <>
@@ -215,7 +213,7 @@ function Pedido() {
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={validar}
+                      
                     >
                       Guardar
                     </button>
@@ -261,14 +259,14 @@ function Pedido() {
                 </form>
               </div>
 
-              <button>
-                <span className="material-symbols-outlined">print</span>
-              </button>
+              <PDFGenerator data={pedido}/>
+
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>
             </div>
           </div>
+
           <hr></hr>
           <br></br>
 

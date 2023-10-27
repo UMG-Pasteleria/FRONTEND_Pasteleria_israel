@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalP from "../components/modals/modalProveedor";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
+
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
-import { useNavigate, useParams } from "react-router-dom";
+import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
+import ModalP from "../components/modals/modalProveedor";
+import Navbar from "../components/navbar";
+import SidebarCompras from "../components/sidebarCompras";
+import PDFGenerator from "../generarPDF/gProveedores";
 import "../styles/proveedores.css";
 
 const Proveedor = () => {
@@ -15,7 +16,7 @@ const Proveedor = () => {
 
   const [proveedor, setProveedor] = useState([]);
 
-  const URL = "http://localhost:3000/proveedores";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
 
   const getData = async () => {
     try {
@@ -120,17 +121,15 @@ const Proveedor = () => {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-  const navigate = useNavigate();
-  const params = useParams();
+
+
   //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
+
 
   return (
     <>
@@ -265,17 +264,17 @@ const Proveedor = () => {
                 </form>
               </div>
 
-              <button>
-                <span className="material-symbols-outlined">print</span>
-              </button>
+           
+              <PDFGenerator data={proveedor}/>
+
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>
             </div>
           </div>
+
           <hr></hr>
           <br></br>
-
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
             {proveedor.map((proveedor, index) => (
