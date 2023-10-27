@@ -14,10 +14,12 @@ import "react-datepicker/dist/react-datepicker.css";
 function Compras() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [idEdit, setIdEdit] = useState("");
+  const [compras, setProveedor] = useState([]);
 
-  const [compra, setProveedor] = useState([]);
+  const URL = "http://localhost:3000/compras";
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/compras";
+  //-----CAPTURAR DATOS DE COMPRAS------//
 
   const getData = async () => {
     try {
@@ -32,7 +34,8 @@ function Compras() {
   useEffect(() => {
     getData();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
+
+  //-----CAPTURAR DATOS DE NUEVA COMPRA------//
   const { handleSubmit, register } = useForm();
   const enviarProveedor = handleSubmit((data) => {
     console.log(data);
@@ -67,7 +70,7 @@ function Compras() {
     // const data = await res.json();
     console.log(res);
     setProveedor(
-      compra.filter((proveedor) => proveedor.idcompras !== idcompras)
+      compras.filter((proveedor) => proveedor.idcompras !== idcompras)
     );
   };
 
@@ -122,11 +125,7 @@ function Compras() {
 
   //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
-  const [idEdit, setIdEdit] = useState("");
-
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
-
-
 
   return (
     <>
@@ -225,11 +224,7 @@ function Compras() {
                   </div>
 
                   <div>
-                    <button
-                      type="submit"
-                      className="btGuardar"
-                    
-                    >
+                    <button type="submit" className="btGuardar">
                       Guardar
                     </button>
                   </div>
@@ -274,7 +269,7 @@ function Compras() {
                 </form>
               </div>
 
-              <PDFGenerator data={compra}/>
+              <PDFGenerator data={compras} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
@@ -286,7 +281,7 @@ function Compras() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
-            {compra.map((compra, index) => (
+            {compras.map((compra, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
@@ -371,7 +366,7 @@ function Compras() {
               </div>
             </div>
 
-            {compra.map((compra, index) => (
+            {compras.map((compra, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="compraID">

@@ -14,6 +14,7 @@ const PDFGenerator = ({ data }) => {
     doc.addImage(img, "JPEG", 13, 10, 30, 30); // Ajusta las coordenadas y el tamaño de la imagen
 
     // Agrega un título
+
     doc.setFontSize(18);
     doc.text("Panaderia Israel", 85, 30);
     doc.text("Proveedores registrados", 75, 40); // Ajusta las coordenadas y el tamaño del título
@@ -57,7 +58,12 @@ const PDFGenerator = ({ data }) => {
     });
 
     // Guarda el PDF o ábrelo en una nueva ventana
-    window.open(doc.output("bloburl"), "_blank");
+    // window.open(doc.output("bloburl"), "_blank");
+    window.open(
+      doc.save(`Proveedores${generatePDF.data}.pdf`).output("bloburl"),
+      "_blank"
+    );
+    // window.open(doc.save(`Proveedores${generatePDF.data}.pdf`));
   };
 
   return (
