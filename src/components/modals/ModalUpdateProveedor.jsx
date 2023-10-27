@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
 
 const ModalupProiveedor = ({
@@ -122,7 +121,7 @@ const ModalupProiveedor = ({
 
   //----------------------------------
 
-  // ------------------------ FIN ACTUALIZAR USUARIO ---------------------------------
+  // ------------------------ FIN ACTUALIZAR PROVEEDOR ---------------------------------
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import swal from "sweetalert2";
 
 const ModalupClient = ({
   children,
@@ -7,24 +8,26 @@ const ModalupClient = ({
   cambiarEstado2,
   titulo2,
   idEdit,
+  setClientes,
+  clientes,
 }) => {
   const [cliente, setCliente] = useState([]);
 
-  const getDataUp = async (idclient) => {
+  const getDataUp = async (id_cliente) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/clientes/${idclient}`,
+        `http://localhost:3000/cliente/${id_cliente}`,
         { headers: { "content-Type": "application/json" } }
       );
       const cliente = await response.json();
       setCliente(cliente);
       setClienteoUP({
-        idclient: cliente.idclient,
-        nombre_client: cliente.nombre_client,
-        nit_client: cliente.nit_client,
-        telefono_client: cliente.telefono_client,
-        correo_client: cliente.correo_client,
-        direccion_client: cliente.direccion_client,
+        id_cliente: cliente.id_cliente,
+        nombre_cl: cliente.nombre_cl,
+        nit_cl: cliente.nit_cl,
+        telefono_cl: cliente.telefono_cl,
+        tipo_cliente: cliente.tipo_cliente,
+        direccion_cl: cliente.direccion_cl,
       });
       console.log(cliente);
     } catch (err) {
@@ -41,12 +44,12 @@ const ModalupClient = ({
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
   const [clienteUP, setClienteoUP] = useState({
-    idclient: "",
-    nombre_client: "",
-    nit_client: "",
-    telefono_client: "",
-    correo_client: "",
-    direccion_client: "",
+    id_cliente: "",
+    nombre_cl: "",
+    nit_cl: "",
+    telefono_cl: "",
+    tipo_cliente: "",
+    direccion_cl: "",
   });
 
   const onChangeData = (e) => {
@@ -61,7 +64,7 @@ const ModalupClient = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/clientes/${idclient}`,
+        `http://localhost:3000/cliente/${clienteUP.id_cliente}`,
         {
           method: "PUT",
           body: JSON.stringify(clienteUP),
@@ -73,11 +76,43 @@ const ModalupClient = ({
       const data = await response.json();
       console.log(data);
       console.log(response);
-      //Si el servidor devuelve codigo 204 de confirmación
+      setClientes(
+        clientes.map((cliente) =>
+          cliente.id_cliente === clienteUP.id_cliente ? clienteUP : cliente
+        )
+      );
+      cambiarEstado2(false);
+      //Si el servidor devuelve codigo 200 de confirmación
       //lanza alerta de guardado correctamente
-      //   if (response.status === 204) {
-      //     saveSweetalert();
-      //   }
+      if (response.status === 200) {
+        swal.fire({
+          title: "Cliente Actualizado!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      } else {
+        swal.fire({
+          title: "Error al Actualizar!",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      }
     } catch (error) {
       console.log(error.massage);
     }
@@ -85,7 +120,7 @@ const ModalupClient = ({
 
   //----------------------------------
 
-  // ------------------------ FIN ACTUALIZAR USUARIO ---------------------------------
+  // ------------------------ FIN ACTUALIZAR CLIENTE ---------------------------------
 
   return (
     <>
@@ -107,8 +142,8 @@ const ModalupClient = ({
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    value={clienteUP.idclient}
-                    name="idclient"
+                    value={clienteUP.id_cliente}
+                    name="id_cliente"
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
@@ -117,11 +152,11 @@ const ModalupClient = ({
                   <label>Cliente: </label>
                   <input
                     // {...register("nombre")}
-                    value={clienteUP.nombre_client}
+                    value={clienteUP.nombre_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre_client"
+                    name="nombre_cl"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -130,11 +165,11 @@ const ModalupClient = ({
                   <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={clienteUP.nit_client}
+                    value={clienteUP.nit_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="nit_client"
+                    name="nit_cl"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -143,11 +178,11 @@ const ModalupClient = ({
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={clienteUP.telefono_client}
+                    value={clienteUP.telefono_cl}
                     onChange={(e) => onChangeData(e)}
                     type="number"
                     id="telefonoUser"
-                    name="telefono_client"
+                    name="telefono_cl"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -156,12 +191,12 @@ const ModalupClient = ({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={clienteUP.correo_client}
+                    value={clienteUP.tipo_cliente}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="correo_client"
-                    placeholder="Correo electronico"
+                    name="tipo_cliente"
+                    placeholder="tipo cleinte"
                   ></input>
                 </div>
 
@@ -169,11 +204,11 @@ const ModalupClient = ({
                   <label>Direccion: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={clienteUP.direccion_pr}
+                    value={clienteUP.direccion_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
-                    name="direccion_client"
+                    name="direccion_cl"
                     placeholder="Direccion"
                   ></input>
                 </div>
@@ -194,7 +229,7 @@ const ModalupClient = ({
                     <button
                       type="submit"
                       className="btGuardar"
-                      onClick={() => cambiarEstado2(false)}
+                      onClick={handleSubmit}
                     >
                       Guardar
                     </button>

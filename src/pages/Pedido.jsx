@@ -14,15 +14,15 @@ function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
-  const [pedido, setPedido] = useState([]);
+  const [pedidos, setPedidos] = useState([]);
 
   const URL = "http://localhost:3000/pedidos";
 
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/pedidos");
+      const response = await fetch(URL);
       const json = await response.json();
-      setPedido(json);
+      setPedidos(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -55,6 +55,11 @@ function Pedido() {
         container: "contenedor-alert",
       },
     });
+    (document.getElementById("correo_pr").value = null),
+      (document.getElementById("nit_pr").value = null),
+      (document.getElementById("nombre_pr").value = null),
+      (document.getElementById("telefono_pr").value = null),
+      (document.getElementById("direccion_pr").value = null);
   });
 
   //-----------------ELIMINAR PEDIDO---------------------------------
@@ -65,7 +70,7 @@ function Pedido() {
     });
     // const data = await res.json();
     console.log(res);
-    setPedido(pedido.filter((pedido) => pedido.idpedido !== idpedido));
+    setPedidos(pedidos.filter((pedido) => pedido.idpedido !== idpedido));
   };
 
   //------------------------------------FIN ELIMINA PEDIDO -----------------------------------
@@ -233,6 +238,8 @@ function Pedido() {
             cambiarEstado2={cambiarEstadoModal2}
             titulo2={"Actualizar pedido"}
             idEdit={idEdit}
+            setPedidos={setPedidos}
+            pedidos={pedidos}
           ></ModalupPedido>
           {/* --------------------------- FIN MODAL EDITAR PEDIDO ------------------ */}
 
@@ -274,7 +281,7 @@ function Pedido() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="pedidoMovil">
-            {pedido.map((pedido, index) => (
+            {pedidos.map((pedido, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidoID">
@@ -291,13 +298,13 @@ function Pedido() {
                   }
                 >
                   <div>
-                    <h3>{pedido.producto_pd}</h3>
+                    <h3>{pedido.producto_pro}</h3>
                   </div>
                   <div>
                     <h5>Cliente: {pedido.id_client}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {pedido.total}</p>
+                    <p>Total: {pedido.total}</p>
                   </div>
                 </div>
                 <div className="controlBtPd">
@@ -348,7 +355,7 @@ function Pedido() {
               </div>
             </div>
 
-            {pedido.map((pedido, index) => (
+            {pedidos.map((pedido, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidosID">

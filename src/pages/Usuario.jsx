@@ -1,26 +1,25 @@
-import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Navbar from "../components/navbar";
 import Modal from "../components/modals/modalUsuario";
-import ModalupUser from "../components/modals/ModalUpdateProveedor";
+import ModalEditUser from "../components/modals/modalUserUp2";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
 import "../styles/usuarios.css";
-import ModalEditUser from "../components/modals/modalUserUp2";
 
 const Usuario = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
 
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
-  const [usuario, setUsuario] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
 
   const URL = "http://localhost:3000/usuario";
   const getData = async () => {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setUsuario(json);
+      setUsuarios(json);
       console.log(json);
     } catch (err) {
       console.error(err);
@@ -35,33 +34,37 @@ const Usuario = () => {
   //-----CAPTURAR DATOS DE NUEVO USUARIO------
 
   const enviarUsuario = handleSubmit((data) => {
-    console.log(data);
-    fetch(URL, {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    getData();
-    cambiarEstadoModal1(!estadoModal1);
-    swal.fire({
-      title: "¡Usuario agregado!",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1200,
-      customClass: {
-        confirmButton: "btEliminar",
-        cancelButton: "btCancelar",
-        popup: "popus-eliminado",
-        title: "titulo-pop",
-        container: "contenedor-alert",
-      },
-    });
+    try {
+      console.log(data);
+      fetch(URL, {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      getData();
+      cambiarEstadoModal1(!estadoModal1);
+      swal.fire({
+        title: "¡Usuario agregado!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1200,
+        customClass: {
+          confirmButton: "btEliminar",
+          cancelButton: "btCancelar",
+          popup: "popus-eliminado",
+          title: "titulo-pop",
+          container: "contenedor-alert",
+        },
+      });
+    } catch (error) {
+      console.log(error.massage);
+    }
   });
 
   // ------------------------- ACTUALIZAR USUARIO ------------------------------------
 
   //--------------------------------- OBTENER DATOS DE USUARIOA A ACTUALIZAR
-  // const [idUserEdit, setIdUserEdit] = useState("");
+  const [idEdit, setIdEdit] = useState("");
 
   // //----------------------------------
 
@@ -69,7 +72,7 @@ const Usuario = () => {
 
   //------------ELIMINAR USUARIO------------------
   const handleDelete = async (idusuario) => {
-    const res = await fetch(`http://localhost:3000/susuario/${idusuario}`, {
+    const res = await fetch(`http://localhost:3000/usuario/${idusuario}`, {
       method: "DELETE",
     });
     // const data = await res.json();
@@ -208,7 +211,14 @@ const Usuario = () => {
           </Modal>
           {/* --------------------------- FIN MODAL INGRESAR NUEVO USUARIO ------------------ */}
           {/* //------------------------------- MODAL PARA EDITAR USUARIO */}
-
+          <ModalEditUser
+            estado2={estadoModal2}
+            cambiarEstado2={cambiarEstadoModal2}
+            titulo2={"Actualizar usuario"}
+            idEdit={idEdit}
+            setUsuarios={setUsuarios}
+            usuarios={usuarios}
+          ></ModalEditUser>
           {/* //------------------------------ FIN MODAL EDITAR USUARIO */}
 
           {/* //----------------------------------ELIMINAR USUARIO ----------------------------------*/}
@@ -248,21 +258,31 @@ const Usuario = () => {
 
           <hr></hr>
           <br />
+
+          {/* ------------------------ MOSTRAR USUARIOS VERSION MOVIL --------------------------- */}
           <div className="usuarioMovil">
-            {usuario.map((usuario, index) => (
+            {usuarios.map((usuario, index) => (
               <div className="conenedorPusuario" key={index}>
                 <div className="imgPerfil">
+                  <div className="proveedorID">
+                    <p>ID</p>
+                    <span>{usuario.idusuario}</span>
+                  </div>
                   <img
                     src={avatar}
                     className="avatar"
-                    onClick={() => (
-                      <ModalEditUser idUserEdit={usuario.idusuario} />
-                    )}
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(usuario.idusuario)
+                    }
                   />
                 </div>
                 <div
                   className="datoUsuario"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  onClick={() =>
+                    cambiarEstadoModal2(!estadoModal2) &
+                    setIdEdit(usuario.idusuario)
+                  }
                 >
                   <div>
                     <h3>
@@ -277,7 +297,7 @@ const Usuario = () => {
                 <div className="btControlU">
                   <button
                     className="btEditarU"
-                    onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                   >
                     <span className="material-symbols-outlined">edit</span>
                   </button>
@@ -294,7 +314,7 @@ const Usuario = () => {
           </div>
 
           <div className="usuarioEscritorio">
-            {usuario.map((usuario, index) => (
+            {usuarios.map((usuario, index) => (
               <div className="conenedorPusuario" key={index}>
                 <div className="imgPerfil">
                   <img src={avatar} className="avatar" />
@@ -312,6 +332,15 @@ const Usuario = () => {
                 </div>
                 <div className="btControlU">
                   <ModalEditUser idUserEdit={usuario.idusuario} />
+                  <button
+                    className="btEditarU"
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(usuario.idusuario)
+                    }
+                  >
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
 
                   <button
                     className="btEliminarU"
