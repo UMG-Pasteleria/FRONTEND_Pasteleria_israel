@@ -13,6 +13,7 @@ import "../styles/clientes.css";
 function Cliente() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [search, setSaerch] = useState("");
 
   const [clientes, setClientes] = useState([]);
 
@@ -123,6 +124,21 @@ function Cliente() {
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
+
+  //------------busqueda inteligente -----------------
+  const searcher = (e) => {
+    setSaerch(e.target.value);
+    console.log(e.target.value);
+  };
+  //----metodod de filtrado de busqueda-----
+  let result = [];
+  if (!search) {
+    result = clientes;
+  } else {
+    result = clientes.filter((datos) =>
+      datos.nombre_cl.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
   return (
     <>
@@ -245,13 +261,11 @@ function Cliente() {
               </button>
 
               <div className="busqueda">
-                <form
-                  action="http://localhost:3000/clientes"
-                  method="get"
-                  className="cuadroBusqueda"
-                >
+                <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
+                    value={search}
+                    onChange={searcher}
                     placeholder="Buscar cliente"
                     name="q"
                   ></input>
@@ -273,7 +287,7 @@ function Cliente() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="clienteMovil">
-            {clientes.map((cliente, index) => (
+            {result.map((cliente, index) => (
               <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
                   <div className="clienteID">
@@ -355,7 +369,7 @@ function Cliente() {
               </div>
             </div>
 
-            {clientes.map((cliente, index) => (
+            {result.map((cliente, index) => (
               <div className="ContenedorClientes" key={index}>
                 <div className="imgPerfil">
                   <div className="clienteID">
