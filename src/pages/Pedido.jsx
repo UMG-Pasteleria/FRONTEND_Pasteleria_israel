@@ -13,6 +13,7 @@ import "../styles/pedido.css";
 function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [search, setSaerch] = useState("");
 
   const [pedidos, setPedidos] = useState([]);
 
@@ -128,6 +129,21 @@ function Pedido() {
 
   //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
 
+//------------busqueda inteligente -----------------
+const searcher = (e) => {
+  setSaerch(e.target.value);
+  console.log(e.target.value);
+};
+//----metodod de filtrado de busqueda-----
+let result = [];
+if (!search) {
+  result = pedidos;
+} else {
+  result = pedidos.filter((datos) =>
+    datos.producto_pro.toLowerCase().includes(search.toLowerCase())
+  );
+}
+
   return (
     <>
       <Navbar />
@@ -242,14 +258,12 @@ function Pedido() {
                 <span className="material-symbols-outlined">person_add</span>
               </button>
 
-              <div className="busqueda">
-                <form
-                  action="http://localhost:3000/pedidos"
-                  method="get"
-                  className="cuadroBusqueda"
-                >
+               <div className="busqueda">
+                <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
+                    value={search}
+                    onChange={searcher}
                     placeholder="Buscar pedido"
                     name="q"
                   ></input>
@@ -272,7 +286,7 @@ function Pedido() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="pedidoMovil">
-            {pedidos.map((pedido, index) => (
+            {result.map((pedido, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidoID">
@@ -346,7 +360,7 @@ function Pedido() {
               </div>
             </div>
 
-            {pedidos.map((pedido, index) => (
+            {result.map((pedido, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidosID">
