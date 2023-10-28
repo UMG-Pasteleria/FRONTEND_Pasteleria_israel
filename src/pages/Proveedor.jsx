@@ -7,12 +7,12 @@ import SidebarCompras from "../components/sidebarCompras";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
 import PDFGenerator from "../generarPDF/gProveedores";
-import { useNavigate, useParams } from "react-router-dom";
 import "../styles/proveedores.css";
 
 const Proveedor = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [search, setSaerch] = useState("");
 
   const [proveedores, setProveedores] = useState([]);
 
@@ -21,9 +21,9 @@ const Proveedor = () => {
   const getData = async () => {
     try {
       const response = await fetch(URL);
-      const json = await response.json();
-      setProveedores(json);
-      console.log(json);
+      const datos = await response.json();
+      setProveedores(datos);
+      console.log(datos);
     } catch (err) {
       console.error(err);
     }
@@ -123,17 +123,27 @@ const Proveedor = () => {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
-  const navigate = useNavigate();
-  const params = useParams();
+
   //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
+  //------------busqueda inteligente -----------------
+  const searcher = (e) => {
+    setSaerch(e.target.value);
+    console.log(e.target.value);
+  };
+  //----metodod de filtrado de busqueda-----
+  let result = [];
+  if (!search) {
+    result = proveedores;
+  } else {
+    result = proveedores.filter((datos) =>
+      datos.nombre_pr.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
   return (
     <>
@@ -219,11 +229,7 @@ const Proveedor = () => {
                     </button>
                   </div>
                   <div>
-                    <button
-                      type="submit"
-                      className="btGuardar"
-                      // onClick={validar}
-                    >
+                    <button type="submit" className="btGuardar">
                       Guardar
                     </button>
                   </div>
@@ -254,13 +260,11 @@ const Proveedor = () => {
               </button>
 
               <div className="busqueda">
-                <form
-                  action="http://localhost:3000/usuario"
-                  method="get"
-                  className="cuadroBusqueda"
-                >
+                <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
+                    value={search}
+                    onChange={searcher}
                     placeholder="Buscar proveedor"
                     name="q"
                   ></input>
@@ -282,7 +286,7 @@ const Proveedor = () => {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
-            {proveedores.map((proveedores, index) => (
+            {result.map((proveedores, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
@@ -323,7 +327,7 @@ const Proveedor = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    // onClick={() => mostrarAlerta(usuario.iduser)}
+                    onClick={() => mostrarAlerta(proveedores.idprov)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -364,7 +368,7 @@ const Proveedor = () => {
               </div>
             </div>
 
-            {proveedores.map((proveedor, index) => (
+            {result.map((proveedor, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
