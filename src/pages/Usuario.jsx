@@ -12,6 +12,7 @@ import "../styles/usuarios.css";
 const Usuario = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [search, setSaerch] = useState("");
 
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuarios, setUsuarios] = useState([]);
@@ -20,9 +21,9 @@ const Usuario = () => {
   const getData = async () => {
     try {
       const response = await fetch(URL);
-      const json = await response.json();
-      setUsuarios(json);
-      console.log(json);
+      const datos = await response.json();
+      setUsuarios(datos);
+      console.log(datos);
     } catch (err) {
       console.error(err);
     }
@@ -130,6 +131,22 @@ const Usuario = () => {
       });
   };
   //----------------------------FIN DE ALERTAS --------------------------------
+
+  //------------busqueda inteligente -----------------
+  const searcher = (e) => {
+    setSaerch(e.target.value);
+    console.log(e.target.value);
+  };
+  //----metodod de filtrado de busqueda-----
+  let result = [];
+  if (!search) {
+    result = usuarios;
+  } else {
+    result = usuarios.filter((datos) =>
+      datos.nombre_u.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return (
     <>
       <Navbar />
@@ -238,6 +255,7 @@ const Usuario = () => {
                 >
                   <input
                     type="text"
+                    onChange={searcher}
                     placeholder="Buscar usuario"
                     name="q"
                   ></input>
@@ -262,7 +280,7 @@ const Usuario = () => {
 
           {/* ------------------------ MOSTRAR USUARIOS VERSION MOVIL --------------------------- */}
           <div className="usuarioMovil">
-            {usuarios.map((usuario, index) => (
+            {result.map((usuario, index) => (
               <div className="conenedorPusuario" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
@@ -315,7 +333,7 @@ const Usuario = () => {
           </div>
 
           <div className="usuarioEscritorio">
-            {usuarios.map((usuario, index) => (
+            {result.map((usuario, index) => (
               <div className="conenedorPusuario" key={index}>
                 <div className="imgPerfil">
                   <img src={avatar} className="avatar" />

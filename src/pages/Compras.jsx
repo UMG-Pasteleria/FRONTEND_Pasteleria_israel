@@ -15,24 +15,45 @@ function Compras() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [idEdit, setIdEdit] = useState("");
-  const [compras, setProveedor] = useState([]);
+  const [compras, setCompras] = useState([]);
+  const [proveedoresC, setProveedoresC] = useState([]);
+  const [search, setSaerch] = useState("");
+  //-------URLS DE API-----------------//
 
   const URL = "http://localhost:3000/compras";
+  const URLprov = "http://localhost:3000/proveedores";
+  const URLprod = "http://localhost:3000/productos";
 
   //-----CAPTURAR DATOS DE COMPRAS------//
 
   const getData = async () => {
     try {
       const response = await fetch(URL);
-      const json = await response.json();
-      setProveedor(json);
-      console.log(json);
+      const datos = await response.json();
+      setCompras(datos);
+      console.log(datos);
     } catch (err) {
       console.error(err);
     }
   };
   useEffect(() => {
     getData();
+  }, []);
+
+  //-----CAPTURAR DATOS DE PROVEEDORES------//
+
+  const getDataProv = async () => {
+    try {
+      const response = await fetch(URLprov);
+      const json = await response.json();
+      setProveedoresC(json);
+      console.log(json);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    getDataProv();
   }, []);
 
   //-----CAPTURAR DATOS DE NUEVA COMPRA------//
@@ -61,7 +82,7 @@ function Compras() {
     });
   });
 
-  //-----------------ELIMINAR PORVEEDOR---------------------------------
+  //-----------------ELIMINAR COMPRAS---------------------------------
 
   const handleDelete = async (idcompras) => {
     const res = await fetch(`http://localhost:3000/compras/${idcompras}`, {
@@ -69,7 +90,7 @@ function Compras() {
     });
     // const data = await res.json();
     console.log(res);
-    setProveedor(
+    setCompras(
       compras.filter((proveedor) => proveedor.idcompras !== idcompras)
     );
   };
@@ -127,6 +148,21 @@ function Compras() {
 
   //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
+  //------------busqueda inteligente -----------------
+  const searcher = (e) => {
+    setSaerch(e.target.value);
+    console.log(e.target.value);
+  };
+  //----metodod de filtrado de busqueda-----
+  let result = [];
+  if (!search) {
+    result = compras;
+  } else {
+    result = compras.filter((datos) =>
+      datos.responsable.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return (
     <>
       <Navbar />
@@ -137,7 +173,7 @@ function Compras() {
           <br></br>
           <h2>Listado de Compras</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
+          {/* ------------------- MODAL AGREGAR NUEVA COMPRA-------------- */}
           <ModalP
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
@@ -232,9 +268,9 @@ function Compras() {
               </form>
             </div>
           </ModalP>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
+          {/* --------------------------- FIN MODAL INGRESAR NUEVA COMPRA ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
+          {/* ------------------- MODAL EDITAR  COMPRA-------------- */}
 
           <ModalupProiveedor
             estado2={estadoModal2}
@@ -242,9 +278,9 @@ function Compras() {
             titulo2={"Actualizar proveedor"}
             idEdit={idEdit}
           ></ModalupProiveedor>
-          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
+          {/* --------------------------- FIN MODAL EDITAR COMPRA ------------------ */}
 
-          {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
+          {/* //----------------------------------ELIMINAR COMPRA ----------------------------------*/}
 
           <div className="centrarControles">
             <div className="controlesUsuario">
@@ -260,6 +296,7 @@ function Compras() {
                 >
                   <input
                     type="text"
+                    onChange={searcher}
                     placeholder="Buscar proveedor"
                     name="q"
                   ></input>
@@ -281,7 +318,7 @@ function Compras() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="proveedorMovil">
-            {compras.map((compra, index) => (
+            {result.map((compra, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="proveedorID">
@@ -331,6 +368,8 @@ function Compras() {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
+
+          {/* //--------------------------- VERSION ESCRITORIO ---------------------------- */}
           <div className="proveedorEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
@@ -344,7 +383,7 @@ function Compras() {
                   <h3>Responsable: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Producto: </h3>
+                  <h3>Proveedor: </h3>
                 </div>
                 <div className="encD">
                   <h3>Cantida: </h3>
@@ -366,7 +405,7 @@ function Compras() {
               </div>
             </div>
 
-            {compras.map((compra, index) => (
+            {result.map((compra, index) => (
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="compraID">
