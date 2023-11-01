@@ -20,9 +20,7 @@ function Compras() {
   const [search, setSaerch] = useState("");
   //-------URLS DE API-----------------//
 
-  const URL = "http://localhost:3000/compras";
-  const URLprov = "http://localhost:3000/proveedores";
-  const URLprod = "http://localhost:3000/productos";
+  const URL = "http://localhost:8080/compras";
 
   //-----CAPTURAR DATOS DE COMPRAS------//
 
@@ -32,28 +30,13 @@ function Compras() {
       const datos = await response.json();
       setCompras(datos);
       console.log(datos);
+      return datos;
     } catch (err) {
       console.error(err);
     }
   };
   useEffect(() => {
     getData();
-  }, []);
-
-  //-----CAPTURAR DATOS DE PROVEEDORES------//
-
-  const getDataProv = async () => {
-    try {
-      const response = await fetch(URLprov);
-      const json = await response.json();
-      setProveedoresC(json);
-      console.log(json);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    getDataProv();
   }, []);
 
   //-----CAPTURAR DATOS DE NUEVA COMPRA------//
@@ -374,28 +357,37 @@ function Compras() {
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>ID: </h3>
+                  <h3>Codigo: </h3>
                 </div>
               </div>
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Responsable: </h3>
+                  <h3>Fecha compra: </h3>
                 </div>
                 <div className="encD">
                   <h3>Proveedor: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Cantida: </h3>
+                  <h3>NIT: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Metodo de pago: </h3>
+                  <h3>producto: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Emision: </h3>
+                  <h3>Cantidad: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Entrega: </h3>
+                  <h3>Precio unitario: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Stock: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Descripcion: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Vencimiento: </h3>
                 </div>
               </div>
               <div className="encBT">
@@ -409,8 +401,7 @@ function Compras() {
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="compraID">
-                    <p>ID</p>
-                    <span>{compra.idcompras}</span>
+                    <span>COMP{compra.idcompra}</span>
                   </div>
                 </div>
 
@@ -419,22 +410,31 @@ function Compras() {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{compra.responsable}</h3>
+                    <h3>{compra.fecha_compra}</h3>
                   </div>
                   <div>
-                    <h5>{compra.nombre_producto}</h5>
+                    <h5>{compra.nombre_proveedor}</h5>
+                  </div>
+                  <div>
+                    <p>{compra.nit}</p>
+                  </div>
+                  <div>
+                    <p>{compra.producto}</p>
                   </div>
                   <div>
                     <p>{compra.cantidad}</p>
                   </div>
                   <div>
-                    <p>{compra.metd_pago}</p>
+                    <p>Q. {compra.costo_unitario}</p>
                   </div>
                   <div>
-                    <p>{compra.emision}</p>
+                    <p>{compra.stock}</p>
                   </div>
                   <div>
-                    <p>{compra.entrega}</p>
+                    <p>{compra.descripcion}</p>
+                  </div>
+                  <div>
+                    <p>{compra.fecha_vencimiento}</p>
                   </div>
                 </form>
                 <div className="controlBtP">
