@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
 
@@ -23,11 +23,11 @@ const ModalupProiveedor = ({
       setProveedor(proveedor);
       setProveedroUP({
         idprov: proveedor.idprov,
-        nombre_pr: proveedor.nombre_pr,
-        nit_pr: proveedor.nit_pr,
-        telefono_pr: proveedor.telefono_pr,
-        correo_pr: proveedor.correo_pr,
-        direccion_pr: proveedor.direccion_pr,
+        nombre_proveedor: proveedor.nombre_proveedor,
+        nit: proveedor.nit,
+        telefono_prov: proveedor.telefono_prov,
+        email: proveedor.email,
+        direccion_prov: proveedor.direccion_prov,
       });
       console.log(proveedor);
     } catch (err) {
@@ -45,11 +45,11 @@ const ModalupProiveedor = ({
 
   const [proveedorUP, setProveedroUP] = useState({
     idprov: "",
-    nombre_pr: "",
-    nit_pr: "",
-    telefono_pr: "",
-    correo_pr: "",
-    direccion_pr: "",
+    nombre_proveedor: "",
+    nit: "",
+    telefono_prov: "",
+    email: "",
+    direccion_prov: "",
   });
 
   const onChangeData = (e) => {
@@ -153,11 +153,11 @@ const ModalupProiveedor = ({
                   <label>Proveedor: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.nombre_pr}
+                    value={proveedorUP.nombre_proveedor}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre_pr"
+                    name="nombre_proveedor"
                     placeholder="Nombre"
                   ></input>
                 </div>
@@ -166,11 +166,11 @@ const ModalupProiveedor = ({
                   <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={proveedorUP.nit_pr}
+                    value={proveedorUP.nit}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="nit_pr"
+                    name="nit"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -179,11 +179,11 @@ const ModalupProiveedor = ({
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={proveedorUP.telefono_pr}
+                    value={proveedorUP.telefono_prov}
                     onChange={(e) => onChangeData(e)}
                     type="number"
                     id="telefonoUser"
-                    name="telefono_pr"
+                    name="telefono_prov"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -192,24 +192,24 @@ const ModalupProiveedor = ({
                   <label>Correo: </label>
                   <input
                     // {...register("email")}
-                    value={proveedorUP.correo_pr}
+                    value={proveedorUP.email}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="correo_pr"
+                    name="email"
                     placeholder="Correo electronico"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>direccion: </label>
+                  <label>Direccion: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={proveedorUP.direccion_pr}
+                    value={proveedorUP.direccion_prov}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="passwordUser"
-                    name="direccion_pr"
+                    name="direccion_prov"
                     placeholder="Contraseña"
                   ></input>
                 </div>

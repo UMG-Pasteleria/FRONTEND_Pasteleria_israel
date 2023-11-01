@@ -13,21 +13,22 @@ const ModalupClient = ({
 }) => {
   const [cliente, setCliente] = useState([]);
 
-  const getDataUp = async (id_cliente) => {
+  const getDataUp = async (idcliente) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/cliente/${id_cliente}`,
+        `http://localhost:3000/cliente/${idcliente}`,
         { headers: { "content-Type": "application/json" } }
       );
       const cliente = await response.json();
       setCliente(cliente);
       setClienteoUP({
-        id_cliente: cliente.id_cliente,
+        idcliente: cliente.idcliente,
         nombre_cl: cliente.nombre_cl,
         nit_cl: cliente.nit_cl,
         telefono_cl: cliente.telefono_cl,
         tipo_cliente: cliente.tipo_cliente,
         direccion_cl: cliente.direccion_cl,
+        idtcl: cliente.idtcl, //id tabla tipo_cliente
       });
       console.log(cliente);
     } catch (err) {
@@ -44,12 +45,13 @@ const ModalupClient = ({
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
   const [clienteUP, setClienteoUP] = useState({
-    id_cliente: "",
+    idcliente: "",
     nombre_cl: "",
     nit_cl: "",
     telefono_cl: "",
     tipo_cliente: "",
-    direccion_cl: "",
+    idtcl: "",//id tabla tipo_cliente
+    
   });
 
   const onChangeData = (e) => {
@@ -64,7 +66,7 @@ const ModalupClient = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/cliente/${clienteUP.id_cliente}`,
+        `http://localhost:3000/cliente/${clienteUP.idcliente}`,
         {
           method: "PUT",
           body: JSON.stringify(clienteUP),
@@ -78,7 +80,7 @@ const ModalupClient = ({
       console.log(response);
       setClientes(
         clientes.map((cliente) =>
-          cliente.id_cliente === clienteUP.id_cliente ? clienteUP : cliente
+          cliente.idcliente === clienteUP.idcliente ? clienteUP : cliente
         )
       );
       cambiarEstado2(false);
@@ -142,7 +144,7 @@ const ModalupClient = ({
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    value={clienteUP.id_cliente}
+                    value={clienteUP.idcliente}
                     name="id_cliente"
                     onChange={(e) => onChangeData(e)}
                   ></input>
@@ -188,10 +190,10 @@ const ModalupClient = ({
                 </div>
 
                 <div className="itemUser">
-                  <label>Correo: </label>
+                  <label>Tipo cliente: </label>
                   <input
                     // {...register("email")}
-                    value={clienteUP.tipo_cliente}
+                    value={clienteUP.idtcl} //id tabla tipo_cliente
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
@@ -200,7 +202,7 @@ const ModalupClient = ({
                   ></input>
                 </div>
 
-                <div className="itemUser">
+                {/* <div className="itemUser">
                   <label>Direccion: </label>
                   <input
                     // {...register("contrasenia")}
@@ -211,7 +213,7 @@ const ModalupClient = ({
                     name="direccion_cl"
                     placeholder="Direccion"
                   ></input>
-                </div>
+                </div> */}
 
                 <br />
 

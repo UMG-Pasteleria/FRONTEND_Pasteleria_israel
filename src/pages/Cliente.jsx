@@ -60,21 +60,21 @@ function Cliente() {
 
   //-----------------ELIMINAR CLIENTE---------------------------------
 
-  const handleDelete = async (id_cliente) => {
-    const res = await fetch(`http://localhost:3000/cliente/${id_cliente}`, {
+  const handleDelete = async (idcliente) => {
+    const res = await fetch(`http://localhost:3000/cliente/${idcliente}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
     setClientes(
-      clientes.filter((cliente) => cliente.id_cliente !== id_cliente)
+      clientes.filter((cliente) => cliente.idcliente !== idcliente)
     );
   };
 
   //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (id_cliente) => {
+  const mostrarAlerta = (idcliente) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
@@ -100,7 +100,7 @@ function Cliente() {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(id_cliente);
+          handleDelete(idcliente);
           swal.fire({
             title: "¡Eliminado!",
             icon: "success",
@@ -193,21 +193,21 @@ function Cliente() {
                 </div>
 
                 <div className="itemClient">
-                  <label>Correo: </label>
+                  <label>Direccion: </label>
                   <input
                     {...register("direccion_cl")}
                     type="text"
-                    id="correo_client"
-                    placeholder="Correo electronico"
+                    id="direccion_client"
+                    placeholder="Direccion"
                   ></input>
 
                   <div className="itemClient">
-                    <label>Direccion: </label>
+                    <label>Tipo Cliente: </label>
                     <input
-                      {...register("tipo_cliente")}
+                      {...register("idtcl")}//id tabla tipo_cliente
                       type="text"
-                      id="direccion_client"
-                      placeholder="Direccion"
+                      id="tipo_client"
+                      placeholder="Tipo_cliente"
                     ></input>
                   </div>
                 </div>
@@ -292,14 +292,14 @@ function Cliente() {
                 <div className="imgPerfil">
                   <div className="clienteID">
                     <p>ID</p>
-                    <span>{cliente.id_cliente}</span>
+                    <span>{cliente.idcliente}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.id_cliente)
+                      setIdEdit(cliente.idcliente)
                     }
                   />
                 </div>
@@ -308,7 +308,7 @@ function Cliente() {
                   className="datoCliente"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(cliente.id_cliente)
+                    setIdEdit(cliente.idcliente)
                   }
                 >
                   <div>
@@ -319,6 +319,9 @@ function Cliente() {
                   </div>
                   <div>
                     <p>Telefono: {cliente.telefono_cl}</p>
+                  </div>
+                  <div>
+                    <p>Tipo Cliente: {cliente.idtcl}</p>
                   </div>
                 </div>
                 <div className="controlBtC">
@@ -374,7 +377,7 @@ function Cliente() {
                 <div className="imgPerfil">
                   <div className="clienteID">
                     <p>ID</p>
-                    <span>{cliente.id_cliente}</span>
+                    <span>{cliente.idcliente}</span>
                   </div>
                   <img
                     src={avatar}
@@ -400,7 +403,7 @@ function Cliente() {
                     <p>{cliente.direccion_cl}</p>
                   </div>
                   <div>
-                    <p>{cliente.tipo_cliente}</p>
+                    <p>{cliente.idtcl}</p>
                   </div>
                 </form>
                 <div className="controlBtC">
@@ -408,7 +411,7 @@ function Cliente() {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.id_cliente)
+                      setIdEdit(cliente.idcliente)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -416,7 +419,7 @@ function Cliente() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(cliente.id_cliente)}
+                    onClick={() => mostrarAlerta(cliente.idcliente)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
