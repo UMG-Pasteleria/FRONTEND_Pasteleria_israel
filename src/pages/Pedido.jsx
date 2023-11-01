@@ -71,6 +71,8 @@ function Pedido() {
       console.error(err);
     }
   };
+
+  //-------------------- OBTENER DATOS DE MODO PAGO -----------------//
   const getModopago = async () => {
     try {
       const response = await fetch(URL + "modo_pago");
