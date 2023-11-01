@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import swal from "sweetalert2";
 import ModalupPedido from "../components/modals/ModalUpdatePedido";
 import ModalPed from "../components/modals/modalPedido";
 import Navbar from "../components/navbar";
-//import SidebarCompras from "../components/sidebarCompras";
 import SidebarPedidos from "../components/sidebarPedido";
 import PDFGenerator from "../generarPDF/g.Pedido";
 import "../styles/pedido.css";
@@ -14,29 +12,106 @@ function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [search, setSaerch] = useState("");
-
+  const [estados, setEstados] = useState([]);
   const [pedidos, setPedidos] = useState([]);
+  const [clientes, setClientes] = useState([]);
+  const [pasteles, setPasteles] = useState([]);
+  const [modopagos, setModopagos] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pedidos";
+  const URL = "http://localhost:3000/";
+
+  //--------------- OBTENER DATOS DE PEDIDOS -----------------//
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
-      const json = await response.json();
-      setPedidos(json);
-      console.log(json);
+      const response = await fetch(URL + "pedidos");
+      const datos = await response.json();
+      setPedidos(datos);
+      console.log(datos);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //--------------- OBTENER DATOS DE ESTADOS -----------------//
+
+  const getEstado = async () => {
+    try {
+      const response = await fetch(URL + "estado");
+      const estado = await response.json();
+      setEstados(estado);
+      console.log(estado);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //--------------- OBTENER DATOS DE CLIENTES -----------------//
+
+  const getCliente = async () => {
+    try {
+      const response = await fetch(URL + "cliente");
+      const clienteData = await response.json();
+      setClientes(clienteData);
+      console.log(clienteData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //--------------- OBTENER DATOS DE PASTELES -----------------//
+
+  const getPastel = async () => {
+    try {
+      const response = await fetch(URL + "pastel");
+      const pastelData = await response.json();
+      setPasteles(pastelData);
+      console.log(pastelData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const getModopago = async () => {
+    try {
+      const response = await fetch(URL + "modo_pago");
+      const modopagoData = await response.json();
+      setModopagos(modopagoData);
+      console.log(modopagoData);
     } catch (err) {
       console.error(err);
     }
   };
   useEffect(() => {
     getData();
+    getEstado();
+    getCliente();
+    getPastel();
+    getModopago();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
+  // //------------------ENVIAR DATOS DE SELECTOR ESTADO -----------------//
+  // const [selectEstado, setSelectEstado] = useState();
+  // const handleSelectChange = (a) => {
+  //   console.log(a.target.value);
+  //   setSelectEstado(a.target.value);
+  // };
+  // //------------------ENVIAR DATOS DE SELECTOR CLIENTE -----------------//
+  // const [selectCliente, setSelectCliente] = useState();
+  // const handleSelectChangeCliente = (b) => {
+  //   console.log(b.target.value);
+  //   setSelectCliente(b.target.value);
+  // };
+  // //------------------ENVIAR DATOS DE SELECTOR PASTEL -----------------//
+  // const [selectPastel, setSelectPastel] = useState();
+  // const handleSelectChangePastel = (c) => {
+  //   console.log(c.target.value);
+  //   setSelectPastel(c.target.value);
+  // };
+
+  //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
   const { handleSubmit, register } = useForm();
   const enviarPedido = handleSubmit((data) => {
     console.log(data);
-    fetch(URL, {
+    fetch(URL + "pedidos", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -56,20 +131,20 @@ function Pedido() {
         container: "contenedor-alert",
       },
     });
-    (document.getElementById("correo_pr").value = null),
-      (document.getElementById("nit_pr").value = null),
-      (document.getElementById("nombre_pr").value = null),
-      (document.getElementById("telefono_pr").value = null),
-      (document.getElementById("direccion_pr").value = null);
+
+    //   (document.getElementById("nit_pr").value = null),
+    //   (document.getElementById("nombre_pr").value = null),
+    //   (document.getElementById("telefono_pr").value = null),
+    //   (document.getElementById("direccion_pr").value = null);
   });
 
   //-----------------ELIMINAR PEDIDO---------------------------------
 
   const handleDelete = async (idpedido) => {
-    const res = await fetch(`http://localhost:3000/pedidos/${idpedido}`, {
+    const res = await fetch(URL + `pedidos/${idpedido}`, {
       method: "DELETE",
     });
-    // const data = await res.json();
+
     console.log(res);
     setPedidos(pedidos.filter((pedido) => pedido.idpedido !== idpedido));
   };
@@ -121,28 +196,25 @@ function Pedido() {
         }
       });
   };
-  //----------------------------FIN DE ALERTAS --------------------------------
 
   //--------------------------------- EDITAR PEDIDO ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR PEDIDO ----------------------------------//
-
-//------------busqueda inteligente -----------------
-const searcher = (e) => {
-  setSaerch(e.target.value);
-  console.log(e.target.value);
-};
-//----metodod de filtrado de busqueda-----
-let result = [];
-if (!search) {
-  result = pedidos;
-} else {
-  result = pedidos.filter((datos) =>
-    datos.producto_pro.toLowerCase().includes(search.toLowerCase())
-  );
-}
+  //----------------------BUSQUEDA INTELIGENTE-------------------------//
+  const searcher = (e) => {
+    setSaerch(e.target.value);
+    console.log(e.target.value);
+  };
+  //----metodod de filtrado de busqueda-----
+  let result = [];
+  if (!search) {
+    result = pedidos;
+  } else {
+    result = pedidos.filter((datos) =>
+      datos.nombre_cl.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
   return (
     <>
@@ -154,6 +226,7 @@ if (!search) {
           <br></br>
           <h2>Listado de Pedidos</h2>
           <br></br>
+
           {/* ------------------- MODAL AGREGAR NUEVO PEDIDO-------------- */}
           <ModalPed
             estado={estadoModal1}
@@ -167,53 +240,99 @@ if (!search) {
                 onSubmit={enviarPedido}
               >
                 <div className="itemPedid">
-                  <label>No. </label>
-                  <input
-                    {...register("nit_pd")}
-                    type="number"
-                    id="nit_pr"
-                    placeholder="No."
-                  ></input>
+                  <label>Cliente: </label>
+                  <select
+                    className="selector"
+                    {...register("id_cliente")}
+                    id="id_cliente"
+                    placeholder="Seleccione cliente"
+                    // onChange={handleSelectChangeCliente}
+                  >
+                    {/* <option value="" disabled selected>
+                      Seleccione un cliente
+                    </option> */}
+                    {clientes.map((clienteData, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        defaultValue={clienteData.idcliente}
+                      >
+                        {clienteData.nombre_cl}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="itemPedid">
-                  <label>Productos: </label>
-                  <input
-                    {...register("productos_pd")}
-                    type="text"
-                    id="productos_pd"
-                    placeholder="Productos"
-                  ></input>
+                  <label>Pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("id_pastel")}
+                    id="id_pastel"
+                    // onChange={handleSelectChangePastel}
+                  >
+                    <option defaultValue="" disabled selected>
+                      Seleccione un pastel
+                    </option>
+                    {pasteles.map((pastelData, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        defaultValue={pastelData.idpastel}
+                      >
+                        {pastelData.pastel} {pastelData.tamanio} con{" "}
+                        {pastelData.decoracion} {".          ."} Precio: Q.
+                        {pastelData.precio}
+                      </option>
+                    ))}
+                  </select>
+                  <button>+</button>
                 </div>
 
                 <div className="itemPedid">
-                  <label>Telefono: </label>
+                  <label>Modo pago: </label>
                   <input
-                    {...register("telefono_pd")}
+                    {...register("id_modopago")}
                     type="number"
-                    id="telefono_pd"
+                    id="id_modopago"
                     placeholder="Telefono"
                   ></input>
                 </div>
 
                 <div className="itemPedid">
-                  <label>Estado: </label>
+                  <label>Cantidad: </label>
                   <input
-                    {...register("estado_pd")}
-                    type="text"
-                    id="estado_pd"
-                    placeholder="Estado"
+                    {...register("cantidad")}
+                    type="number"
+                    id="cantidad"
+                    placeholder="Cantidad"
                   ></input>
 
-                  {/* <div className="itemProv">
-                    <label>Direccion: </label>
-                    <input
-                      {...register("direccion_pr")}
-                      type="text"
-                      id="direccion_pr"
-                      placeholder="direccion"
-                    ></input>
-                  </div> */}
+                  <div className="itemPedid">
+                    <label>Estado: </label>
+
+                    <select
+                      className="selector"
+                      {...register("id_estado")}
+                      id="id_estado"
+                      defaultValue=""
+                      // onChange={handleSelectChange}
+                    >
+                      {/* 
+                      <option value="" disabled selected>
+                        Seleccione un cliente
+                      </option> */}
+                      {estados.map((estado, index) => (
+                        <option
+                          className="opciones"
+                          key={index}
+                          defaultValue={estado.idestadop}
+                        >
+                          {estado.idestadop} - {estado.estado}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <br />
 
@@ -258,7 +377,7 @@ if (!search) {
                 <span className="material-symbols-outlined">person_add</span>
               </button>
 
-               <div className="busqueda">
+              <div className="busqueda">
                 <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
@@ -332,22 +451,34 @@ if (!search) {
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>No. </h3>
+                  <h3>Pedido No. </h3>
                 </div>
               </div>
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Producto: </h3>
+                  <h3>Fecha: </h3>
                 </div>
                 <div className="encD">
                   <h3>Cliente: </h3>
                 </div>
                 <div className="encD">
-                  <h3>cantidad: </h3>
+                  <h3>Pastel: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Fecha: </h3>
+                  <h3>Tamaño: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Decoracion: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Cantidad: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Total: </h3>
+                </div>
+                <div className="encD">
+                  <h3>Estado: </h3>
                 </div>
                 {/* <div className="encD">
                   <h3>Direccion: </h3>
@@ -360,11 +491,11 @@ if (!search) {
               </div>
             </div>
 
-            {result.map((pedido, index) => (
+            {result.map((pedidos, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidosID">
-                    <span>{pedido.idpedido}</span>
+                    <span>P#{pedidos.idpedido}</span>
                   </div>
                 </div>
 
@@ -373,17 +504,37 @@ if (!search) {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{pedido.producto_pro}</h3>
+                    <h3>
+                      {new Date(pedidos.fecha_pedido).toLocaleDateString(
+                        "es-ES",
+                        {
+                          timeZone: "UTC",
+                        }
+                      )}
+                    </h3>
                   </div>
                   <div>
-                    <h5>{pedido.id_client}</h5>
+                    <h5>{pedidos.nombre_cl}</h5>
                   </div>
                   <div>
-                    <p>{pedido.cantidad_pro}</p>
+                    <p>{pedidos.pastel}</p>
                   </div>
                   <div>
-                    <p>{pedido.fecha_pedido}</p>
+                    <p>{pedidos.tamanio}</p>
                   </div>
+                  <div>
+                    <p>{pedidos.decoracion}</p>
+                  </div>
+                  <div>
+                    <p>{pedidos.cantidad}</p>
+                  </div>
+                  <div>
+                    <p>{pedidos.total}</p>
+                  </div>
+                  <div>
+                    <p>{pedidos.estado}</p>
+                  </div>
+
                   {/* <div>
                     <p>{proveedor.direccion_pr}</p>
                   </div> */}
@@ -393,15 +544,15 @@ if (!search) {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(pedido.idpedido)
+                      setIdEdit(pedidos.idpedido)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
                   </button>
-                  <br />
+
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(pedido.idpedido)}
+                    onClick={() => mostrarAlerta(pedidos.idpedido)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>

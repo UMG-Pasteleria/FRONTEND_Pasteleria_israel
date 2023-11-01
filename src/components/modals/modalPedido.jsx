@@ -23,8 +23,8 @@ const ModalPed = ({ children, estado, cambiarEstado, titulo }) => {
 export default ModalPed;
 
 const Overlay = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -37,14 +37,42 @@ const Overlay = styled.div`
 `;
 
 const ContenedorModal = styled.div`
-  width: 400px;
-  min-height: 100px;
-  background: #fff;
-  position: relative;
-  border-radius: 15px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 20px;
-  z-index: 99;
+  @media (max-width: 600px) {
+    width: 80%;
+    max-width: 300px;
+    min-height: 100px;
+    background: #fff;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    z-index: 99;
+    transition: 0.5s all ease-out;
+  }
+
+  @media (max-width: 1200px) {
+    width: 600px;
+    min-height: 100px;
+    background: #fff;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    z-index: 99;
+    transition: 0.3s all ease-out;
+  }
+
+  @media (min-width: 1201px) {
+    width: 900px;
+    min-height: 100px;
+    background: #fff;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    z-index: 99;
+    transition: 0.3s all ease-out;
+  }
 `;
 
 const EncabezadoModal = styled.div`
