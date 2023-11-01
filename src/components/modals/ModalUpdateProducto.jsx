@@ -3,39 +3,40 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
 
-const ModalupProiveedor = ({
+const ModalupProducto = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
-  setProveedores,
-  proveedores,
+  setProductos,
+  productos,
 }) => {
-  const [proveedor, setProveedor] = useState({});
+  const [producto, setProducto] = useState({});
 
-  const getDataUp = async (idprov) => {
+  const getDataUp = async (id_producto) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/producto/${id_producto}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const proveedor = await response.json();
-      setProveedor(proveedor);
-      setProveedroUP({
-        idprov: proveedor.idprov,
-        nombre_pr: proveedor.nombre_pr,
-        nit_pr: proveedor.nit_pr,
-        telefono_pr: proveedor.telefono_pr,
-        correo_pr: proveedor.correo_pr,
-        direccion_pr: proveedor.direccion_pr,
+      const producto = await response.json();
+      setProducto(producto);
+      setProductoUP({
+        id_producto: producto.id_producto,
+        cod_prod: producto.cod_prod,
+        cantidad: producto.cantidad,
+        nombre_prod: producto.nombre_prod,
+        peso_prod: producto.peso_prod,
+        fechavencimiento: producto.fechavencimiento,
+        descripcion_prod: producto.descripcion_prod
       });
-      console.log(proveedor);
+      console.log(producto);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(proveedor);
+  console.log(producto);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -44,17 +45,18 @@ const ModalupProiveedor = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [proveedorUP, setProveedroUP] = useState({
-    idprov: "",
-    nombre_pr: "",
-    nit_pr: "",
-    telefono_pr: "",
-    correo_pr: "",
-    direccion_pr: "",
+  const [productoUP, setProductoUP] = useState({
+    id_producto: "",
+    cod_prod:"",
+    cantidad:"",
+    nombre_prod: "",
+    peso_prod: "",
+    fechavencimiento: "",
+    descripcion_prod: "",
   });
 
   const onChangeData = (e) => {
-    setProveedroUP({ ...proveedorUP, [e.target.name]: e.target.value });
+    setProductoUP({ ...productoUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
@@ -66,10 +68,10 @@ const ModalupProiveedor = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${proveedorUP.idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/producto/${productoUP.id_producto}`,
         {
           method: "PUT",
-          body: JSON.stringify(proveedorUP),
+          body: JSON.stringify(productoUP),
           headers: {
             "Content-Type": "application/json",
           },
@@ -78,9 +80,9 @@ const ModalupProiveedor = ({
       const data = response.json();
       console.log(data);
       console.log(response);
-      setProveedores(
-        proveedores.map((proveedor) =>
-          proveedor.idprov === proveedorUP.idprov ? proveedorUP : proveedor
+      setProductos(
+        productos.map((producto) =>
+          producto.id_producto === productoUP.id_producto ? productoUP : producto
         )
       );
       cambiarEstado2(false);
@@ -88,7 +90,7 @@ const ModalupProiveedor = ({
       //lanza alerta de guardado correctamente
       if (response.status === 200) {
         swal.fire({
-          title: "Proveedor Actualizado!",
+          title: "Producto Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
@@ -137,86 +139,102 @@ const ModalupProiveedor = ({
             </BotonCerrar>
 
 
-            <div className="ContenedorEditarProducto">
+            <div className="ContenedorEditarUsuario">
               <form className="nuevoUserForm">
                 <div className="itemUser">
-                  <label>id: </label>
+                  <label>Id: </label>
                   <input
                     // {...register("iduser")}
-                    type="text"
-                    id="idUser"
+                    type="number"
+                    id="id_producto"
                     placeholder="ID"
-                    value={proveedorUP.idprov}
-                    name="idprov"
+                    value={productoUP.id_producto}
+                    name="id_producto"
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Proveedor: </label>
+                  <label>Codigo: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.nombre_pr}
+                    value={productoUP.cod_prod}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="nombre_pr"
-                    placeholder="Nombre"
+                    name="cod_prod"
+                    placeholder="Codigo"
                   ></input>
                 </div>
 
-                <div className="itemUser">
-                  <label>NIT: </label>
-                  <input
-                    // {...register("apellido")}
-                    value={proveedorUP.nit_pr}
-                    onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="apellidoUser"
-                    name="nit_pr"
-                    placeholder="NIT"
-                  ></input>
-                </div>
 
                 <div className="itemUser">
-                  <label>Telefono: </label>
+                  <label>Cantidad: </label>
                   <input
-                    // {...register("telefono")}
-                    value={proveedorUP.telefono_pr}
+                    // {...register("nombre")}
+                    value={productoUP.cantidad}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="telefonoUser"
-                    name="telefono_pr"
-                    placeholder="Telefono"
+                    id="nombreUser"
+                    name="cantidad"
+                    placeholder="Cantidad"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Correo: </label>
+                  <label>Producto: </label>
+                  <input
+                    // {...register("nombre")}
+                    value={productoUP.nombre_prod}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="nombreUser"
+                    name="nombre_prod"
+                    placeholder="Producto"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Peso: </label>
+                  <input
+                    // {...register("telefono")}
+                    value={productoUP.peso_prod}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="telefonoUser"
+                    name="peso_prod"
+                    placeholder="Peso_producto"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Vencimiento: </label>
                   <input
                     // {...register("email")}
-                    value={proveedorUP.correo_pr}
+                    value={productoUP.fechavencimiento}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="correo_pr"
-                    placeholder="Correo electronico"
+                    name="fechavencimiento"
+                    placeholder="Vencimiento"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>direccion: </label>
+                  <label>Descripcion: </label>
                   <input
-                    // {...register("contrasenia")}
-                    value={proveedorUP.direccion_pr}
+                    // {...register("apellido")}
+                    value={productoUP.descripcion_prod}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="passwordUser"
-                    name="direccion_pr"
-                    placeholder="Contraseña"
+                    id="apellidoUser"
+                    name="cantidad"
+                    placeholder="Descripcion"
                   ></input>
-                </div>
+                </div>     
+           
 
+                
                 <br />
 
                 <div className="bonotesNewUser">
@@ -249,7 +267,7 @@ const ModalupProiveedor = ({
   );
 };
 
-export default ModalupProiveedor;
+export default ModalupProducto;
 
 const Overlay = styled.div`
   width: 100vw;

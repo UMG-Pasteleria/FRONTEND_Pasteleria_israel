@@ -15,7 +15,7 @@ const Usuario = () => {
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuario, setUsuario] = useState([]);
 
-  const URL = "http://localhost:3000/usuario";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/usuario";
   const getData = async () => {
     try {
       const response = await fetch(URL);

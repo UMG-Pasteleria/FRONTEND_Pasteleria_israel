@@ -12,6 +12,9 @@ import ProductosWEB from "./pages/ProductosWEB";
 import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
 import Cliente from "./pages/Cliente";
 import Pedido from "./pages/Pedido";
+import ModalProd from "../src/components/modals/modalProducto";
+import Producto from "./pages/Producto";
+//import MateriaP from "./pages/MateriaPri";
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -31,8 +34,11 @@ function App() {
           <Route path="/Admin/Compras" element={<Compras />} />
           <Route path="/Admin/Cliente" element={<Cliente />} />
           <Route path="/Admin/Pedido" element={<Pedido />} />
+          <Route path="/Admin/Producto" element={<Producto />} />
           <Route path="/Admin/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Admin/Proveedor/:idprov/editar" element={<ModalP />} />
+          {/* <Route path="/Admin/MateriaPri/:id_mateprima/editar" element={<ModalProd />} /> */}
+
         </Routes>
       </BrowserRouter>
     </>
