@@ -2,39 +2,39 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
 
-const ModalupClient = ({
+const ModalupPastel = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
-  setClientes,
-  clientes,
+  setPasteles,
+  pasteles,
 }) => {
-  const [cliente, setCliente] = useState([]);
+  const [pastel, setPastel] = useState({});
 
-  const getDataUp = async (idcliente) => {
+  const getDataUp = async (idpastel) => {
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${idcliente}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/pasteles/${idpastel}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const cliente = await response.json();
-      setCliente(cliente);
-      setClienteoUP({
-        idcliente: cliente.idcliente,
-        nombre_cl: cliente.nombre_cl,
-        nit_cl: cliente.nit_cl,
-        telefono_cl: cliente.telefono_cl,
-        direccion_cl: cliente.direccion_cl,
-        idtcl: cliente.idtcl, //id tabla tipo_cliente
+      const pastel = await response.json();
+      setPastel(pastel);
+      setPasteloUP({
+        idpastel: pastel.idpastel,
+        pastel: pastel.pastel,
+        precio: pastel.precio,
+        idtampast: pastel.idtampast,
+        idecpast: pastel.idecpast,
+        idcatp: pastel.idcatp,
       });
-      console.log(cliente);
+      console.log(pastel);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(cliente);
+  console.log(pastel);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -43,43 +43,43 @@ const ModalupClient = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [clienteUP, setClienteoUP] = useState({
-    idcliente: "",
-    nombre_cl: "",
-    nit_cl: "",
-    telefono_cl: "",
-    direccion_cl: "",
-    idtcl: "",//id tabla tipo_cliente
-    
+  const [pastelUP, setPasteloUP] = useState({
+    idpastel: "",
+    pastel: "",
+    precio: "",
+    idtampast: "",
+    idecpast: "",
+    idcatp: "",
   });
 
   const onChangeData = (e) => {
-    setClienteoUP({ ...clienteUP, [e.target.name]: e.target.value });
+    setPasteloUP({ ...pastelUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
   //----------------------Evento de envio del formulario
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${clienteUP.idcliente}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/pasteles/${pastelUP.idpastel}`,
         {
           method: "PUT",
-          body: JSON.stringify(clienteUP),
+          body: JSON.stringify(pastelUP),
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      const data = await response.json();
+      const data = response.json();
       console.log(data);
       console.log(response);
-      setClientes(
-        clientes.map((cliente) =>
-          cliente.idcliente === clienteUP.idcliente ? clienteUP : cliente
+      setPasteles(
+        pasteles.map((pastel) =>
+          pastel.idpastel === pastelUP.idpastel ? pastelUP : pastel
         )
       );
       cambiarEstado2(false);
@@ -87,7 +87,7 @@ const ModalupClient = ({
       //lanza alerta de guardado correctamente
       if (response.status === 200) {
         swal.fire({
-          title: "Cliente Actualizado!",
+          title: "Pastel Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
@@ -121,7 +121,7 @@ const ModalupClient = ({
 
   //----------------------------------
 
-  // ------------------------ FIN ACTUALIZAR CLIENTE ---------------------------------
+  // ------------------------ FIN ACTUALIZAR PROVEEDOR ---------------------------------
 
   return (
     <>
@@ -135,83 +135,83 @@ const ModalupClient = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm" onSubmit={handleSubmit}>
+              <form className="nuevoUserForm">
                 <div className="itemUser">
                   <label>id: </label>
                   <input
                     // {...register("iduser")}
                     type="text"
-                    id="idcliente"
+                    id="idpastel"
                     placeholder="ID"
-                    value={clienteUP.idcliente}
-                    name="idcliente"
+                    value={pastelUP.idpastel}
+                    name="idprov"
                     onChange={(e) => onChangeData(e)}
                     disabled selected
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Cliente: </label>
+                  <label>Pastel: </label>
                   <input
                     // {...register("nombre")}
-                    value={clienteUP.nombre_cl}
+                    value={pastelUP.pastel}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="nombre_cl"
-                    name="nombre_cl"
-                    placeholder="Nombre"
+                    id="pastel"
+                    name="nombre_pastel"
+                    placeholder="Pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>NIT: </label>
+                  <label>Precio: </label>
                   <input
                     // {...register("apellido")}
-                    value={clienteUP.nit_cl}
+                    value={pastelUP.precio}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="nit_cl"
-                    name="nit_cl"
-                    placeholder="NIT"
+                    id="precio"
+                    name="precio"
+                    placeholder="Precio"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Telefono: </label>
+                  <label>Tamaño del Pastel: </label>
                   <input
                     // {...register("telefono")}
-                    value={clienteUP.telefono_cl}
+                    value={pastelUP.idtampast}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="telefono_cl"
-                    name="telefono_cl"
-                    placeholder="Telefono"
+                    id="idtampast"
+                    name="tamaño_pastel"
+                    placeholder="Tamaño del pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Direccion: </label>
+                  <label>Decoracion del Pastel: </label>
                   <input
                     // {...register("email")}
-                    value={clienteUP.direccion_cl} 
+                    value={pastelUP.idecpast}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="direccion_cl"
-                    name="direccion_cl"
-                    placeholder="Direccion"
+                    id="idecpast"
+                    name="decoracion_pastel"
+                    placeholder="Decoracion del pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Tipo cliente: </label>
+                  <label>Categoria del pastel: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={clienteUP.idtcl} //id tabla tipo_cliente
+                    value={pastelUP.idcatp}
                     onChange={(e) => onChangeData(e)}
-                    type="number"
-                    id="idtcl"
-                    name="idtcl"
-                    placeholder="Tipo cliente"
+                    type="text"
+                    id="idcatp"
+                    name="categoria_pastel"
+                    placeholder="Categoria del pastel"
                   ></input>
                 </div>
 
@@ -247,7 +247,7 @@ const ModalupClient = ({
   );
 };
 
-export default ModalupClient;
+export default ModalupPastel;
 
 const Overlay = styled.div`
   width: 100vw;

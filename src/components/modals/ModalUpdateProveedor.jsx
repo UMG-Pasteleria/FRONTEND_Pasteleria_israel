@@ -16,7 +16,7 @@ const ModalupProiveedor = ({
   const getDataUp = async (idprov) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`,
         { headers: { "content-Type": "application/json" } }
       );
       const proveedor = await response.json();
@@ -65,7 +65,7 @@ const ModalupProiveedor = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/proveedores/${proveedorUP.idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${proveedorUP.idprov}`,
         {
           method: "PUT",
           body: JSON.stringify(proveedorUP),
@@ -146,6 +146,7 @@ const ModalupProiveedor = ({
                     value={proveedorUP.idprov}
                     name="idprov"
                     onChange={(e) => onChangeData(e)}
+                    disabled selected
                   ></input>
                 </div>
 

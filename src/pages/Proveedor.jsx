@@ -55,17 +55,17 @@ const Proveedor = () => {
         container: "contenedor-alert",
       },
     });
-    (document.getElementById("email").value = null),
-      (document.getElementById("nit").value = null),
-      (document.getElementById("nombre_proveedor").value = null),
-      (document.getElementById("telefono_prov").value = null),
-      (document.getElementById("direccion_prov").value = null);
+    // (document.getElementById("email").value = null),
+    //   (document.getElementById("nit").value = null),
+    //   (document.getElementById("nombre_proveedor").value = null),
+    //   (document.getElementById("telefono_prov").value = null),
+    //   (document.getElementById("direccion_prov").value = null);
   });
 
   //-----------------ELIMINAR PORVEEDOR---------------------------------
 
   const handleDelete = async (idprov) => {
-    const res = await fetch(`http://localhost:3000/proveedores/${idprov}`, {
+    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`, {
       method: "DELETE",
     });
     // const data = await res.json();

@@ -1,17 +1,17 @@
-import { useState } from "react";
-import Login from "./pages/Login";
-import Inicio from "./pages/Inicio";
-import Proveedor from "./pages/Proveedor";
-import Usuario from "./pages/Usuario";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ModalP from "../src/components/modals/modalProveedor";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Reportes from "./pages/Reportes";
-import Compras from "./pages/Compras";
-import Web from "./pages/webInicio";
-import ProductosWEB from "./pages/ProductosWEB";
-import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
 import Cliente from "./pages/Cliente";
+import Compras from "./pages/Compras";
+import Inicio from "./pages/Inicio";
+import Login from "./pages/Login";
+import Pastel from "./pages/Pasteles";
+import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
 import Pedido from "./pages/Pedido";
+import ProductosWEB from "./pages/ProductosWEB";
+import Proveedor from "./pages/Proveedor";
+import Reportes from "./pages/Reportes";
+import Usuario from "./pages/Usuario";
+import Web from "./pages/webInicio";
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -31,6 +31,7 @@ function App() {
           <Route path="/Admin/Compras" element={<Compras />} />
           <Route path="/Admin/Cliente" element={<Cliente />} />
           <Route path="/Admin/Pedido" element={<Pedido />} />
+          <Route path="/Admin/Pasteles" element={<Pastel />} />
           <Route path="/Admin/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Admin/Proveedor/:idprov/editar" element={<ModalP />} />
         </Routes>
