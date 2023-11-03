@@ -234,7 +234,7 @@ function Pedido() {
       <SidebarPedidos />
       <div className="bodyPedid">
         <div className="ContainerPed"></div>
-        <div className="Pedidoss">
+        < className="Pedidoss">
           <br></br>
           <h2>Listado de Pedidos</h2>
           <br></br>
@@ -408,31 +408,31 @@ function Pedido() {
                       </select>
                     </div>
                   </div>
-                </div>
+             
                 <br />
-                <div className="total">
+                {/* <div className="total">
                   <label htmlFor="total" id="total">
                     .
                   </label>
                   <button
                     type="button"
                     className="totalButton"
-                    // onClick={function Total() {
-                    //   let precio = parseFloat(
-                    //     (pasteles.precio = pasteles.idpastel)
-                    //   ).value;
-                    //   let cantidad = parseInt(
-                    //     document.getElementById("cantidad")
-                    //   );
-                    //   let total = precio * cantidad;
+                    onClick={function Total() {
+                      let precio = parseFloat(
+                        (pasteles.precio = pasteles.idpastel)
+                      ).value;
+                      let cantidad = parseInt(
+                        document.getElementById("cantidad")
+                      );
+                      let total = precio * cantidad;
 
-                    //   console.log(total);
-                    //   document.getElementById("total").oninput = total;
-                    // }}
+                      console.log(total);
+                      document.getElementById("total").oninput = total;
+                    }}
                   >
                     Calcular
                   </button>
-                </div>
+                </div> */}
                 <div className="bonotesNewPedid">
                   <div>
                     <button
@@ -449,6 +449,7 @@ function Pedido() {
                     </button>
                   </div>
                 </div>
+                
               </form>
             </div>
           </ModalPed>
