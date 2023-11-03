@@ -1,0 +1,821 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Caveat:wght@400;500;600;700&family=Indie+Flower&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&family=Work+Sans:wght@400;800&display=swap');
+
+
+body{
+background-color: #b1b1b1;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 250,
+  'opsz' 48
+}
+
+.bodyPast{
+    display: flex;
+    justify-self: center;
+    font-family: 'Istok Web';
+    
+}
+/* -------------------------- CONTROL DE BUSQUEDA-----------------*/
+.centrarControles{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.centrarControles .controlesUsuario{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+    width: 50%;
+    min-width: 350px;
+}
+.centrarControles .controlesUsuario .busqueda{
+    width: 60%;
+    min-width: 200px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-size: cover;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+   
+
+}
+.centrarControles .controlesUsuario .busqueda .cuadroBusqueda {
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+width: 100%;
+height: 100%;
+}
+.controlesUsuario .busqueda .cuadroBusqueda input{
+    display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+width: 100%;
+height: 100%;
+
+    border: #dddddd solid 2px;
+    border-radius: 25px 0px 0px 25px;
+    text-align: center;
+    background-color: #EEE;
+}
+.controlesUsuario .busqueda .cuadroBusqueda  button{
+    border: none;
+    border-radius:0px 25px 25px 0px;
+    background-color:#5c5c5c15;
+    color: #5C5C5C;
+    width: 50px;
+    height:100%;
+    transition: 0.3s;
+}
+.controlesUsuario .busqueda .cuadroBusqueda  button:hover{
+    border: none;
+    border-radius:0px 25px 25px 0px;
+    background-color:#FF8A00;
+    color: #ffffff;
+    width: 50px;
+    height:100%;
+    transition: 0.3s;
+}
+.controlesUsuario button{
+    border: none;
+    background-color: transparent;
+    color: #5C5C5C;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.controlesUsuario button:hover{
+    border: none;
+    background-color: transparent;
+    color: #FF8A00;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* ------------------------ FIN CONTROL DE BUSQUEDA-----------------------------*/
+
+/*-------- ESTILO FORMULARIO MODAL NUEVO USUARIO -----------------------*/
+
+.containerNewPast{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.containerNewPast input{
+    border: none;
+    border-radius: 5px;
+    width: 153px;
+    height: 36px;
+    text-align: center;
+    background-color: #EEEEEE;
+}
+.nuevoPastForm{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.nuevoPastForm label{
+    font-size: 12px;
+    color: #FF8A00;
+    font-weight: bolder;
+}
+.itemPast{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.bonotesNewPast{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin: 20px;
+}
+
+.bonotesNewPast .btcancelar{
+    border: none;
+    width: 140px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #5E5E5E;
+    color: #ffffff;
+    margin-right: 5px;
+}
+.bonotesNewPast .btGuardar{
+    border: none;
+    width: 140px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #FF8A00;
+    color: #ffffff;
+    margin-left: 5px;
+}
+/*----------FIN FORMULARIO MODAL NUEVO USUARIO -------------------------*/
+
+/*-----------------------ALERTA--------------------------*/
+.btCancelar{
+    border: none;
+    width: 120px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #5E5E5E;
+    color: #ffffff;
+    margin-left: 5px;
+}
+.btEliminar{
+    border: none;
+    width: 120px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #FF8A00;
+    color: #ffffff;
+    margin-right: 5px;
+}
+.titulo-pop{
+    font-size: 24px;
+}
+.text-pop{
+    font-size: 10px;
+}
+.icon-pop{
+    border:  #5E5E5E solid 5px;
+}
+
+/*----------------------------------FIN ALERTAS-----------------------------------*/
+
+/*---------------------------------- VERSION ESCRITORIO --------------------------*/
+@media(min-width: 1201px){
+    .bodyPast{
+        margin-top: 115px;  /*--------------------------cambiar esto --------*/
+    }
+    .ContainerPast{
+        margin-left: 160px;
+    }
+
+    .Pasteles{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+    }
+
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PROVEEDORES MEJORADO TABLET---------------*/
+.pastelMovil{
+    display: none;
+}
+.pastelEscritorio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pastelEscritorio .encabezadoEscritorio{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+text-align: center;
+background-color: #eeeeeea2;
+border-radius: 25px;
+height: 30px;
+margin-bottom: 8px;
+}
+.pastelEscritorio .encabezadoEscritorio  h3{
+    font-size: 14px;
+    
+}
+.pastelEscritorio .encabezadoEscritorio .encID{
+    width: 130px;
+}
+.pastelEscritorio .encabezadoEscritorio .encDato{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+}
+.pastelEscritorio .encabezadoEscritorio .encDato .encD {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 100%;
+}
+.pastelEscritorio .encabezadoEscritorio .encBT{
+    width: 185px;
+}
+.pastelEscritorio .ContenedorPasteles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 65px;
+    min-width: 300px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil{
+    width: 135px;
+    height: 65px;
+    position:relative;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID{
+    display: flex;
+background-color: #FF8A00;
+width: 20px;
+height: 20px;
+border-radius: 25px;
+position: absolute;
+bottom: 0px;
+left: 50px;
+z-index: 80;
+justify-content: center;
+align-items: center;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID p{
+    display: none;          /*ID oculto con none*/
+    font-size: 10px;
+    color: #5C5C5C;
+    font-weight:bolder ;
+    position: absolute;
+bottom: 5px;
+left: 20px;
+z-index: 81;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID span{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+
+.pastelEscritorio .ContenedorPasteles .imgPerfil .avatar{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .datoPastel {
+        display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel div{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        padding: 0px 7px;
+        width: 100%;   /*-----------------*/
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel h3{
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel h5{
+        font-weight: bold;
+        color: #FF8A00;
+        font-size: 12px;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 180px;
+        margin: 0 4px;
+        transition: 0.3s all ease-out;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEditarU{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEditarU:hover{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEliminarU{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEliminarU:hover{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+}
+/*------------------------FIN VERSION ESCRITORIO-----------------*/
+
+/*---------------------------------- VERSION TABLET --------------------------*/
+@media(max-width: 1200px){
+    .bodyPast{
+        margin-top: 115px;
+        margin-bottom: 75px;
+    }
+    .ContainerP{
+        margin-left: 0px;
+       
+    }
+
+    .Pasteles{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+    }
+
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PROVEEDORES MEJORADO TABLET---------------*/
+.pastelMovil{
+    display: none;
+}
+.pastelEscritorio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pastelEscritorio .encabezadoEscritorio{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+text-align: center;
+background-color: #eeeeeea2;
+border-radius: 25px;
+height: 30px;
+margin-bottom: 8px;
+}
+.pastelEscritorio .encabezadoEscritorio  h3{
+    font-size: 14px;
+    
+}
+.pastelEscritorio .encabezadoEscritorio .encID{
+    width: 130px;
+}
+.pastelEscritorio .encabezadoEscritorio .encDato{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+}
+.pastelEscritorio .encabezadoEscritorio .encDato .encD {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 100%;
+}
+.pastelEscritorio .encabezadoEscritorio .encBT{
+    width: 185px;
+}
+.pastelEscritorio .ContenedorPasteles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 65px;
+    min-width: 300px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil{
+    width: 135px;
+    height: 65px;
+    position:relative;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID{
+    display: flex;
+background-color: #FF8A00;
+width: 20px;
+height: 20px;
+border-radius: 25px;
+position: absolute;
+bottom: 0px;
+left: 50px;
+z-index: 80;
+justify-content: center;
+align-items: center;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID p{
+    display: none;          /*ID oculto con none*/
+    font-size: 10px;
+    color: #5C5C5C;
+    font-weight:bolder ;
+    position: absolute;
+bottom: 5px;
+left: 20px;
+z-index: 81;
+}
+.pastelEscritorio .ContenedorPasteles .imgPerfil .pastelID span{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+
+.pastelEscritorio .ContenedorPasteles .imgPerfil .avatar{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .datoPastel {
+        display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel div{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        padding: 0px 7px;
+        width: 100%;   /*-----------------*/
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel h3{
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+    }
+    .pastelEscritorio .ContenedorPasteles .datoPastel h5{
+        font-weight: bold;
+        color: #FF8A00;
+        font-size: 12px;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 180px;
+        margin: 0 4px;
+        transition: 0.3s all ease-out;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEditarU{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEditarU:hover{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEliminarU{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pastelEscritorio .ContenedorPasteles .controlBtP .btEliminarU:hover{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+}
+/*------------------------FIN VERSION TABLET-----------------*/
+
+/*--------------------------------------VERSION MOVIL----------------------------------*/
+
+@media(max-width: 600px){
+    .bodyPast{
+        margin-top: 115px;
+    }
+    .ContainerP{
+        margin-left: 0px;
+    }
+
+    .Pasteles{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+        min-width: 400px;
+    }
+  
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PROVEEDORES MEJORADO MOVIL---------------*/
+.pastelEscritorio{
+    display: none;
+}
+.pastelMovil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pastelMovil .ContenedorPasteles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 65px;
+    min-width: 300px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+.pastelMovil .ContenedorPasteles .imgPerfil{
+    width: 65px;
+    height: 65px;
+    position:relative;
+    background-color: #ffffff;
+}
+.pastelMovil .ContenedorPasteles .imgPerfil .pastelID{
+    display: flex;
+background-color: #FF8A00;
+width: 20px;
+height: 20px;
+border-radius: 25px;
+position: absolute;
+bottom: 0px;
+left: 0px;
+z-index: 80;
+justify-content: center;
+align-items: center;
+}
+.pastelMovil .ContenedorPasteles .imgPerfil .pastelID p{
+    display: none;          /*ID oculto con none*/
+    font-size: 10px;
+    color: #5C5C5C;
+    font-weight:bolder ;
+    position: absolute;
+bottom: 5px;
+left: -8px;
+z-index: 81;
+}
+.pastelMovil .ContenedorPasteles .imgPerfil .pastelID span{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+
+.pastelMovil .ContenedorPasteles .imgPerfil .avatar{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    }
+
+    .pastelMovil .ContenedorPasteles .datoPastel {
+        margin-left: 60px;
+        width: 100%;
+        font-family: 'Istok Web';
+        text-align: left;
+        font-size: 12px;
+    }
+    .pastelMovil .ContenedorPasteles .datoPastel h3{
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+    }
+    .pastelMovil .ContenedorPasteles .datoPastel h5{
+        font-weight: bold;
+        color: #FF8A00;
+        font-size: 12px;
+    }
+
+    .pastelMovil .ContenedorPasteles .controlBtP{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 180px;
+        margin-left: 5px;
+        margin-right: 5px;
+        transition: 0.3s all ease-out;
+    }
+
+    .pastelMovil .ContenedorPasteles .controlBtP .btEditarU{
+        display: none;
+        background-color: #5C5C5C;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        font-size: 7px;
+        width: 40px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+    }
+    .pastelMovil .ContenedorPasteles .controlBtP .btEliminarU{
+        background-color: #5C5C5C;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0.3s all ease-out;
+    }
+    .pastelMovil .ContenedorPasteles .controlBtP .btEliminarU:hover{
+        background-color: #5c5c5c6a;
+        color: #ffffff;
+    }
+}
+/*--------------------------------- FIN VRESION MOVIL--------------------------------*/

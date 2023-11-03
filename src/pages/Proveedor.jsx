@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalP from "../components/modals/modalProveedor";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.jpg";
+import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
+import ModalP from "../components/modals/modalProveedor";
+import Navbar from "../components/navbar";
+import SidebarCompras from "../components/sidebarCompras";
 import PDFGenerator from "../generarPDF/gProveedores";
 import "../styles/proveedores.css";
 
@@ -16,7 +16,7 @@ const Proveedor = () => {
 
   const [proveedores, setProveedores] = useState([]);
 
-  const URL = "http://localhost:3000/proveedores";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
 
   const getData = async () => {
     try {
@@ -55,17 +55,17 @@ const Proveedor = () => {
         container: "contenedor-alert",
       },
     });
-    (document.getElementById("correo_pr").value = null),
-      (document.getElementById("nit_pr").value = null),
-      (document.getElementById("nombre_pr").value = null),
-      (document.getElementById("telefono_pr").value = null),
-      (document.getElementById("direccion_pr").value = null);
+    // (document.getElementById("email").value = null),
+    //   (document.getElementById("nit").value = null),
+    //   (document.getElementById("nombre_proveedor").value = null),
+    //   (document.getElementById("telefono_prov").value = null),
+    //   (document.getElementById("direccion_prov").value = null);
   });
 
   //-----------------ELIMINAR PORVEEDOR---------------------------------
 
   const handleDelete = async (idprov) => {
-    const res = await fetch(`http://localhost:3000/proveedores/${idprov}`, {
+    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`, {
       method: "DELETE",
     });
     // const data = await res.json();
@@ -141,7 +141,7 @@ const Proveedor = () => {
     result = proveedores;
   } else {
     result = proveedores.filter((datos) =>
-      datos.nombre_pr.toLowerCase().includes(search.toLowerCase())
+      datos.nombre_proveedor.toLowerCase().includes(search.toLowerCase())
     );
   }
 
@@ -170,9 +170,9 @@ const Proveedor = () => {
                 <div className="itemProv">
                   <label>NIT: </label>
                   <input
-                    {...register("nit_pr")}
+                    {...register("nit")}
                     type="number"
-                    id="nit_pr"
+                    id="nit"
                     placeholder="NIT"
                   ></input>
                 </div>
@@ -180,9 +180,9 @@ const Proveedor = () => {
                 <div className="itemProv">
                   <label>Proveedor: </label>
                   <input
-                    {...register("nombre_pr")}
+                    {...register("nombre_proveedor")}
                     type="text"
-                    id="nombre_pr"
+                    id="nombre_proveedor"
                     placeholder="Proveedor"
                   ></input>
                 </div>
@@ -190,9 +190,9 @@ const Proveedor = () => {
                 <div className="itemProv">
                   <label>Telefono: </label>
                   <input
-                    {...register("telefono_pr")}
+                    {...register("telefono_prov")}
                     type="number"
-                    id="telefono_pr"
+                    id="telefono_prov"
                     placeholder="Telefono"
                   ></input>
                 </div>
@@ -200,19 +200,19 @@ const Proveedor = () => {
                 <div className="itemProv">
                   <label>Correo: </label>
                   <input
-                    {...register("correo_pr")}
+                    {...register("email")}
                     type="text"
-                    id="correo_pr"
+                    id="email"
                     placeholder="Correo electronico"
                   ></input>
 
                   <div className="itemProv">
                     <label>Direccion: </label>
                     <input
-                      {...register("direccion_pr")}
+                      {...register("direccion_prov")}
                       type="text"
-                      id="direccion_pr"
-                      placeholder="direccion"
+                      id="direccion_prov"
+                      placeholder="Direccion"
                     ></input>
                   </div>
                 </div>
@@ -311,13 +311,13 @@ const Proveedor = () => {
                   }
                 >
                   <div>
-                    <h3>{proveedores.nombre_pr}</h3>
+                    <h3>{proveedores.nombre_proveedor}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {proveedores.nit_pr}</h5>
+                    <h5>NIT: {proveedores.nit}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {proveedores.telefono_pr}</p>
+                    <p>Telefono: {proveedores.telefono_prov}</p>
                   </div>
                 </div>
                 <div className="controlBtP">
@@ -387,19 +387,19 @@ const Proveedor = () => {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{proveedor.nombre_pr}</h3>
+                    <h3>{proveedor.nombre_proveedor}</h3>
                   </div>
                   <div>
-                    <h5>{proveedor.nit_pr}</h5>
+                    <h5>{proveedor.nit}</h5>
                   </div>
                   <div>
-                    <p>{proveedor.telefono_pr}</p>
+                    <p>{proveedor.telefono_prov}</p>
                   </div>
                   <div>
-                    <p>{proveedor.correo_pr}</p>
+                    <p>{proveedor.email}</p>
                   </div>
                   <div>
-                    <p>{proveedor.direccion_pr}</p>
+                    <p>{proveedor.direccion_prov}</p>
                   </div>
                 </form>
                 <div className="controlBtP">

@@ -326,37 +326,41 @@ function Pedido() {
                     </div>
                   </div>
 
-                  <div className="contDataModal">
-                    {/* //--------------------PASTEL----------------/*/}
-                    <div className="itemPedid">
-                      <label>Pastel: </label>
-                      <div className="agregarNew">
-                        <select
-                          className="selector"
-                          {...register("id_pastel")}
-                          id="id_pastel"
-                        >
-                          <option disabled selected>
-                            Seleccione un pastel
-                          </option>
-                          {pasteles.map((pastelData, index) => (
-                            <option
-                              className="opciones"
-                              key={index}
-                              Value={pastelData.idpastel}
-                            >
-                              {pastelData.pastel} {pastelData.tamanio} con{" "}
-                              {pastelData.decoracion} {".          ."} Precio:
-                              Q.
-                              {pastelData.precio}
-                            </option>
-                          ))}
-                        </select>
-                        <button className="botonAgregar" type="button">
-                          +
-                        </button>
-                      </div>
-                    </div>
+                <div className="itemPedid">
+                  <label>Pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("id_pastel")}
+                    id="id_pastel"
+                    // onChange={handleSelectChangePastel}
+                  >
+                    <option defaultValue="" disabled selected>
+                      Seleccione un pastel
+                    </option>
+                    {pasteles.map((pastelData, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        defaultValue={pastelData.idpastel}
+                      >
+                        {pastelData.pastel} {pastelData.tamanio} con{" "}
+                        {pastelData.decoracion} {".          ."} Precio: Q.
+                        {pastelData.precio}
+                      </option>
+                    ))}
+                  </select>
+                  <button>+</button>
+                </div>
+
+                <div className="itemPedid">
+                  <label>Modo pago: </label>
+                  <input
+                    {...register("id_modopago")}
+                    type="number"
+                    id="id_modopago"
+                    placeholder="Telefono"
+                  ></input>
+                </div>
 
                     {/* //--------------------CANTIDAD----------------/ */}
                     <div className="itemPedid">

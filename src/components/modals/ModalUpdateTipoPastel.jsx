@@ -2,39 +2,36 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
 
-const ModalupProiveedor = ({
+const ModalupTipoPastel = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
-  setProveedores,
-  proveedores,
+  setTPasteles,
+  tpasteles,
 }) => {
-  const [proveedor, setProveedor] = useState({});
+  const [tpastel, setTPastel] = useState([]);
 
-  const getDataUp = async (idprov) => {
+  const getDataUp = async (idtpastel) => {
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtpastel}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const proveedor = await response.json();
-      setProveedor(proveedor);
-      setProveedroUP({
-        idprov: proveedor.idprov,
-        nombre_proveedor: proveedor.nombre_proveedor,
-        nit: proveedor.nit,
-        telefono_prov: proveedor.telefono_prov,
-        email: proveedor.email,
-        direccion_prov: proveedor.direccion_prov,
+      const tpastel = await response.json();
+      setTPastel(tpastel);
+      setTPasteloUP({
+        idtpastel: tpastel.idtpastel,
+        tipo_pastel: tpastel.tipo_pastel,
+      
       });
-      console.log(proveedor);
+      console.log(tpastel);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(proveedor);
+  console.log(tpastel);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -43,43 +40,40 @@ const ModalupProiveedor = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [proveedorUP, setProveedroUP] = useState({
-    idprov: "",
-    nombre_proveedor: "",
-    nit: "",
-    telefono_prov: "",
-    email: "",
-    direccion_prov: "",
+  const [tpastelUP, setTPasteloUP] = useState({
+    idtpastel: "",
+    tipo_pastel: "",
+   
+    
   });
 
   const onChangeData = (e) => {
-    setProveedroUP({ ...proveedorUP, [e.target.name]: e.target.value });
+    setTPasteloUP({ ...tpastelUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
   //----------------------Evento de envio del formulario
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${proveedorUP.idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${tpastelUP.idtpastel}`,
         {
           method: "PUT",
-          body: JSON.stringify(proveedorUP),
+          body: JSON.stringify(tpastelUP),
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      const data = response.json();
+      const data = await response.json();
       console.log(data);
       console.log(response);
-      setProveedores(
-        proveedores.map((proveedor) =>
-          proveedor.idprov === proveedorUP.idprov ? proveedorUP : proveedor
+      setTPasteles(
+        tpasteles.map((tpastel) =>
+          tpastel.idtpastel === tpastelUP.idtpastel ? tpastelUP : tpastel
         )
       );
       cambiarEstado2(false);
@@ -87,7 +81,7 @@ const ModalupProiveedor = ({
       //lanza alerta de guardado correctamente
       if (response.status === 200) {
         swal.fire({
-          title: "Proveedor Actualizado!",
+          title: "Tipo De Pastel Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
@@ -121,7 +115,7 @@ const ModalupProiveedor = ({
 
   //----------------------------------
 
-  // ------------------------ FIN ACTUALIZAR PROVEEDOR ---------------------------------
+  // ------------------------ FIN ACTUALIZAR CLIENTE ---------------------------------
 
   return (
     <>
@@ -135,85 +129,85 @@ const ModalupProiveedor = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm">
+              <form className="nuevoUserForm" onSubmit={handleSubmit}>
                 <div className="itemUser">
                   <label>id: </label>
                   <input
                     // {...register("iduser")}
                     type="text"
-                    id="idUser"
+                    id="idtpastel"
                     placeholder="ID"
-                    value={proveedorUP.idprov}
-                    name="idprov"
+                    value={tpastelUP.idtpastel}
+                    name="idtpastel"
                     onChange={(e) => onChangeData(e)}
                     disabled selected
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Proveedor: </label>
+                  <label>Tipo Pastel: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.nombre_proveedor}
+                    value={tpastelUP.tipo_pastel}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="nombreUser"
-                    name="nombre_proveedor"
-                    placeholder="Nombre"
+                    id="tipo_pastel"
+                    name="tipo_pastel"
+                    placeholder="Tipo de pastel"
                   ></input>
                 </div>
 
-                <div className="itemUser">
+                {/* <div className="itemUser">
                   <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={proveedorUP.nit}
+                    value={tclienteUP.nit_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="apellidoUser"
-                    name="nit"
+                    id="nit_cl"
+                    name="nit_cl"
                     placeholder="NIT"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemUser">
+                {/* <div className="itemUser">
                   <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={proveedorUP.telefono_prov}
+                    value={tclienteUP.telefono_cl}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="telefonoUser"
-                    name="telefono_prov"
+                    id="telefono_cl"
+                    name="telefono_cl"
                     placeholder="Telefono"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemUser">
-                  <label>Correo: </label>
-                  <input
-                    // {...register("email")}
-                    value={proveedorUP.email}
-                    onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="emailUser"
-                    name="email"
-                    placeholder="Correo electronico"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
+                {/* <div className="itemUser">
                   <label>Direccion: </label>
                   <input
-                    // {...register("contrasenia")}
-                    value={proveedorUP.direccion_prov}
+                    // {...register("email")}
+                    value={tclienteUP.direccion_cl} 
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="passwordUser"
-                    name="direccion_prov"
-                    placeholder="Contraseña"
+                    id="direccion_cl"
+                    name="direccion_cl"
+                    placeholder="Direccion"
                   ></input>
-                </div>
+                </div> */}
+
+                {/* <div className="itemUser">
+                  <label>Tipo cliente: </label>
+                  <input
+                    // {...register("contrasenia")}
+                    value={tclienteUP.idtcl} //id tabla tipo_cliente
+                    onChange={(e) => onChangeData(e)}
+                    type="number"
+                    id="idtcl"
+                    name="idtcl"
+                    placeholder="Tipo cliente"
+                  ></input>
+                </div> */}
 
                 <br />
 
@@ -247,7 +241,7 @@ const ModalupProiveedor = ({
   );
 };
 
-export default ModalupProiveedor;
+export default ModalupTipoPastel;
 
 const Overlay = styled.div`
   width: 100vw;

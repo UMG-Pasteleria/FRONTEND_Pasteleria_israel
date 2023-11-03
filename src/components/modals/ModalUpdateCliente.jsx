@@ -13,21 +13,21 @@ const ModalupClient = ({
 }) => {
   const [cliente, setCliente] = useState([]);
 
-  const getDataUp = async (id_cliente) => {
+  const getDataUp = async (idcliente) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/cliente/${id_cliente}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${idcliente}`,
         { headers: { "content-Type": "application/json" } }
       );
       const cliente = await response.json();
       setCliente(cliente);
       setClienteoUP({
-        id_cliente: cliente.id_cliente,
+        idcliente: cliente.idcliente,
         nombre_cl: cliente.nombre_cl,
         nit_cl: cliente.nit_cl,
         telefono_cl: cliente.telefono_cl,
-        tipo_cliente: cliente.tipo_cliente,
         direccion_cl: cliente.direccion_cl,
+        tipo_idtclient: cliente.tipo_idtclient, //id tabla tipo_cliente
       });
       console.log(cliente);
     } catch (err) {
@@ -44,12 +44,13 @@ const ModalupClient = ({
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
   const [clienteUP, setClienteoUP] = useState({
-    id_cliente: "",
+    idcliente: "",
     nombre_cl: "",
     nit_cl: "",
     telefono_cl: "",
-    tipo_cliente: "",
     direccion_cl: "",
+    tipo_idtclient: "",//id tabla tipo_cliente
+    
   });
 
   const onChangeData = (e) => {
@@ -64,7 +65,7 @@ const ModalupClient = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/cliente/${clienteUP.id_cliente}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${clienteUP.idcliente}`,
         {
           method: "PUT",
           body: JSON.stringify(clienteUP),
@@ -78,7 +79,7 @@ const ModalupClient = ({
       console.log(response);
       setClientes(
         clientes.map((cliente) =>
-          cliente.id_cliente === clienteUP.id_cliente ? clienteUP : cliente
+          cliente.idcliente === clienteUP.idcliente ? clienteUP : cliente
         )
       );
       cambiarEstado2(false);
@@ -140,11 +141,12 @@ const ModalupClient = ({
                   <input
                     // {...register("iduser")}
                     type="text"
-                    id="idUser"
+                    id="idcliente"
                     placeholder="ID"
-                    value={clienteUP.id_cliente}
-                    name="id_cliente"
+                    value={clienteUP.idcliente}
+                    name="idcliente"
                     onChange={(e) => onChangeData(e)}
+                    disabled selected
                   ></input>
                 </div>
 
@@ -155,7 +157,7 @@ const ModalupClient = ({
                     value={clienteUP.nombre_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="nombreUser"
+                    id="nombre_cl"
                     name="nombre_cl"
                     placeholder="Nombre"
                   ></input>
@@ -167,8 +169,8 @@ const ModalupClient = ({
                     // {...register("apellido")}
                     value={clienteUP.nit_cl}
                     onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="apellidoUser"
+                    type="number"
+                    id="nit_cl"
                     name="nit_cl"
                     placeholder="NIT"
                   ></input>
@@ -181,35 +183,35 @@ const ModalupClient = ({
                     value={clienteUP.telefono_cl}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="telefonoUser"
+                    id="telefono_cl"
                     name="telefono_cl"
                     placeholder="Telefono"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Correo: </label>
+                  <label>Direccion: </label>
                   <input
                     // {...register("email")}
-                    value={clienteUP.tipo_cliente}
+                    value={clienteUP.direccion_cl} 
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="emailUser"
-                    name="tipo_cliente"
-                    placeholder="tipo cleinte"
+                    id="direccion_cl"
+                    name="direccion_cl"
+                    placeholder="Direccion"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Direccion: </label>
+                  <label>Tipo cliente: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={clienteUP.direccion_cl}
+                    value={clienteUP.tipo_idtclient} //id tabla tipo_cliente
                     onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="passwordUser"
-                    name="direccion_cl"
-                    placeholder="Direccion"
+                    type="number"
+                    id="tipo_idtclient"
+                    name="tipo_idtclient"
+                    placeholder="Tipo cliente"
                   ></input>
                 </div>
 
