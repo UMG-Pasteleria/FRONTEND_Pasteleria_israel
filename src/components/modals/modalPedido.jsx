@@ -39,7 +39,7 @@ const Overlay = styled.div`
 const ContenedorModal = styled.div`
   @media (max-width: 600px) {
     width: 80%;
-    max-width: 300px;
+    max-width: 370px;
     min-height: 100px;
     background: #fff;
     position: relative;
@@ -63,7 +63,7 @@ const ContenedorModal = styled.div`
   }
 
   @media (min-width: 1201px) {
-    width: 900px;
+    width: 700px;
     min-height: 100px;
     background: #fff;
     position: relative;

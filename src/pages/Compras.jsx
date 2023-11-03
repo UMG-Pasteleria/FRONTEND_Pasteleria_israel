@@ -20,7 +20,7 @@ function Compras() {
   const [search, setSaerch] = useState("");
   //-------URLS DE API-----------------//
 
-  const URL = "http://localhost:8080/compras";
+  const URL = "http://localhost:3000/compras";
 
   //-----CAPTURAR DATOS DE COMPRAS------//
 

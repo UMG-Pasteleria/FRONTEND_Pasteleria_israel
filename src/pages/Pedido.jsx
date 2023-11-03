@@ -6,6 +6,7 @@ import ModalPed from "../components/modals/modalPedido";
 import Navbar from "../components/navbar";
 import SidebarPedidos from "../components/sidebarPedido";
 import PDFGenerator from "../generarPDF/g.Pedido";
+import moment from "moment";
 import "../styles/pedido.css";
 
 function Pedido() {
@@ -18,7 +19,7 @@ function Pedido() {
   const [pasteles, setPasteles] = useState([]);
   const [modopagos, setModopagos] = useState([]);
 
-  const URL = "http://localhost:3000/";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   //--------------- OBTENER DATOS DE PEDIDOS -----------------//
 
@@ -218,6 +219,15 @@ function Pedido() {
     );
   }
 
+  // //---------------CALCULAR TOTAL-----------------//
+  // function Total() {
+  //   let precio = parseFloat((pasteles.precio = pasteles.idpastel)).value;
+  //   let cantidad = parseInt(document.getElementById("cantidad"));
+  //   let total = precio * cantidad;
+
+  //   console.log(total);
+  //   document.getElementById("total").htmlFor = total;
+  // }
   return (
     <>
       <Navbar />
@@ -241,103 +251,184 @@ function Pedido() {
                 id="FormularioPedid"
                 onSubmit={enviarPedido}
               >
-                <div className="itemPedid">
-                  <label>Cliente: </label>
-                  <select
-                    className="selector"
-                    {...register("id_cliente")}
-                    id="id_cliente"
-                    placeholder="Seleccione cliente"
-                    // onChange={handleSelectChangeCliente}
-                  >
-                    {/* <option value="" disabled selected>
-                      Seleccione un cliente
-                    </option> */}
-                    {clientes.map((clienteData, index) => (
-                      <option
-                        className="opciones"
-                        key={index}
-                        defaultValue={clienteData.idcliente}
-                      >
-                        {clienteData.nombre_cl}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="itemPedid">
-                  <label>Pastel: </label>
-                  <select
-                    className="selector"
-                    {...register("id_pastel")}
-                    id="id_pastel"
-                    // onChange={handleSelectChangePastel}
-                  >
-                    <option defaultValue="" disabled selected>
-                      Seleccione un pastel
-                    </option>
-                    {pasteles.map((pastelData, index) => (
-                      <option
-                        className="opciones"
-                        key={index}
-                        defaultValue={pastelData.idpastel}
-                      >
-                        {pastelData.pastel} {pastelData.tamanio} con{" "}
-                        {pastelData.decoracion} {".          ."} Precio: Q.
-                        {pastelData.precio}
-                      </option>
-                    ))}
-                  </select>
-                  <button>+</button>
-                </div>
-
-                <div className="itemPedid">
-                  <label>Modo pago: </label>
-                  <input
-                    {...register("id_modopago")}
-                    type="number"
-                    id="id_modopago"
-                    placeholder="Telefono"
-                  ></input>
-                </div>
-
-                <div className="itemPedid">
-                  <label>Cantidad: </label>
-                  <input
-                    {...register("cantidad")}
-                    type="number"
-                    id="cantidad"
-                    placeholder="Cantidad"
-                  ></input>
-
-                  <div className="itemPedid">
-                    <label>Estado: </label>
-
-                    <select
-                      className="selector"
-                      {...register("id_estado")}
-                      id="id_estado"
-                      defaultValue=""
-                      // onChange={handleSelectChange}
-                    >
-                      {/* 
-                      <option value="" disabled selected>
-                        Seleccione un cliente
-                      </option> */}
-                      {estados.map((estado, index) => (
-                        <option
-                          className="opciones"
-                          key={index}
-                          defaultValue={estado.idestadop}
+                <div className="contenedorInputs">
+                  <div className="contDataModal">
+                    {/* //----------CLIENTE----------------/ */}
+                    <div className="itemPedid">
+                      <label>Cliente: </label>
+                      <div className="agregarNew">
+                        <select
+                          className="selector"
+                          {...register("id_cliente")}
+                          id="id_cliente"
                         >
-                          {estado.idestadop} - {estado.estado}
+                          <option disabled selected>
+                            Seleccione un cliente
+                          </option>
+                          {clientes.map((clienteData, index) => (
+                            <option
+                              className="opciones"
+                              key={index}
+                              Value={clienteData.idcliente}
+                            >
+                              {clienteData.nombre_cl}
+                            </option>
+                          ))}
+                        </select>
+                        <button className="botonAgregar" type="button">
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    {/* //------------------MODO DE PAGO----------------/ */}
+                    <div className="itemPedid">
+                      <label>Modo pago: </label>
+                      <select
+                        className="selector"
+                        {...register("id_modopago")}
+                        id="id_modopago"
+                      >
+                        <option disabled selected>
+                          Seleccione modo de pago
                         </option>
-                      ))}
-                    </select>
+                        {modopagos.map((modopagoData, index) => (
+                          <option
+                            className="opciones"
+                            key={index}
+                            Value={modopagoData.idmodp}
+                          >
+                            {modopagoData.modo}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* //--------------------ANTICIPO----------------/*/}
+                    <div className="itemPedid">
+                      <label>Anticipo: </label>
+                      <input
+                        {...register("anticipo")}
+                        type="number"
+                        id="anticipo"
+                        placeholder="Anticipo"
+                      ></input>
+                    </div>
+
+                    {/* //--------------------FECHA DE ENTREGA----------------/*/}
+                    <div className="itemPedid">
+                      <label>Fecha de entrega: </label>
+                      <input
+                        {...register("fecha_entrega")}
+                        type="dateTime-local"
+                        id="fecha_entrega"
+                        placeholder="Anticipo"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="contDataModal">
+                    {/* //--------------------PASTEL----------------/*/}
+                    <div className="itemPedid">
+                      <label>Pastel: </label>
+                      <div className="agregarNew">
+                        <select
+                          className="selector"
+                          {...register("id_pastel")}
+                          id="id_pastel"
+                        >
+                          <option disabled selected>
+                            Seleccione un pastel
+                          </option>
+                          {pasteles.map((pastelData, index) => (
+                            <option
+                              className="opciones"
+                              key={index}
+                              Value={pastelData.idpastel}
+                            >
+                              {pastelData.pastel} {pastelData.tamanio} con{" "}
+                              {pastelData.decoracion} {".          ."} Precio:
+                              Q.
+                              {pastelData.precio}
+                            </option>
+                          ))}
+                        </select>
+                        <button className="botonAgregar" type="button">
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* //--------------------CANTIDAD----------------/ */}
+                    <div className="itemPedid">
+                      <label>Cantidad: </label>
+                      <input
+                        {...register("cantidad")}
+                        type="number"
+                        id="cantidad"
+                        placeholder="Cantidad"
+                      ></input>
+                    </div>
+
+                    {/* //--------------------DEDICATORIA----------------/ */}
+                    <div className="itemPedid">
+                      <label>Decicatoria: </label>
+                      <input
+                        {...register("dedicatoria")}
+                        type="textarea"
+                        id="dedicatoria"
+                        placeholder="Dedicatoria"
+                      ></input>
+                    </div>
+
+                    {/* //--------------------ESTADO---------------- */}
+                    <div className="itemPedid">
+                      <label>Estado: </label>
+
+                      <select
+                        className="selector"
+                        {...register("id_estado")}
+                        id="id_estado"
+                      >
+                        <option disabled selected>
+                          Seleccione estado de pedido
+                        </option>
+                        {estados.map((estado, index) => (
+                          <option
+                            className="opciones"
+                            key={index}
+                            Value={estado.idestadop}
+                          >
+                            {estado.idestadop} - {estado.estado}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <br />
+                <div className="total">
+                  <label htmlFor="total" id="total">
+                    .
+                  </label>
+                  <button
+                    type="button"
+                    className="totalButton"
+                    // onClick={function Total() {
+                    //   let precio = parseFloat(
+                    //     (pasteles.precio = pasteles.idpastel)
+                    //   ).value;
+                    //   let cantidad = parseInt(
+                    //     document.getElementById("cantidad")
+                    //   );
+                    //   let total = precio * cantidad;
 
+                    //   console.log(total);
+                    //   document.getElementById("total").oninput = total;
+                    // }}
+                  >
+                    Calcular
+                  </button>
+                </div>
                 <div className="bonotesNewPedid">
                   <div>
                     <button
@@ -357,7 +448,6 @@ function Pedido() {
               </form>
             </div>
           </ModalPed>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO PEDIDO ------------------ */}
 
           {/* ------------------- MODAL EDITAR  PEDIDO-------------- */}
 
@@ -369,7 +459,6 @@ function Pedido() {
             setPedidos={setPedidos}
             pedidos={pedidos}
           ></ModalupPedido>
-          {/* --------------------------- FIN MODAL EDITAR PEDIDO ------------------ */}
 
           {/* //----------------------------------ELIMINAR PEDIDO ----------------------------------*/}
 
@@ -407,12 +496,19 @@ function Pedido() {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="pedidoMovil">
-            {result.map((pedido, index) => (
+            {result.map((pedidos, index) => (
               <div className="ContenedorPedidos" key={index}>
                 <div className="imgPerfil">
                   <div className="pedidoID">
-                    <p>No.</p>
-                    <span>{pedido.idpedido}</span>
+                    <h3>P-{pedidos.idpedido}</h3>
+                    <h6>
+                      {new Date(pedidos.fecha_pedido).toLocaleDateString(
+                        "es-ES",
+                        {
+                          timeZone: "UTC",
+                        }
+                      )}
+                    </h6>
                   </div>
                 </div>
 
@@ -420,17 +516,20 @@ function Pedido() {
                   className="datoPedido"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(pedido.idpedido)
+                    setIdEdit(pedidos.idpedido)
                   }
                 >
-                  <div>
-                    <h3>{pedido.producto_pro}</h3>
+                  <div className="datoclientes">
+                    <h5>{pedidos.nombre_cl}</h5>
+                    <h4>
+                      {pedidos.pastel} {pedidos.tamanio}
+                    </h4>
+                    <h4>{pedidos.estado}</h4>
                   </div>
-                  <div>
-                    <h5>Cliente: {pedido.id_client}</h5>
-                  </div>
-                  <div>
-                    <p>Total: {pedido.total}</p>
+
+                  <div className="datopastel">
+                    <h6>Telefono: {pedidos.telefono_cl}</h6>
+                    <h6>Direccion: {pedidos.direccion_cl}</h6>
                   </div>
                 </div>
                 <div className="controlBtPd">
@@ -448,8 +547,8 @@ function Pedido() {
               </div>
             ))}
           </div>
-          {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="pedidoEscritorio">
+          {/* //--------------------------- VERSION ESCRITORIO Y TABLET ---------------------------- */}
+          <div className="pedidoEscritorioP">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
@@ -458,33 +557,27 @@ function Pedido() {
               </div>
 
               <div className="encDato">
-                <div className="encD">
-                  <h3>Fecha: </h3>
-                </div>
-                <div className="encD">
+                <div className="encCliente">
                   <h3>Cliente: </h3>
                 </div>
-                <div className="encD">
+                <div className="encPastel">
                   <h3>Pastel: </h3>
                 </div>
-                <div className="encD">
-                  <h3>Tamaño: </h3>
+
+                <div className="encDedicatoria">
+                  <h3>Dedicatoria: </h3>
                 </div>
-                <div className="encD">
-                  <h3>Decoracion: </h3>
+                <div className="encDetalle">
+                  <h3>Detalle: </h3>
                 </div>
-                <div className="encD">
-                  <h3>Cantidad: </h3>
+
+                <div className="encEntrega">
+                  <h3>Fecha entrega: </h3>
                 </div>
-                <div className="encD">
-                  <h3>Total: </h3>
-                </div>
-                <div className="encD">
+
+                <div className="encEstado">
                   <h3>Estado: </h3>
                 </div>
-                {/* <div className="encD">
-                  <h3>Direccion: </h3>
-                </div> */}
               </div>
               <div className="encBT">
                 <div>
@@ -494,46 +587,53 @@ function Pedido() {
             </div>
 
             {result.map((pedidos, index) => (
-              <div className="ContenedorPedidos" key={index}>
-                <div className="imgPerfil">
-                  <div className="pedidosID">
-                    <span>P#{pedidos.idpedido}</span>
+              <div className="ContenedorPedidosP" key={index}>
+                <div className="PEDIDO">
+                  <div className="pedidosPID">
+                    <h3>P-{pedidos.idpedido}</h3>
+                    <div>
+                      <h6>
+                        {new Date(pedidos.fecha_pedido).toLocaleDateString(
+                          "es-ES",
+                          {
+                            timeZone: "UTC",
+                          }
+                        )}
+                      </h6>
+                    </div>
                   </div>
                 </div>
 
-                <form
-                  className="datoPedido"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
-                  <div>
+                <form className="datoPedido">
+                  <div className="clienteinfo">
+                    <h4>{pedidos.nombre_cl}</h4>
+                    <p>Telefono: {pedidos.telefono_cl}</p>
+                    <p>Direccion: {pedidos.direccion_cl}</p>
+                  </div>
+                  <div className="pastelinfo">
+                    <h3>{pedidos.pastel}</h3>
+                    <p>{pedidos.tamanio}</p>
+                    <p>{pedidos.decoracion}</p>
+                  </div>
+                  <div className="dedicatoriaP">
+                    <h3>{pedidos.dedicatoria}</h3>
+                  </div>
+
+                  <div className="pagoP">
+                    <p>Cantidad: {pedidos.cantidad}</p>
+                    <p>Total: Q. {pedidos.total}</p>
+                    <p>Anticipo: Q. {pedidos.anticipo}</p>
+                  </div>
+
+                  <div className="entregaP">
                     <h3>
-                      {new Date(pedidos.fecha_pedido).toLocaleDateString(
-                        "es-ES",
-                        {
-                          timeZone: "UTC",
-                        }
+                      {moment(pedidos.fecha_entrega).format(
+                        "DD/MM/YYYY h:mm A"
                       )}
                     </h3>
                   </div>
-                  <div>
-                    <h5>{pedidos.nombre_cl}</h5>
-                  </div>
-                  <div>
-                    <p>{pedidos.pastel}</p>
-                  </div>
-                  <div>
-                    <p>{pedidos.tamanio}</p>
-                  </div>
-                  <div>
-                    <p>{pedidos.decoracion}</p>
-                  </div>
-                  <div>
-                    <p>{pedidos.cantidad}</p>
-                  </div>
-                  <div>
-                    <p>{pedidos.total}</p>
-                  </div>
-                  <div>
+
+                  <div className="estadoP">
                     <p>{pedidos.estado}</p>
                   </div>
 
