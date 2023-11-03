@@ -1,41 +1,41 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/sidebarPedidos.css";
+import "../styles/sidebarInventario.css";
 
 //import styled from 'styled-components';
 //import Modal from './componentes/modal';
 
-function SidebarPedidos() {
+function SidebarInventario() {
   const navegate = useNavigate();
   return (
     <>
-      <div className="ContenedorSBPd">
+      <div className="ContenedorSBInv">
         <nav className="sidebar">
           <button
-            className="BTpedidos"
-            onClick={() => navegate("/Admin/Pedido")}
+            className="BTpasteles"
+            onClick={() => navegate("/Admin/Pasteles")}
           >
             <div>
-              <h3>Pedidos</h3>
+              <h3>Pasteles</h3>
             </div>
           </button>
 
           <button
-            className="BTclientes"
-            onClick={() => navegate("/Admin/Cliente")}
+            className="BTproductos"
+            onClick={() => navegate("/Admin/TipoPastel")}
           >
             <div>
-              <h3>Clientes</h3>
+              <h3>Tipo de pastel</h3>
               {/* <a href="#">Proveeedores</a> */}
             </div>
           </button>
 
           <button
             className="BTdevoluciones"
-            onClick={() => navegate("/Admin/TipoCliente")}
+            onClick={() => navegate("/Admin/Proveedor")}
           >
             <div>
-              <h3>Tipo de cliente</h3>
+              <h3>Productos</h3>
             </div>
           </button>
         </nav>
@@ -44,4 +44,4 @@ function SidebarPedidos() {
   );
 }
 
-export default SidebarPedidos;
+export default SidebarInventario;

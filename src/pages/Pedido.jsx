@@ -18,7 +18,7 @@ function Pedido() {
   const [pasteles, setPasteles] = useState([]);
   const [modopagos, setModopagos] = useState([]);
 
-  const URL = "http://localhost:3000/";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   //--------------- OBTENER DATOS DE PEDIDOS -----------------//
 
@@ -293,12 +293,26 @@ function Pedido() {
 
                 <div className="itemPedid">
                   <label>Modo pago: </label>
-                  <input
+                  <select
+                  className="selector"
                     {...register("id_modopago")}
                     type="number"
                     id="id_modopago"
-                    placeholder="Telefono"
-                  ></input>
+                    >
+                    <option defaultValue="" disabled selected>
+                      Seleccione el modo de pago
+                    </option>
+                    {modopagos.map((modopagoData, index) => (
+                    <option
+                    className="opciones"
+                    key={index}
+                    defaultValue={modopagoData.idmodp}
+                  >
+                    {modopagoData.modo_pago} {modopagoData.modo}
+                  </option>
+                  ))}
+                  </select>
+                  <button>+</button>
                 </div>
 
                 <div className="itemPedid">

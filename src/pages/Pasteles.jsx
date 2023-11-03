@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
-import avatar from "../assets/avatar.png";
-import ModalupClient from "../components/modals/ModalUpdateCliente";
-import ModalCli from "../components/modals/modalCliente";
+import avatar from "../assets/Chocolate.jpeg";
+import ModalupPastel from "../components/modals/ModalUpdatePastel";
+import ModalPast from "../components/modals/modalPastel";
 import Navbar from "../components/navbar";
-//import SidebarCompras from "../components/sidebarCompras";
-import SidebarPedidos from "../components/sidebarPedido";
-import PDFGenerator from "../generarPDF/g.Cliente";
-import "../styles/clientes.css";
+import SidebarInventario from "../components/sidebarInventario";
+import PDFGenerator from "../generarPDF/gProveedores";
+import "../styles/pasteles.css";
 
-function Cliente() {
+const Pastel = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [search, setSaerch] = useState("");
 
-  const [clientes, setClientes] = useState([]);
+  const [pasteles, setPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pastel";
 
   const getData = async () => {
     try {
       const response = await fetch(URL);
-      const json = await response.json();
-      setClientes(json);
-      console.log(json);
+      const datos = await response.json();
+      setPasteles(datos);
+      console.log(datos);
     } catch (err) {
       console.error(err);
     }
@@ -32,9 +31,9 @@ function Cliente() {
   useEffect(() => {
     getData();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO CLIENTE------//
+  // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
   const { handleSubmit, register } = useForm();
-  const enviarCliente = handleSubmit((data) => {
+  const enviarPastel = handleSubmit((data) => {
     console.log(data);
     fetch(URL, {
       method: "POST",
@@ -44,7 +43,7 @@ function Cliente() {
     getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
-      title: "Cliente Agregado!",
+      title: "Pastel Agregado!",
       icon: "success",
       showConfirmButton: false,
       timer: 1200,
@@ -56,30 +55,35 @@ function Cliente() {
         container: "contenedor-alert",
       },
     });
+    // (document.getElementById("email").value = null),
+    //   (document.getElementById("nit").value = null),
+    //   (document.getElementById("nombre_proveedor").value = null),
+    //   (document.getElementById("telefono_prov").value = null),
+    //   (document.getElementById("direccion_prov").value = null);
   });
 
-  //-----------------ELIMINAR CLIENTE---------------------------------
+  //-----------------ELIMINAR PORVEEDOR---------------------------------
 
-  const handleDelete = async (idcliente) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/cliente/${idcliente}`, {
+  const handleDelete = async (idpastel) => {
+    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setClientes(
-      clientes.filter((cliente) => cliente.idcliente !== idcliente)
+    setPasteles(
+      pasteles.filter((pastel) => pastel.idpastel !== idpastel)
     );
   };
 
-  //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
+  //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idcliente) => {
+  const mostrarAlerta = (idpastel) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
         icon: "question",
-        text: "Se eliminaran los datos del Cliente",
+        text: "Se eliminaran los datos del Pastel",
         confirmButtonText: "Eliminar",
         confirmButtonColor: "#FF8A00",
         showCancelButton: true,
@@ -100,7 +104,8 @@ function Cliente() {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idcliente);
+          handleDelete(idpastel);
+
           swal.fire({
             title: "¡Eliminado!",
             icon: "success",
@@ -119,11 +124,11 @@ function Cliente() {
   };
   //----------------------------FIN DE ALERTAS --------------------------------
 
-  //--------------------------------- EDITAR CLIENTE ----------------------------------//
+  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
+  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
 
   //------------busqueda inteligente -----------------
   const searcher = (e) => {
@@ -133,87 +138,87 @@ function Cliente() {
   //----metodod de filtrado de busqueda-----
   let result = [];
   if (!search) {
-    result = clientes;
+    result = pasteles;
   } else {
-    result = clientes.filter((datos) =>
-      datos.nombre_cl.toLowerCase().includes(search.toLowerCase())
+    result = pasteles.filter((datos) =>
+      datos.pastel.toLowerCase().includes(search.toLowerCase())
     );
   }
 
   return (
     <>
       <Navbar />
-      <SidebarPedidos />
-      <div className="bodyClient">
-        <div className="ContainerC"></div>
-        <div className="Clientes">
+      <SidebarInventario />
+      <div className="bodyPast">
+        <div className="ContainerPast"></div>
+        <div className="Pasteles">
           <br></br>
-          <h2>Listado de Clientes</h2>
+          <h2>Listado de Pasteles</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO CLIENTE-------------- */}
-          <ModalCli
+          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
+          <ModalPast
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nuevo cliente"
+            titulo="Nuevo pastel"
           >
-            <div className="containerNewClient">
+            <div className="containerNewPast">
               <form
-                className="nuevoClientForm"
-                id="FormularioC"
-                onSubmit={enviarCliente}
+                className="nuevoPastForm"
+                id="FormularioPast"
+                onSubmit={enviarPastel}
               >
-                <div className="itemClient">
-                  <label>NIT: </label>
+                <div className="itemPast">
+                  <label>Pastel: </label>
                   <input
-                    {...register("nit_cl")}
-                    type="number"
-                    id="nit_cl"
-                    placeholder="NIT"
-                  ></input>
-                </div>
-
-                <div className="itemClient">
-                  <label>Cliente: </label>
-                  <input
-                    {...register("nombre_cl")}
+                    {...register("pastel")}
                     type="text"
-                    id="nombre_cl"
-                    placeholder="Cliente"
+                    id="pastel"
+                    placeholder="Pastel"
                   ></input>
                 </div>
 
-                <div className="itemClient">
-                  <label>Telefono: </label>
+                <div className="itemPast">
+                  <label>Precio: </label>
                   <input
-                    {...register("telefono_cl")}
+                    {...register("precio")}
                     type="number"
-                    id="telefono_cl"
-                    placeholder="Telefono"
+                    id="precio"
+                    placeholder="Precio"
                   ></input>
                 </div>
 
-                <div className="itemClient">
-                  <label>Direccion: </label>
+                <div className="itemPast">
+                  <label>Tamaño del pastel: </label>
                   <input
-                    {...register("direccion_cl")}
-                    type="text"
-                    id="direccion_cl"
-                    placeholder="Direccion"
+                    {...register("tamanio_idpast")}
+                    type="number"
+                    id="tamanio_idpast"
+                    placeholder="Tamaño del pastel"
+                  ></input>
+                </div>
+
+                <div className="itemPast">
+                  <label>Decoracion del pastel: </label>
+                  <input
+                    {...register("dec_idpast")}
+                    type="number"
+                    id="dec_idpast"
+                    placeholder="Decoracion del pastel"
                   ></input>
 
-                  <div className="itemClient">
-                    <label>Tipo Cliente: </label>
+                  <div className="itemPast">
+                    <label>Categoria del pastel: </label>
                     <input
-                      {...register("tipo_idtclient")}//id tabla tipo_cliente
+                      {...register("cat_idpast")}
                       type="number"
-                      id="tipo_idtclient"
-                      placeholder="Tipo_cliente"
+                      id="cat_idpast"
+                      placeholder="Categoria del pastel"
                     ></input>
                   </div>
                 </div>
                 <br />
 
-                <div className="bonotesNewClient">
+                <div className="bonotesNewPast">
                   <div>
                     <button
                       type="button"
@@ -224,12 +229,6 @@ function Cliente() {
                     </button>
                   </div>
                   <div>
-                    {/* <button
-                      type="submit"
-                      className="btGuardar"
-                      
-                    > */}
-
                     <button type="submit" className="btGuardar">
                       Guardar
                     </button>
@@ -237,19 +236,19 @@ function Cliente() {
                 </div>
               </form>
             </div>
-          </ModalCli>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
+          </ModalPast>
+          {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
+          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
 
-          <ModalupClient
+          <ModalupPastel
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar cliente"}
+            titulo2={"Actualizar pastel"}
             idEdit={idEdit}
-            setClientes={setClientes}
-            clientes={clientes}
-          ></ModalupClient>
+            setPasteles={setPasteles}
+            pasteles={pasteles}
+          ></ModalupPastel>
           {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
           {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
@@ -266,7 +265,7 @@ function Cliente() {
                     type="text"
                     value={search}
                     onChange={searcher}
-                    placeholder="Buscar cliente"
+                    placeholder="Buscar pastel"
                     name="q"
                   ></input>
                   <button type="submit">
@@ -275,7 +274,7 @@ function Cliente() {
                 </form>
               </div>
 
-              <PDFGenerator data={clientes} />
+              <PDFGenerator data={pasteles} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
@@ -286,55 +285,49 @@ function Cliente() {
           <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
-          <div className="clienteMovil">
-            {result.map((cliente, index) => (
-              <div className="ContenedorClientes" key={index}>
+          <div className="pastelMovil">
+            {result.map((pasteles, index) => (
+              <div className="ContenedorPasteles" key={index}>
                 <div className="imgPerfil">
-                  <div className="clienteID">
+                  <div className="pastelID">
                     <p>ID</p>
-                    <span>{cliente.idcliente}</span>
+                    <span>{pasteles.idpastel}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.idcliente)
+                      setIdEdit(pasteles.idpastel)
                     }
                   />
                 </div>
 
                 <div
-                  className="datoCliente"
+                  className="datoPastel"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(cliente.idcliente)
+                    setIdEdit(pasteles.idpastel)
                   }
                 >
                   <div>
-                    <h3>{cliente.nombre_cl}</h3>
+                    <h3>{pasteles.pastel}</h3>
                   </div>
                   <div>
-                    <h5>NIT: {cliente.nit_cl}</h5>
+                    <h5>Precio: {pasteles.precio}</h5>
                   </div>
                   <div>
-                    <p>Telefono: {cliente.telefono_cl}</p>
-                  </div>
-                  <div>
-                    <p>Direccion: {cliente.direccion_cl}</p>
-                  </div>
-                  <div>
-                    <p>Tipo Cliente: {cliente.tipo_idtclient}</p>
+                    <p>Tamaño del pastel: {pasteles.tamanio_idpast}</p>
                   </div>
                 </div>
-                <div className="controlBtC">
+                <div className="controlBtP">
                   <button className="btEditarU">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(cliente.idcliente)}
+                    onClick={() => mostrarAlerta(pasteles.idpastel)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -343,7 +336,7 @@ function Cliente() {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="clienteEscritorio">
+          <div className="pastelEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
@@ -353,19 +346,19 @@ function Cliente() {
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Cliente: </h3>
+                  <h3>Pastel: </h3>
                 </div>
                 <div className="encD">
-                  <h3>NIT: </h3>
+                  <h3>Precio: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Telefono: </h3>
+                  <h3>Tamaño del pastel: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Direccion: </h3>
+                  <h3>Decoracion del pastel: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Tipo: </h3>
+                  <h3>Categoria del pastel: </h3>
                 </div>
               </div>
               <div className="encBT">
@@ -375,12 +368,12 @@ function Cliente() {
               </div>
             </div>
 
-            {result.map((cliente, index) => (
-              <div className="ContenedorClientes" key={index}>
+            {result.map((pastel, index) => (
+              <div className="ContenedorPasteles" key={index}>
                 <div className="imgPerfil">
-                  <div className="clienteID">
+                  <div className="pastelID">
                     <p>ID</p>
-                    <span>{cliente.idcliente}</span>
+                    <span>{pastel.idpastel}</span>
                   </div>
                   <img
                     src={avatar}
@@ -390,31 +383,31 @@ function Cliente() {
                 </div>
 
                 <form
-                  className="datoCliente"
+                  className="datoPastel"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{cliente.nombre_cl}</h3>
+                    <h3>{pastel.pastel}</h3>
                   </div>
                   <div>
-                    <h5>{cliente.nit_cl}</h5>
+                    <h5>{pastel.precio}</h5>
                   </div>
                   <div>
-                    <p>{cliente.telefono_cl}</p>
+                    <p>{pastel.tamanio_idpast}</p>
                   </div>
                   <div>
-                    <p>{cliente.direccion_cl}</p>
+                    <p>{pastel.dec_idpast}</p>
                   </div>
                   <div>
-                    <p>{cliente.tipo_idtclient}</p>
+                    <p>{pastel.cat_idpast}</p>
                   </div>
                 </form>
-                <div className="controlBtC">
+                <div className="controlBtP">
                   <button
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(cliente.idcliente)
+                      setIdEdit(pastel.idpastel)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -422,7 +415,7 @@ function Cliente() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(cliente.idcliente)}
+                    onClick={() => mostrarAlerta(pastel.idpastel)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -434,6 +427,6 @@ function Cliente() {
       </div>
     </>
   );
-}
+};
 
-export default Cliente;
+export default Pastel;

@@ -2,39 +2,39 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
 
-const ModalupProiveedor = ({
+const ModalupPastel = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
-  setProveedores,
-  proveedores,
+  setPasteles,
+  pasteles,
 }) => {
-  const [proveedor, setProveedor] = useState({});
+  const [pastel, setPastel] = useState({});
 
-  const getDataUp = async (idprov) => {
+  const getDataUp = async (idpastel) => {
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const proveedor = await response.json();
-      setProveedor(proveedor);
-      setProveedroUP({
-        idprov: proveedor.idprov,
-        nombre_proveedor: proveedor.nombre_proveedor,
-        nit: proveedor.nit,
-        telefono_prov: proveedor.telefono_prov,
-        email: proveedor.email,
-        direccion_prov: proveedor.direccion_prov,
+      const pastel = await response.json();
+      setPastel(pastel);
+      setPasteloUP({
+        idpastel: pastel.idpastel,
+        pastel: pastel.pastel,
+        precio: pastel.precio,
+        tamanio_idpast: pastel.tamanio_idpast,
+        dec_idpast: pastel.dec_idpast,
+        cat_idpast: pastel.cat_idpast,
       });
-      console.log(proveedor);
+      console.log(pastel);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(proveedor);
+  console.log(pastel);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -43,17 +43,17 @@ const ModalupProiveedor = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [proveedorUP, setProveedroUP] = useState({
-    idprov: "",
-    nombre_proveedor: "",
-    nit: "",
-    telefono_prov: "",
-    email: "",
-    direccion_prov: "",
+  const [pastelUP, setPasteloUP] = useState({
+    idpastel: "",
+    pastel: "",
+    precio: "",
+    tamanio_idpast: "",
+    dec_idpast: "",
+    cat_idpast: "",
   });
 
   const onChangeData = (e) => {
-    setProveedroUP({ ...proveedorUP, [e.target.name]: e.target.value });
+    setPasteloUP({ ...pastelUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
@@ -65,10 +65,10 @@ const ModalupProiveedor = ({
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${proveedorUP.idprov}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${pastelUP.idpastel}`,
         {
           method: "PUT",
-          body: JSON.stringify(proveedorUP),
+          body: JSON.stringify(pastelUP),
           headers: {
             "Content-Type": "application/json",
           },
@@ -77,9 +77,9 @@ const ModalupProiveedor = ({
       const data = response.json();
       console.log(data);
       console.log(response);
-      setProveedores(
-        proveedores.map((proveedor) =>
-          proveedor.idprov === proveedorUP.idprov ? proveedorUP : proveedor
+      setPasteles(
+        pasteles.map((pastel) =>
+          pastel.idpastel === pastelUP.idpastel ? pastelUP : pastel
         )
       );
       cambiarEstado2(false);
@@ -87,7 +87,7 @@ const ModalupProiveedor = ({
       //lanza alerta de guardado correctamente
       if (response.status === 200) {
         swal.fire({
-          title: "Proveedor Actualizado!",
+          title: "Pastel Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
@@ -141,77 +141,77 @@ const ModalupProiveedor = ({
                   <input
                     // {...register("iduser")}
                     type="text"
-                    id="idUser"
+                    id="idpastel"
                     placeholder="ID"
-                    value={proveedorUP.idprov}
-                    name="idprov"
+                    value={pastelUP.idpastel}
+                    name="idpastel"
                     onChange={(e) => onChangeData(e)}
                     disabled selected
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Proveedor: </label>
+                  <label>Pastel: </label>
                   <input
                     // {...register("nombre")}
-                    value={proveedorUP.nombre_proveedor}
+                    value={pastelUP.pastel}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="nombreUser"
-                    name="nombre_proveedor"
-                    placeholder="Nombre"
+                    id="pastel"
+                    name="pastel"
+                    placeholder="Pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>NIT: </label>
+                  <label>Precio: </label>
                   <input
                     // {...register("apellido")}
-                    value={proveedorUP.nit}
-                    onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="apellidoUser"
-                    name="nit"
-                    placeholder="NIT"
-                  ></input>
-                </div>
-
-                <div className="itemUser">
-                  <label>Telefono: </label>
-                  <input
-                    // {...register("telefono")}
-                    value={proveedorUP.telefono_prov}
+                    value={pastelUP.precio}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="telefonoUser"
-                    name="telefono_prov"
-                    placeholder="Telefono"
+                    id="precio"
+                    name="precio"
+                    placeholder="Precio"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Correo: </label>
+                  <label>Tamaño del Pastel: </label>
+                  <input
+                    // {...register("telefono")}
+                    value={pastelUP.tamanio_idpast}
+                    onChange={(e) => onChangeData(e)}
+                    type="number"
+                    id="tamanio_idpast"
+                    name="tamanio_idpast"
+                    placeholder="Tamaño del pastel"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Decoracion del Pastel: </label>
                   <input
                     // {...register("email")}
-                    value={proveedorUP.email}
+                    value={pastelUP.dec_idpast}
                     onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="emailUser"
-                    name="email"
-                    placeholder="Correo electronico"
+                    type="number"
+                    id="dec_idpast"
+                    name="dec_idpast"
+                    placeholder="Decoracion del pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Direccion: </label>
+                  <label>Categoria del pastel: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={proveedorUP.direccion_prov}
+                    value={pastelUP.cat_idpast}
                     onChange={(e) => onChangeData(e)}
-                    type="text"
-                    id="passwordUser"
-                    name="direccion_prov"
-                    placeholder="Contraseña"
+                    type="number"
+                    id="cat_idpast"
+                    name="cat_idpast"
+                    placeholder="Categoria del pastel"
                   ></input>
                 </div>
 
@@ -247,7 +247,7 @@ const ModalupProiveedor = ({
   );
 };
 
-export default ModalupProiveedor;
+export default ModalupPastel;
 
 const Overlay = styled.div`
   width: 100vw;
