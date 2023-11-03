@@ -32,10 +32,10 @@ function SidebarPedidos() {
 
           <button
             className="BTdevoluciones"
-            onClick={() => navegate("/Admin/Proveedor")}
+            onClick={() => navegate("/Admin/TipoCliente")}
           >
             <div>
-              <h3>Devoluciones</h3>
+              <h3>Tipo de cliente</h3>
             </div>
           </button>
         </nav>

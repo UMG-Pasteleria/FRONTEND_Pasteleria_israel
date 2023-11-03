@@ -22,10 +22,10 @@ function SidebarInventario() {
 
           <button
             className="BTproductos"
-            onClick={() => navegate("/Admin/Cliente")}
+            onClick={() => navegate("/Admin/TipoPastel")}
           >
             <div>
-              <h3>Eliminar</h3>
+              <h3>Tipo de pastel</h3>
               {/* <a href="#">Proveeedores</a> */}
             </div>
           </button>

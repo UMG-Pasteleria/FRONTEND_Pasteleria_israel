@@ -27,7 +27,7 @@ const ModalupClient = ({
         nit_cl: cliente.nit_cl,
         telefono_cl: cliente.telefono_cl,
         direccion_cl: cliente.direccion_cl,
-        idtcl: cliente.idtcl, //id tabla tipo_cliente
+        tipo_idtclient: cliente.tipo_idtclient, //id tabla tipo_cliente
       });
       console.log(cliente);
     } catch (err) {
@@ -49,7 +49,7 @@ const ModalupClient = ({
     nit_cl: "",
     telefono_cl: "",
     direccion_cl: "",
-    idtcl: "",//id tabla tipo_cliente
+    tipo_idtclient: "",//id tabla tipo_cliente
     
   });
 
@@ -169,7 +169,7 @@ const ModalupClient = ({
                     // {...register("apellido")}
                     value={clienteUP.nit_cl}
                     onChange={(e) => onChangeData(e)}
-                    type="text"
+                    type="number"
                     id="nit_cl"
                     name="nit_cl"
                     placeholder="NIT"
@@ -206,11 +206,11 @@ const ModalupClient = ({
                   <label>Tipo cliente: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={clienteUP.idtcl} //id tabla tipo_cliente
+                    value={clienteUP.tipo_idtclient} //id tabla tipo_cliente
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="idtcl"
-                    name="idtcl"
+                    id="tipo_idtclient"
+                    name="tipo_idtclient"
                     placeholder="Tipo cliente"
                   ></input>
                 </div>

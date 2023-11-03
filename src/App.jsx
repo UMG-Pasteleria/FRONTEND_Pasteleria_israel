@@ -10,6 +10,8 @@ import Pedido from "./pages/Pedido";
 import ProductosWEB from "./pages/ProductosWEB";
 import Proveedor from "./pages/Proveedor";
 import Reportes from "./pages/Reportes";
+import TipoCliente from "./pages/TipoCliente";
+import TipoPastel from "./pages/TipoPastel";
 import Usuario from "./pages/Usuario";
 import Web from "./pages/webInicio";
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="/Admin/Cliente" element={<Cliente />} />
           <Route path="/Admin/Pedido" element={<Pedido />} />
           <Route path="/Admin/Pasteles" element={<Pastel />} />
+          <Route path="/Admin/TipoCliente" element={<TipoCliente />} />
+          <Route path="/Admin/TipoPastel" element={<TipoPastel />} />
           <Route path="/Admin/Usuario/:iduser/editar" element={<Usuario />} />
           <Route path="/Admin/Proveedor/:idprov/editar" element={<ModalP />} />
         </Routes>

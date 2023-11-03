@@ -2,39 +2,36 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
 
-const ModalupPastel = ({
+const ModalupTipoPastel = ({
   children,
   estado2,
   cambiarEstado2,
   titulo2,
   idEdit,
-  setPasteles,
-  pasteles,
+  setTamPasteles,
+  tampasteles,
 }) => {
-  const [pastel, setPastel] = useState({});
+  const [tampastel, setTamPastel] = useState([]);
 
-  const getDataUp = async (idpastel) => {
+  const getDataUp = async (idtampast) => {
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtampast}`,
         { headers: { "content-Type": "application/json" } }
       );
-      const pastel = await response.json();
-      setPastel(pastel);
-      setPasteloUP({
-        idpastel: pastel.idpastel,
-        pastel: pastel.pastel,
-        precio: pastel.precio,
-        tamanio_idpast: pastel.tamanio_idpast,
-        dec_idpast: pastel.dec_idpast,
-        cat_idpast: pastel.cat_idpast,
+      const tampastel = await response.json();
+      setTamPastel(tampastel);
+      setTamPasteloUP({
+        idtampast: tampastel.idtampast,
+        tamanio: tampastel.tamanio,
+      
       });
-      console.log(pastel);
+      console.log(tampastel);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(pastel);
+  console.log(tampastel);
   useEffect(() => {
     if (idEdit) {
       getDataUp(idEdit);
@@ -43,43 +40,40 @@ const ModalupPastel = ({
 
   //-------------capurar datos de actualizadcoin de usuario-------------------
 
-  const [pastelUP, setPasteloUP] = useState({
-    idpastel: "",
-    pastel: "",
-    precio: "",
-    tamanio_idpast: "",
-    dec_idpast: "",
-    cat_idpast: "",
+  const [tampastelUP, setTamPasteloUP] = useState({
+    idtampast: "",
+    tamanio: "",
+   
+    
   });
 
   const onChangeData = (e) => {
-    setPasteloUP({ ...pastelUP, [e.target.name]: e.target.value });
+    setTamPasteloUP({ ...tampastelUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
 
   //----------------------Evento de envio del formulario
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(dataProduct);
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${pastelUP.idpastel}`,
+        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${tampastelUP.idtampast}`,
         {
           method: "PUT",
-          body: JSON.stringify(pastelUP),
+          body: JSON.stringify(tampastelUP),
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      const data = response.json();
+      const data = await response.json();
       console.log(data);
       console.log(response);
-      setPasteles(
-        pasteles.map((pastel) =>
-          pastel.idpastel === pastelUP.idpastel ? pastelUP : pastel
+      setTamPasteles(
+        tampasteles.map((tampastel) =>
+          tampastel.idtampast === tampastelUP.idtampast ? tampastelUP : tampastel
         )
       );
       cambiarEstado2(false);
@@ -87,7 +81,7 @@ const ModalupPastel = ({
       //lanza alerta de guardado correctamente
       if (response.status === 200) {
         swal.fire({
-          title: "Pastel Actualizado!",
+          title: "Tamaño De Pastel Actualizado!",
           icon: "success",
           showConfirmButton: false,
           timer: 1200,
@@ -121,7 +115,7 @@ const ModalupPastel = ({
 
   //----------------------------------
 
-  // ------------------------ FIN ACTUALIZAR PROVEEDOR ---------------------------------
+  // ------------------------ FIN ACTUALIZAR CLIENTE ---------------------------------
 
   return (
     <>
@@ -135,85 +129,85 @@ const ModalupPastel = ({
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
             <div className="ContenedorEditarUsuario">
-              <form className="nuevoUserForm">
+              <form className="nuevoUserForm" onSubmit={handleSubmit}>
                 <div className="itemUser">
                   <label>id: </label>
                   <input
                     // {...register("iduser")}
                     type="text"
-                    id="idpastel"
+                    id="idtampast"
                     placeholder="ID"
-                    value={pastelUP.idpastel}
-                    name="idpastel"
+                    value={tampastelUP.idtampast}
+                    name="idtampast"
                     onChange={(e) => onChangeData(e)}
                     disabled selected
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Pastel: </label>
+                  <label>Tamaño de Pastel: </label>
                   <input
                     // {...register("nombre")}
-                    value={pastelUP.pastel}
+                    value={tampastelUP.tamanio}
                     onChange={(e) => onChangeData(e)}
                     type="text"
-                    id="pastel"
-                    name="pastel"
-                    placeholder="Pastel"
+                    id="tamanio"
+                    name="tamanio"
+                    placeholder="Tamaño de pastel"
                   ></input>
                 </div>
 
-                <div className="itemUser">
-                  <label>Precio: </label>
+                {/* <div className="itemUser">
+                  <label>NIT: </label>
                   <input
                     // {...register("apellido")}
-                    value={pastelUP.precio}
+                    value={tclienteUP.nit_cl}
                     onChange={(e) => onChangeData(e)}
-                    type="number"
-                    id="precio"
-                    name="precio"
-                    placeholder="Precio"
+                    type="text"
+                    id="nit_cl"
+                    name="nit_cl"
+                    placeholder="NIT"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemUser">
-                  <label>Tamaño del Pastel: </label>
+                {/* <div className="itemUser">
+                  <label>Telefono: </label>
                   <input
                     // {...register("telefono")}
-                    value={pastelUP.tamanio_idpast}
+                    value={tclienteUP.telefono_cl}
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="tamanio_idpast"
-                    name="tamanio_idpast"
-                    placeholder="Tamaño del pastel"
+                    id="telefono_cl"
+                    name="telefono_cl"
+                    placeholder="Telefono"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemUser">
-                  <label>Decoracion del Pastel: </label>
+                {/* <div className="itemUser">
+                  <label>Direccion: </label>
                   <input
                     // {...register("email")}
-                    value={pastelUP.dec_idpast}
+                    value={tclienteUP.direccion_cl} 
                     onChange={(e) => onChangeData(e)}
-                    type="number"
-                    id="dec_idpast"
-                    name="dec_idpast"
-                    placeholder="Decoracion del pastel"
+                    type="text"
+                    id="direccion_cl"
+                    name="direccion_cl"
+                    placeholder="Direccion"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemUser">
-                  <label>Categoria del pastel: </label>
+                {/* <div className="itemUser">
+                  <label>Tipo cliente: </label>
                   <input
                     // {...register("contrasenia")}
-                    value={pastelUP.cat_idpast}
+                    value={tclienteUP.idtcl} //id tabla tipo_cliente
                     onChange={(e) => onChangeData(e)}
                     type="number"
-                    id="cat_idpast"
-                    name="cat_idpast"
-                    placeholder="Categoria del pastel"
+                    id="idtcl"
+                    name="idtcl"
+                    placeholder="Tipo cliente"
                   ></input>
-                </div>
+                </div> */}
 
                 <br />
 
@@ -247,7 +241,7 @@ const ModalupPastel = ({
   );
 };
 
-export default ModalupPastel;
+export default ModalupTipoPastel;
 
 const Overlay = styled.div`
   width: 100vw;

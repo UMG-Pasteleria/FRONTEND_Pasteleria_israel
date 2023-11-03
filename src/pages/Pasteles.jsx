@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
-import avatar from "../assets/avatar.jpg";
+import avatar from "../assets/Chocolate.jpeg";
 import ModalupPastel from "../components/modals/ModalUpdatePastel";
 import ModalPast from "../components/modals/modalPastel";
 import Navbar from "../components/navbar";
@@ -16,7 +16,7 @@ const Pastel = () => {
 
   const [pasteles, setPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pasteles";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pastel";
 
   const getData = async () => {
     try {
@@ -65,7 +65,7 @@ const Pastel = () => {
   //-----------------ELIMINAR PORVEEDOR---------------------------------
 
   const handleDelete = async (idpastel) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/pasteles/${idpastel}`, {
+    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`, {
       method: "DELETE",
     });
     // const data = await res.json();
@@ -190,9 +190,9 @@ const Pastel = () => {
                 <div className="itemPast">
                   <label>Tamaño del pastel: </label>
                   <input
-                    {...register("idtampast")}
+                    {...register("tamanio_idpast")}
                     type="number"
-                    id="idtampast"
+                    id="tamanio_idpast"
                     placeholder="Tamaño del pastel"
                   ></input>
                 </div>
@@ -200,18 +200,18 @@ const Pastel = () => {
                 <div className="itemPast">
                   <label>Decoracion del pastel: </label>
                   <input
-                    {...register("idecpast")}
+                    {...register("dec_idpast")}
                     type="number"
-                    id="idecpast"
+                    id="dec_idpast"
                     placeholder="Decoracion del pastel"
                   ></input>
 
                   <div className="itemPast">
                     <label>Categoria del pastel: </label>
                     <input
-                      {...register("idcatp")}
+                      {...register("cat_idpast")}
                       type="number"
-                      id="idcatp"
+                      id="cat_idpast"
                       placeholder="Categoria del pastel"
                     ></input>
                   </div>
@@ -317,7 +317,7 @@ const Pastel = () => {
                     <h5>Precio: {pasteles.precio}</h5>
                   </div>
                   <div>
-                    <p>Tamaño del pastel: {pasteles.idtampast}</p>
+                    <p>Tamaño del pastel: {pasteles.tamanio_idpast}</p>
                   </div>
                 </div>
                 <div className="controlBtP">
@@ -393,13 +393,13 @@ const Pastel = () => {
                     <h5>{pastel.precio}</h5>
                   </div>
                   <div>
-                    <p>{pastel.idtampast}</p>
+                    <p>{pastel.tamanio_idpast}</p>
                   </div>
                   <div>
-                    <p>{pastel.idecpast}</p>
+                    <p>{pastel.dec_idpast}</p>
                   </div>
                   <div>
-                    <p>{pastel.idcatp}</p>
+                    <p>{pastel.cat_idpast}</p>
                   </div>
                 </form>
                 <div className="controlBtP">
