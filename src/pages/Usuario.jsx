@@ -17,10 +17,10 @@ const Usuario = () => {
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuarios, setUsuarios] = useState([]);
 
-  const URL = "http://localhost:3000/usuario";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "usuario");
       const datos = await response.json();
       setUsuarios(datos);
       console.log(datos);
@@ -75,7 +75,7 @@ const Usuario = () => {
 
   //------------ELIMINAR USUARIO------------------
   const handleDelete = async (idusuario) => {
-    const res = await fetch(`http://localhost:3000/usuario/${idusuario}`, {
+    const res = await fetch(URL + `usuario/${idusuario}`, {
       method: "DELETE",
     });
     // const data = await res.json();

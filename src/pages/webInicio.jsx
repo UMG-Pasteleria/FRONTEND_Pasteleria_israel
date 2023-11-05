@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import "../styles/webInicio.css";
 import NavbarWEB from "../components/navbarWeb";
 const Web = () => {
-  const URL = "http://localhost:3000/web";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/web";
 
   const [web, setWeb] = useState([]);
 

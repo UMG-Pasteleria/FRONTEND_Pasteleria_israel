@@ -13,14 +13,13 @@ const Proveedor = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [search, setSaerch] = useState("");
-
   const [proveedores, setProveedores] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/proveedores";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "proveedores");
       const datos = await response.json();
       setProveedores(datos);
       console.log(datos);
@@ -65,7 +64,7 @@ const Proveedor = () => {
   //-----------------ELIMINAR PORVEEDOR---------------------------------
 
   const handleDelete = async (idprov) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`, {
+    const res = await fetch(URL + `proveedores/${idprov}`, {
       method: "DELETE",
     });
     // const data = await res.json();

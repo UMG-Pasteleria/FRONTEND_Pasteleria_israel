@@ -234,7 +234,7 @@ function Pedido() {
       <SidebarPedidos />
       <div className="bodyPedid">
         <div className="ContainerPed"></div>
-        < className="Pedidoss">
+        <div className="Pedidoss">
           <br></br>
           <h2>Listado de Pedidos</h2>
           <br></br>
@@ -324,43 +324,40 @@ function Pedido() {
                         placeholder="Anticipo"
                       ></input>
                     </div>
+
+                    {/* //-----------PASTEL----------------------- */}
                   </div>
-
-                <div className="itemPedid">
-                  <label>Pastel: </label>
-                  <select
-                    className="selector"
-                    {...register("id_pastel")}
-                    id="id_pastel"
-                    // onChange={handleSelectChangePastel}
-                  >
-                    <option defaultValue="" disabled selected>
-                      Seleccione un pastel
-                    </option>
-                    {pasteles.map((pastelData, index) => (
-                      <option
-                        className="opciones"
-                        key={index}
-                        defaultValue={pastelData.idpastel}
-                      >
-                        {pastelData.pastel} {pastelData.tamanio} con{" "}
-                        {pastelData.decoracion} {".          ."} Precio: Q.
-                        {pastelData.precio}
-                      </option>
-                    ))}
-                  </select>
-                  <button>+</button>
-                </div>
-
-                <div className="itemPedid">
-                  <label>Modo pago: </label>
-                  <input
-                    {...register("id_modopago")}
-                    type="number"
-                    id="id_modopago"
-                    placeholder="Telefono"
-                  ></input>
-                </div>
+                  <div className="contDataModal">
+                    <div className="itemPedid">
+                      <label>Pastel: </label>
+                      <div className="agregarNew">
+                        <select
+                          className="selector"
+                          {...register("id_pastel")}
+                          id="id_pastel"
+                          // onChange={handleSelectChangePastel}
+                        >
+                          <option defaultValue="" disabled selected>
+                            Seleccione un pastel
+                          </option>
+                          {pasteles.map((pastelData, index) => (
+                            <option
+                              className="opciones"
+                              key={index}
+                              defaultValue={pastelData.idpastel}
+                            >
+                              {pastelData.pastel} {pastelData.tamanio} con{" "}
+                              {pastelData.decoracion} {".          ."} Precio:
+                              Q.
+                              {pastelData.precio}
+                            </option>
+                          ))}
+                        </select>
+                        <button className="botonAgregar" type="button">
+                          +
+                        </button>
+                      </div>
+                    </div>
 
                     {/* //--------------------CANTIDAD----------------/ */}
                     <div className="itemPedid">
@@ -408,7 +405,7 @@ function Pedido() {
                       </select>
                     </div>
                   </div>
-             
+                </div>
                 <br />
                 {/* <div className="total">
                   <label htmlFor="total" id="total">
@@ -449,7 +446,6 @@ function Pedido() {
                     </button>
                   </div>
                 </div>
-                
               </form>
             </div>
           </ModalPed>

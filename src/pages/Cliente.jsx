@@ -17,11 +17,11 @@ function Cliente() {
 
   const [clientes, setClientes] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "cliente");
       const json = await response.json();
       setClientes(json);
       console.log(json);
@@ -61,14 +61,12 @@ function Cliente() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idcliente) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/cliente/${idcliente}`, {
+    const res = await fetch(URL + `cliente/${idcliente}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setClientes(
-      clientes.filter((cliente) => cliente.idcliente !== idcliente)
-    );
+    setClientes(clientes.filter((cliente) => cliente.idcliente !== idcliente));
   };
 
   //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
@@ -204,7 +202,7 @@ function Cliente() {
                   <div className="itemClient">
                     <label>Tipo Cliente: </label>
                     <input
-                      {...register("tipo_idtclient")}//id tabla tipo_cliente
+                      {...register("tipo_idtclient")} //id tabla tipo_cliente
                       type="number"
                       id="tipo_idtclient"
                       placeholder="Tipo_cliente"

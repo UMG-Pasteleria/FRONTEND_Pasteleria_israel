@@ -20,13 +20,13 @@ function Compras() {
   const [search, setSaerch] = useState("");
   //-------URLS DE API-----------------//
 
-  const URL = "http://localhost:3000/compras";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   //-----CAPTURAR DATOS DE COMPRAS------//
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "compras");
       const datos = await response.json();
       setCompras(datos);
       console.log(datos);
@@ -68,7 +68,7 @@ function Compras() {
   //-----------------ELIMINAR COMPRAS---------------------------------
 
   const handleDelete = async (idcompras) => {
-    const res = await fetch(`http://localhost:3000/compras/${idcompras}`, {
+    const res = await fetch(URL + `compras/${idcompras}`, {
       method: "DELETE",
     });
     // const data = await res.json();

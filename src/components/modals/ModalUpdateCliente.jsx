@@ -12,13 +12,13 @@ const ModalupClient = ({
   clientes,
 }) => {
   const [cliente, setCliente] = useState([]);
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getDataUp = async (idcliente) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${idcliente}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `cliente/${idcliente}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const cliente = await response.json();
       setCliente(cliente);
       setClienteoUP({
@@ -49,13 +49,13 @@ const ModalupClient = ({
     nit_cl: "",
     telefono_cl: "",
     direccion_cl: "",
-    tipo_idtclient: "",//id tabla tipo_cliente
-    
+    tipo_idtclient: "", //id tabla tipo_cliente
   });
 
   const onChangeData = (e) => {
     setClienteoUP({ ...clienteUP, [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
+    c;
   };
 
   //----------------------Evento de envio del formulario
@@ -64,16 +64,13 @@ const ModalupClient = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/cliente/${clienteUP.idcliente}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(clienteUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `cliente/${clienteUP.idcliente}`, {
+        method: "PUT",
+        body: JSON.stringify(clienteUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       console.log(response);
@@ -146,7 +143,8 @@ const ModalupClient = ({
                     value={clienteUP.idcliente}
                     name="idcliente"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 
@@ -193,7 +191,7 @@ const ModalupClient = ({
                   <label>Direccion: </label>
                   <input
                     // {...register("email")}
-                    value={clienteUP.direccion_cl} 
+                    value={clienteUP.direccion_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="direccion_cl"

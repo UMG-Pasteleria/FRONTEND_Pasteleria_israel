@@ -5,13 +5,15 @@ import "../../styles/pastelCumple.css";
 import NavbarWEB from "../../components/navbarWeb";
 
 const PastelCumpleWEB = () => {
-  const URL = "http://localhost:3000/pastel";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pastel";
 
-  const [pastel, setPastel] = useState([]);
+  const [pasteles, setPastel] = useState([]);
 
   const getPastel = async () => {
     try {
-      const response = await fetch("http://localhost:3000/pastel");
+      const response = await fetch(
+        "https://8086zfpm-3000.use.devtunnels.ms/pastel"
+      );
       const pastel = await response.json();
       setPastel(pastel);
       console.log(pastel);
@@ -38,19 +40,21 @@ const PastelCumpleWEB = () => {
             </div>
           </div>
           <hr />
-          {pastel.map((pastel, index) => (
+          {pasteles.map((pasteles, index) => (
             <div className="sectionMainCumple" key={index}>
               <div className="pastel">
                 <div className="Cumple"></div>
                 <div className="datoPastel">
                   <div className="TituloPastel">
-                    <h3>{pastel.nombre_past}</h3>
+                    <h3>{pasteles.pastel}</h3>
                   </div>
                   <div className="descripcion">
-                    <h5>{pastel.descripcion_pastel}</h5>
+                    <h5>{pasteles.tamanio}</h5>
+                    <h5>{pasteles.decoracion}</h5>
+                    <h5>{pasteles.categoria}</h5>
                   </div>
                   <div className="precio">
-                    <h3>Q. {pastel.precio_pastel}</h3>
+                    <h3>Q. {pasteles.precio}</h3>
                   </div>
                 </div>
                 <div className="controles">

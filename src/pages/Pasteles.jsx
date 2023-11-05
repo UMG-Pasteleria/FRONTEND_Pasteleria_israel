@@ -16,11 +16,11 @@ const Pastel = () => {
 
   const [pasteles, setPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/pastel";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "pastel");
       const datos = await response.json();
       setPasteles(datos);
       console.log(datos);
@@ -65,14 +65,12 @@ const Pastel = () => {
   //-----------------ELIMINAR PORVEEDOR---------------------------------
 
   const handleDelete = async (idpastel) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`, {
+    const res = await fetch(URL + `pastel/${idpastel}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setPasteles(
-      pasteles.filter((pastel) => pastel.idpastel !== idpastel)
-    );
+    setPasteles(pasteles.filter((pastel) => pastel.idpastel !== idpastel));
   };
 
   //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
@@ -317,7 +315,7 @@ const Pastel = () => {
                     <h5>Precio: {pasteles.precio}</h5>
                   </div>
                   <div>
-                    <p>Tamaño del pastel: {pasteles.tamanio_idpast}</p>
+                    <p>Tamaño del pastel: {pasteles.tamanio}</p>
                   </div>
                 </div>
                 <div className="controlBtP">

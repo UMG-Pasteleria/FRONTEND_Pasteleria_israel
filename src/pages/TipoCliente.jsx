@@ -17,11 +17,11 @@ function TCliente() {
 
   const [tclientes, setTClientes] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "tipo_cliente");
       const json = await response.json();
       setTClientes(json);
       console.log(json);
@@ -61,14 +61,12 @@ function TCliente() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idtcl) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtcl}`, {
+    const res = await fetch(URL + `tipo_cliente/${idtcl}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setTClientes(
-      tclientes.filter((tcliente) => tcliente.idtcl !== idtcl)
-    );
+    setTClientes(tclientes.filter((tcliente) => tcliente.idtcl !== idtcl));
   };
 
   //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
