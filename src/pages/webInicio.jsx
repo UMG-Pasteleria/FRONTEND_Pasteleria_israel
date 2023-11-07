@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/04.jpg";
-import { Navigate } from "react-router-dom";
-import "../styles/webInicio.css";
 import NavbarWEB from "../components/navbarWeb";
+import "../styles/webInicio.css";
 const Web = () => {
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/web";
 

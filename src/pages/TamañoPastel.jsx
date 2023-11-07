@@ -17,11 +17,11 @@ function TamPastel() {
 
   const [tampasteles, setTamPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "tamanio");
       const json = await response.json();
       setTamPasteles(json);
       console.log(json);
@@ -61,7 +61,7 @@ function TamPastel() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idtampast) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtampast}`, {
+    const res = await fetch(URL + `tamanio/${idtampast}`, {
       method: "DELETE",
     });
     // const data = await res.json();

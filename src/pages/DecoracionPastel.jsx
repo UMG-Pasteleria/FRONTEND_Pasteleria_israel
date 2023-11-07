@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
-import avatar from "../assets/avatar.jpg";
-import ModalupProiveedor from "../components/modals/ModalUpdateProveedor";
-import ModalP from "../components/modals/modalProveedor";
+import avatar from "../assets/Chocolate.jpeg";
+import ModalupTamPastel from "../components/modals/ModalUpdateTamañoPastel";
+import ModalTamañoPast from "../components/modals/modalTamañoPastel";
 import Navbar from "../components/navbar";
-import SidebarCompras from "../components/sidebarCompras";
-import PDFGenerator from "../generarPDF/g.Compras";
-import "../styles/compras.css";
+//import SidebarCompras from "../components/sidebarCompras";
+import SidebarInventario from "../components/sidebarInventario";
+import PDFGenerator from "../generarPDF/g.Cliente";
+import "../styles/tamañoPasteles.css";
 
-function Compras() {
+function DecPastel() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
-  const [idEdit, setIdEdit] = useState("");
-  const [compras, setCompras] = useState([]);
-  const [proveedoresC, setProveedoresC] = useState([]);
   const [search, setSaerch] = useState("");
-  //-------URLS DE API-----------------//
+
+  const [decpasteles, setTamPasteles] = useState([]);
 
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
-  //-----CAPTURAR DATOS DE COMPRAS------//
-
   const getData = async () => {
     try {
-      const response = await fetch(URL + "compras");
-      const datos = await response.json();
-      setCompras(datos);
-      console.log(datos);
-      return datos;
+      const response = await fetch(URL + "decoracion");
+      const json = await response.json();
+      setTamPasteles(json);
+      console.log(json);
     } catch (err) {
       console.error(err);
     }
@@ -37,10 +32,9 @@ function Compras() {
   useEffect(() => {
     getData();
   }, []);
-
-  //-----CAPTURAR DATOS DE NUEVA COMPRA------//
+  // // // // //-----CAPTURAR DATOS DE NUEVO CLIENTE------//
   const { handleSubmit, register } = useForm();
-  const enviarProveedor = handleSubmit((data) => {
+  const enviarTamPastel = handleSubmit((data) => {
     console.log(data);
     fetch(URL, {
       method: "POST",
@@ -50,7 +44,7 @@ function Compras() {
     getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
-      title: "Proveedor Agregado!",
+      title: "Tamaño de pastel Agregado!",
       icon: "success",
       showConfirmButton: false,
       timer: 1200,
@@ -64,28 +58,28 @@ function Compras() {
     });
   });
 
-  //-----------------ELIMINAR COMPRAS---------------------------------
+  //-----------------ELIMINAR CLIENTE---------------------------------
 
-  const handleDelete = async (idcompras) => {
-    const res = await fetch(URL + `compras/${idcompras}`, {
+  const handleDelete = async (idtampast) => {
+    const res = await fetch(URL + `decoracion/${idtampast}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setCompras(
-      compras.filter((proveedor) => proveedor.idcompras !== idcompras)
+    setTamPasteles(
+      decpasteles.filter((tampastel) => tampastel.idtampast !== idtampast)
     );
   };
 
-  //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
+  //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idprov) => {
+  const mostrarAlerta = (idtampast) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
         icon: "question",
-        text: "Se eliminaran los datos del Proveedor",
+        text: "Se eliminaran los datos del tamaño de pastel",
         confirmButtonText: "Eliminar",
         confirmButtonColor: "#FF8A00",
         showCancelButton: true,
@@ -106,8 +100,7 @@ function Compras() {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idprov);
-
+          handleDelete(idtampast);
           swal.fire({
             title: "¡Eliminado!",
             icon: "success",
@@ -126,9 +119,11 @@ function Compras() {
   };
   //----------------------------FIN DE ALERTAS --------------------------------
 
-  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- EDITAR CLIENTE ----------------------------------//
 
-  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
+  const [idEdit, setIdEdit] = useState("");
+
+  //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
 
   //------------busqueda inteligente -----------------
   const searcher = (e) => {
@@ -138,99 +133,87 @@ function Compras() {
   //----metodod de filtrado de busqueda-----
   let result = [];
   if (!search) {
-    result = compras;
+    result = decpasteles;
   } else {
-    result = compras.filter((datos) =>
-      datos.responsable.toLowerCase().includes(search.toLowerCase())
+    result = decpasteles.filter((datos) =>
+      datos.tamanio.toLowerCase().includes(search.toLowerCase())
     );
   }
 
   return (
     <>
       <Navbar />
-      <SidebarCompras />
-      <div className="bodyProv">
-        <div className="ContainerP"></div>
-        <div className="Proveedores">
+      <SidebarInventario />
+      <div className="bodyTamPast">
+        <div className="ContainerTamPast"></div>
+        <div className="TamPasteles">
           <br></br>
-          <h2>Listado de Compras</h2>
+          <h2>Listado Del Tamaño De Pasteles</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVA COMPRA-------------- */}
-          <ModalP
+          {/* ------------------- MODAL AGREGAR NUEVO CLIENTE-------------- */}
+          <ModalTamañoPast
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nueva compra"
+            titulo="Nuevo Tamaño de Pastel"
           >
-            <div className="containerNewProv">
+            <div className="containerNewTamPast">
               <form
-                className="nuevoProvForm"
-                id="FormularioP"
-                onSubmit={enviarProveedor}
+                className="nuevoTamPastForm"
+                id="FormularioTamP"
+                onSubmit={enviarTamPastel}
               >
-                <div className="itemProv">
-                  <label>Responsable: </label>
+                <div className="itemTamPast">
+                  <label>Tamaño de pastel: </label>
                   <input
-                    {...register("responsable")}
-                    type="number"
-                    id="responsable"
-                    placeholder="Responsable"
-                  ></input>
-                </div>
-
-                <div className="itemProv">
-                  <label>Proveedor: </label>
-                  <input
-                    {...register("nombre_producto")}
+                    {...register("tamanio")}
                     type="text"
-                    id="nombre_pr"
-                    placeholder="Producto"
+                    id="tamanio"
+                    placeholder="Tamaño de pastel"
                   ></input>
                 </div>
 
-                <div className="itemProv">
+                {/* <div className="itemClient">
+                  <label>Cliente: </label>
+                  <input
+                    {...register("nombre_cl")}
+                    type="text"
+                    id="nombre_cl"
+                    placeholder="Cliente"
+                  ></input>
+                </div> */}
+
+                {/* <div className="itemClient">
                   <label>Telefono: </label>
                   <input
-                    {...register("cantidad")}
+                    {...register("telefono_cl")}
                     type="number"
-                    id="telefono_pr"
-                    placeholder="Cantidad"
+                    id="telefono_cl"
+                    placeholder="Telefono"
                   ></input>
-                </div>
+                </div> */}
 
-                <div className="itemProv">
-                  <label>Correo: </label>
-                  <input
-                    {...register("metd_pago")}
-                    type="text"
-                    id="correo_pr"
-                    placeholder="Metodo de pago"
-                  ></input>
-
-                  <div className="itemProv">
-                    <label>Direccion: </label>
-                    <input
-                      {...register("emision")}
-                      type="text"
-                      id="direccion_pr"
-                      placeholder="Fecha de emision"
-                    ></input>
-                  </div>
-                </div>
-                <br />
-
-                <div className="itemProv">
+                {/* <div className="itemClient">
                   <label>Direccion: </label>
                   <input
-                    {...register("entrega")}
+                    {...register("direccion_cl")}
                     type="text"
-                    id="direccion_pr"
-                    placeholder="Fecha de entrega"
+                    id="direccion_cl"
+                    placeholder="Direccion"
                   ></input>
-                </div>
 
+                  <div className="itemClient">
+                    <label>Tipo Cliente: </label>
+                    <input
+                      {...register("idtcl")}//id tabla tipo_cliente
+                      type="number"
+                      id="idtcl"
+                      placeholder="Tipo_cliente"
+                    ></input>
+                  </div>
+                </div> */}
                 <br />
 
-                <div className="bonotesNewProv">
+                <div className="bonotesNewTamPast">
                   <div>
                     <button
                       type="button"
@@ -240,8 +223,13 @@ function Compras() {
                       Cancelar
                     </button>
                   </div>
-
                   <div>
+                    {/* <button
+                      type="submit"
+                      className="btGuardar"
+                      
+                    > */}
+
                     <button type="submit" className="btGuardar">
                       Guardar
                     </button>
@@ -249,20 +237,22 @@ function Compras() {
                 </div>
               </form>
             </div>
-          </ModalP>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVA COMPRA ------------------ */}
+          </ModalTamañoPast>
+          {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  COMPRA-------------- */}
+          {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
 
-          <ModalupProiveedor
+          <ModalupTamPastel
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar proveedor"}
+            titulo2={"Actualizar tamaño de pastel"}
             idEdit={idEdit}
-          ></ModalupProiveedor>
-          {/* --------------------------- FIN MODAL EDITAR COMPRA ------------------ */}
+            setTamPasteles={setTamPasteles}
+            tampasteles={decpasteles}
+          ></ModalupTamPastel>
+          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
 
-          {/* //----------------------------------ELIMINAR COMPRA ----------------------------------*/}
+          {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
 
           <div className="centrarControles">
             <div className="controlesUsuario">
@@ -271,15 +261,12 @@ function Compras() {
               </button>
 
               <div className="busqueda">
-                <form
-                  action="http://localhost:3000/usuario"
-                  method="get"
-                  className="cuadroBusqueda"
-                >
+                <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
+                    value={search}
                     onChange={searcher}
-                    placeholder="Buscar proveedor"
+                    placeholder="Buscar tamaño de pasteles"
                     name="q"
                   ></input>
                   <button type="submit">
@@ -288,7 +275,7 @@ function Compras() {
                 </form>
               </div>
 
-              <PDFGenerator data={compras} />
+              <PDFGenerator data={decpasteles} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
@@ -299,49 +286,55 @@ function Compras() {
           <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
-          <div className="proveedorMovil">
-            {result.map((compra, index) => (
-              <div className="ContenedorProveedores" key={index}>
+          <div className="tampastelMovil">
+            {result.map((tampastel, index) => (
+              <div className="ContenedorTamPasteles" key={index}>
                 <div className="imgPerfil">
-                  <div className="proveedorID">
+                  <div className="tampastelID">
                     <p>ID</p>
-                    <span>{compra.idcompras}</span>
+                    <span>{tampastel.idtampast}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(compra.idcompras)
+                      setIdEdit(tampastel.idtampast)
                     }
                   />
                 </div>
 
                 <div
-                  className="datoProveedor"
+                  className="datoTamPastel"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(compra.idcompras)
+                    setIdEdit(tampastel.idtampast)
                   }
                 >
                   <div>
-                    <h3>{compra.responsable}</h3>
+                    <h3>{tampastel.tamanio}</h3>
+                  </div>
+                  {/* <div>
+                    <h5>NIT: {tcliente.nit_cl}</h5>
                   </div>
                   <div>
-                    <h5>Producto: {compra.nombre_producto}</h5>
+                    <p>Telefono: {tcliente.telefono_cl}</p>
                   </div>
                   <div>
-                    <p>Entrega: {compra.entrega}</p>
+                    <p>Direccion: {tcliente.direccion_cl}</p>
                   </div>
+                  <div>
+                    <p>Tipo Cliente: {tcliente.idtcl}</p>
+                  </div> */}
                 </div>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button className="btEditarU">
                     <span className="material-symbols-outlined">edit</span>
                   </button>
                   <br />
                   <button
                     className="btEliminarU"
-                    // onClick={() => mostrarAlerta(usuario.iduser)}
+                    onClick={() => mostrarAlerta(tampastel.idtampast)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -350,44 +343,30 @@ function Compras() {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-
-          {/* //--------------------------- VERSION ESCRITORIO ---------------------------- */}
-          <div className="proveedorEscritorio">
+          <div className="tampastelEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>Codigo: </h3>
+                  <h3>ID: </h3>
                 </div>
               </div>
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Fecha compra: </h3>
+                  <h3>Tamaño de pastel: </h3>
                 </div>
-                <div className="encD">
-                  <h3>Proveedor: </h3>
-                </div>
-                <div className="encD">
+                {/* <div className="encD">
                   <h3>NIT: </h3>
                 </div>
                 <div className="encD">
-                  <h3>producto: </h3>
+                  <h3>Telefono: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Cantidad: </h3>
+                  <h3>Direccion: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Precio unitario: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Stock: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Descripcion: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Vencimiento: </h3>
-                </div>
+                  <h3>Tipo: </h3>
+                </div> */}
               </div>
               <div className="encBT">
                 <div>
@@ -396,52 +375,46 @@ function Compras() {
               </div>
             </div>
 
-            {result.map((compra, index) => (
-              <div className="ContenedorProveedores" key={index}>
+            {result.map((tampastel, index) => (
+              <div className="ContenedorTamPasteles" key={index}>
                 <div className="imgPerfil">
-                  <div className="compraID">
-                    <span>COMP{compra.idcompra}</span>
+                  <div className="tampastelID">
+                    <p>ID</p>
+                    <span>{tampastel.idtampast}</span>
                   </div>
+                  <img
+                    src={avatar}
+                    className="avatar"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  />
                 </div>
 
                 <form
-                  className="datoProveedor"
+                  className="datoTamPastel"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{compra.fecha_compra}</h3>
+                    <h3>{tampastel.tamanio}</h3>
+                  </div>
+                  {/* <div>
+                    <h5>{tcliente.nit_cl}</h5>
                   </div>
                   <div>
-                    <h5>{compra.nombre_proveedor}</h5>
+                    <p>{tcliente.telefono_cl}</p>
                   </div>
                   <div>
-                    <p>{compra.nit}</p>
+                    <p>{tcliente.direccion_cl}</p>
                   </div>
                   <div>
-                    <p>{compra.producto}</p>
-                  </div>
-                  <div>
-                    <p>{compra.cantidad}</p>
-                  </div>
-                  <div>
-                    <p>Q. {compra.costo_unitario}</p>
-                  </div>
-                  <div>
-                    <p>{compra.stock}</p>
-                  </div>
-                  <div>
-                    <p>{compra.descripcion}</p>
-                  </div>
-                  <div>
-                    <p>{compra.fecha_vencimiento}</p>
-                  </div>
+                    <p>{tcliente.idtcl}</p>
+                  </div> */}
                 </form>
-                <div className="controlBtP">
+                <div className="controlBtC">
                   <button
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(compra.idcompras)
+                      setIdEdit(tampastel.idtampast)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -449,7 +422,7 @@ function Compras() {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(compra.idcompras)}
+                    onClick={() => mostrarAlerta(tampastel.idtampast)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -463,4 +436,4 @@ function Compras() {
   );
 }
 
-export default Compras;
+export default DecPastel;

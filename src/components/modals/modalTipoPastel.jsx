@@ -1,6 +1,70 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
-const ModalTipoPast = ({ children, estado, cambiarEstado, titulo }) => {
+import swal from "sweetalert2";
+  
+  const ModalTipoPast = ({
+    estado,
+    cambiarEstado,
+    titulo,
+    setTPasteles,
+    tpasteles,
+    URL,
+  }) => {
+    const { handleSubmit, register } = useForm();
+
+
+  
+    const enviarTPasteles = handleSubmit(async (data) => {
+      try {
+        const response = await fetch(URL + "tipo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+  
+        if (response.status === 200) {
+          swal.fire({
+            title: "Tipo Pastel Agregado!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1200,
+            customClass: {
+              confirmButton: "btEliminar",
+              cancelButton: "btCancelar",
+              popup: "popus-eliminado",
+              title: "titulo-pop",
+              container: "contenedor-alert",
+            },
+          });
+  
+          // Optionally update your clients state or perform other actions
+          setTPasteles([...tpasteles, data]);
+        } else {
+          swal.fire({
+            title: "Error al Agregar",
+            icon: "error",
+            text: `${response.status}`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+              confirmButton: "btEliminar",
+              cancelButton: "btCancelar",
+              popup: "popus-eliminado",
+              title: "titulo-pop",
+              container: "contenedor-alert",
+            },
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+  
+      cambiarEstado(false);
+    });
+  
+  
+  
   return (
     <>
       {estado && (
@@ -12,7 +76,49 @@ const ModalTipoPast = ({ children, estado, cambiarEstado, titulo }) => {
             <BotonCerrar onClick={() => cambiarEstado(false)}>
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
-            {children}
+            <div className="containerNewTPast">
+              <form
+                className="nuevoTPastForm"
+                id="FormularioTP"
+                onSubmit={enviarTPasteles}
+              >
+                <div className="itemTPast">
+                  <label>Tipo pastel: </label>
+                  <input
+                    {...register("tipo_pastel")}
+                    type="text"
+                    id="tipo_pastel"
+                    placeholder="Tipo pastel"
+                  ></input>
+                </div>
+
+                <br />
+
+                <div className="bonotesNewTPast">
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => cambiarEstado(false)}
+                      className="btcancelar"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                  <div>
+                    {/* <button
+                      type="submit"
+                      className="btGuardar"
+                      
+                    > */}
+
+                    <button type="submit" className="btGuardar"
+                    onClick={() => cambiarEstado(false)}>
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </ContenedorModal>
         </Overlay>
       )}
