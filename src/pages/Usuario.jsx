@@ -17,7 +17,7 @@ const Usuario = () => {
   //------------------------------------MOSTRAR DATOS DE LOS USUARIOS DESDE EL BACKEND--------------------------------------------------------------
   const [usuarios, setUsuarios] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
   const getData = async () => {
     try {
       const response = await fetch(URL + "usuario");

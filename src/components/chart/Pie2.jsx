@@ -4,15 +4,16 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function Pie1() {
+function Pie2() {
   const [pasteles, setPastel] = useState([]);
 
   const URL = import.meta.env.VITE_URL;
 
   const getData = async () => {
     try {
-      const response = await fetch(URL + "pastelesvendidos");
+      const response = await fetch(URL + "pastel");
       const datos = await response.json();
+
       setPastel(datos);
       console.log(datos);
     } catch (err) {
@@ -23,7 +24,7 @@ function Pie1() {
     getData();
   }, []);
 
-  var stock = pasteles.map((item) => item.total).slice(0, 15);
+  var stock = pasteles.map((item) => item.stock).slice(0, 15);
   var pastel = pasteles.map((item) => item.pastel).slice(0, 15);
 
   var options = {
@@ -60,18 +61,18 @@ function Pie1() {
         label: "Ventas de pasteles",
         data: stock,
         backgroundColor: [
-          "rgba(255, 114, 70,0.5)",
-          "rgba(255, 175, 92,0.5)",
-          "rgba(255, 212, 84,0.5)",
-          "rgba(144, 156, 90,0.5)",
-          "rgba(0, 138, 147,0.5)",
+          "rgba(255, 154, 90,0.5)",
+          "rgba(255, 105, 122,0.5)",
+          "rgba(255, 222, 104,0.5)",
+          "rgba(144, 136, 120,0.5)",
+          "rgba(70, 138, 167,0.5)",
         ],
         borderColor: [
-          "rgba(255, 114, 70,0.7",
-          "rgba(255, 175, 92,0.7)",
-          "rgba(255, 212, 84,0.7)",
-          "rgba(144, 156, 90,0.7)",
-          "rgba(0, 138, 147,0.7)",
+          "rgba(255, 154, 90,0.5)",
+          "rgba(255, 105, 122,0.5)",
+          "rgba(255, 222, 104,0.5)",
+          "rgba(144, 136, 120,0.5)",
+          "rgba(70, 138, 167,0.5)",
         ],
         hoverOffset: 15,
         borderwidth: 5,
@@ -86,4 +87,4 @@ function Pie1() {
   );
 }
 
-export default Pie1;
+export default Pie2;

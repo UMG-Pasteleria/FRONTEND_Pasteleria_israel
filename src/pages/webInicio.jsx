@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/04.jpg";
 import NavbarWEB from "../components/navbarWeb";
+import { useNavigate } from "react-router-dom";
+
 import "../styles/webInicio.css";
 const Web = () => {
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/web";
+  const URL = import.meta.env.VITE_URL;
 
   const [web, setWeb] = useState([]);
 
   const getWeb = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "web");
       const web = await response.json();
       setWeb(web);
       console.log(web);
@@ -21,13 +23,17 @@ const Web = () => {
   useEffect(() => {
     getWeb();
   }, []);
-
+  const navegate = useNavigate();
   return (
     <>
       <div className="ContenedorWeb">
         <div className="main">
           <div className="bannerEncabezado">
-            <img src={logo} className="logoLogin" />
+            <img
+              src={logo}
+              className="logoLogin"
+              onClick={() => navegate("/Admin")}
+            />
           </div>
           <div className="sectionMain">
             {web.map((web, index) => (

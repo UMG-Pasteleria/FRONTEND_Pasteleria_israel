@@ -5,6 +5,7 @@ import ChartDias from "../components/chart/grafica1";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Pie1 from "../components/chart/Pie1";
+import Pie2 from "../components/chart/Pie2";
 import logo from "../assets/04.jpg";
 
 function Inicio() {
@@ -45,19 +46,25 @@ function Inicio() {
                 </div>
               </div>
               <div className="ChartPie">
-                <span className="TituloItem">Insumos disponibles</span>
+                <span className="TituloItem">Pasteles disponibles</span>
                 <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie1 />
+                  <Pie2 />
                 </div>
               </div>
             </div>
           </article>
           <article className="MenuInicio">
-            <div className="ElementoMenu1">
+            <div
+              className="ElementoMenu1"
+              onClick={() => navegate("/Admin/Productos")}
+            >
               <span className="TituloItem">Productos</span>
             </div>
 
-            <div className="ElementoMenu2">
+            <div
+              className="ElementoMenu2"
+              onClick={() => navegate("/Admin/Cliente")}
+            >
               <span className="TituloItem">Clientes</span>
             </div>
 
@@ -68,7 +75,7 @@ function Inicio() {
               <span className="TituloItem">Empleados</span>
             </div>
 
-            <div className="ElementoMenu4">
+            <div className="ElementoMenu4" onClick={() => navegate("/")}>
               <span className="TituloItemWEB">Pagina WEB</span>
               <div className="Logo"></div>
             </div>

@@ -8,7 +8,6 @@ import Navbar from "../components/navbar";
 import SidebarPedidos from "../components/sidebarPedido";
 import PDFGenerator from "../generarPDF/g.Pedido";
 import moment from "moment";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/pedido.css";
 
@@ -16,6 +15,7 @@ function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [estadoModal3, cambiarEstadoModal3] = useState(false);
+  const [estadoModal4, cambiarEstadoModal4] = useState(false);
   const [search, setSaerch] = useState("");
   const [estados, setEstados] = useState([]);
   const [pedidos, setPedidos] = useState([]);
@@ -23,7 +23,7 @@ function Pedido() {
   const [pasteles, setPasteles] = useState([]);
   const [modopagos, setModopagos] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   //--------------- OBTENER DATOS DE PEDIDOS -----------------//
 
@@ -476,10 +476,11 @@ function Pedido() {
           <ModalupPedido
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar pedido"}
+            titulo2={"P-"}
             idEdit={idEdit}
             setPedidos={setPedidos}
             pedidos={pedidos}
+            URL={URL}
           ></ModalupPedido>
           {/* //----------------------------------ELIMINAR PEDIDO ----------------------------------*/}
           <div className="centrarControles">
@@ -523,7 +524,13 @@ function Pedido() {
           <div className="pedidoMovil">
             {result.map((pedidos, index) => (
               <div className="ContenedorPedidos" key={index}>
-                <div className="imgPerfil">
+                <div
+                  className="imgPerfil"
+                  onClick={() =>
+                    cambiarEstadoModal4(!estadoModal4) &
+                    setIdEdit(pedidos.idpedido)
+                  }
+                >
                   <div className="pedidoID">
                     <h3>P-{pedidos.idpedido}</h3>
                     <h6>
@@ -572,6 +579,20 @@ function Pedido() {
               </div>
             ))}
           </div>
+
+          <ModalPed
+            estado={estadoModal4}
+            cambiarEstado={cambiarEstadoModal4}
+            titulo={"Actualizar pedido"}
+            idEdit={idEdit}
+            setPedidos={setPedidos}
+            pedidos={pedidos}
+          >
+            <label htmlFor="" value={pedidos.idprov}>
+              `ID + ${pedidos.idprov}`
+            </label>
+          </ModalPed>
+
           {/* //--------------------------- VERSION ESCRITORIO Y TABLET ---------------------------- */}
           <div className="pedidoEscritorioP">
             <div className="encabezadoEscritorio">
@@ -667,7 +688,7 @@ function Pedido() {
                   </div> */}
                 </form>
                 <div className="controlBtPd">
-                  <button
+                  {/* <button
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
@@ -675,7 +696,7 @@ function Pedido() {
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
-                  </button>
+                  </button> */}
 
                   <button
                     className="btEliminarU"

@@ -16,7 +16,7 @@ const Pastel = () => {
 
   const [pasteles, setPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   const getData = async () => {
     try {
@@ -289,7 +289,7 @@ const Pastel = () => {
                 <div className="imgPerfil">
                   <div className="pastelID">
                     <p>ID</p>
-                    <span>{pasteles.idpastel}</span>
+                    <span>{pasteles.stock}</span>
                   </div>
                   <img
                     src={avatar}
@@ -338,7 +338,7 @@ const Pastel = () => {
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>ID: </h3>
+                  <h3>Stock: </h3>
                 </div>
               </div>
 
@@ -371,7 +371,7 @@ const Pastel = () => {
                 <div className="imgPerfil">
                   <div className="pastelID">
                     <p>ID</p>
-                    <span>{pastel.idpastel}</span>
+                    <span>{pastel.stock}</span>
                   </div>
                   <img
                     src={avatar}

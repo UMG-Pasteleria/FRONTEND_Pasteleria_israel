@@ -17,7 +17,7 @@ function DecPastel() {
 
   const [decpasteles, setTamPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   const getData = async () => {
     try {

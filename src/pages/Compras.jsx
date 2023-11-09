@@ -19,7 +19,7 @@ function Compras() {
   const [search, setSaerch] = useState("");
   //-------URLS DE API-----------------//
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   //-----CAPTURAR DATOS DE COMPRAS------//
 
@@ -380,7 +380,7 @@ function Compras() {
                   <h3>Precio unitario: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Stock: </h3>
+                  <h3>Total: </h3>
                 </div>
                 <div className="encD">
                   <h3>Descripcion: </h3>
@@ -400,7 +400,7 @@ function Compras() {
               <div className="ContenedorProveedores" key={index}>
                 <div className="imgPerfil">
                   <div className="compraID">
-                    <span>COMP{compra.idcompra}</span>
+                    <span>COMP{compra.idetallec}</span>
                   </div>
                 </div>
 
@@ -427,7 +427,7 @@ function Compras() {
                     <p>Q. {compra.costo_unitario}</p>
                   </div>
                   <div>
-                    <p>{compra.stock}</p>
+                    <p>{compra.total}</p>
                   </div>
                   <div>
                     <p>{compra.descripcion}</p>

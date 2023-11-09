@@ -13,11 +13,10 @@ import "../styles/tamañoPasteles.css";
 function TamPastel() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [tampasteles, setTamPasteles] = useState([]);
   const [search, setSaerch] = useState("");
 
-  const [tampasteles, setTamPasteles] = useState([]);
-
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   const getData = async () => {
     try {
@@ -61,7 +60,6 @@ function TamPastel() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idtampast) => {
-
     const res = await fetch(URL + `tamanio/${idtampast}`, {
       method: "DELETE",
     });

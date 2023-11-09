@@ -17,7 +17,7 @@ function TPastel() {
   const [decpasteles, setDecPasteles] = useState([]);
   const [catpasteles, setCatPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   //--------OBTENER DATOS DE TIPO DE PASTEL---
 

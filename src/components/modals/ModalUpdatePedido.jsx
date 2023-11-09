@@ -1,7 +1,9 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import swal from "sweetalert2";
-
+import PDFGenerator from "../../generarPDF/g.Pedido";
+import "../../styles/pedido.css";
 const ModalupPedido = ({
   children,
   estado2,
@@ -10,23 +12,31 @@ const ModalupPedido = ({
   idEdit,
   setPedidos,
   pedidos,
+  URL,
 }) => {
   const [pedido, setPedido] = useState([]);
 
   const getDataUp = async (idpedido) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/pedidos/${idpedido}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `pedidos/${idpedido}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const pedido = await response.json();
       setPedido(pedido);
       setPedidooUP({
         idpedido: pedido.idpedido,
-        producto_pro: pedido.producto_pro,
-        id_client: pedido.id_client,
+        pastel: pedido.pastel,
+        decoracion: pedido.decoracion,
+        dedicatoria: pedido.dedicatoria,
+        cantidad: pedido.cantidad,
         fecha_pedido: pedido.fecha_pedido,
-        estado_pd: pedido.estado_pd,
+        estado: pedido.estado,
+        direccion_cl: pedido.direccion_cl,
+        fecha_entrega: pedido.fecha_entrega,
+        nombre_cl: pedido.nombre_cl,
+        tamanio: pedido.tamanio,
+        telefono_cl: pedido.telefono_cl,
+        total: pedido.total,
       });
       console.log(pedido);
     } catch (err) {
@@ -44,10 +54,18 @@ const ModalupPedido = ({
 
   const [pedidoUP, setPedidooUP] = useState({
     idpedido: "",
-    producto_pro: "",
-    id_client: "",
-    telefono_pd: "",
-    estado_pd: "",
+    pastel: "",
+    decoracion: "",
+    dedicatoria: "",
+    cantidad: "",
+    fecha_pedido: "",
+    estado: "",
+    direccion_cl: "",
+    fecha_entrega: "",
+    nombre_cl: "",
+    tamanio: "",
+    telefono_cl: "",
+    total: "",
   });
 
   const onChangeData = (e) => {
@@ -61,16 +79,13 @@ const ModalupPedido = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/pedidos/${pedidoUP.idpedido}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(pedidoUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`URL + pedidos/${pedidoUP.idpedido}`, {
+        method: "PUT",
+        body: JSON.stringify(pedidoUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       console.log(response);
@@ -131,7 +146,15 @@ const ModalupPedido = ({
         <Overlay>
           <ContenedorModal>
             <EncabezadoModal>
-              <h3>{titulo2}</h3>
+              <h3>
+                <b>
+                  {" "}
+                  {titulo2} {pedidoUP.idpedido}
+                </b>{" "}
+                | {pedidoUP.nombre_cl}
+              </h3>
+              <br />
+              <PDFGenerator data={pedidoUP} />
             </EncabezadoModal>
             <BotonCerrar onClick={() => cambiarEstado2(false)}>
               <span className="material-symbols-outlined">close</span>
@@ -139,54 +162,123 @@ const ModalupPedido = ({
             <div className="ContenedorEditarUsuario">
               <form className="nuevoUserForm">
                 <div className="itemUser">
-                  <label>No. </label>
+                  <label>Fecha de pedido:</label>
                   <input
                     // {...register("iduser")}
                     type="text"
                     id="idUser"
                     placeholder="ID"
-                    value={pedidoUP.idpedido}
-                    name="idpedido"
+                    value={moment(pedidoUP.fecha_pedido).format(
+                      "DD/MM/YYYY  | h:mm A"
+                    )}
+                    name="fecha_pedido"
                     onChange={(e) => onChangeData(e)}
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Producto: </label>
+                  <label>Fecha de entrega:</label>
                   <input
                     // {...register("nombre")}
-                    value={pedidoUP.producto_pro}
+                    value={moment(pedidoUP.fecha_entrega).format(
+                      "DD/MM/YYYY  | h:mm A"
+                    )}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="nombreUser"
-                    name="producto_pro"
-                    placeholder="Producto"
+                    name="fecha_entrega"
+                    placeholder="Pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Cliente: </label>
+                  <label>Direccion: </label>
                   <input
                     // {...register("apellido")}
-                    value={pedidoUP.id_client}
+                    value={pedidoUP.direccion_cl}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="apellidoUser"
-                    name="id_client"
-                    placeholder="Cliente"
+                    name="pastel"
+                    placeholder="Pastel"
                   ></input>
                 </div>
 
                 <div className="itemUser">
-                  <label>Telefono: </label>
+                  <label>Direccion: </label>
                   <input
-                    // {...register("telefono")}
-                    value={pedidoUP.telefono_pd}
+                    // {...register("apellido")}
+                    value={pedidoUP.telefono_cl}
                     onChange={(e) => onChangeData(e)}
-                    type="number"
-                    id="telefonoUser"
-                    name="telefono_pd"
-                    placeholder="Telefono"
+                    type="text"
+                    id="apellidoUser"
+                    name="telefono_cl"
+                    placeholder="Pastel"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Pastel: </label>
+                  <input
+                    // {...register("apellido")}
+                    value={"Pastel de " + pedidoUP.pastel}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="apellidoUser"
+                    name="pastel"
+                    placeholder="Pastel"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Tamaño: </label>
+                  <input
+                    // {...register("email")}
+                    value={pedidoUP.tamanio}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="emailUser"
+                    name="tamanio"
+                    placeholder="Tamaño del pastel"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Decoración: </label>
+                  <input
+                    // {...register("email")}
+                    value={pedidoUP.decoracion}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="emailUser"
+                    name="decoracion"
+                    placeholder="Estado"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Dedicatoria: </label>
+                  <input
+                    // {...register("email")}
+                    value={pedidoUP.dedicatoria}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="emailUser"
+                    name="dedicatoria"
+                    placeholder="Dedicatoria"
+                  ></input>
+                </div>
+
+                <div className="itemUser">
+                  <label>Cantidad: </label>
+                  <input
+                    // {...register("email")}
+                    value={pedidoUP.cantidad}
+                    onChange={(e) => onChangeData(e)}
+                    type="text"
+                    id="emailUser"
+                    name="cantidad"
+                    placeholder="Cantidad"
                   ></input>
                 </div>
 
@@ -194,11 +286,11 @@ const ModalupPedido = ({
                   <label>Estado: </label>
                   <input
                     // {...register("email")}
-                    value={pedidoUP.estado_pd}
+                    value={pedidoUP.estado}
                     onChange={(e) => onChangeData(e)}
                     type="text"
                     id="emailUser"
-                    name="estado_pd"
+                    name="estado"
                     placeholder="Estado"
                   ></input>
                 </div>
