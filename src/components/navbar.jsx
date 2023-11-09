@@ -32,7 +32,7 @@ function Navbar() {
         <button
           type="button"
           className="navB"
-          onClick={() => navegate("/Admin/Reportes")}
+          onClick={() => navegate("/Admin/ReporteOficial")}
         >
           <div className="Reportes">
             <span className="material-symbols-outlined">bar_chart</span>

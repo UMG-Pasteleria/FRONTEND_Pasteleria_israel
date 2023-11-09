@@ -32,7 +32,7 @@ function SidebarInventario() {
 
           <button
             className="BTdevoluciones"
-            onClick={() => navegate("/Admin/Proveedor")}
+            onClick={() => navegate("/Admin/Producto")}
           >
             <div>
               <h3>Productos</h3>
