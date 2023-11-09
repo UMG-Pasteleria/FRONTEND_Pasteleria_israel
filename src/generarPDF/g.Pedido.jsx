@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import PropTypes from "prop-types"; // Agrega esta línea
 import React from "react";
+import moment from "moment";
 
 const PDFGenerator = ({ data }) => {
   const generatePDF = () => {
@@ -27,16 +28,30 @@ const PDFGenerator = ({ data }) => {
     doc.text(`Fecha de Generación: ${date}`, 130, 15);
 
     // Define las columnas de la tabla
-    const tableColumn = ["No.", "Producto", "Cliente", "Cantidad", "Fecha"];
+    const tableColumn = [
+      "No.",
+      "Producto",
+      "tamaño",
+      "decoracion",
+      "Cliente",
+      "Cantidad",
+      "Dedicatoria",
+      "estado",
+      "Fecha entrega",
+    ];
     const tableRows = [];
 
     data.forEach((item) => {
       const rowData = [
         ++contador,
-        item.producto_pro,
-        item.id_client,
-        item.cantidad_pro,
-        item.fecha_pedido,
+        "Pastel de " + item.pastel,
+        item.tamanio,
+        item.decoracion,
+        item.nombre_cl,
+        item.cantidad,
+        item.dedicatoria,
+        item.estado,
+        moment(item.fecha_entrega).format("DD/MM/YYYY h:mm A"),
       ];
       tableRows.push(rowData);
     });
@@ -67,10 +82,12 @@ PDFGenerator.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       contador: PropTypes.number,
-      producto_pro: PropTypes.string,
-      id_client: PropTypes.number,
-      cantidad_pro: PropTypes.number,
-      fecha_pedido: PropTypes.string,
+      pastel: PropTypes.string,
+      nombre_cl: PropTypes.string,
+      cantidad: PropTypes.number,
+      precio: PropTypes.number,
+      total: PropTypes.number,
+      fecha_entrega: PropTypes.string,
       // Define más validaciones según la estructura de cada elemento en 'data' si es necesario
     })
   ),

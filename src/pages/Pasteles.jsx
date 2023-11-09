@@ -391,13 +391,13 @@ const Pastel = () => {
                     <h5>{pastel.precio}</h5>
                   </div>
                   <div>
-                    <p>{pastel.tamanio_idpast}</p>
+                    <p>{pastel.tamanio}</p>
                   </div>
                   <div>
-                    <p>{pastel.dec_idpast}</p>
+                    <p>{pastel.decoracion}</p>
                   </div>
                   <div>
-                    <p>{pastel.cat_idpast}</p>
+                    <p>{pastel.categoria}</p>
                   </div>
                 </form>
                 <div className="controlBtP">
