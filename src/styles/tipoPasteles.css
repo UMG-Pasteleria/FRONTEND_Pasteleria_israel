@@ -202,6 +202,7 @@ height: 100%;
     }
 
     .TPasteles{
+        height: 100%;
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -232,29 +233,464 @@ height: 100%;
     display: none;
 }
 .tpastelEscritorio{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 10px;
-}
-.tpastelEscritorio .contenedorTmanioPastel{
-    width: 100%;
     height: 100%;
-    border: #b1b1b1 solid 2px;
-    border-radius: 15px;
-        padding: 20px;
-        margin: 5px;
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
 }
 
-.tpastelEscritorio .contenedorTipoPastel{
+/*----------pasteles-------*/
+.tpastelEscritorio .contenedorTipoPastel {
     width: 100%;
+    max-width: 400px;
     height: 100%;
+    max-height: 400px;
+    overflow: auto;
     border: #b1b1b1 solid 2px;
     border-radius: 15px;
     padding: 20px;
     margin: 5px;
+    min-height: 350px;
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio{
+
+.tpastelEscritorio .contenedorTamañoPastel {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 400px;
+    overflow: auto;
+    border: #b1b1b1 solid 2px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 5px;
+    min-height: 350px;
+}
+
+.tpastelEscritorio .contenedorTamañoPastel {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 400px;
+    overflow: auto;
+    border: #b1b1b1 solid 2px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 5px;
+    min-height: 350px;
+}
+
+.tpastelEscritorio .contenedorDecoracionPastel {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 350px;
+    overflow: auto;
+    border: #b1b1b1 solid 2px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 5px;
+    min-height: 350px;
+}
+
+.tpastelEscritorio .contenedorCategoriaPastel {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 400px;
+    overflow: auto;
+
+    border: #b1b1b1 solid 2px;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 5px;
+
+    min-height: 350px;
+}
+
+/*----------------- Categoria de Pastel---------------*/
+
+.tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background-color: #eeeeeea2;
+    border-radius: 25px;
+    height: 30px;
+    margin-bottom: 8px;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio  h3{
+        font-size: 14px;
+        
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio .encID{
+        width: 130px;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio .encDato{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio .encDato .encD {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        width: 100%;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .encabezadoEscritorio .encBT{
+        width: 185px;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: none;
+        background-color: #EEE;
+        width: 100%;
+        height: 65px;
+        min-width: 300px;
+        border-radius: 50px;
+        margin-bottom: 10px;
+        transition: 0.3s all ease-out;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .imgPerfil{
+        width: 135px;
+        height: 65px;
+        position:relative;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .imgPerfil .tpastelID{
+        display: flex;
+    background-color: #FF8A00;
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    z-index: 80;
+    justify-content: center;
+    align-items: center;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .imgPerfil .tpastelID p{
+        display: none;          /*ID oculto con none*/
+        font-size: 10px;
+        color: #5C5C5C;
+        font-weight:bolder ;
+        position: absolute;
+    bottom: 5px;
+    left: 20px;
+    z-index: 81;
+    }
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .imgPerfil .tpastelID span{
+    font-size: 12px;
+    color: #ffffff;
+    font-weight:bolder ;
+    }
+    
+    .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .imgPerfil .avatar{
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        position:absolute;
+        top: 0px;
+        left: 0px;
+        }
+    
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .datoTPastel {
+            display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+        }
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .datoTPastel div{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            text-align: left;
+            padding: 0px 7px;
+            width: 100%;   /*-----------------*/
+        }
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .datoTPastel h3{
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+        }
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .datoTPastel h5{
+            font-weight: bold;
+            color: #FF8A00;
+            font-size: 12px;
+        }
+    
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .controlBtC{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 180px;
+            margin: 0 4px;
+            transition: 0.3s all ease-out;
+        }
+    
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .controlBtC .btEditarU{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .controlBtC .btEditarU:hover{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .controlBtC .btEliminarU{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorCategoriaPastel .ContenedorTPasteles .controlBtC .btEliminarU:hover{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    }
+    /*----------------- FIN Decoracion Pastel---------------*/
+
+/*----------------- Decoracion Pastel---------------*/
+
+.tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background-color: #eeeeeea2;
+    border-radius: 25px;
+    height: 30px;
+    margin-bottom: 8px;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio  h3{
+        font-size: 14px;
+        
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio .encID{
+        width: 130px;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio .encDato{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio .encDato .encD {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        width: 100%;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .encabezadoEscritorio .encBT{
+        width: 185px;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: none;
+        background-color: #EEE;
+        width: 100%;
+        height: 65px;
+        min-width: 300px;
+        border-radius: 50px;
+        margin-bottom: 10px;
+        transition: 0.3s all ease-out;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .imgPerfil{
+        width: 135px;
+        height: 65px;
+        position:relative;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .imgPerfil .tpastelID{
+        display: flex;
+    background-color: #FF8A00;
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    z-index: 80;
+    justify-content: center;
+    align-items: center;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .imgPerfil .tpastelID p{
+        display: none;          /*ID oculto con none*/
+        font-size: 10px;
+        color: #5C5C5C;
+        font-weight:bolder ;
+        position: absolute;
+    bottom: 5px;
+    left: 20px;
+    z-index: 81;
+    }
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .imgPerfil .tpastelID span{
+    font-size: 12px;
+    color: #ffffff;
+    font-weight:bolder ;
+    }
+    
+    .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .imgPerfil .avatar{
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        position:absolute;
+        top: 0px;
+        left: 0px;
+        }
+    
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .datoTPastel {
+            display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+        }
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .datoTPastel div{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            text-align: left;
+            padding: 0px 7px;
+            width: 100%;   /*-----------------*/
+        }
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .datoTPastel h3{
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+        }
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .datoTPastel h5{
+            font-weight: bold;
+            color: #FF8A00;
+            font-size: 12px;
+        }
+    
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .controlBtC{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 180px;
+            margin: 0 4px;
+            transition: 0.3s all ease-out;
+        }
+    
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .controlBtC .btEditarU{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .controlBtC .btEditarU:hover{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .controlBtC .btEliminarU{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorDecoracionPastel .ContenedorTPasteles .controlBtC .btEliminarU:hover{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    
+    /*----------------- FIN Clase Pastel---------------*/
+    
+/*----------------- Tamaño Pastel---------------*/
+
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio{
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
@@ -265,14 +701,16 @@ border-radius: 25px;
 height: 30px;
 margin-bottom: 8px;
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio  h3{
+
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio  h3{
     font-size: 14px;
     
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encID{
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio .encID{
     width: 130px;
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encDato{
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio .encDato{
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -280,17 +718,21 @@ margin-bottom: 8px;
     font-size: 14px;
     text-align: start;
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encDato .encD {
+
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio .encDato .encD {
+
     display: flex;
     flex-direction: row;
     justify-content: left;
     text-align: left;
     width: 100%;
 }
-.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encBT{
+
+.tpastelEscritorio .contenedorTamañoPastel .encabezadoEscritorio .encBT{
     width: 185px;
 }
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles{
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles{
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -304,12 +746,16 @@ margin-bottom: 8px;
     margin-bottom: 10px;
     transition: 0.3s all ease-out;
 }
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil{
+
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .imgPerfil{
+
     width: 135px;
     height: 65px;
     position:relative;
 }
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID{
+
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .imgPerfil .tpastelID{
+
     display: flex;
 background-color: #FF8A00;
 width: 20px;
@@ -322,7 +768,9 @@ z-index: 80;
 justify-content: center;
 align-items: center;
 }
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID p{
+
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .imgPerfil .tpastelID p{
+
     display: none;          /*ID oculto con none*/
     font-size: 10px;
     color: #5C5C5C;
@@ -332,13 +780,17 @@ bottom: 5px;
 left: 20px;
 z-index: 81;
 }
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID span{
+
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .imgPerfil .tpastelID span{
+
 font-size: 12px;
 color: #ffffff;
 font-weight:bolder ;
 }
 
-.tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .avatar{
+
+.tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .imgPerfil .avatar{
+
     width: 65px;
     height: 65px;
     border-radius: 50%;
@@ -347,7 +799,9 @@ font-weight:bolder ;
     left: 0px;
     }
 
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel {
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .datoTPastel {
+
         display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -355,7 +809,9 @@ font-weight:bolder ;
     font-size: 14px;
     text-align: start;
     }
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel div{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .datoTPastel div{
+
         display: flex;
         flex-direction: row;
         justify-content: left;
@@ -363,18 +819,24 @@ font-weight:bolder ;
         padding: 0px 7px;
         width: 100%;   /*-----------------*/
     }
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel h3{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .datoTPastel h3{
+
         font-weight: bold;
         color: #000;
         font-size: 16px;
     }
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel h5{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .datoTPastel h5{
+
         font-weight: bold;
         color: #FF8A00;
         font-size: 12px;
     }
 
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .controlBtC{
+
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -383,7 +845,8 @@ font-weight:bolder ;
         transition: 0.3s all ease-out;
     }
 
-    .tpastelEscritorio  .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEditarU{
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .controlBtC .btEditarU{
+
         display: block;
         justify-content: center;
         background-color: rgba(92, 92, 92, 1);
@@ -397,7 +860,9 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .tpastelEscritorio  .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEditarU:hover{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .controlBtC .btEditarU:hover{
+
         display: block;
         justify-content: center;
         background-color: rgba(92, 92, 92, 0.5);
@@ -412,7 +877,9 @@ font-weight:bolder ;
         transition: 0,3s;
     }
 
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEliminarU{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .controlBtC .btEliminarU{
+
         justify-content: center;
         background-color: rgba(255, 136, 0, 1);
         color: #ffffff;
@@ -425,7 +892,9 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEliminarU:hover{
+
+    .tpastelEscritorio .contenedorTamañoPastel .ContenedorTPasteles .controlBtC .btEliminarU:hover{
+
         justify-content: center;
         background-color: rgba(255, 136, 0, 0.5);
         color: #ffffff;
@@ -438,7 +907,197 @@ font-weight:bolder ;
         padding-right: 5px ;
         transition: 0,3s;
     }
-}
+
+/*----------------- FIN Tamaño Pastel---------------*/
+
+
+/*----------------- Tipo Pastel---------------*/
+
+.tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background-color: #eeeeeea2;
+    border-radius: 25px;
+    height: 30px;
+    margin-bottom: 8px;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio  h3{
+        font-size: 14px;
+        
+    }
+    .tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encID{
+        width: 130px;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encDato{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encDato .encD {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        width: 100%;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .encabezadoEscritorio .encBT{
+        width: 185px;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: none;
+        background-color: #EEE;
+        width: 100%;
+        height: 65px;
+        min-width: 300px;
+        border-radius: 50px;
+        margin-bottom: 10px;
+        transition: 0.3s all ease-out;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil{
+        width: 135px;
+        height: 65px;
+        position:relative;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID{
+        display: flex;
+    background-color: #FF8A00;
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    z-index: 80;
+    justify-content: center;
+    align-items: center;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID p{
+        display: none;          /*ID oculto con none*/
+        font-size: 10px;
+        color: #5C5C5C;
+        font-weight:bolder ;
+        position: absolute;
+    bottom: 5px;
+    left: 20px;
+    z-index: 81;
+    }
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .tpastelID span{
+    font-size: 12px;
+    color: #ffffff;
+    font-weight:bolder ;
+    }
+    
+    .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .imgPerfil .avatar{
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        position:absolute;
+        top: 0px;
+        left: 0px;
+        }
+    
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel {
+            display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 14px;
+        text-align: start;
+        }
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel div{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            text-align: left;
+            padding: 0px 7px;
+            width: 100%;   /*-----------------*/
+        }
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel h3{
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+        }
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .datoTPastel h5{
+            font-weight: bold;
+            color: #FF8A00;
+            font-size: 12px;
+        }
+    
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 180px;
+            margin: 0 4px;
+            transition: 0.3s all ease-out;
+        }
+    
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEditarU{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEditarU:hover{
+            display: block;
+            justify-content: center;
+            background-color: rgba(92, 92, 92, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  25px 0px 0px 25px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEliminarU{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 1);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+        .tpastelEscritorio .contenedorTipoPastel .ContenedorTPasteles .controlBtC .btEliminarU:hover{
+            justify-content: center;
+            background-color: rgba(255, 136, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            border-radius:  0px 25px 25px 0px;
+            cursor: pointer;
+            width: 50px;
+            height: 40px;
+            padding-left: 5px;
+            padding-right: 5px ;
+            transition: 0,3s;
+        }
+    
 /*------------------------FIN VERSION ESCRITORIO-----------------*/
 
 /*---------------------------------- VERSION TABLET --------------------------*/

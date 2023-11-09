@@ -25,7 +25,7 @@ function SidebarInventario() {
             onClick={() => navegate("/Admin/TipoPastel")}
           >
             <div>
-              <h3>Tipo de pastel</h3>
+              <h3>Caracteristicas del pastel</h3>
               {/* <a href="#">Proveeedores</a> */}
             </div>
           </button>

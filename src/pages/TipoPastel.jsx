@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
-import avatar from "../assets/Chocolate.jpeg";
 import ModalupTPastel from "../components/modals/ModalUpdateTipoPastel";
 import ModalTipoPast from "../components/modals/modalTipoPastel";
 import Navbar from "../components/navbar";
 //import SidebarCompras from "../components/sidebarCompras";
 import SidebarInventario from "../components/sidebarInventario";
-import PDFGenerator from "../generarPDF/g.Cliente";
 import "../styles/tipoPasteles.css";
 
 function TPastel() {
@@ -16,12 +13,19 @@ function TPastel() {
   const [search, setSaerch] = useState("");
 
   const [tpasteles, setTPasteles] = useState([]);
+  const [tampasteles, setTamPasteles] = useState([]);
+  const [decpasteles, setDecPasteles] = useState([]);
+  const [catpasteles, setCatPasteles] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente";
+  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
-  const getData = async () => {
+
+
+      //--------OBTENER DATOS DE TIPO DE PASTEL---
+
+  const getTipo = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "tipo");
       const json = await response.json();
       setTPasteles(json);
       console.log(json);
@@ -29,44 +33,64 @@ function TPastel() {
       console.error(err);
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO CLIENTE------//
-  const { handleSubmit, register } = useForm();
-  const enviarTPastel = handleSubmit((data) => {
-    console.log(data);
-    fetch(URL, {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    getData();
-    cambiarEstadoModal1(!estadoModal1);
-    swal.fire({
-      title: "Tipo de pastel Agregado!",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1200,
-      customClass: {
-        confirmButton: "btEliminar",
-        cancelButton: "btCancelar",
-        popup: "popus-eliminado",
-        title: "titulo-pop",
-        container: "contenedor-alert",
-      },
-    });
-  });
 
-  //-----------------ELIMINAR CLIENTE---------------------------------
+    //--------OBTENER DATOS DE TAMAÑO DE PASTEL---
+
+    const getTamaño = async () => {
+      try {
+        const response = await fetch(URL + "tamanio");
+        const json = await response.json();
+        setTamPasteles(json);
+        console.log(json);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+       //--------OBTENER DATOS DE DECORACION DE PASTEL---
+
+       const getDecoracion = async () => {
+        try {
+          const response = await fetch(URL + "decoracion");
+          const json = await response.json();
+          setDecPasteles(json);
+          console.log(json);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+       //--------OBTENER DATOS DE CATEGORIA DE PASTEL---
+
+       const getCategoria = async () => {
+        try {
+          const response = await fetch(URL + "categoria");
+          const json = await response.json();
+          setCatPasteles(json);
+          console.log(json);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
+  useEffect(() => {
+    getTipo ();
+    getTamaño();
+    getDecoracion ();
+    getCategoria ();
+  }, []);
+
+
+
+
+  //-----------------ELIMINAR TIPO PASTEL---------------------------------
 
   const handleDelete = async (idtpastel) => {
-    const res = await fetch(
-      `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtpastel}`,
-      {
-        method: "DELETE",
-      }
-    );
+
+    const res = await fetch(URL + `tipo/${idtpastel}`, {
+      method: "DELETE",
+    });
+
     // const data = await res.json();
     console.log(res);
     setTPasteles(
@@ -74,7 +98,7 @@ function TPastel() {
     );
   };
 
-  //------------------------------------FIN ELIMINA CLIENTE -----------------------------------
+  //------------------------------------FIN ELIMINA TIPO PASTEL -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
   const mostrarAlerta = (idtpastel) => {
@@ -122,17 +146,15 @@ function TPastel() {
   };
   //----------------------------FIN DE ALERTAS --------------------------------
 
-  //--------------------------------- EDITAR CLIENTE ----------------------------------//
+  //--------------------------------- EDITAR TIPO PASTEL ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR CLIENTE ----------------------------------//
+  //--------------------------------- FIN EDITAR TIPO PASTEL ----------------------------------//
 
   //------------busqueda inteligente -----------------
-  const searcher = (e) => {
-    setSaerch(e.target.value);
-    console.log(e.target.value);
-  };
+
+  
   //----metodod de filtrado de busqueda-----
   let result = [];
   if (!search) {
@@ -142,6 +164,7 @@ function TPastel() {
       datos.tipo_pastel.toLowerCase().includes(search.toLowerCase())
     );
   }
+  
 
   return (
     <>
@@ -151,99 +174,23 @@ function TPastel() {
         <div className="ContainerTPast"></div>
         <div className="TPasteles">
           <br></br>
-          <h2>Listado Del Tipo Pasteles</h2>
+          <h2>Listado de caracteristicas</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO CLIENTE-------------- */}
+          {/* ------------------- MODAL AGREGAR NUEVO TIPO PASTEL-------------- */}
           <ModalTipoPast
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
             titulo="Nuevo Tipo de Pastel"
+            URL = {URL}
+            setTPasteles = {setTPasteles}
+            tpasteles = {tpasteles}
           >
-            <div className="containerNewTPast">
-              <form
-                className="nuevoTPastForm"
-                id="FormularioTP"
-                onSubmit={enviarTPastel}
-              >
-                <div className="itemTPast">
-                  <label>Tipo pastel: </label>
-                  <input
-                    {...register("tipo_pastel")}
-                    type="text"
-                    id="tipo_pastel"
-                    placeholder="Tipo pastel"
-                  ></input>
-                </div>
-
-                {/* <div className="itemClient">
-                  <label>Cliente: </label>
-                  <input
-                    {...register("nombre_cl")}
-                    type="text"
-                    id="nombre_cl"
-                    placeholder="Cliente"
-                  ></input>
-                </div> */}
-
-                {/* <div className="itemClient">
-                  <label>Telefono: </label>
-                  <input
-                    {...register("telefono_cl")}
-                    type="number"
-                    id="telefono_cl"
-                    placeholder="Telefono"
-                  ></input>
-                </div> */}
-
-                {/* <div className="itemClient">
-                  <label>Direccion: </label>
-                  <input
-                    {...register("direccion_cl")}
-                    type="text"
-                    id="direccion_cl"
-                    placeholder="Direccion"
-                  ></input>
-
-                  <div className="itemClient">
-                    <label>Tipo Cliente: </label>
-                    <input
-                      {...register("idtcl")}//id tabla tipo_cliente
-                      type="number"
-                      id="idtcl"
-                      placeholder="Tipo_cliente"
-                    ></input>
-                  </div>
-                </div> */}
-                <br />
-
-                <div className="bonotesNewTPast">
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => cambiarEstadoModal1(!estadoModal1)}
-                      className="btcancelar"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                  <div>
-                    {/* <button
-                      type="submit"
-                      className="btGuardar"
-                      
-                    > */}
-
-                    <button type="submit" className="btGuardar">
-                      Guardar
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+            
           </ModalTipoPast>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
+          
+          {/* --------------------------- FIN MODAL INGRESAR TIPO PASTEL ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
+          {/* ------------------- MODAL EDITAR  TIPO PASTEL-------------- */}
 
           <ModalupTPastel
             estado2={estadoModal2}
@@ -253,40 +200,11 @@ function TPastel() {
             setTPasteles={setTPasteles}
             tpasteles={tpasteles}
           ></ModalupTPastel>
-          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
+          {/* --------------------------- FIN MODAL EDITAR TIPO PASTEL ------------------ */}
 
-          {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
+          {/* //----------------------------------ELIMINAR TIPO PASTEL ----------------------------------*/}
 
-          <div className="centrarControles">
-            <div className="controlesUsuario">
-              <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                <span className="material-symbols-outlined">person_add</span>
-              </button>
 
-              <div className="busqueda">
-                <form method="get" className="cuadroBusqueda">
-                  <input
-                    type="text"
-                    value={search}
-                    onChange={searcher}
-                    placeholder="Buscar tipo de pasteles"
-                    name="q"
-                  ></input>
-                  <button type="submit">
-                    <span className="material-symbols-outlined">search</span>
-                  </button>
-                </form>
-              </div>
-
-              <PDFGenerator data={tpasteles} />
-
-              <button onClick={getData}>
-                <span className="material-symbols-outlined">refresh</span>
-              </button>
-            </div>
-          </div>
-          <hr></hr>
-          <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="tpastelMovil">
@@ -297,14 +215,7 @@ function TPastel() {
                     <p>ID</p>
                     <span>{tpastel.idtpastel}</span>
                   </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(tpastel.idtpastel)
-                    }
-                  />
+              
                 </div>
 
                 <div
@@ -317,18 +228,7 @@ function TPastel() {
                   <div>
                     <h3>{tpastel.tipo_pastel}</h3>
                   </div>
-                  {/* <div>
-                    <h5>NIT: {tcliente.nit_cl}</h5>
-                  </div>
-                  <div>
-                    <p>Telefono: {tcliente.telefono_cl}</p>
-                  </div>
-                  <div>
-                    <p>Direccion: {tcliente.direccion_cl}</p>
-                  </div>
-                  <div>
-                    <p>Tipo Cliente: {tcliente.idtcl}</p>
-                  </div> */}
+                 
                 </div>
                 <div className="controlBtC">
                   <button className="btEditarU">
@@ -345,86 +245,334 @@ function TPastel() {
               </div>
             ))}
           </div>
+
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="tpastelEscritorio">
+
+
+  {/*/-------------------------- CONTENEDOR TIPO PASTEL -----------------------------------*/}
+
+      <div className="tpastelEscritorio">
             <div className="contenedorTipoPastel">
-              <div className="encabezadoEscritorio">
-                <div className="encID">
-                  <div>
-                    <h3>ID: </h3>
-                  </div>
+
+  {/*/--------Agrega Iconos Agregar, Refresh*/}
+            <div className="centrarControles">
+             <div className="controlesUsuario">
+               <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                 <span className="material-symbols-outlined">person_add</span>
+                </button>
+
+                <button onClick={getTipo}>
+                <span className="material-symbols-outlined">refresh</span>
+              </button>
+            </div>
+          </div>
+   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
+
+            <div className="encabezadoEscritorio">
+              <div className="encID">
+                <div>
+                  <h3>ID: </h3>
+
                 </div>
 
-                <div className="encDato">
-                  <div className="encD">
-                    <h3>Tipo de pastel: </h3>
-                  </div>
+
+              <div className="encDato">
+                <div className="encD">
+                  <h3>Tipo de pastel: </h3>
                 </div>
-                <div className="encBT">
-                  <div>
-                    <h3>Accion: </h3>
-                  </div>
+            
+              </div>
+              <div className="encBT">
+                <div>
+                  <h3>Accion: </h3>
+
                 </div>
               </div>
 
-              {result.map((tpastel, index) => (
-                <div className="ContenedorTPasteles" key={index}>
-                  <div className="imgPerfil">
-                    <div className="tpastelID">
-                      <p>ID</p>
-                      <span>{tpastel.idtpastel}</span>
-                    </div>
-                    <img
-                      src={avatar}
-                      className="avatar"
-                      // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                    />
+            {tpasteles.map((tpastel, index) => (
+              <div className="ContenedorTPasteles" key={index}>
+                <div className="imgPerfil">
+                  
+                  <div className="tpastelID">
+                    <p>ID</p>
+                    <span>{tpastel.idtpastel}</span>
                   </div>
+                
+                </div>
 
-                  <form
-                    className="datoTPastel"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                <form
+                  className="datoTPastel"
+                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                >
+                  <div>
+                    <h3>{tpastel.tipo_pastel}</h3>
+                  </div>
+              
+                </form>
+                <div className="controlBtC">
+                  <button
+                    className="btEditarU"
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(tpastel.idtpastel)
+                    }
                   >
-                    <div>
-                      <h3>{tpastel.tipo_pastel}</h3>
-                    </div>
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <br />
+                  <button
+                    className="btEliminarU"
+                    onClick={() => mostrarAlerta(tpastel.idtpastel)}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+            </div>
+
+  {/*/-------------------------- CONTENEDOR TAMAÑO PASTEL -----------------------------------*/}
+
+      <div className="contenedorTamañoPastel">
+           
+  {/*/--------Agrega Iconos Agregar, Refresh*/}
+          <div className="centrarControles">
+              <div className="controlesUsuario">
+                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                  <span className="material-symbols-outlined">person_add</span>
+                </button>
+
+                <button onClick={getTipo}>
+                  <span className="material-symbols-outlined">refresh</span>
+                </button>
+              </div>
+          </div>
+   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
+
+            <div className="encabezadoEscritorio">
+              <div className="encID">
+                <div>
+                  <h3>ID: </h3>
+                </div>
+              </div>
+
+              <div className="encDato">
+                <div className="encD">
+                  <h3>Tamaño de pastel: </h3>
+                </div>
+            
+              </div>
+              <div className="encBT">
+                <div>
+                  <h3>Accion: </h3>
+                </div>
+              </div>
+            </div>
+            {tampasteles.map((tampastel, index) => (
+              <div className="ContenedorTPasteles" key={index}>
+                <div className="imgPerfil">
+                  <div className="tpastelID">
+                    <p>ID</p>
+                    <span>{tampastel.idtampast}</span>
+
                     {/* <div>
                     <h5>{tcliente.nit_cl}</h5>
+
                   </div>
-                  <div>
-                    <p>{tcliente.telefono_cl}</p>
-                  </div>
-                  <div>
-                    <p>{tcliente.direccion_cl}</p>
-                  </div>
-                  <div>
-                    <p>{tcliente.idtcl}</p>
-                  </div> */}
-                  </form>
-                  <div className="controlBtC">
-                    <button
-                      className="btEditarU"
-                      onClick={() =>
-                        cambiarEstadoModal2(!estadoModal2) &
-                        setIdEdit(tpastel.idtpastel)
-                      }
-                    >
-                      <span className="material-symbols-outlined">edit</span>
-                    </button>
-                    <br />
-                    <button
-                      className="btEliminarU"
-                      onClick={() => mostrarAlerta(tpastel.idtpastel)}
-                    >
-                      <span className="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
+                
                 </div>
-              ))}
+
+                <form
+                  className="datoTPastel"
+                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                >
+                  <div>
+                    <h3>{tampastel.tamanio}</h3>
+                  </div>
+              
+                </form>
+                <div className="controlBtC">
+                  <button
+                    className="btEditarU"
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(tampastel.idtampast)
+                    }
+                  >
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <br />
+                  <button
+                    className="btEliminarU"
+                    onClick={() => mostrarAlerta(tampastel.idtampast)}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+            ))}
             </div>
-            <div className="contenedorTmanioPastel">
-              <h1>tamanio pasteles</h1>
+
+  {/*/-------------------------- CONTENEDOR DECORACION PASTEL -----------------------------------*/}
+
+        <div className="contenedorDecoracionPastel">
+
+{/*/--------Agrega Iconos Agregar, Refresh*/}
+          <div className="centrarControles">
+              <div className="controlesUsuario">
+                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                  <span className="material-symbols-outlined">person_add</span>
+                </button>
+
+                <button onClick={getTipo}>
+                  <span className="material-symbols-outlined">refresh</span>
+                </button>
+              </div>
+          </div>
+   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
+
+            <div className="encabezadoEscritorio">
+              <div className="encID">
+                <div>
+                  <h3>ID: </h3>
+                </div>
+              </div>
+
+              <div className="encDato">
+                <div className="encD">
+                  <h3>Decoracion de pastel: </h3>
+                </div>
+            
+              </div>
+              <div className="encBT">
+                <div>
+                  <h3>Accion: </h3>
+                </div>
+              </div>
             </div>
+
+            {decpasteles.map((decpastel, index) => (
+              <div className="ContenedorTPasteles" key={index}>
+                <div className="imgPerfil">
+                  <div className="tpastelID">
+                    <p>ID</p>
+                    <span>{decpastel.idecpast}</span>
+                  </div>
+                
+                </div>
+
+                <form
+                  className="datoTPastel"
+                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                >
+                  <div>
+                    <h3>{decpastel.decoracion}</h3>
+                  </div>
+              
+                </form>
+                <div className="controlBtC">
+                  <button
+                    className="btEditarU"
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(decpastel.idecpast)
+                    }
+                  >
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <br />
+                  <button
+                    className="btEliminarU"
+                    onClick={() => mostrarAlerta(decpastel.idecpast)}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+            </div>
+
+  {/*/-------------------------- CONTENEDOR CATEGORIA PASTEL -----------------------------------*/}
+
+            <div className="contenedorCategoriaPastel">
+
+  {/*/--------Agrega Iconos Agregar, Refresh*/}
+          <div className="centrarControles">
+              <div className="controlesUsuario">
+                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                  <span className="material-symbols-outlined">person_add</span>
+                </button>
+
+                <button onClick={getTipo}>
+                  <span className="material-symbols-outlined">refresh</span>
+                </button>
+              </div>
+          </div>
+   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
+
+            <div className="encabezadoEscritorio">
+              <div className="encID">
+                <div>
+                  <h3>ID: </h3>
+                </div>
+              </div>
+
+              <div className="encDato">
+                <div className="encD">
+                  <h3>Categoria de pastel: </h3>
+                </div>
+            
+              </div>
+              <div className="encBT">
+                <div>
+                  <h3>Accion: </h3>
+                </div>
+              </div>
+            </div>
+
+            {catpasteles.map((catpastel, index) => (
+              <div className="ContenedorTPasteles" key={index}>
+                <div className="imgPerfil">
+                  <div className="tpastelID">
+                    <p>ID</p>
+                    <span>{catpastel.idcatp}</span>
+                  </div>
+                
+                </div>
+
+                <form
+                  className="datoTPastel"
+                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                >
+                  <div>
+
+                    <h3>{catpastel.categoria}</h3>
+                  </div>
+              
+                </form>
+                <div className="controlBtC">
+                  <button
+                    className="btEditarU"
+                    onClick={() =>
+                      cambiarEstadoModal2(!estadoModal2) &
+                      setIdEdit(catpastel.idcatp)
+                    }
+                  >
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <br />
+                  <button
+                    className="btEliminarU"
+                    onClick={() => mostrarAlerta(catpastel.idcatp)}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+            </div>
+
+
           </div>
         </div>
       </div>
