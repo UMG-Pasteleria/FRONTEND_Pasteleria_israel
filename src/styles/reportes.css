@@ -1,0 +1,1486 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Caveat:wght@400;500;600;700&family=Indie+Flower&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&family=Work+Sans:wght@400;800&display=swap');
+
+
+body{
+background-color: #b1b1b1;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 250,
+  'opsz' 48
+}
+
+.bodyPedid{
+    display: flex;
+    justify-self: center;
+    font-family: 'Istok Web';
+    
+}
+/* -------------------------- CONTROL DE BUSQUEDA-----------------*/
+.centrarControles{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.centrarControles .controlesUsuario{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+    width: 50%;
+    min-width: 350px;
+}
+.centrarControles .controlesUsuario .busqueda{
+    width: 60%;
+    min-width: 200px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-size: cover;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+   
+
+}
+.centrarControles .controlesUsuario .busqueda .cuadroBusqueda {
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+width: 100%;
+height: 100%;
+}
+.controlesUsuario .busqueda .cuadroBusqueda input{
+    display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+width: 100%;
+height: 100%;
+
+    border: #dddddd solid 2px;
+    border-radius: 25px 0px 0px 25px;
+    text-align: center;
+    background-color: #EEE;
+}
+.controlesUsuario .busqueda .cuadroBusqueda  button{
+    border: none;
+    border-radius:0px 25px 25px 0px;
+    background-color:#5c5c5c15;
+    color: #5C5C5C;
+    width: 50px;
+    height:100%;
+    transition: 0.3s;
+}
+.controlesUsuario .busqueda .cuadroBusqueda  button:hover{
+    border: none;
+    border-radius:0px 25px 25px 0px;
+    background-color:#FF8A00;
+    color: #ffffff;
+    width: 50px;
+    height:100%;
+    transition: 0.3s;
+}
+.controlesUsuario button{
+    border: none;
+    background-color: transparent;
+    color: #5C5C5C;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.controlesUsuario button:hover{
+    border: none;
+    background-color: transparent;
+    color: #FF8A00;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* ------------------------ FIN CONTROL DE BUSQUEDA-----------------------------*/
+
+
+
+
+
+
+/*-------- ESTILO FORMULARIO MODAL NUEVO PEDIDO -----------------------*/
+
+/*--------------VERSIO ESCRITORIO-------------------------------*/
+@media(min-width: 1201px){
+.containerNewPedid{
+    width: 100%;
+ 
+    /* background-color: #b1b1b1; */
+}
+.containerNewPedid .nuevoPedidForm input{
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 36px;
+    text-align: center;
+    background-color: #EEEEEE;
+    padding: 5px 50px 5px 50px;
+}
+.containerNewPedid .nuevoPedidForm{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.containerNewPedid .nuevoPedidForm .contenedorInputs {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    align-items: stretch;
+}
+.containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal {
+display: flex;
+flex-direction: column;
+padding: 10px;
+width: 100%;
+height: 100%;
+
+}
+.containerNewPedid .nuevoPedidForm label{
+    font-size: 12px;
+    color: #FF8A00;
+    font-weight: bolder;
+}
+.containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew .botonAgregar{
+    border: none;
+    width: 40px;
+    background-color: #5C5C5C;
+    color: #ffffff;
+    font-size: larger;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew{
+display: flex;
+flex-direction: row;
+}
+.containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 5px;
+        /* background-color: #88ec9e; */
+}
+.containerNewPedid .nuevoPedidForm  .bonotesNewPedid{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+        /* background-color: #b1b1b1; */
+}
+
+.containerNewPedid .nuevoPedidForm  .bonotesNewPedid .btcancelar{
+    border: none;
+    width: 140px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #5E5E5E;
+    color: #ffffff;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.containerNewPedid .nuevoPedidForm  .bonotesNewPedid .btGuardar{
+    border: none;
+    width: 140px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #FF8A00;
+    color: #ffffff;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.selector{
+    width: 100%;
+    height: 36px;
+    background-color: #EEEEEE;
+    padding: 5px;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.selector option{
+    background-color: #ffffff;
+    border-radius: 0px;
+    padding: 5px;
+    height: 15px;
+    color: #5C5C5C;
+}
+}
+/*-----------------------FIN VERIOSN ESCRITORIO-----------------------*/
+
+/*-----------------------VERSION TABLET ----------------------------*/
+
+@media(max-width: 1200px) {
+.containerNewPedid {
+        width: 100%;
+
+        /* background-color: #b1b1b1; */
+    }
+
+    .containerNewPedid .nuevoPedidForm input {
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        min-width: 180px;
+        height: 36px;
+        text-align: center;
+        background-color: #EEEEEE;
+      justify-content: center;
+    }
+
+    .containerNewPedid .nuevoPedidForm {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 10px;
+     
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal {
+        display: flex;
+        flex-direction: column; 
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm label {
+        font-size: 12px;
+        color: #FF8A00;
+        font-weight: bolder;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew .botonAgregar {
+        border: none;
+        width: 40px;
+        background-color: #5C5C5C;
+        color: #ffffff;
+        font-size: larger;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding: 5px;
+        /* background-color: #88ec9e; */
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        margin: 10px;
+        /* background-color: #b1b1b1; */
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid .btcancelar {
+        border: none;
+        width: 140px;
+        height: 36px;
+        border-radius: 25px;
+        background-color: #5E5E5E;
+        color: #ffffff;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid .btGuardar {
+        border: none;
+        width: 140px;
+        height: 36px;
+        border-radius: 25px;
+        background-color: #FF8A00;
+        color: #ffffff;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .selector {
+        width: 100%;
+        height: 36px;
+        background-color: #EEEEEE;
+        padding: 5px;
+        align-items: center;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .selector option {
+        background-color: #ffffff;
+        border-radius: 0px;
+        padding: 5px;
+        height: 15px;
+        color: #5C5C5C;
+    }
+}
+/*-----------------------FIN VERSION TABLET-----------------------------*/
+
+/*-------------------------VERSION MOVIL------------------------------------*/
+@media(max-width: 600px) {
+    .containerNewPedid {
+        width: 100%;
+
+        /* background-color: #b1b1b1; */
+    }
+
+    .containerNewPedid .nuevoPedidForm input {
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        min-width: 180px;
+        height: 36px;
+        text-align: center;
+        background-color: #EEEEEE;
+        justify-content: center;
+    }
+
+    .containerNewPedid .nuevoPedidForm {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 10px;
+        overflow: auto;
+        padding-top: 130px;
+    
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm label {
+        font-size: 12px;
+        color: #FF8A00;
+        font-weight: bolder;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew .botonAgregar {
+        border: none;
+        width: 40px;
+        background-color: #5C5C5C;
+        color: #ffffff;
+        font-size: larger;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid .agregarNew {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .containerNewPedid .nuevoPedidForm .contenedorInputs .contDataModal .itemPedid {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding: 5px;
+        /* background-color: #88ec9e; */
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        margin: 10px;
+        /* background-color: #b1b1b1; */
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid .btcancelar {
+        border: none;
+        width: 140px;
+        height: 36px;
+        border-radius: 25px;
+        background-color: #5E5E5E;
+        color: #ffffff;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    .containerNewPedid .nuevoPedidForm .bonotesNewPedid .btGuardar {
+        border: none;
+        width: 140px;
+        height: 36px;
+        border-radius: 25px;
+        background-color: #FF8A00;
+        color: #ffffff;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    .selector {
+        width: 100%;
+        height: 36px;
+        background-color: #EEEEEE;
+        padding: 5px;
+        align-items: center;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .selector option {
+        background-color: #ffffff;
+        border-radius: 0px;
+        padding: 5px;
+        height: 15px;
+        color: #5C5C5C;
+    }
+}
+
+/*------------------------FIN VERSION MOVIL-------------------------*/
+
+/*----------FIN FORMULARIO MODAL NUEVO PEDIDO -------------------------*/
+
+
+
+
+
+/*-----------------------ALERTA--------------------------*/
+.btCancelar{
+    border: none;
+    width: 120px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #5E5E5E;
+    color: #ffffff;
+    margin-left: 5px;
+}
+.btEliminar{
+    border: none;
+    width: 120px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #FF8A00;
+    color: #ffffff;
+    margin-right: 5px;
+}
+.titulo-pop{
+    font-size: 24px;
+}
+.text-pop{
+    font-size: 10px;
+}
+.icon-pop{
+    border:  #5E5E5E solid 5px;
+}
+
+/*----------------------------------FIN ALERTAS-----------------------------------*/
+
+
+
+
+
+/*---------------------------------- VERSION ESCRITORIO --------------------------*/
+@media(min-width: 1201px){
+    .bodyPedid{
+        margin-top: 115px;  /*--------------------------cambiar esto --------*/
+    }
+    .ContainerPed{
+        margin-left: 160px;
+    }
+
+    .Pedidoss{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+    }
+
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PROVEEDORES MEJORADO ESCRITORIO---------------*/
+.pedidoMovil{
+    display: none;
+}
+.pedidoEscritorioP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pedidoEscritorioP .encabezadoEscritorio{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+text-align: center;
+background-color: #eeeeeea2;
+border-radius: 25px;
+height: 30px;
+margin-bottom: 8px;
+}
+.pedidoEscritorioP .encabezadoEscritorio  h3{
+    font-size: 14px;
+    
+}
+.pedidoEscritorioP .encabezadoEscritorio .encID{
+    width: 180px;
+}
+.pedidoEscritorioP .encabezadoEscritorio .encDato{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+}
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encCliente {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 100%;
+}
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encPastel {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 75%;
+}
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encDedicatoria {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 70%;
+}
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encDetalle {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 55%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encEntrega {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 70%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encEstado {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 40%;
+}
+
+
+.pedidoEscritorioP .encabezadoEscritorio .encBT{
+    width: 185px;
+}
+.pedidoEscritorioP .ContenedorPedidosP{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 85px;
+    min-width: 300px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 85px;
+    /* position:relative; */
+    background-color: #5C5C5C;
+    border-radius: 20px 0px 0px 20px;
+    color: #ffffff;
+}
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID{
+    display: flex;
+background-color: #FF8A00;
+width: 20px;
+height: 20px;
+border-radius: 25px;
+position: absolute;
+bottom: 0px;
+left: 50px;
+z-index: 80;
+justify-content: center;
+align-items: center;
+color: #ffffff;
+}
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID p{
+    display: none;          /*ID oculto con none*/
+    font-size: 10px;
+    color: #5C5C5C;
+    font-weight:bolder ;
+    position: absolute;
+bottom: 5px;
+left: 20px;
+z-index: 81;
+}
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID span{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .avatar{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    }
+
+    .pedidoEscritorioP .ContenedorPedidosP .datoPedido {
+        display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+    }
+    .pedidoEscritorioP .ContenedorPedidosP .datoPedido div{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        padding: 0px 7px;
+        width: 100%;   /*-----------------*/
+    }
+    .pedidoEscritorioP .ContenedorPedidosP .datoPedido h3{
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+    }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .clienteinfo{
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+            width:100%;
+            max-height: 85px;
+      justify-content: center;
+    border-right: #cfcfcf solid 2px;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .pastelinfo{
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            height: 85px;
+      justify-content: center;
+    border-right: #cfcfcf solid 2px;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .dedicatoriaP{
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            height: 85px;
+            font-size: 12px;
+            color: #5C5C5C;
+      justify-content: center;
+    border-right: #cfcfcf solid 2px;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .pagoP{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            height: 85px;
+            font-size: 12px;
+            color: #5C5C5C;
+            font-weight: bolder;
+      justify-content: center;
+    border-right: #cfcfcf solid 2px;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .totalP{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            height: 85px;
+            font-size: 16px;
+                color: #5C5C5C;
+                font-weight: bolder;
+      justify-content: center;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .entregaP{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            height: 85px;
+            font-size: 16px;
+                color: #000000;
+                font-weight: bolder;
+                text-align: center;
+      justify-content: center;
+    border-right: #cfcfcf solid 2px;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .anticipoP{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            height: 85px;
+            font-size: 16px;
+                color: #5C5C5C;
+                font-weight: bolder;
+      justify-content: center;
+        }
+        .pedidoEscritorioP .ContenedorPedidosP .datoPedido .estadoP{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 60px;
+            font-size: 16px;
+            color: #5C5C5C;
+            font-weight: bolder;
+            text-align: center;
+        }
+    .pedidoEscritorioP .ContenedorPedidosP .datoPedido h4{
+        font-weight: bold;
+        color: #FF8A00;
+        font-size: 16px;
+    }
+
+    .pedidoEscritorioP .ContenedorPedidosP .controlBtPd{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 160px;
+        margin: 0 4px;
+        transition: 0.3s all ease-out;
+    }
+
+    .pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEditarU{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEditarU:hover{
+        display: block;
+        justify-content: center;
+        background-color: rgba(92, 92, 92, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  25px 0px 0px 25px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+
+    .pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEliminarU{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 1);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+    .pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEliminarU:hover{
+        justify-content: center;
+        background-color: rgba(255, 136, 0, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius:  0px 25px 25px 0px;
+        cursor: pointer;
+        width: 50px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0,3s;
+    }
+}
+/*------------------------FIN VERSION ESCRITORIO-----------------*/
+
+/*---------------------------------- VERSION TABLET --------------------------*/
+@media(max-width: 1200px){
+    .bodyPedid{
+        margin-top: 115px;
+        margin-bottom: 75px;
+    }
+    .ContainerPed{
+        margin-left: 0px;
+       
+    }
+
+    .Pedidoss{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+    }
+
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PROVEEDORES MEJORADO TABLET---------------*/
+.pedidoMovil{
+    display: none;
+}
+.pedidoEscritorioP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pedidoEscritorioP .encabezadoEscritorio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background-color: #eeeeeea2;
+    border-radius: 25px;
+    height: 30px;
+    margin-bottom: 8px;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio h3 {
+    font-size: 14px;
+
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encID {
+    width: 180px;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encCliente {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 100%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encPastel {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 75%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encDedicatoria {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 70%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encDetalle {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 55%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encEntrega {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 70%;
+}
+
+.pedidoEscritorioP .encabezadoEscritorio .encDato .encEstado {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    width: 40%;
+}
+
+
+.pedidoEscritorioP .encabezadoEscritorio .encBT {
+    width: 185px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 85px;
+    min-width: 300px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 85px;
+    /* position:relative; */
+        background-color: #5C5C5C;
+    border-radius: 50px 0px 0px 50px;
+    color: #ffffff;
+        transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID {
+    display: flex;
+    background-color: #FF8A00;
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    z-index: 80;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+        transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID p {
+    display: none;
+    /*ID oculto con none*/
+    font-size: 10px;
+    color: #5C5C5C;
+    font-weight: bolder;
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    z-index: 81;
+        transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .pedidoPID span {
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: bolder;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .PEDIDO .avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+        transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    width: 100%;
+    font-size: 14px;
+    text-align: start;
+        transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido div {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+    padding: 0px 7px;
+    width: 100%;
+        transition: 0.3s all ease-out;
+    /*-----------------*/
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido h3 {
+    font-weight: bold;
+    color: #000;
+    font-size: 12px;
+}
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido p {
+    font-style: italic;
+    color: #000;
+    font-size: 10px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .clienteinfo {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    width: 100%;
+    max-height: 85px;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .pastelinfo {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 85px;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .dedicatoriaP {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 85px;
+    font-size: 12px;
+    color: #5C5C5C;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .pagoP {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 85px;
+    font-size: 12px;
+    color: #5C5C5C;
+    font-weight: bolder;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .totalP {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 85px;
+    font-size: 16px;
+    color: #5C5C5C;
+    font-weight: bolder;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .entregaP {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 85px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: bolder;
+    text-align: center;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .anticipoP {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 85px;
+    font-size: 16px;
+    color: #5C5C5C;
+    font-weight: bolder;
+    justify-content: center;
+        border-right: #cfcfcf solid 2px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido .estadoP {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 60px;
+    font-size: 14px;
+    color: #5C5C5C;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .datoPedido h4 {
+    font-weight: bold;
+    color: #FF8A00;
+    font-size: 14px;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .controlBtPd {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 160px;
+    margin: 0 4px;
+    transition: 0.3s all ease-out;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEditarU {
+    display: block;
+    justify-content: center;
+    background-color: rgba(92, 92, 92, 1);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px 0px 0px 25px;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: 0, 3s;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEditarU:hover {
+    display: block;
+    justify-content: center;
+    background-color: rgba(92, 92, 92, 0.5);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px 0px 0px 25px;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: 0, 3s;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEliminarU {
+    justify-content: center;
+    background-color: rgba(255, 136, 0, 1);
+    color: #ffffff;
+    border: none;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: 0, 3s;
+}
+
+.pedidoEscritorioP .ContenedorPedidosP .controlBtPd .btEliminarU:hover {
+    justify-content: center;
+    background-color: rgba(255, 136, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: 0, 3s;
+}
+}
+/*------------------------FIN VERSION TABLET-----------------*/
+
+/*--------------------------------------VERSION MOVIL----------------------------------*/
+
+@media(max-width: 600px){
+    .bodyPedid{
+        margin-top: 115px;
+    }
+    .ContainerPed{
+        margin-left: 0px;
+    }
+
+    .Pedidoss{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border: #ffffff solid 1px;
+        border-radius: 20px;
+        margin: 5px;
+        min-width: 400px;
+    }
+  
+        .btEditar{
+            background-color: none;
+            color: #5E5E5E;
+            border: none;
+            border-radius: 25px;
+            font-size: 10px;
+            width: 30px;
+            height: 10px;
+            padding-left: 5px;
+            padding-right: 5px ;
+        }
+
+        
+/*----------------- DATOS PEDIDO MEJORADO MOVIL---------------*/
+.pedidoEscritorioP{
+    display: none;
+}
+.pedidoMovil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pedidoMovil .ContenedorPedidos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+    background-color: #EEE;
+    width: 100%;
+    height: 65px;
+    min-width: 300px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    transition: 0.3s all ease-out;
+}
+
+
+.pedidoMovil .ContenedorPedidos .datoPedido .datoclientes {
+    width: 100%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-right: #b1b1b1 solid 1px;
+    text-align: left;
+}
+.pedidoMovil .ContenedorPedidos .datoPedido .datopastel {
+    width: 70%;
+    padding-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-right: #b1b1b1 solid 1px;
+}
+.pedidoMovil .ContenedorPedidos .datoPedido .estadopedido {
+    width: 50px;
+    padding-right: 10px;
+    padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+}
+
+
+
+.pedidoMovil .ContenedorPedidos .imgPerfil{
+    width: 120px;
+    height: 65px;
+    border-radius: 50px 0px 0px 50px;
+
+
+}
+.pedidoMovil .ContenedorPedidos .imgPerfil .pedidoID{
+        display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+/* background-color: #FF8A00; */
+    width: 90px;
+        height: 65px;
+        border-radius: 50px 0px 0px 50px;
+    background-color: #5C5C5C;
+
+
+}
+
+.pedidoMovil .ContenedorPedidos .imgPerfil .pedidoID h3{
+
+font-size: 18px;
+color: #ffffff;
+font-weight:bolder ;
+}
+.pedidoMovil .ContenedorPedidos .imgPerfil .pedidoID h4{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+.pedidoMovil .ContenedorPedidos .imgPerfil .pedidoID h6{
+font-size: 12px;
+color: #ffffff;
+font-weight:bolder ;
+}
+
+
+
+    .pedidoMovil .ContenedorPedidos .datoPedido {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-left: 15px;
+        width: 100%;
+        font-family: 'Istok Web';
+        text-align: left;
+        font-size: 12px;
+    }
+    .pedidoMovil .ContenedorPedidos .datoPedido h3{
+        font-weight: bold;
+        color: #000;
+        font-size: 16px;
+    }
+    .pedidoMovil .ContenedorPedidos .datoPedido h5{
+        font-weight: bold;
+        color: #FF8A00;
+        font-size: 12px;
+    }
+
+    .pedidoMovil .ContenedorPedidos .controlBtPd{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 90px;
+        margin-left: 5px;
+        margin-right: 5px;
+        transition: 0.3s all ease-out;
+    }
+
+    .pedidoMovil .ContenedorPedidos .controlBtPd .btEditarU{
+        display: none;
+        background-color: #5C5C5C;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        font-size: 7px;
+        width: 40px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+    }
+    .pedidoMovil .ContenedorPedidos .controlBtPd .btEliminarU{
+        background-color: #5C5C5C;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px ;
+        transition: 0.3s all ease-out;
+    }
+    .pedidoMovil .ContenedorPedidos .controlBtPd .btEliminarU:hover{
+        background-color: #5c5c5c6a;
+        color: #ffffff;
+    }
+}
+/*--------------------------------- FIN VRESION MOVIL--------------------------------*/

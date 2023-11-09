@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
 import avatar from "../assets/Chocolate.jpeg";
-import ModalupPastel from "../components/modals/ModalUpdatePastel";
-import ModalPast from "../components/modals/modalPastel";
+import ModalupProduct from "../components/modals/ModalUpdateProducto";
+import ModalProduct from "../components/modals/modalProducto";
 import Navbar from "../components/navbar";
 import SidebarInventario from "../components/sidebarInventario";
 import PDFGenerator from "../generarPDF/gProveedores";
-import "../styles/pasteles.css";
+import "../styles/producto.css";
 
 const Pastel = () => {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
   const [search, setSaerch] = useState("");
 
-  const [pasteles, setPasteles] = useState([]);
+  const [productos, setProductos] = useState([]);
 
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
   const getData = async () => {
     try {
-      const response = await fetch(URL + "pastel");
+      const response = await fetch(URL + "producto");
       const datos = await response.json();
-      setPasteles(datos);
+      setProductos(datos);
       console.log(datos);
     } catch (err) {
       console.error(err);
@@ -31,9 +31,9 @@ const Pastel = () => {
   useEffect(() => {
     getData();
   }, []);
-  // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
+  // // // // //-----CAPTURAR DATOS DE NUEVO PRODUCTO------//
   const { handleSubmit, register } = useForm();
-  const enviarPastel = handleSubmit((data) => {
+  const enviarProducto = handleSubmit((data) => {
     console.log(data);
     fetch(URL, {
       method: "POST",
@@ -43,7 +43,7 @@ const Pastel = () => {
     getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
-      title: "Pastel Agregado!",
+      title: "Producto Agregado!",
       icon: "success",
       showConfirmButton: false,
       timer: 1200,
@@ -62,26 +62,26 @@ const Pastel = () => {
     //   (document.getElementById("direccion_prov").value = null);
   });
 
-  //-----------------ELIMINAR PORVEEDOR---------------------------------
+  //-----------------ELIMINAR PRODUCTO---------------------------------
 
-  const handleDelete = async (idpastel) => {
-    const res = await fetch(URL + `pastel/${idpastel}`, {
+  const handleDelete = async (idprod) => {
+    const res = await fetch(URL + `producto/${idprod}`, {
       method: "DELETE",
     });
     // const data = await res.json();
     console.log(res);
-    setPasteles(pasteles.filter((pastel) => pastel.idpastel !== idpastel));
+    setProductos(productos.filter((producto) => producto.idprod !== idprod));
   };
 
-  //------------------------------------FIN ELIMINA PROVEEDOR -----------------------------------
+  //------------------------------------FIN ELIMINA PRODUCTO -----------------------------------
 
   //---------------------ALERTAS ----------------------------------
-  const mostrarAlerta = (idpastel) => {
+  const mostrarAlerta = (idprod) => {
     swal
       .fire({
         title: "¿Desea eliminar?",
         icon: "question",
-        text: "Se eliminaran los datos del Pastel",
+        text: "Se eliminaran los datos del Producto",
         confirmButtonText: "Eliminar",
         confirmButtonColor: "#FF8A00",
         showCancelButton: true,
@@ -102,7 +102,7 @@ const Pastel = () => {
       })
       .then((response) => {
         if (response.isConfirmed) {
-          handleDelete(idpastel);
+          handleDelete(idprod);
 
           swal.fire({
             title: "¡Eliminado!",
@@ -122,11 +122,11 @@ const Pastel = () => {
   };
   //----------------------------FIN DE ALERTAS --------------------------------
 
-  //--------------------------------- EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- EDITAR PRODUCTO ----------------------------------//
 
   const [idEdit, setIdEdit] = useState("");
 
-  //--------------------------------- FIN EDITAR PROVEEDOR ----------------------------------//
+  //--------------------------------- FIN EDITAR PRODUCTO ----------------------------------//
 
   //------------busqueda inteligente -----------------
   const searcher = (e) => {
@@ -136,10 +136,10 @@ const Pastel = () => {
   //----metodod de filtrado de busqueda-----
   let result = [];
   if (!search) {
-    result = pasteles;
+    result = productos;
   } else {
-    result = pasteles.filter((datos) =>
-      datos.pastel.toLowerCase().includes(search.toLowerCase())
+    result = productos.filter((datos) =>
+      datos.producto.toLowerCase().includes(search.toLowerCase())
     );
   }
 
@@ -147,76 +147,87 @@ const Pastel = () => {
     <>
       <Navbar />
       <SidebarInventario />
-      <div className="bodyPast">
-        <div className="ContainerPast"></div>
-        <div className="Pasteles">
+      <div className="bodyProd">
+        <div className="ContainerProd"></div>
+        <div className="Productos">
           <br></br>
-          <h2>Listado de Pasteles</h2>
+          <h2>Listado de Productos</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
-          <ModalPast
+          {/* ------------------- MODAL AGREGAR NUEVO PRODUCTO-------------- */}
+          <ModalProduct
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
-            titulo="Nuevo pastel"
+            titulo="Nuevo producto"
           >
-            <div className="containerNewPast">
+            <div className="containerNewProd">
               <form
-                className="nuevoPastForm"
-                id="FormularioPast"
-                onSubmit={enviarPastel}
+                className="nuevoProdForm"
+                id="FormularioProd"
+                onSubmit={enviarProducto}
               >
-                <div className="itemPast">
-                  <label>Pastel: </label>
+                <div className="itemProd">
+                  <label>Producto: </label>
                   <input
-                    {...register("pastel")}
+                    {...register("producto")}
                     type="text"
-                    id="pastel"
-                    placeholder="Pastel"
+                    id="producto"
+                    placeholder="Producto"
                   ></input>
                 </div>
 
-                <div className="itemPast">
-                  <label>Precio: </label>
+                <div className="itemProd">
+                  <label>Descripcion: </label>
                   <input
-                    {...register("precio")}
-                    type="number"
-                    id="precio"
-                    placeholder="Precio"
+                    {...register("descripcion")}
+                    type="text"
+                    id="descripcion"
+                    placeholder="Descripcion"
                   ></input>
                 </div>
 
-                <div className="itemPast">
-                  <label>Tamaño del pastel: </label>
+                <div className="itemProd">
+                  <label>Stock: </label>
                   <input
-                    {...register("tamanio_idpast")}
+                    {...register("stock")}
                     type="number"
-                    id="tamanio_idpast"
-                    placeholder="Tamaño del pastel"
+                    id="stock"
+                    placeholder="Stock"
                   ></input>
                 </div>
 
-                <div className="itemPast">
-                  <label>Decoracion del pastel: </label>
+                <div className="itemProd">
+                  <label>Fecha vencimiento: </label>
                   <input
-                    {...register("dec_idpast")}
-                    type="number"
-                    id="dec_idpast"
-                    placeholder="Decoracion del pastel"
+                    {...register("fecha_vencimiento")}
+                    type="date"
+                    id="fecha_vencimiento"
+                    placeholder="Fecha vencimiento"
                   ></input>
 
-                  <div className="itemPast">
-                    <label>Categoria del pastel: </label>
+                  <div className="itemProd">
+                    <label>Tipo: </label>
                     <input
-                      {...register("cat_idpast")}
-                      type="number"
-                      id="cat_idpast"
-                      placeholder="Categoria del pastel"
+                      {...register("tipo")}
+                      type="text"
+                      id="tipo"
+                      placeholder="Tipo"
                     ></input>
                   </div>
+
+                  <div className="itemProd">
+                    <label>Proveedor: </label>
+                    <input
+                      {...register("nombre_proveedor")}
+                      type="text"
+                      id="nombre_proveedor"
+                      placeholder="Nombre proveedor"
+                    ></input>
+                  </div>
+
                 </div>
                 <br />
 
-                <div className="bonotesNewPast">
+                <div className="bonotesNewProd">
                   <div>
                     <button
                       type="button"
@@ -234,22 +245,22 @@ const Pastel = () => {
                 </div>
               </form>
             </div>
-          </ModalPast>
-          {/* --------------------------- FIN MODAL INGRESAR NUEVO PROVEEDOR ------------------ */}
+          </ModalProduct>
+          {/* --------------------------- FIN MODAL INGRESAR NUEVO PRODUCTO ------------------ */}
 
-          {/* ------------------- MODAL EDITAR  PROVEEDOR-------------- */}
+          {/* ------------------- MODAL EDITAR  PRODUCTO-------------- */}
 
-          <ModalupPastel
+          <ModalupProduct
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
-            titulo2={"Actualizar pastel"}
+            titulo2={"Actualizar producto"}
             idEdit={idEdit}
-            setProductos={setPasteles}
-            productos={pasteles}
-          ></ModalupPastel>
-          {/* --------------------------- FIN MODAL EDITAR PROVEEDOR ------------------ */}
+            setProductos={setProductos}
+            productos={productos}
+          ></ModalupProduct>
+          {/* --------------------------- FIN MODAL EDITAR PRODUCTO ------------------ */}
 
-          {/* //----------------------------------ELIMINAR PROVEEDOR ----------------------------------*/}
+          {/* //----------------------------------ELIMINAR PRODUCTO ----------------------------------*/}
 
           <div className="centrarControles">
             <div className="controlesUsuario">
@@ -263,7 +274,7 @@ const Pastel = () => {
                     type="text"
                     value={search}
                     onChange={searcher}
-                    placeholder="Buscar pastel"
+                    placeholder="Buscar producto"
                     name="q"
                   ></input>
                   <button type="submit">
@@ -272,7 +283,7 @@ const Pastel = () => {
                 </form>
               </div>
 
-              <PDFGenerator data={pasteles} />
+              <PDFGenerator data={productos} />
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
@@ -283,39 +294,39 @@ const Pastel = () => {
           <br></br>
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
-          <div className="pastelMovil">
-            {result.map((pasteles, index) => (
-              <div className="ContenedorPasteles" key={index}>
+          <div className="productoMovil">
+            {result.map((productos, index) => (
+              <div className="ContenedorProductos" key={index}>
                 <div className="imgPerfil">
-                  <div className="pastelID">
-                    <p>ID</p>
-                    <span>{pasteles.idpastel}</span>
+                  <div className="productoID">
+                    <p>Stock</p>
+                    <span>{productos.stock}</span>
                   </div>
                   <img
                     src={avatar}
                     className="avatar"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(pasteles.idpastel)
+                      setIdEdit(productos.idprod)
                     }
                   />
                 </div>
 
                 <div
-                  className="datoPastel"
+                  className="datoProd"
                   onClick={() =>
                     cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(pasteles.idpastel)
+                    setIdEdit(productos.idprod)
                   }
                 >
                   <div>
-                    <h3>{pasteles.pastel}</h3>
+                    <h3>{productos.producto}</h3>
                   </div>
                   <div>
-                    <h5>Precio: {pasteles.precio}</h5>
+                    <h5>Descripcion: {productos.descripcion}</h5>
                   </div>
                   <div>
-                    <p>Tamaño del pastel: {pasteles.tamanio}</p>
+                    <p>ID: {productos.idprod}</p>
                   </div>
                 </div>
                 <div className="controlBtP">
@@ -325,7 +336,7 @@ const Pastel = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(pasteles.idpastel)}
+                    onClick={() => mostrarAlerta(productos.idprod)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
@@ -334,30 +345,34 @@ const Pastel = () => {
             ))}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
-          <div className="pastelEscritorio">
+          <div className="productoEscritorio">
             <div className="encabezadoEscritorio">
               <div className="encID">
                 <div>
-                  <h3>ID: </h3>
+                  <h3>STOCK: </h3>
                 </div>
               </div>
 
               <div className="encDato">
                 <div className="encD">
-                  <h3>Pastel: </h3>
+                  <h3>Producto: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Precio: </h3>
+                  <h3>Descripcion: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Tamaño del pastel: </h3>
+                  <h3>ID: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Decoracion del pastel: </h3>
+                  <h3>Fecha vencimiento: </h3>
                 </div>
                 <div className="encD">
-                  <h3>Categoria del pastel: </h3>
+                  <h3>Tipo: </h3>
                 </div>
+                <div className="encD">
+                  <h3>Proveedor: </h3>
+                </div>
+
               </div>
               <div className="encBT">
                 <div>
@@ -366,12 +381,12 @@ const Pastel = () => {
               </div>
             </div>
 
-            {result.map((pastel, index) => (
-              <div className="ContenedorPasteles" key={index}>
+            {result.map((producto, index) => (
+              <div className="ContenedorProductos" key={index}>
                 <div className="imgPerfil">
-                  <div className="pastelID">
-                    <p>ID</p>
-                    <span>{pastel.idpastel}</span>
+                  <div className="productoID">
+                    <p>STOCK</p>
+                    <span>{producto.stock}</span>
                   </div>
                   <img
                     src={avatar}
@@ -381,23 +396,26 @@ const Pastel = () => {
                 </div>
 
                 <form
-                  className="datoPastel"
+                  className="datoProducto"
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
-                    <h3>{pastel.pastel}</h3>
+                    <h3>{producto.producto}</h3>
                   </div>
                   <div>
-                    <h5>{pastel.precio}</h5>
+                    <h5>{producto.descripcion}</h5>
                   </div>
                   <div>
-                    <p>{pastel.tamanio_idpast}</p>
+                    <p>{producto.idprod}</p>
                   </div>
                   <div>
-                    <p>{pastel.dec_idpast}</p>
+                    <p>{producto.fecha_vencimiento}</p>
                   </div>
                   <div>
-                    <p>{pastel.cat_idpast}</p>
+                    <p>{producto.tipo}</p>
+                  </div>
+                  <div>
+                    <p>{producto.nombre_proveedor}</p>
                   </div>
                 </form>
                 <div className="controlBtP">
@@ -405,7 +423,7 @@ const Pastel = () => {
                     className="btEditarU"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(pastel.idpastel)
+                      setIdEdit(producto.idprod)
                     }
                   >
                     <span className="material-symbols-outlined">edit</span>
@@ -413,7 +431,7 @@ const Pastel = () => {
                   <br />
                   <button
                     className="btEliminarU"
-                    onClick={() => mostrarAlerta(pastel.idpastel)}
+                    onClick={() => mostrarAlerta(producto.idprod)}
                   >
                     <span className="material-symbols-outlined">delete</span>
                   </button>
