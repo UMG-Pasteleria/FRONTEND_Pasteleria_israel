@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
 import ModalupPedido from "../components/modals/ModalUpdatePedido";
 import ModalPed from "../components/modals/modalPedido";
+import ModalCli from "../components/modals/modalCliente";
 import Navbar from "../components/navbar";
 import SidebarPedidos from "../components/sidebarPedido";
 import PDFGenerator from "../generarPDF/g.Pedido";
 import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../styles/pedido.css";
 
 function Pedido() {
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [estadoModal2, cambiarEstadoModal2] = useState(false);
+  const [estadoModal3, cambiarEstadoModal3] = useState(false);
   const [search, setSaerch] = useState("");
   const [estados, setEstados] = useState([]);
   const [pedidos, setPedidos] = useState([]);
@@ -91,24 +95,6 @@ function Pedido() {
     getPastel();
     getModopago();
   }, []);
-  // //------------------ENVIAR DATOS DE SELECTOR ESTADO -----------------//
-  // const [selectEstado, setSelectEstado] = useState();
-  // const handleSelectChange = (a) => {
-  //   console.log(a.target.value);
-  //   setSelectEstado(a.target.value);
-  // };
-  // //------------------ENVIAR DATOS DE SELECTOR CLIENTE -----------------//
-  // const [selectCliente, setSelectCliente] = useState();
-  // const handleSelectChangeCliente = (b) => {
-  //   console.log(b.target.value);
-  //   setSelectCliente(b.target.value);
-  // };
-  // //------------------ENVIAR DATOS DE SELECTOR PASTEL -----------------//
-  // const [selectPastel, setSelectPastel] = useState();
-  // const handleSelectChangePastel = (c) => {
-  //   console.log(c.target.value);
-  //   setSelectPastel(c.target.value);
-  // };
 
   //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
   const { handleSubmit, register } = useForm();
@@ -119,21 +105,42 @@ function Pedido() {
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+
+    if (response.status === 200) {
+      swal.fire({
+        title: "Pedido Agregado!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1200,
+        customClass: {
+          confirmButton: "btEliminar",
+          cancelButton: "btCancelar",
+          popup: "popus-eliminado",
+          title: "titulo-pop",
+          container: "contenedor-alert",
+        },
+      });
+
+      // Optionally update your clients state or perform other actions
+      setClientes([...clientes, data]);
+    } else {
+      swal.fire({
+        title: "Error al Agregar",
+        icon: "error",
+        text: `${response.status}`,
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          confirmButton: "btEliminar",
+          cancelButton: "btCancelar",
+          popup: "popus-eliminado",
+          title: "titulo-pop",
+          container: "contenedor-alert",
+        },
+      });
+    }
     getData();
     cambiarEstadoModal1(!estadoModal1);
-    swal.fire({
-      title: "Pedido Agregado!",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1200,
-      customClass: {
-        confirmButton: "btEliminar",
-        cancelButton: "btCancelar",
-        popup: "popus-eliminado",
-        title: "titulo-pop",
-        container: "contenedor-alert",
-      },
-    });
 
     //   (document.getElementById("nit_pr").value = null),
     //   (document.getElementById("nombre_pr").value = null),
@@ -204,6 +211,11 @@ function Pedido() {
 
   const [idEdit, setIdEdit] = useState("");
 
+  //-----------------busqueda por fecha------------------//
+  // state = {
+  //   fecahPedido: new Date("2023", "09", "01"),
+  // };
+
   //----------------------BUSQUEDA INTELIGENTE-------------------------//
   const searcher = (e) => {
     setSaerch(e.target.value);
@@ -238,7 +250,14 @@ function Pedido() {
           <br></br>
           <h2>Listado de Pedidos</h2>
           <br></br>
-
+          <ModalCli
+            estado={estadoModal3}
+            cambiarEstado={cambiarEstadoModal3}
+            titulo="Nuevo cliente"
+            setClientes={setClientes}
+            clientes={clientes}
+            URL={URL}
+          ></ModalCli>
           {/* ------------------- MODAL AGREGAR NUEVO PEDIDO-------------- */}
           <ModalPed
             estado={estadoModal1}
@@ -275,7 +294,11 @@ function Pedido() {
                             </option>
                           ))}
                         </select>
-                        <button className="botonAgregar" type="button">
+                        <button
+                          className="botonAgregar"
+                          type="button"
+                          onClick={() => cambiarEstadoModal3(!estadoModal3)}
+                        >
                           +
                         </button>
                       </div>
@@ -321,7 +344,7 @@ function Pedido() {
                         {...register("fecha_entrega")}
                         type="dateTime-local"
                         id="fecha_entrega"
-                        placeholder="Anticipo"
+                        placeholder="Fecha de entrega"
                       ></input>
                     </div>
 
@@ -344,7 +367,7 @@ function Pedido() {
                             <option
                               className="opciones"
                               key={index}
-                              defaultValue={pastelData.idpastel}
+                              Value={pastelData.idpastel}
                             >
                               {pastelData.pastel} {pastelData.tamanio} con{" "}
                               {pastelData.decoracion} {".          ."} Precio:
@@ -449,9 +472,7 @@ function Pedido() {
               </form>
             </div>
           </ModalPed>
-
           {/* ------------------- MODAL EDITAR  PEDIDO-------------- */}
-
           <ModalupPedido
             estado2={estadoModal2}
             cambiarEstado2={cambiarEstadoModal2}
@@ -460,11 +481,12 @@ function Pedido() {
             setPedidos={setPedidos}
             pedidos={pedidos}
           ></ModalupPedido>
-
           {/* //----------------------------------ELIMINAR PEDIDO ----------------------------------*/}
-
           <div className="centrarControles">
             <div className="controlesUsuario">
+              <button onClick={getData}>
+                <span className="material-symbols-outlined">refresh</span>
+              </button>
               <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
                 <span className="material-symbols-outlined">person_add</span>
               </button>
@@ -484,17 +506,19 @@ function Pedido() {
                 </form>
               </div>
 
-              <PDFGenerator data={pedidos} />
-
-              <button onClick={getData}>
+              <PDFGenerator data={result} />
+              <br />
+              {/* <DatePicker
+                selected={this.state.fecahPedido}
+                onChange={this.onChange}
+              /> */}
+              {/* <button>
                 <span className="material-symbols-outlined">refresh</span>
-              </button>
+              </button> */}
             </div>
           </div>
-
           <hr></hr>
           <br></br>
-
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="pedidoMovil">
             {result.map((pedidos, index) => (

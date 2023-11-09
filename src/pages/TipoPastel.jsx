@@ -86,9 +86,11 @@ function TPastel() {
   //-----------------ELIMINAR TIPO PASTEL---------------------------------
 
   const handleDelete = async (idtpastel) => {
+
     const res = await fetch(URL + `tipo/${idtpastel}`, {
       method: "DELETE",
     });
+
     // const data = await res.json();
     console.log(res);
     setTPasteles(
@@ -246,6 +248,7 @@ function TPastel() {
 
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
 
+
   {/*/-------------------------- CONTENEDOR TIPO PASTEL -----------------------------------*/}
 
       <div className="tpastelEscritorio">
@@ -269,8 +272,9 @@ function TPastel() {
               <div className="encID">
                 <div>
                   <h3>ID: </h3>
+
                 </div>
-              </div>
+
 
               <div className="encDato">
                 <div className="encD">
@@ -281,9 +285,9 @@ function TPastel() {
               <div className="encBT">
                 <div>
                   <h3>Accion: </h3>
+
                 </div>
               </div>
-            </div>
 
             {tpasteles.map((tpastel, index) => (
               <div className="ContenedorTPasteles" key={index}>
@@ -370,6 +374,10 @@ function TPastel() {
                   <div className="tpastelID">
                     <p>ID</p>
                     <span>{tampastel.idtampast}</span>
+
+                    {/* <div>
+                    <h5>{tcliente.nit_cl}</h5>
+
                   </div>
                 
                 </div>
@@ -537,6 +545,7 @@ function TPastel() {
                   // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                 >
                   <div>
+
                     <h3>{catpastel.categoria}</h3>
                   </div>
               
@@ -562,6 +571,7 @@ function TPastel() {
               </div>
             ))}
             </div>
+
 
           </div>
         </div>

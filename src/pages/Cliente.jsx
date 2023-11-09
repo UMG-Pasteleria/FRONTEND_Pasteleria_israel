@@ -33,30 +33,30 @@ function Cliente() {
     getData();
   }, []);
   // // // // //-----CAPTURAR DATOS DE NUEVO CLIENTE------//
-  const { handleSubmit, register } = useForm();
-  const enviarCliente = handleSubmit((data) => {
-    console.log(data);
-    fetch(URL, {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    getData();
-    cambiarEstadoModal1(!estadoModal1);
-    swal.fire({
-      title: "Cliente Agregado!",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1200,
-      customClass: {
-        confirmButton: "btEliminar",
-        cancelButton: "btCancelar",
-        popup: "popus-eliminado",
-        title: "titulo-pop",
-        container: "contenedor-alert",
-      },
-    });
-  });
+  // const { handleSubmit, register } = useForm();
+  // const enviarCliente = handleSubmit((data) => {
+  //   console.log(data);
+  //   fetch(URL, {
+  //     method: "POST",
+  //     headers: { "content-Type": "application/json" },
+  //     body: JSON.stringify(data),
+  //   });
+  //   getData();
+  //   cambiarEstadoModal1(!estadoModal1);
+  //   swal.fire({
+  //     title: "Cliente Agregado!",
+  //     icon: "success",
+  //     showConfirmButton: false,
+  //     timer: 1200,
+  //     customClass: {
+  //       confirmButton: "btEliminar",
+  //       cancelButton: "btCancelar",
+  //       popup: "popus-eliminado",
+  //       title: "titulo-pop",
+  //       container: "contenedor-alert",
+  //     },
+  //   });
+  // });
 
   //-----------------ELIMINAR CLIENTE---------------------------------
 
@@ -153,89 +153,10 @@ function Cliente() {
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
             titulo="Nuevo cliente"
-          >
-            <div className="containerNewClient">
-              <form
-                className="nuevoClientForm"
-                id="FormularioC"
-                onSubmit={enviarCliente}
-              >
-                <div className="itemClient">
-                  <label>NIT: </label>
-                  <input
-                    {...register("nit_cl")}
-                    type="number"
-                    id="nit_cl"
-                    placeholder="NIT"
-                  ></input>
-                </div>
-
-                <div className="itemClient">
-                  <label>Cliente: </label>
-                  <input
-                    {...register("nombre_cl")}
-                    type="text"
-                    id="nombre_cl"
-                    placeholder="Cliente"
-                  ></input>
-                </div>
-
-                <div className="itemClient">
-                  <label>Telefono: </label>
-                  <input
-                    {...register("telefono_cl")}
-                    type="number"
-                    id="telefono_cl"
-                    placeholder="Telefono"
-                  ></input>
-                </div>
-
-                <div className="itemClient">
-                  <label>Direccion: </label>
-                  <input
-                    {...register("direccion_cl")}
-                    type="text"
-                    id="direccion_cl"
-                    placeholder="Direccion"
-                  ></input>
-
-                  <div className="itemClient">
-                    <label>Tipo Cliente: </label>
-                    <input
-                      {...register("tipo_idtclient")} //id tabla tipo_cliente
-                      type="number"
-                      id="tipo_idtclient"
-                      placeholder="Tipo_cliente"
-                    ></input>
-                  </div>
-                </div>
-                <br />
-
-                <div className="bonotesNewClient">
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => cambiarEstadoModal1(!estadoModal1)}
-                      className="btcancelar"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                  <div>
-                    {/* <button
-                      type="submit"
-                      className="btGuardar"
-                      
-                    > */}
-
-                    <button type="submit" className="btGuardar">
-                      Guardar
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </ModalCli>
+            setClientes={setClientes}
+            clientes={clientes}
+            URL={URL}
+          ></ModalCli>
           {/* --------------------------- FIN MODAL INGRESAR NUEVO CLIENTE ------------------ */}
 
           {/* ------------------- MODAL EDITAR  CLIENTE-------------- */}
@@ -322,7 +243,7 @@ function Cliente() {
                     <p>Direccion: {cliente.direccion_cl}</p>
                   </div>
                   <div>
-                    <p>Tipo Cliente: {cliente.tipo_idtclient}</p>
+                    <p>Tipo Cliente: {cliente.tipo_cl}</p>
                   </div>
                 </div>
                 <div className="controlBtC">
@@ -404,7 +325,7 @@ function Cliente() {
                     <p>{cliente.direccion_cl}</p>
                   </div>
                   <div>
-                    <p>{cliente.tipo_idtclient}</p>
+                    <p>{cliente.tipo_cl}</p>
                   </div>
                 </form>
                 <div className="controlBtC">

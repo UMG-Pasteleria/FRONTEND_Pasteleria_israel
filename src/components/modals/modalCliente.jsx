@@ -1,6 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-const ModalCli = ({ children, estado, cambiarEstado, titulo }) => {
+import { useForm } from "react-hook-form";
+import swal from "sweetalert2";
+
+const ModalCli = ({
+  estado,
+  cambiarEstado,
+  titulo,
+  setClientes,
+  clientes,
+  URL,
+}) => {
+  const { handleSubmit, register } = useForm();
+
+  const [tclientes, setTClientes] = useState([]);
+  //--------------- OBTENER DATOS DE CLIENTES -----------------//
+
+  const getData = async () => {
+    try {
+      const response = await fetch(URL + "tipo_cliente");
+      const tipoData = await response.json();
+      setTClientes(tipoData);
+      console.log(tipoData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  const enviarCliente = handleSubmit(async (data) => {
+    try {
+      const response = await fetch(URL + "cliente", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.status === 200) {
+        swal.fire({
+          title: "Cliente Agregado!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+
+        // Optionally update your clients state or perform other actions
+        setClientes([...clientes, data]);
+      } else {
+        swal.fire({
+          title: "Error al Agregar",
+          icon: "error",
+          text: `${response.status}`,
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            confirmButton: "btEliminar",
+            cancelButton: "btCancelar",
+            popup: "popus-eliminado",
+            title: "titulo-pop",
+            container: "contenedor-alert",
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    getData();
+    cambiarEstado(false);
+  });
+
   return (
     <>
       {estado && (
@@ -12,7 +88,95 @@ const ModalCli = ({ children, estado, cambiarEstado, titulo }) => {
             <BotonCerrar onClick={() => cambiarEstado(false)}>
               <span className="material-symbols-outlined">close</span>
             </BotonCerrar>
-            {children}
+
+            <div className="containerNewClient">
+              <form
+                className="nuevoClientForm"
+                id="FormularioC"
+                onSubmit={enviarCliente}
+              >
+                <div className="itemClient">
+                  <label>NIT: </label>
+                  <input
+                    {...register("nit_cl")}
+                    type="number"
+                    id="nit_cl"
+                    placeholder="NIT"
+                  ></input>
+                </div>
+
+                <div className="itemClient">
+                  <label>Cliente: </label>
+                  <input
+                    {...register("nombre_cl")}
+                    type="text"
+                    id="nombre_cl"
+                    placeholder="Cliente"
+                  ></input>
+                </div>
+
+                <div className="itemClient">
+                  <label>Telefono: </label>
+                  <input
+                    {...register("telefono_cl")}
+                    type="number"
+                    id="telefono_cl"
+                    placeholder="Telefono"
+                  ></input>
+                </div>
+
+                <div className="itemClient">
+                  <label>Direccion: </label>
+                  <input
+                    {...register("direccion_cl")}
+                    type="text"
+                    id="direccion_cl"
+                    placeholder="Direccion"
+                  ></input>
+
+                  <div className="itemClient">
+                    <label>Tipo Cliente: </label>
+
+                    <select
+                      className="selector"
+                      {...register("tipo_idtclient")}
+                      id="tipo_idtclient"
+                    >
+                      <option disabled selected>
+                        Seleccione tipo de cliente
+                      </option>
+                      {tclientes.map((tipoData, index) => (
+                        <option
+                          className="opciones"
+                          key={index}
+                          Value={tipoData.idtcl}
+                        >
+                          {tipoData.tipo_cl}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <br />
+
+                <div className="bonotesNewClient">
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => cambiarEstado(false)}
+                      className="btcancelar"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                  <div>
+                    <button type="submit" className="btGuardar">
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </ContenedorModal>
         </Overlay>
       )}
@@ -33,7 +197,7 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 95;
+  z-index: 105;
 `;
 
 const ContenedorModal = styled.div`
@@ -44,7 +208,7 @@ const ContenedorModal = styled.div`
   border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 20px;
-  z-index: 99;
+  z-index: 106;
 `;
 
 const EncabezadoModal = styled.div`

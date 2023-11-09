@@ -61,9 +61,11 @@ function TamPastel() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idtampast) => {
+
     const res = await fetch(URL + `tamanio/${idtampast}`, {
       method: "DELETE",
     });
+
     // const data = await res.json();
     console.log(res);
     setTamPasteles(
@@ -344,18 +346,19 @@ function TamPastel() {
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
           <div className="tampastelEscritorio">
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
+            <div className="conetedorTamanioPastel">
+              <div className="encabezadoEscritorio">
+                <div className="encID">
+                  <div>
+                    <h3>ID: </h3>
+                  </div>
                 </div>
-              </div>
 
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Tamaño de pastel: </h3>
-                </div>
-                {/* <div className="encD">
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Tamaño de pastel: </h3>
+                  </div>
+                  {/* <div className="encD">
                   <h3>NIT: </h3>
                 </div>
                 <div className="encD">
@@ -367,36 +370,36 @@ function TamPastel() {
                 <div className="encD">
                   <h3>Tipo: </h3>
                 </div> */}
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
                 </div>
-              </div>
-            </div>
-
-            {result.map((tampastel, index) => (
-              <div className="ContenedorTamPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="tampastelID">
-                    <p>ID</p>
-                    <span>{tampastel.idtampast}</span>
-                  </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                  />
-                </div>
-
-                <form
-                  className="datoTamPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+                <div className="encBT">
                   <div>
-                    <h3>{tampastel.tamanio}</h3>
+                    <h3>Accion: </h3>
                   </div>
-                  {/* <div>
+                </div>
+              </div>
+
+              {result.map((tampastel, index) => (
+                <div className="ContenedorTamPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tampastelID">
+                      <p>ID</p>
+                      <span>{tampastel.idtampast}</span>
+                    </div>
+                    <img
+                      src={avatar}
+                      className="avatar"
+                      // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    />
+                  </div>
+
+                  <form
+                    className="datoTamPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <div>
+                      <h3>{tampastel.tamanio}</h3>
+                    </div>
+                    {/* <div>
                     <h5>{tcliente.nit_cl}</h5>
                   </div>
                   <div>
@@ -408,27 +411,28 @@ function TamPastel() {
                   <div>
                     <p>{tcliente.idtcl}</p>
                   </div> */}
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(tampastel.idtampast)
-                    }
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(tampastel.idtampast)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(tampastel.idtampast)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(tampastel.idtampast)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
