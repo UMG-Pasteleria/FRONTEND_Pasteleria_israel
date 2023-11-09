@@ -61,9 +61,12 @@ function TPastel() {
   //-----------------ELIMINAR CLIENTE---------------------------------
 
   const handleDelete = async (idtpastel) => {
-    const res = await fetch(`https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtpastel}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtpastel}`,
+      {
+        method: "DELETE",
+      }
+    );
     // const data = await res.json();
     console.log(res);
     setTPasteles(
@@ -344,59 +347,48 @@ function TPastel() {
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
           <div className="tpastelEscritorio">
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
-                </div>
-              </div>
-
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Tipo de pastel: </h3>
-                </div>
-                {/* <div className="encD">
-                  <h3>NIT: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Telefono: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Direccion: </h3>
-                </div>
-                <div className="encD">
-                  <h3>Tipo: </h3>
-                </div> */}
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
-                </div>
-              </div>
-            </div>
-
-            {result.map((tpastel, index) => (
-              <div className="ContenedorTPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="tpastelID">
-                    <p>ID</p>
-                    <span>{tpastel.idtpastel}</span>
-                  </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
-                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                  />
-                </div>
-
-                <form
-                  className="datoTPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+            <div className="contenedorTipoPastel">
+              <div className="encabezadoEscritorio">
+                <div className="encID">
                   <div>
-                    <h3>{tpastel.tipo_pastel}</h3>
+                    <h3>ID: </h3>
                   </div>
-                  {/* <div>
+                </div>
+
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Tipo de pastel: </h3>
+                  </div>
+                </div>
+                <div className="encBT">
+                  <div>
+                    <h3>Accion: </h3>
+                  </div>
+                </div>
+              </div>
+
+              {result.map((tpastel, index) => (
+                <div className="ContenedorTPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tpastelID">
+                      <p>ID</p>
+                      <span>{tpastel.idtpastel}</span>
+                    </div>
+                    <img
+                      src={avatar}
+                      className="avatar"
+                      // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                    />
+                  </div>
+
+                  <form
+                    className="datoTPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <div>
+                      <h3>{tpastel.tipo_pastel}</h3>
+                    </div>
+                    {/* <div>
                     <h5>{tcliente.nit_cl}</h5>
                   </div>
                   <div>
@@ -408,27 +400,31 @@ function TPastel() {
                   <div>
                     <p>{tcliente.idtcl}</p>
                   </div> */}
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(tpastel.idtpastel)
-                    }
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(tpastel.idtpastel)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(tpastel.idtpastel)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(tpastel.idtpastel)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="contenedorTmanioPastel">
+              <h1>tamanio pasteles</h1>
+            </div>
           </div>
         </div>
       </div>

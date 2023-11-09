@@ -236,7 +236,11 @@ height: 100%;
     flex-direction: column;
     justify-content: center;
 }
-.tampastelEscritorio .encabezadoEscritorio{
+.tampastelEscritorio .conetedorTamanioPastel {
+width: 20%;
+height: 100%;
+}
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio{
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
@@ -247,14 +251,14 @@ border-radius: 25px;
 height: 30px;
 margin-bottom: 8px;
 }
-.tampastelEscritorio .encabezadoEscritorio  h3{
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio  h3{
     font-size: 14px;
     
 }
-.tampastelEscritorio .encabezadoEscritorio .encID{
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio .encID{
     width: 130px;
 }
-.tampastelEscritorio .encabezadoEscritorio .encDato{
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio .encDato{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -262,17 +266,17 @@ margin-bottom: 8px;
     font-size: 14px;
     text-align: start;
 }
-.tampastelEscritorio .encabezadoEscritorio .encDato .encD {
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio .encDato .encD {
     display: flex;
     flex-direction: row;
     justify-content: left;
     text-align: left;
     width: 100%;
 }
-.tampastelEscritorio .encabezadoEscritorio .encBT{
+.tampastelEscritorio .conetedorTamanioPastel .encabezadoEscritorio .encBT{
     width: 185px;
 }
-.tampastelEscritorio .ContenedorTamPasteles{
+.tampastelEscritorio .conetedorTamanioPastel .ContenedorTamPasteles{
     display: flex;
     flex-direction: row;
     align-items: center;
