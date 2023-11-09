@@ -19,9 +19,7 @@ function TPastel() {
 
   const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
 
-
-
-      //--------OBTENER DATOS DE TIPO DE PASTEL---
+  //--------OBTENER DATOS DE TIPO DE PASTEL---
 
   const getTipo = async () => {
     try {
@@ -34,63 +32,58 @@ function TPastel() {
     }
   };
 
-    //--------OBTENER DATOS DE TAMAÑO DE PASTEL---
+  //--------OBTENER DATOS DE TAMAÑO DE PASTEL---
 
-    const getTamaño = async () => {
-      try {
-        const response = await fetch(URL + "tamanio");
-        const json = await response.json();
-        setTamPasteles(json);
-        console.log(json);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const getTamaño = async () => {
+    try {
+      const response = await fetch(URL + "tamanio");
+      const json = await response.json();
+      setTamPasteles(json);
+      console.log(json);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-       //--------OBTENER DATOS DE DECORACION DE PASTEL---
+  //--------OBTENER DATOS DE DECORACION DE PASTEL---
 
-       const getDecoracion = async () => {
-        try {
-          const response = await fetch(URL + "decoracion");
-          const json = await response.json();
-          setDecPasteles(json);
-          console.log(json);
-        } catch (err) {
-          console.error(err);
-        }
-      };
+  const getDecoracion = async () => {
+    try {
+      const response = await fetch(URL + "decoracion");
+      const json = await response.json();
+      setDecPasteles(json);
+      console.log(json);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-       //--------OBTENER DATOS DE CATEGORIA DE PASTEL---
+  //--------OBTENER DATOS DE CATEGORIA DE PASTEL---
 
-       const getCategoria = async () => {
-        try {
-          const response = await fetch(URL + "categoria");
-          const json = await response.json();
-          setCatPasteles(json);
-          console.log(json);
-        } catch (err) {
-          console.error(err);
-        }
-      };
+  const getCategoria = async () => {
+    try {
+      const response = await fetch(URL + "categoria");
+      const json = await response.json();
+      setCatPasteles(json);
+      console.log(json);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    getTipo ();
+    getTipo();
     getTamaño();
-    getDecoracion ();
-    getCategoria ();
+    getDecoracion();
+    getCategoria();
   }, []);
-
-
-
 
   //-----------------ELIMINAR TIPO PASTEL---------------------------------
 
   const handleDelete = async (idtpastel) => {
-
     const res = await fetch(URL + `tipo/${idtpastel}`, {
       method: "DELETE",
     });
-
     // const data = await res.json();
     console.log(res);
     setTPasteles(
@@ -154,7 +147,6 @@ function TPastel() {
 
   //------------busqueda inteligente -----------------
 
-  
   //----metodod de filtrado de busqueda-----
   let result = [];
   if (!search) {
@@ -164,7 +156,6 @@ function TPastel() {
       datos.tipo_pastel.toLowerCase().includes(search.toLowerCase())
     );
   }
-  
 
   return (
     <>
@@ -181,13 +172,11 @@ function TPastel() {
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
             titulo="Nuevo Tipo de Pastel"
-            URL = {URL}
-            setTPasteles = {setTPasteles}
-            tpasteles = {tpasteles}
-          >
-            
-          </ModalTipoPast>
-          
+            URL={URL}
+            setTPasteles={setTPasteles}
+            tpasteles={tpasteles}
+          ></ModalTipoPast>
+
           {/* --------------------------- FIN MODAL INGRESAR TIPO PASTEL ------------------ */}
 
           {/* ------------------- MODAL EDITAR  TIPO PASTEL-------------- */}
@@ -204,8 +193,6 @@ function TPastel() {
 
           {/* //----------------------------------ELIMINAR TIPO PASTEL ----------------------------------*/}
 
-
-
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="tpastelMovil">
             {result.map((tpastel, index) => (
@@ -215,7 +202,6 @@ function TPastel() {
                     <p>ID</p>
                     <span>{tpastel.idtpastel}</span>
                   </div>
-              
                 </div>
 
                 <div
@@ -228,7 +214,6 @@ function TPastel() {
                   <div>
                     <h3>{tpastel.tipo_pastel}</h3>
                   </div>
-                 
                 </div>
                 <div className="controlBtC">
                   <button className="btEditarU">
@@ -248,331 +233,313 @@ function TPastel() {
 
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
 
+          {/*/-------------------------- CONTENEDOR TIPO PASTEL -----------------------------------*/}
 
-  {/*/-------------------------- CONTENEDOR TIPO PASTEL -----------------------------------*/}
-
-      <div className="tpastelEscritorio">
+          <div className="tpastelEscritorio">
             <div className="contenedorTipoPastel">
+              {/*/--------Agrega Iconos Agregar, Refresh*/}
+              <div className="centrarControles">
+                <div className="controlesUsuario">
+                  <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                    <span className="material-symbols-outlined">
+                      person_add
+                    </span>
+                  </button>
 
-  {/*/--------Agrega Iconos Agregar, Refresh*/}
-            <div className="centrarControles">
-             <div className="controlesUsuario">
-               <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                 <span className="material-symbols-outlined">person_add</span>
-                </button>
-
-                <button onClick={getTipo}>
-                <span className="material-symbols-outlined">refresh</span>
-              </button>
-            </div>
-          </div>
-   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
-
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
-
-                </div>
-
-
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Tipo de pastel: </h3>
-                </div>
-            
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
-
+                  <button onClick={getTipo}>
+                    <span className="material-symbols-outlined">refresh</span>
+                  </button>
                 </div>
               </div>
+              {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
 
-            {tpasteles.map((tpastel, index) => (
-              <div className="ContenedorTPasteles" key={index}>
-                <div className="imgPerfil">
-                  
-                  <div className="tpastelID">
-                    <p>ID</p>
-                    <span>{tpastel.idtpastel}</span>
-                  </div>
-                
-                </div>
-
-                <form
-                  className="datoTPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+              <div className="encabezadoEscritorio">
+                <div className="encID">
                   <div>
-                    <h3>{tpastel.tipo_pastel}</h3>
+                    <h3>ID: </h3>
                   </div>
-              
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(tpastel.idtpastel)
-                    }
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(tpastel.idtpastel)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
                 </div>
-              </div>
-            ))}
-            </div>
 
-  {/*/-------------------------- CONTENEDOR TAMAÑO PASTEL -----------------------------------*/}
-
-      <div className="contenedorTamañoPastel">
-           
-  {/*/--------Agrega Iconos Agregar, Refresh*/}
-          <div className="centrarControles">
-              <div className="controlesUsuario">
-                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                  <span className="material-symbols-outlined">person_add</span>
-                </button>
-
-                <button onClick={getTipo}>
-                  <span className="material-symbols-outlined">refresh</span>
-                </button>
-              </div>
-          </div>
-   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
-
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
-                </div>
-              </div>
-
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Tamaño de pastel: </h3>
-                </div>
-            
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
-                </div>
-              </div>
-            </div>
-            {tampasteles.map((tampastel, index) => (
-              <div className="ContenedorTPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="tpastelID">
-                    <p>ID</p>
-                    <span>{tampastel.idtampast}</span>
-
-                    {/* <div>
-                    <h5>{tcliente.nit_cl}</h5>
-
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Tipo de pastel: </h3>
                   </div>
-                
                 </div>
-
-                <form
-                  className="datoTPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+                <div className="encBT">
                   <div>
-                    <h3>{tampastel.tamanio}</h3>
+                    <h3>Accion: </h3>
                   </div>
-              
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(tampastel.idtampast)
-                    }
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(tampastel.idtampast)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
                 </div>
               </div>
-            ))}
+
+              {tpasteles.map((tpastel, index) => (
+                <div className="ContenedorTPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tpastelID">
+                      <p>ID</p>
+                      <span>{tpastel.idtpastel}</span>
+                    </div>
+                  </div>
+
+                  <form
+                    className="datoTPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <div>
+                      <h3>{tpastel.tipo_pastel}</h3>
+                    </div>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(tpastel.idtpastel)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(tpastel.idtpastel)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
 
-  {/*/-------------------------- CONTENEDOR DECORACION PASTEL -----------------------------------*/}
+            {/*/-------------------------- CONTENEDOR TAMAÑO PASTEL -----------------------------------*/}
 
-        <div className="contenedorDecoracionPastel">
+            <div className="contenedorTamañoPastel">
+              {/*/--------Agrega Iconos Agregar, Refresh*/}
+              <div className="centrarControles">
+                <div className="controlesUsuario">
+                  <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                    <span className="material-symbols-outlined">
+                      person_add
+                    </span>
+                  </button>
 
-{/*/--------Agrega Iconos Agregar, Refresh*/}
-          <div className="centrarControles">
-              <div className="controlesUsuario">
-                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                  <span className="material-symbols-outlined">person_add</span>
-                </button>
-
-                <button onClick={getTipo}>
-                  <span className="material-symbols-outlined">refresh</span>
-                </button>
-              </div>
-          </div>
-   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
-
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
+                  <button onClick={getTipo}>
+                    <span className="material-symbols-outlined">refresh</span>
+                  </button>
                 </div>
               </div>
+              {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
 
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Decoracion de pastel: </h3>
-                </div>
-            
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
-                </div>
-              </div>
-            </div>
-
-            {decpasteles.map((decpastel, index) => (
-              <div className="ContenedorTPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="tpastelID">
-                    <p>ID</p>
-                    <span>{decpastel.idecpast}</span>
-                  </div>
-                
-                </div>
-
-                <form
-                  className="datoTPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+              <div className="encabezadoEscritorio">
+                <div className="encID">
                   <div>
-                    <h3>{decpastel.decoracion}</h3>
+                    <h3>ID: </h3>
                   </div>
-              
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(decpastel.idecpast)
-                    }
+                </div>
+
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Tamaño de pastel: </h3>
+                  </div>
+                </div>
+                <div className="encBT">
+                  <div>
+                    <h3>Accion: </h3>
+                  </div>
+                </div>
+              </div>
+              {tampasteles.map((tampastel, index) => (
+                <div className="ContenedorTPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tpastelID">
+                      <p>ID</p>
+                      <span>{tampastel.idtampast}</span>
+                    </div>
+                  </div>
+
+                  <form
+                    className="datoTPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
                   >
-                    <span className="material-symbols-outlined">edit</span>
+                    <div>
+                      <h3>{tampastel.tamanio}</h3>
+                    </div>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(tampastel.idtampast)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(tampastel.idtampast)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/*/-------------------------- CONTENEDOR DECORACION PASTEL -----------------------------------*/}
+
+            <div className="contenedorDecoracionPastel">
+              {/*/--------Agrega Iconos Agregar, Refresh*/}
+              <div className="centrarControles">
+                <div className="controlesUsuario">
+                  <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                    <span className="material-symbols-outlined">
+                      person_add
+                    </span>
                   </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(decpastel.idecpast)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
+
+                  <button onClick={getTipo}>
+                    <span className="material-symbols-outlined">refresh</span>
                   </button>
                 </div>
               </div>
-            ))}
+              {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
+
+              <div className="encabezadoEscritorio">
+                <div className="encID">
+                  <div>
+                    <h3>ID: </h3>
+                  </div>
+                </div>
+
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Decoracion de pastel: </h3>
+                  </div>
+                </div>
+                <div className="encBT">
+                  <div>
+                    <h3>Accion: </h3>
+                  </div>
+                </div>
+              </div>
+
+              {decpasteles.map((decpastel, index) => (
+                <div className="ContenedorTPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tpastelID">
+                      <p>ID</p>
+                      <span>{decpastel.idecpast}</span>
+                    </div>
+                  </div>
+
+                  <form
+                    className="datoTPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <div>
+                      <h3>{decpastel.decoracion}</h3>
+                    </div>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(decpastel.idecpast)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(decpastel.idecpast)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
 
-  {/*/-------------------------- CONTENEDOR CATEGORIA PASTEL -----------------------------------*/}
+            {/*/-------------------------- CONTENEDOR CATEGORIA PASTEL -----------------------------------*/}
 
             <div className="contenedorCategoriaPastel">
+              {/*/--------Agrega Iconos Agregar, Refresh*/}
+              <div className="centrarControles">
+                <div className="controlesUsuario">
+                  <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
+                    <span className="material-symbols-outlined">
+                      person_add
+                    </span>
+                  </button>
 
-  {/*/--------Agrega Iconos Agregar, Refresh*/}
-          <div className="centrarControles">
-              <div className="controlesUsuario">
-                <button onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                  <span className="material-symbols-outlined">person_add</span>
-                </button>
-
-                <button onClick={getTipo}>
-                  <span className="material-symbols-outlined">refresh</span>
-                </button>
-              </div>
-          </div>
-   {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
-
-            <div className="encabezadoEscritorio">
-              <div className="encID">
-                <div>
-                  <h3>ID: </h3>
+                  <button onClick={getTipo}>
+                    <span className="material-symbols-outlined">refresh</span>
+                  </button>
                 </div>
               </div>
+              {/*/--------FIN de Agrega Iconos Agregar,Refresh*/}
 
-              <div className="encDato">
-                <div className="encD">
-                  <h3>Categoria de pastel: </h3>
-                </div>
-            
-              </div>
-              <div className="encBT">
-                <div>
-                  <h3>Accion: </h3>
-                </div>
-              </div>
-            </div>
-
-            {catpasteles.map((catpastel, index) => (
-              <div className="ContenedorTPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="tpastelID">
-                    <p>ID</p>
-                    <span>{catpastel.idcatp}</span>
-                  </div>
-                
-                </div>
-
-                <form
-                  className="datoTPastel"
-                  // onClick={() => cambiarEstadoModal2(!estadoModal2)}
-                >
+              <div className="encabezadoEscritorio">
+                <div className="encID">
                   <div>
-
-                    <h3>{catpastel.categoria}</h3>
+                    <h3>ID: </h3>
                   </div>
-              
-                </form>
-                <div className="controlBtC">
-                  <button
-                    className="btEditarU"
-                    onClick={() =>
-                      cambiarEstadoModal2(!estadoModal2) &
-                      setIdEdit(catpastel.idcatp)
-                    }
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(catpastel.idcatp)}
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
+                </div>
+
+                <div className="encDato">
+                  <div className="encD">
+                    <h3>Categoria de pastel: </h3>
+                  </div>
+                </div>
+                <div className="encBT">
+                  <div>
+                    <h3>Accion: </h3>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {catpasteles.map((catpastel, index) => (
+                <div className="ContenedorTPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="tpastelID">
+                      <p>ID</p>
+                      <span>{catpastel.idcatp}</span>
+                    </div>
+                  </div>
+
+                  <form
+                    className="datoTPastel"
+                    // onClick={() => cambiarEstadoModal2(!estadoModal2)}
+                  >
+                    <div>
+                      <h3>{catpastel.categoria}</h3>
+                    </div>
+                  </form>
+                  <div className="controlBtC">
+                    <button
+                      className="btEditarU"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(catpastel.idcatp)
+                      }
+                    >
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(catpastel.idcatp)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-
-
           </div>
         </div>
       </div>
