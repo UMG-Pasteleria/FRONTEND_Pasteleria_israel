@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Pie1 from "../components/chart/Pie1";
 import ChartDias from "../components/chart/grafica1";
 import Navbar from "../components/navbar";
-import "../styles/inicio.css";
+import "../styles/Inicio.css";
 
 function Reportes() {
   const { handleSubmit, register } = useForm();
@@ -12,19 +12,18 @@ function Reportes() {
     console.log(data);
   });
 
+  /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+  const navegate = useNavigate();
 
-     /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
-     const navegate = useNavigate();
+  useEffect(() => {
+    // Comprobar si el token existe en el localStorage
+    const token = localStorage.getItem("token");
 
-     useEffect(() => {
-       // Comprobar si el token existe en el localStorage
-       const token = localStorage.getItem('token');
-   
-       // Si no hay token, redirigir al inicio
-       if (!token) {
-         navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
-       }
-     }, []);
+    // Si no hay token, redirigir al inicio
+    if (!token) {
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+    }
+  }, []);
 
   return (
     <>
