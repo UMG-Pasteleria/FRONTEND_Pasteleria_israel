@@ -48,7 +48,7 @@ function Inicio() {
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles disponibles</span>
                 <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie2 />
+                  {/* <Pie2 /> */}
                 </div>
               </div>
             </div>
