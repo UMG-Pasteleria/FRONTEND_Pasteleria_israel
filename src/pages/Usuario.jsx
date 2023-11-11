@@ -147,6 +147,17 @@ const Usuario = () => {
     );
   }
 
+
+  // let result = [];
+  // if (!search) {
+  //   result = usuarios;
+  // } else {
+  //   result = usuarios.filter((datos) =>
+  //     datos.nombre_u.toLowerCase().includes(search.toLowerCase())
+  //   );
+  // }
+
+
   return (
     <>
       <Navbar />
