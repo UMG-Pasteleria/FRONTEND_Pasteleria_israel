@@ -9,13 +9,12 @@ const ModalupProiveedor = ({
   idEdit,
 }) => {
   const [proveedor, setProveedor] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idprov) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `proveedores/${idprov}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const proveedor = await response.json();
       setProveedor(proveedor);
       setProveedroUP({
@@ -60,16 +59,13 @@ const ModalupProiveedor = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/proveedores/${idprov}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(proveedorUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `proveedores/${idprov}`, {
+        method: "PUT",
+        body: JSON.stringify(proveedorUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       console.log(response);

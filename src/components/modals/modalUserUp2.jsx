@@ -13,16 +13,15 @@ function ModalEditUser({
 }) {
   // Estados
 
+  const URL = import.meta.env.VITE_URL;
+
   const [usuario, setUsuario] = useState({});
 
   const getDataUp = async (idusuario) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/usuario/${idusuario}`,
-        {
-          headers: { "content-Type": "application/json" },
-        }
-      );
+      const response = await fetch(URL + `usuario/${idusuario}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const json = await response.json();
       setUsuario(json);
       setUserUP({
@@ -67,16 +66,13 @@ function ModalEditUser({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/usuario/${userUP.idusuario}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(userUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `usuario/${userUP.idusuario}`, {
+        method: "PUT",
+        body: JSON.stringify(userUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = response.json();
       console.log(data);
       console.log(response);

@@ -153,14 +153,13 @@ const Usuario = () => {
 
   useEffect(() => {
     // Comprobar si el token existe en el localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     // Si no hay token, redirigir al inicio
     if (!token) {
-      navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
     }
   }, []);
-
 
   return (
     <>
@@ -263,11 +262,7 @@ const Usuario = () => {
               </button>
 
               <div className="busqueda">
-                <form
-                  action="http://localhost:3000/usuario"
-                  method="get"
-                  className="cuadroBusqueda"
-                >
+                <form method="get" className="cuadroBusqueda">
                   <input
                     type="text"
                     onChange={searcher}
