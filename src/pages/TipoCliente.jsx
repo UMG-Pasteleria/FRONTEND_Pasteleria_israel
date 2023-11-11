@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import avatar from "../assets/avatar.png";
 import ModalupTClient from "../components/modals/ModalUpdateTipoCliente";
@@ -136,6 +137,21 @@ function TCliente() {
       datos.tipo_cl.toLowerCase().includes(search.toLowerCase())
     );
   }
+
+    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+    const navegate = useNavigate();
+
+    useEffect(() => {
+      // Comprobar si el token existe en el localStorage
+      const token = localStorage.getItem('token');
+  
+      // Si no hay token, redirigir al inicio
+      if (!token) {
+        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+      }
+    }, []);
+
+    
 
   return (
     <>

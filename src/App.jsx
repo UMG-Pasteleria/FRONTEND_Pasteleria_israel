@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import ModalP from "../src/components/modals/modalProveedor";
 import Cliente from "./pages/Cliente";
 import Compras from "./pages/Compras";
@@ -18,7 +20,30 @@ import Usuario from "./pages/Usuario";
 import Web from "./pages/webInicio";
 
 function App() {
-  //const [count, setCount] = useState(0)
+    //const [count, setCount] = useState(0)
+    /* Lógica de autenticación de Usuario */
+    const [isAuthenticated, setIsAuthenticated] = useState(true);//Cambiar false
+    const setAuth = (booleand) => {
+      setIsAuthenticated(booleand);
+    };
+  
+    async function isAuth() {
+      try {
+        const response = await fetch("http://localhost:3000/auth/verify", {
+          method: "GET",
+          headers: { token: localStorage.token },
+        });
+  
+        const parseRes = await response.json();
+        parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+  
+    useEffect(() => {
+      isAuth();
+    });
 
   return (
     <>
