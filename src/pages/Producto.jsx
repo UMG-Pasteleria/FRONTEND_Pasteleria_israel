@@ -17,7 +17,7 @@ const Pastel = () => {
 
   const [productos, setProductos] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   const getData = async () => {
     try {
@@ -239,7 +239,6 @@ const Pastel = () => {
                       placeholder="Nombre proveedor"
                     ></input>
                   </div>
-
                 </div>
                 <br />
 
@@ -388,7 +387,6 @@ const Pastel = () => {
                 <div className="encD">
                   <h3>Proveedor: </h3>
                 </div>
-
               </div>
               <div className="encBT">
                 <div>

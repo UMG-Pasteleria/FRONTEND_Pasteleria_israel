@@ -35,12 +35,11 @@ const Proveedor = () => {
   const { handleSubmit, register } = useForm();
   const enviarProveedor = handleSubmit((data) => {
     console.log(data);
-    fetch(URL, {
+    fetch(URL + "proveedores", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    getData();
     cambiarEstadoModal1(!estadoModal1);
     swal.fire({
       title: "Proveedor Agregado!",
@@ -55,6 +54,7 @@ const Proveedor = () => {
         container: "contenedor-alert",
       },
     });
+    getData();
     // (document.getElementById("email").value = null),
     //   (document.getElementById("nit").value = null),
     //   (document.getElementById("nombre_proveedor").value = null),

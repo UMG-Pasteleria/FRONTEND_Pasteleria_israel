@@ -8,10 +8,9 @@ import ModalupPedido from "../components/modals/ModalUpdatePedido";
 import Navbar from "../components/navbar";
 import PDFGenerator from "../generarPDF/gReportes";
 
-
-
 import ChartDias from "../components/chart/grafica1";
 import Pie1 from "../components/chart/Pie1";
+import Pie2 from "../components/chart/Pie2";
 import "../styles/reportes.css";
 
 function Pedido() {
@@ -24,7 +23,7 @@ function Pedido() {
   const [pasteles, setPasteles] = useState([]);
   const [modopagos, setModopagos] = useState([]);
 
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   //--------------- OBTENER DATOS DE PEDIDOS -----------------//
 
@@ -97,7 +96,6 @@ function Pedido() {
     getModopago();
   }, []);
 
-
   //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
   const { handleSubmit, register } = useForm();
   const enviarPedido = handleSubmit((data) => {
@@ -122,7 +120,6 @@ function Pedido() {
         container: "contenedor-alert",
       },
     });
-
   });
 
   //-----------------ELIMINAR PEDIDO---------------------------------
@@ -204,6 +201,7 @@ function Pedido() {
   }
 
 
+
     /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
     const navegate = useNavigate();
 
@@ -216,6 +214,7 @@ function Pedido() {
         navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
       }
     }, []);
+
 
 
   return (
@@ -242,12 +241,11 @@ function Pedido() {
               <div className="ChartPie">
                 <span className="TituloItem">Insumos disponibles</span>
                 <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie1 />
+                  <Pie2 />
                 </div>
               </div>
             </div>
           </article>
-         
         </section>
       </div>
 
@@ -462,8 +460,7 @@ function Pedido() {
 
           <div className="centrarControles">
             <div className="controlesUsuario">
-
-            <button onClick={getData}>
+              <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button>
 
@@ -491,7 +488,6 @@ function Pedido() {
               {/* <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
               </button> */}
-              
             </div>
           </div>
 
@@ -567,7 +563,7 @@ function Pedido() {
                 <div className="encPastel">
                   <h3>Pastel: </h3>
                 </div>
-{/* 
+                {/* 
                 <div className="encDedicatoria">
                   <h3>Dedicatoria: </h3>
                 </div> */}

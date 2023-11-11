@@ -16,6 +16,10 @@ const Pastel = () => {
   const [search, setSaerch] = useState("");
 
   const [pasteles, setPasteles] = useState([]);
+  const [tamanios, setTamanio] = useState([]);
+  const [decoracines, setDecoracion] = useState([]);
+  const [categorias, setCategoria] = useState([]);
+  const [tipos, setTipo] = useState([]);
 
   const URL = import.meta.env.VITE_URL;
 
@@ -29,14 +33,70 @@ const Pastel = () => {
       console.error(err);
     }
   };
+
+  //--------------------TAMAÑO DE PASTELES----------------------
+  const getTamanio = async () => {
+    try {
+      const response = await fetch(URL + "tamanio");
+      const datos = await response.json();
+      setTamanio(datos);
+      console.log(datos);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //--------------------- DECORACION DE PASTELES----------------------
+
+  const getDecoracion = async () => {
+    try {
+      const response = await fetch(URL + "decoracion");
+      const datos = await response.json();
+      setDecoracion(datos);
+      console.log(datos);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //---------------------  CATEGORIA DE PASTELES----------------------
+
+  const getCategoria = async () => {
+    try {
+      const response = await fetch(URL + "categoria");
+      const datos = await response.json();
+      setCategoria(datos);
+      console.log(datos);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //-------------- TIPO DE PASTEL ------------------
+
+  const getTipo = async () => {
+    try {
+      const response = await fetch(URL + "tipo");
+      const datos = await response.json();
+      setTipo(datos);
+      console.log(datos);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     getData();
+    getTamanio();
+    getDecoracion();
+    getCategoria();
+    getTipo();
   }, []);
   // // // // //-----CAPTURAR DATOS DE NUEVO PROVEEDOR------//
   const { handleSubmit, register } = useForm();
   const enviarPastel = handleSubmit((data) => {
     console.log(data);
-    fetch(URL, {
+    fetch(URL + "pastel", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -63,7 +123,7 @@ const Pastel = () => {
     //   (document.getElementById("direccion_prov").value = null);
   });
 
-  //-----------------ELIMINAR PORVEEDOR---------------------------------
+  //-----------------ELIMINAR PASTEL---------------------------------
 
   const handleDelete = async (idpastel) => {
     const res = await fetch(URL + `pastel/${idpastel}`, {
@@ -170,7 +230,7 @@ const Pastel = () => {
           <br></br>
           <h2>Listado de Pasteles</h2>
           <br></br>
-          {/* ------------------- MODAL AGREGAR NUEVO PROVEEDOR-------------- */}
+          {/* ------------------- MODAL AGREGAR NUEVO PASTEL-------------- */}
           <ModalPast
             estado={estadoModal1}
             cambiarEstado={cambiarEstadoModal1}
@@ -203,34 +263,106 @@ const Pastel = () => {
                 </div>
 
                 <div className="itemPast">
-                  <label>Tamaño del pastel: </label>
+                  <label>Stock: </label>
                   <input
-                    {...register("tamanio_idpast")}
+                    {...register("stock")}
                     type="number"
-                    id="tamanio_idpast"
-                    placeholder="Tamaño del pastel"
+                    id="stock"
+                    placeholder="Stock"
                   ></input>
                 </div>
 
                 <div className="itemPast">
-                  <label>Decoracion del pastel: </label>
-                  <input
-                    {...register("dec_idpast")}
-                    type="number"
-                    id="dec_idpast"
-                    placeholder="Decoracion del pastel"
-                  ></input>
-
-                  <div className="itemPast">
-                    <label>Categoria del pastel: </label>
-                    <input
-                      {...register("cat_idpast")}
-                      type="number"
-                      id="cat_idpast"
-                      placeholder="Categoria del pastel"
-                    ></input>
-                  </div>
+                  <label>Tamaño del pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("tamanio_idpast")}
+                    id="tamanio_idpast"
+                  >
+                    <option disabled selected>
+                      Seleccione tamaño de pastel
+                    </option>
+                    {tamanios.map((tamanios, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        Value={tamanios.idtampast}
+                      >
+                        {tamanios.tamanio}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+
+                <div className="itemPast">
+                  <label>Decoracion del pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("dec_idpast")}
+                    id="dec_idpast"
+                    placeholder="Sedeccione decoracion"
+                  >
+                    <option disabled selected>
+                      Seleccione decoracion
+                    </option>
+                    {decoracines.map((decoraciones, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        Value={decoraciones.idecpast}
+                      >
+                        {decoraciones.decoracion}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="itemPast">
+                  <label>Categoria del pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("cat_idpast")}
+                    id="cat_idpast"
+                    placeholder="Sedeccione decoracion"
+                  >
+                    <option disabled selected>
+                      Seleccione categoria
+                    </option>
+                    {categorias.map((categorias, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        Value={categorias.idcatp}
+                      >
+                        {categorias.categoria}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="itemPast">
+                  <label>Tipo de pastel: </label>
+                  <select
+                    className="selector"
+                    {...register("id_tipo")}
+                    id="id_tipo"
+                    placeholder="Sedeccione decoracion"
+                  >
+                    <option disabled selected>
+                      Seleccione tipo
+                    </option>
+                    {tipos.map((tipos, index) => (
+                      <option
+                        className="opciones"
+                        key={index}
+                        Value={tipos.idtpastel}
+                      >
+                        {tipos.tipo_pastel}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <br />
 
                 <div className="bonotesNewPast">
@@ -289,7 +421,7 @@ const Pastel = () => {
                 </form>
               </div>
 
-              <PDFGenerator data={pasteles} />
+              {/* <PDFGenerator data={pasteles} /> */}
 
               <button onClick={getData}>
                 <span className="material-symbols-outlined">refresh</span>
@@ -301,54 +433,58 @@ const Pastel = () => {
 
           {/* //----------------VERSION MOVIL ------------------------------ */}
           <div className="pastelMovil">
-            {result.map((pasteles, index) => (
-              <div className="ContenedorPasteles" key={index}>
-                <div className="imgPerfil">
-                  <div className="pastelID">
-                    <p>ID</p>
-                    <span>{pasteles.stock}</span>
+            {result.length === 0 ? (
+              result.map((pasteles, index) => (
+                <div className="ContenedorPasteles" key={index}>
+                  <div className="imgPerfil">
+                    <div className="pastelID">
+                      <p>ID</p>
+                      <span>{pasteles.stock}</span>
+                    </div>
+                    <img
+                      src={avatar}
+                      className="avatar"
+                      onClick={() =>
+                        cambiarEstadoModal2(!estadoModal2) &
+                        setIdEdit(pasteles.idpastel)
+                      }
+                    />
                   </div>
-                  <img
-                    src={avatar}
-                    className="avatar"
+
+                  <div
+                    className="datoPastel"
                     onClick={() =>
                       cambiarEstadoModal2(!estadoModal2) &
                       setIdEdit(pasteles.idpastel)
                     }
-                  />
-                </div>
-
-                <div
-                  className="datoPastel"
-                  onClick={() =>
-                    cambiarEstadoModal2(!estadoModal2) &
-                    setIdEdit(pasteles.idpastel)
-                  }
-                >
-                  <div>
-                    <h3>{pasteles.pastel}</h3>
-                  </div>
-                  <div>
-                    <h5>Precio: {pasteles.precio}</h5>
-                  </div>
-                  <div>
-                    <p>Tamaño del pastel: {pasteles.tamanio}</p>
-                  </div>
-                </div>
-                <div className="controlBtP">
-                  <button className="btEditarU">
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <br />
-                  <button
-                    className="btEliminarU"
-                    onClick={() => mostrarAlerta(pasteles.idpastel)}
                   >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
+                    <div>
+                      <h3>{pasteles.pastel}</h3>
+                    </div>
+                    <div>
+                      <h5>Precio: {pasteles.precio}</h5>
+                    </div>
+                    <div>
+                      <p>Tamaño del pastel: {pasteles.tamanio}</p>
+                    </div>
+                  </div>
+                  <div className="controlBtP">
+                    <button className="btEditarU">
+                      <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <br />
+                    <button
+                      className="btEliminarU"
+                      onClick={() => mostrarAlerta(pasteles.idpastel)}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No hay datos</p>
+            )}
           </div>
           {/* //--------------------------- FIN VERSION MOVIL ---------------------------- */}
           <div className="pastelEscritorio">
@@ -382,7 +518,6 @@ const Pastel = () => {
                 </div>
               </div>
             </div>
-
             {result.map((pastel, index) => (
               <div className="ContenedorPasteles" key={index}>
                 <div className="imgPerfil">
