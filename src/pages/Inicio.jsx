@@ -1,4 +1,4 @@
-import "../styles/inicio.css";
+// import "../styles/inicio.css";
 import React from "react";
 import Navbar from "../components/navbar";
 import ChartDias from "../components/chart/grafica1";
