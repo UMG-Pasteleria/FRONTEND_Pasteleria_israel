@@ -1,14 +1,15 @@
-import React, { useEffect, useState, Component } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import ModalupPedido from "../components/modals/ModalUpdatePedido";
-import ModalPed from "../components/modals/modalPedido";
 import ModalCli from "../components/modals/modalCliente";
+import ModalPed from "../components/modals/modalPedido";
 import Navbar from "../components/navbar";
 import SidebarPedidos from "../components/sidebarPedido";
 import PDFGenerator from "../generarPDF/g.Pedido";
-import moment from "moment";
-import "react-datepicker/dist/react-datepicker.css";
 import "../styles/pedido.css";
 
 function Pedido() {
@@ -240,6 +241,23 @@ function Pedido() {
   //   console.log(total);
   //   document.getElementById("total").htmlFor = total;
   // }
+
+
+  
+    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+    const navegate = useNavigate();
+
+    useEffect(() => {
+      // Comprobar si el token existe en el localStorage
+      const token = localStorage.getItem('token');
+  
+      // Si no hay token, redirigir al inicio
+      if (!token) {
+        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+      }
+    }, []);
+
+
   return (
     <>
       <Navbar />

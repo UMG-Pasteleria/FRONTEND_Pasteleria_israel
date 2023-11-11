@@ -1,12 +1,11 @@
-import "../styles/inicio.css";
-import React from "react";
-import Navbar from "../components/navbar";
-import ChartDias from "../components/chart/grafica1";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Pie1 from "../components/chart/Pie1";
-import Pie2 from "../components/chart/Pie2";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/04.jpg";
+import Pie1 from "../components/chart/Pie1";
+import ChartDias from "../components/chart/grafica1";
+import Navbar from "../components/navbar";
+import "../styles/inicio.css";
 
 function Inicio() {
   const { handleSubmit, register } = useForm();
@@ -14,7 +13,19 @@ function Inicio() {
     console.log(data);
   });
 
+
+  /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
   const navegate = useNavigate();
+
+  useEffect(() => {
+    // Comprobar si el token existe en el localStorage
+    const token = localStorage.getItem('token');
+
+    // Si no hay token, redirigir al inicio
+    if (!token) {
+      navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+    }
+  }, []);
 
   return (
     <>
@@ -48,12 +59,13 @@ function Inicio() {
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles disponibles</span>
                 <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie2 />
+                  {/* <Pie2 /> */}
                 </div>
               </div>
             </div>
           </article>
           <article className="MenuInicio">
+            
             <div
               className="ElementoMenu1"
               onClick={() => navegate("/Admin/Productos")}

@@ -14,6 +14,11 @@ function Navbar() {
 
   const navegate = useNavigate();
 
+  function cerrarsesion () {
+    localStorage.removeItem("token")
+    navegate("/Admin")
+  }
+
   return (
     <>
       <header className="header">
@@ -83,6 +88,18 @@ function Navbar() {
             <span>Compras</span>
           </div>
         </button>
+
+        <button
+          type="button"
+          className="navB"
+          onClick={cerrarsesion}
+        >
+          <div className="Inventario">
+            <span className="material-symbols-outlined">Logout</span>
+            <span>Cerrar Sesion</span>
+          </div>
+        </button>
+
       </nav>
     </>
   );

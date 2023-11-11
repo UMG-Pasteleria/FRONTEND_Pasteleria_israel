@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import ModalupTPastel from "../components/modals/ModalUpdateTipoPastel";
 import ModalTipoPast from "../components/modals/modalTipoPastel";
@@ -156,6 +157,21 @@ function TPastel() {
       datos.tipo_pastel.toLowerCase().includes(search.toLowerCase())
     );
   }
+
+
+    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+    const navegate = useNavigate();
+
+    useEffect(() => {
+      // Comprobar si el token existe en el localStorage
+      const token = localStorage.getItem('token');
+  
+      // Si no hay token, redirigir al inicio
+      if (!token) {
+        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+      }
+    }, []);
+    
 
   return (
     <>
