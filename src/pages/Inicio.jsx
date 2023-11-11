@@ -5,7 +5,7 @@ import logo from "../assets/04.jpg";
 import Pie1 from "../components/chart/Pie1";
 import ChartDias from "../components/chart/grafica1";
 import Navbar from "../components/navbar";
-import "../styles/inicio.css";
+import "../styles/Inicio.css";
 
 function Inicio() {
   const { handleSubmit, register } = useForm();
@@ -13,17 +13,16 @@ function Inicio() {
     console.log(data);
   });
 
-
   /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
   const navegate = useNavigate();
 
   useEffect(() => {
     // Comprobar si el token existe en el localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     // Si no hay token, redirigir al inicio
     if (!token) {
-      navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
     }
   }, []);
 
@@ -65,7 +64,6 @@ function Inicio() {
             </div>
           </article>
           <article className="MenuInicio">
-            
             <div
               className="ElementoMenu1"
               onClick={() => navegate("/Admin/Productos")}
