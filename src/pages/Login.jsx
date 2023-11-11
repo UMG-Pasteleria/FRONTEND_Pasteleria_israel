@@ -3,16 +3,14 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/04.jpg";
 import "../styles/login.css";
 
-
-
 //import '../assets/styles/Login.css';
 const Login = ({ setAuth }) => {
- // const sidebar = useSidebarContext()
+  // const sidebar = useSidebarContext()
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
-  
+  const URL = import.meta.env.VITE_URL;
 
   const { email, password } = inputs;
 
@@ -20,26 +18,26 @@ const Login = ({ setAuth }) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { email, password };
-      console.log(body)
-      const response = await fetch("http://localhost:3000/auth/login", {
+      console.log(body);
+      const response = await fetch(URL + "/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       const parseRes = await response.json();
-      console.log(parseRes)
-      if (parseRes.token){
-        console.log(parseRes.token)
+      console.log(parseRes);
+      if (parseRes.token) {
+        console.log(parseRes.token);
         localStorage.setItem("token", parseRes.token);
         //setAuth(true)
-        navigate("/Admin/Inicio")
+        navigate("/Admin/Inicio");
       }
     } catch (err) {
       console.error(err);
@@ -47,33 +45,37 @@ const Login = ({ setAuth }) => {
   };
 
   return (
-   <div className="bodyLogin">
+    <div className="bodyLogin">
       <div className="login-box">
-      <img src={logo} className="logoLogin" />
-          <h1>Iniciar sesion</h1>
-          <br></br>
+        <img src={logo} className="logoLogin" />
+        <h1>Iniciar sesion</h1>
+        <br></br>
         <form onSubmit={onSubmitForm}>
-        <label htmlFor="username"></label>
-            <input className="input1"
+          <label htmlFor="username"></label>
+          <input
+            className="input1"
             placeholder="correo"
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => onChange(e)}
-            ></input>
-            <label htmlFor="password"></label>
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => onChange(e)}
+          ></input>
+          <label htmlFor="password"></label>
 
-            <input className="input1"
+          <input
+            className="input1"
             placeholder="contraseña"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => onChange(e)}
-            ></input>
-            {/* <label>Contraseña</label> */}
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => onChange(e)}
+          ></input>
+          {/* <label>Contraseña</label> */}
 
           <div className="botones">
-            <button className="BTenviar" id="btn-login">Iniciar sesion</button>
+            <button className="BTenviar" id="btn-login">
+              Iniciar sesion
+            </button>
           </div>
         </form>
       </div>
