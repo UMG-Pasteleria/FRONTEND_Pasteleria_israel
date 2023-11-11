@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert2";
 import ModalupPedido from "../components/modals/ModalUpdatePedido";
@@ -98,49 +98,63 @@ function Pedido() {
 
   //-----CAPTURAR DATOS DE NUEVO PEDIDO------//
   const { handleSubmit, register } = useForm();
-  const enviarPedido = handleSubmit((data) => {
+  const enviarPedido = handleSubmit(async (data) => {
     console.log(data);
-    fetch(URL + "pedidos", {
+    await fetch(URL + "pedidos", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
     });
 
-    if (response.status === 200) {
-      swal.fire({
-        title: "Pedido Agregado!",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1200,
-        customClass: {
-          confirmButton: "btEliminar",
-          cancelButton: "btCancelar",
-          popup: "popus-eliminado",
-          title: "titulo-pop",
-          container: "contenedor-alert",
-        },
-      });
-
-      // Optionally update your clients state or perform other actions
-      setClientes([...clientes, data]);
-    } else {
-      swal.fire({
-        title: "Error al Agregar",
-        icon: "error",
-        text: `${response.status}`,
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-          confirmButton: "btEliminar",
-          cancelButton: "btCancelar",
-          popup: "popus-eliminado",
-          title: "titulo-pop",
-          container: "contenedor-alert",
-        },
-      });
-    }
+    swal.fire({
+      title: "Pedido Agregado!",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1200,
+      customClass: {
+        confirmButton: "btEliminar",
+        cancelButton: "btCancelar",
+        popup: "popus-eliminado",
+        title: "titulo-pop",
+        container: "contenedor-alert",
+      },
+    });
     getData();
     cambiarEstadoModal1(!estadoModal1);
+
+    // if (response.status === 200) {
+    //   // swal.fire({
+    //   //   title: "Pedido Agregado!",
+    //   //   icon: "success",
+    //   //   showConfirmButton: false,
+    //   //   timer: 1200,
+    //   //   customClass: {
+    //   //     confirmButton: "btEliminar",
+    //   //     cancelButton: "btCancelar",
+    //   //     popup: "popus-eliminado",
+    //   //     title: "titulo-pop",
+    //   //     container: "contenedor-alert",
+    //   //   },
+    //   // });
+
+    //   // Optionally update your clients state or perform other actions
+    //   setClientes([...clientes, data]);
+    // } else {
+    //   swal.fire({
+    //     title: "Error al Agregar",
+    //     icon: "error",
+    //     text: `${response.status}`,
+    //     showConfirmButton: false,
+    //     timer: 1500,
+    //     customClass: {
+    //       confirmButton: "btEliminar",
+    //       cancelButton: "btCancelar",
+    //       popup: "popus-eliminado",
+    //       title: "titulo-pop",
+    //       container: "contenedor-alert",
+    //     },
+    //   });
+    // }
 
     //   (document.getElementById("nit_pr").value = null),
     //   (document.getElementById("nombre_pr").value = null),
@@ -294,13 +308,13 @@ function Pedido() {
                             </option>
                           ))}
                         </select>
-                        <button
+                        {/* <button
                           className="botonAgregar"
                           type="button"
                           onClick={() => cambiarEstadoModal3(!estadoModal3)}
                         >
                           +
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                     {/* //------------------MODO DE PAGO----------------/ */}
@@ -376,9 +390,9 @@ function Pedido() {
                             </option>
                           ))}
                         </select>
-                        <button className="botonAgregar" type="button">
+                        {/* <button className="botonAgregar" type="button">
                           +
-                        </button>
+                        </button> */}
                       </div>
                     </div>
 
@@ -631,7 +645,6 @@ function Pedido() {
                 </div>
               </div>
             </div>
-
             {result.map((pedidos, index) => (
               <div className="ContenedorPedidosP" key={index}>
                 <div className="PEDIDO">
