@@ -12,13 +12,12 @@ const ModalupPastel = ({
   pasteles,
 }) => {
   const [pastel, setPastel] = useState({});
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idpastel) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${idpastel}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `pastel/${idpastel}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const pastel = await response.json();
       setPastel(pastel);
       setPasteloUP({
@@ -64,16 +63,13 @@ const ModalupPastel = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/pastel/${pastelUP.idpastel}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(pastelUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `pastel/${pastelUP.idpastel}`, {
+        method: "PUT",
+        body: JSON.stringify(pastelUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = response.json();
       console.log(data);
       console.log(response);
@@ -146,7 +142,8 @@ const ModalupPastel = ({
                     value={pastelUP.idpastel}
                     name="idpastel"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

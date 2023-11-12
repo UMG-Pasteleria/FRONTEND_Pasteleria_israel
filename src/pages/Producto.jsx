@@ -36,7 +36,7 @@ const Pastel = () => {
   const { handleSubmit, register } = useForm();
   const enviarProducto = handleSubmit((data) => {
     console.log(data);
-    fetch(URL, {
+    fetch(URL + "producto", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -144,20 +144,18 @@ const Pastel = () => {
     );
   }
 
+  /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+  const navegate = useNavigate();
 
-    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
-    const navegate = useNavigate();
+  useEffect(() => {
+    // Comprobar si el token existe en el localStorage
+    const token = localStorage.getItem("token");
 
-    useEffect(() => {
-      // Comprobar si el token existe en el localStorage
-      const token = localStorage.getItem('token');
-  
-      // Si no hay token, redirigir al inicio
-      if (!token) {
-        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
-      }
-    }, []);
-    
+    // Si no hay token, redirigir al inicio
+    if (!token) {
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+    }
+  }, []);
 
   return (
     <>
@@ -223,9 +221,9 @@ const Pastel = () => {
                   <div className="itemProd">
                     <label>Tipo: </label>
                     <input
-                      {...register("tipo")}
+                      {...register("id_tipoprod")}
                       type="text"
-                      id="tipo"
+                      id="id_tipoprod"
                       placeholder="Tipo"
                     ></input>
                   </div>
@@ -233,9 +231,9 @@ const Pastel = () => {
                   <div className="itemProd">
                     <label>Proveedor: </label>
                     <input
-                      {...register("nombre_proveedor")}
+                      {...register("id_prov")}
                       type="text"
-                      id="nombre_proveedor"
+                      id="id_prov"
                       placeholder="Nombre proveedor"
                     ></input>
                   </div>

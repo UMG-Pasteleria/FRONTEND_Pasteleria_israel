@@ -12,19 +12,17 @@ const ModalupTipoPastel = ({
   tampasteles,
 }) => {
   const [tampastel, setTamPastel] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idtampast) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtampast}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `tipo_cliente/${idtampast}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const tampastel = await response.json();
       setTamPastel(tampastel);
       setTamPasteloUP({
         idtampast: tampastel.idtampast,
         tamanio: tampastel.tamanio,
-      
       });
       console.log(tampastel);
     } catch (err) {
@@ -43,8 +41,6 @@ const ModalupTipoPastel = ({
   const [tampastelUP, setTamPasteloUP] = useState({
     idtampast: "",
     tamanio: "",
-   
-    
   });
 
   const onChangeData = (e) => {
@@ -59,7 +55,7 @@ const ModalupTipoPastel = ({
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${tampastelUP.idtampast}`,
+        URL + `tipo_cliente/${tampastelUP.idtampast}`,
         {
           method: "PUT",
           body: JSON.stringify(tampastelUP),
@@ -73,7 +69,9 @@ const ModalupTipoPastel = ({
       console.log(response);
       setTamPasteles(
         tampasteles.map((tampastel) =>
-          tampastel.idtampast === tampastelUP.idtampast ? tampastelUP : tampastel
+          tampastel.idtampast === tampastelUP.idtampast
+            ? tampastelUP
+            : tampastel
         )
       );
       cambiarEstado2(false);
@@ -140,7 +138,8 @@ const ModalupTipoPastel = ({
                     value={tampastelUP.idtampast}
                     name="idtampast"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

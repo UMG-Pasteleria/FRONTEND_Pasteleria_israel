@@ -12,19 +12,17 @@ const ModalupCatPastel = ({
   tampasteles: catpasteles,
 }) => {
   const [catpastel, setCatPastel] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idcatp) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idcatp}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `categoria/${idcatp}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const catpastel = await response.json();
       setCatPastel(catpastel);
       setCatPasteloUP({
         idcatp: catpastel.idcatp,
         categoria: catpastel.categoria,
-      
       });
       console.log(catpastel);
     } catch (err) {
@@ -43,8 +41,6 @@ const ModalupCatPastel = ({
   const [catpastelUP, setCatPasteloUP] = useState({
     idcatp: "",
     categoria: "",
-   
-    
   });
 
   const onChangeData = (e) => {
@@ -58,16 +54,13 @@ const ModalupCatPastel = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${catpastelUP.idcatp}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(catpastelUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `categoria/${catpastelUP.idcatp}`, {
+        method: "PUT",
+        body: JSON.stringify(catpastelUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       console.log(response);
@@ -140,7 +133,8 @@ const ModalupCatPastel = ({
                     value={catpastelUP.idcatp}
                     name="idecpast"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

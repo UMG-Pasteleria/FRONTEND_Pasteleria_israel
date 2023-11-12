@@ -12,19 +12,17 @@ const ModalupDecPastel = ({
   tampasteles: decpasteles,
 }) => {
   const [decpastel, setDecPastel] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idecpast) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idecpast}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `tipo_cliente/${idecpast}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const decpastel = await response.json();
       setDecPastel(decpastel);
       setDecPasteloUP({
         idecpast: decpastel.idecpast,
         decoracion: decpastel.decoracion,
-      
       });
       console.log(decpastel);
     } catch (err) {
@@ -43,8 +41,6 @@ const ModalupDecPastel = ({
   const [decpastelUP, setDecPasteloUP] = useState({
     idecpast: "",
     decoracion: "",
-   
-    
   });
 
   const onChangeData = (e) => {
@@ -59,7 +55,7 @@ const ModalupDecPastel = ({
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${decpastelUP.idecpast}`,
+        URL + `tipo_cliente/${decpastelUP.idecpast}`,
         {
           method: "PUT",
           body: JSON.stringify(decpastelUP),
@@ -140,7 +136,8 @@ const ModalupDecPastel = ({
                     value={decpastelUP.idecpast}
                     name="idecpast"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

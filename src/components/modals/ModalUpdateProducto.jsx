@@ -12,13 +12,12 @@ const ModalupProduct = ({
   pasteles: productos,
 }) => {
   const [producto, setProducto] = useState({});
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idprod) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/producto/${idprod}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `producto/${idprod}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const producto = await response.json();
       setProducto(producto);
       setProductoUP({
@@ -148,7 +147,8 @@ const ModalupProduct = ({
                     value={productoUP.idprod}
                     name="idprod"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

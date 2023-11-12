@@ -12,19 +12,17 @@ const ModalupTipoPastel = ({
   tpasteles,
 }) => {
   const [tpastel, setTPastel] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idtpastel) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtpastel}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `tipo_cliente/${idtpastel}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const tpastel = await response.json();
       setTPastel(tpastel);
       setTPasteloUP({
         idtpastel: tpastel.idtpastel,
         tipo_pastel: tpastel.tipo_pastel,
-      
       });
       console.log(tpastel);
     } catch (err) {
@@ -43,8 +41,6 @@ const ModalupTipoPastel = ({
   const [tpastelUP, setTPasteloUP] = useState({
     idtpastel: "",
     tipo_pastel: "",
-   
-    
   });
 
   const onChangeData = (e) => {
@@ -59,7 +55,7 @@ const ModalupTipoPastel = ({
 
     try {
       const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${tpastelUP.idtpastel}`,
+        URL + `tipo_cliente/${tpastelUP.idtpastel}`,
         {
           method: "PUT",
           body: JSON.stringify(tpastelUP),
@@ -140,7 +136,8 @@ const ModalupTipoPastel = ({
                     value={tpastelUP.idtpastel}
                     name="idtpastel"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

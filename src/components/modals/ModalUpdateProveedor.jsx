@@ -12,13 +12,12 @@ const ModalupProiveedor = ({
   proveedores,
 }) => {
   const [proveedor, setProveedor] = useState({});
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idprov) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${idprov}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `proveedores/${idprov}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const proveedor = await response.json();
       setProveedor(proveedor);
       setProveedroUP({
@@ -64,16 +63,13 @@ const ModalupProiveedor = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/proveedores/${proveedorUP.idprov}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(proveedorUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `proveedores/${proveedorUP.idprov}`, {
+        method: "PUT",
+        body: JSON.stringify(proveedorUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = response.json();
       console.log(data);
       console.log(response);
@@ -146,7 +142,8 @@ const ModalupProiveedor = ({
                     value={proveedorUP.idprov}
                     name="idprov"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

@@ -7,10 +7,8 @@ import Compras from "./pages/Compras";
 import Inicio from "./pages/Inicio";
 import Login from "./pages/Login";
 import Pastel from "./pages/Pasteles";
-import PastelCumpleWEB from "./pages/Pasteles/PastelCumple";
 import Pedido from "./pages/Pedido";
 import Producto from "./pages/Producto";
-import ProductosWEB from "./pages/ProductosWEB";
 import Proveedor from "./pages/Proveedor";
 import ReporteOficial from "./pages/ReporteOficial";
 import Reportes from "./pages/Reportes";
@@ -50,8 +48,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Web />} />
-          <Route path="/pastelcumpleaños" element={<PastelCumpleWEB />} />
-          <Route path="/productos" element={<ProductosWEB />} />
           <Route path="/Admin" element={<Login />} />
           <Route path="/Admin/Inicio" element={<Inicio />} />
           <Route path="/Admin/Usuario" element={<Usuario />} />

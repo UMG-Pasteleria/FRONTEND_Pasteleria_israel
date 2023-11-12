@@ -200,22 +200,18 @@ function Pedido() {
     );
   }
 
+  /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+  const navegate = useNavigate();
 
+  useEffect(() => {
+    // Comprobar si el token existe en el localStorage
+    const token = localStorage.getItem("token");
 
-    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
-    const navegate = useNavigate();
-
-    useEffect(() => {
-      // Comprobar si el token existe en el localStorage
-      const token = localStorage.getItem('token');
-  
-      // Si no hay token, redirigir al inicio
-      if (!token) {
-        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
-      }
-    }, []);
-
-
+    // Si no hay token, redirigir al inicio
+    if (!token) {
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+    }
+  }, []);
 
   return (
     <>
@@ -234,14 +230,14 @@ function Pedido() {
             <div className="ContenedorPie">
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles vendidos</span>
-                <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie1 />
+                <div>
+                  <Pie1 style={{ width: "70%", maxHeight: "400px" }} />
                 </div>
               </div>
               <div className="ChartPie">
                 <span className="TituloItem">Insumos disponibles</span>
-                <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie2 />
+                <div>
+                  <Pie2 style={{ width: "70%", maxHeight: "400px" }} />
                 </div>
               </div>
             </div>

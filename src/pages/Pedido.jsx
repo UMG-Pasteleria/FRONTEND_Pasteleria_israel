@@ -1,4 +1,3 @@
-
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
@@ -257,21 +256,18 @@ function Pedido() {
   //   document.getElementById("total").htmlFor = total;
   // }
 
+  /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
+  const navegate = useNavigate();
 
-  
-    /*----Proteger Rutas---Solo se puede accesar SI ESTA LOGEADO */
-    const navegate = useNavigate();
+  useEffect(() => {
+    // Comprobar si el token existe en el localStorage
+    const token = localStorage.getItem("token");
 
-    useEffect(() => {
-      // Comprobar si el token existe en el localStorage
-      const token = localStorage.getItem('token');
-  
-      // Si no hay token, redirigir al inicio
-      if (!token) {
-        navegate('/Admin'); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
-      }
-    }, []);
-
+    // Si no hay token, redirigir al inicio
+    if (!token) {
+      navegate("/Admin"); // Reemplaza '/inicio' con la ruta a la que quieres redirigir
+    }
+  }, []);
 
   return (
     <>
@@ -699,7 +695,7 @@ function Pedido() {
 
                   <div className="pagoP">
                     <p>Cantidad: {pedidos.cantidad}</p>
-                    <p>Total: Q. {pedidos.total}</p>
+                    {/* <p>Total: Q. {pedidos.total}</p> */}
                     <p>Anticipo: Q. {pedidos.anticipo}</p>
                   </div>
 

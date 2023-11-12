@@ -43,7 +43,7 @@ function Pie2() {
       },
       title: {
         display: true,
-        text: "Total de pasteles vendidos durante la semana",
+        text: "Canitidad de pasteles disponibles",
         position: "bottom",
       },
       responsive: true,
@@ -58,7 +58,7 @@ function Pie2() {
     labels: pastel,
     datasets: [
       {
-        label: "Ventas de pasteles",
+        label: "Pasteles disponibles",
         data: stock,
         backgroundColor: [
           "rgba(255, 154, 90,0.5)",

@@ -12,19 +12,17 @@ const ModalupTipoClient = ({
   tclientes,
 }) => {
   const [tcliente, setTCliente] = useState([]);
-
+  const URL = import.meta.env.VITE_URL;
   const getDataUp = async (idtcl) => {
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${idtcl}`,
-        { headers: { "content-Type": "application/json" } }
-      );
+      const response = await fetch(URL + `tipo_cliente/${idtcl}`, {
+        headers: { "content-Type": "application/json" },
+      });
       const tcliente = await response.json();
       setTCliente(tcliente);
       setTClienteoUP({
         idtcl: tcliente.idtcl,
         tipo_cl: tcliente.tipo_cl,
-      
       });
       console.log(tcliente);
     } catch (err) {
@@ -43,8 +41,6 @@ const ModalupTipoClient = ({
   const [tclienteUP, setTClienteoUP] = useState({
     idtcl: "",
     tipo_cl: "",
-   
-    
   });
 
   const onChangeData = (e) => {
@@ -58,16 +54,13 @@ const ModalupTipoClient = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(
-        `https://8086zfpm-3000.use.devtunnels.ms/tipo_cliente/${tclienteUP.idtcl}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(tclienteUP),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(URL + `tipo_cliente/${tclienteUP.idtcl}`, {
+        method: "PUT",
+        body: JSON.stringify(tclienteUP),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       console.log(response);
@@ -140,7 +133,8 @@ const ModalupTipoClient = ({
                     value={tclienteUP.idtcl}
                     name="idtcl"
                     onChange={(e) => onChangeData(e)}
-                    disabled selected
+                    disabled
+                    selected
                   ></input>
                 </div>
 

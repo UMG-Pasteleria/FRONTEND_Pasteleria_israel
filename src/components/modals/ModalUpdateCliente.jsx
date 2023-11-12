@@ -12,7 +12,7 @@ const ModalupClient = ({
   clientes,
 }) => {
   const [cliente, setCliente] = useState([]);
-  const URL = "https://8086zfpm-3000.use.devtunnels.ms/";
+  const URL = import.meta.env.VITE_URL;
 
   const getDataUp = async (idcliente) => {
     try {

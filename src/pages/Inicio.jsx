@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/04.jpg";
 import Pie1 from "../components/chart/Pie1";
+import Pie2 from "../components/chart/Pie2";
 import ChartDias from "../components/chart/grafica1";
 import Navbar from "../components/navbar";
 import "../styles/Inicio.css";
@@ -44,21 +45,21 @@ function Inicio() {
             <button
               type="button"
               className="butonReport"
-              onClick={() => navegate("/Admin/Reportes")}
+              onClick={() => navegate("/Admin/ReporteOficial")}
             >
               Ver completo
             </button>
             <div className="ContenedorPie">
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles vendidos</span>
-                <div style={{ width: "70%", maxHeight: "400px" }}>
-                  <Pie1 />
+                <div>
+                  <Pie1 style={{ width: "70%", maxHeight: "400px" }} />
                 </div>
               </div>
               <div className="ChartPie">
                 <span className="TituloItem">Pasteles disponibles</span>
-                <div style={{ width: "70%", maxHeight: "400px" }}>
-                  {/* <Pie2 /> */}
+                <div>
+                  <Pie2 style={{ width: "70%", maxHeight: "400px" }} />
                 </div>
               </div>
             </div>
@@ -66,7 +67,7 @@ function Inicio() {
           <article className="MenuInicio">
             <div
               className="ElementoMenu1"
-              onClick={() => navegate("/Admin/Productos")}
+              onClick={() => navegate("/Admin/Producto")}
             >
               <span className="TituloItem">Productos</span>
             </div>

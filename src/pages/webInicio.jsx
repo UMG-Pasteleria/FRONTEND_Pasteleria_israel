@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/04.jpg";
-import NavbarWEB from "../components/navbarWeb";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/webInicio.css";
@@ -56,7 +55,6 @@ const Web = () => {
             </div>
           </div>
         </footer>
-        <NavbarWEB />
       </div>
     </>
   );

@@ -79,7 +79,7 @@ const ModalupPedido = ({
     //console.log(dataProduct);
 
     try {
-      const response = await fetch(`URL + pedidos/${pedidoUP.idpedido}`, {
+      const response = await fetch(URL + `pedidos/${pedidoUP.idpedido}`, {
         method: "PUT",
         body: JSON.stringify(pedidoUP),
         headers: {

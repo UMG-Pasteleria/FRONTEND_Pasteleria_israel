@@ -29,7 +29,7 @@ const PDFGenerator = ({ data }) => {
     // Define las columnas de la tabla
     const tableColumn = [
       "No.",
-      "Responsable",
+      "Proveedor",
       "Producto",
       "Cantidad",
       "Metodo de pago",
@@ -41,11 +41,12 @@ const PDFGenerator = ({ data }) => {
     data.forEach((item) => {
       const rowData = [
         ++contador,
-        item.responsable,
-        item.nombre_producto,
+        item.nombre_proveedor,
+        item.producto,
         item.cantidad,
-        item.metd_pago,
-        item.emision,
+        item.idetallec,
+        item.nit,
+        item.descripcion,
         item.entrega,
       ];
       tableRows.push(rowData);

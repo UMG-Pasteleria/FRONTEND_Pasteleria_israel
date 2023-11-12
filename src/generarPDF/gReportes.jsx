@@ -28,7 +28,17 @@ const PDFGenerator = ({ data }) => {
     doc.text(`Fecha de Generación: ${date}`, 130, 15);
 
     // Define las columnas de la tabla
-    const tableColumn = ["No","Pedido No.", "Cliente", "Telefono", "Pastel", "Tamaño", "Decoracion","Cantidad", "Fecha de entrega"];
+    const tableColumn = [
+      "No",
+      "Pedido No.",
+      "Cliente",
+      "Telefono",
+      "Pastel",
+      "Tamaño",
+      "Decoracion",
+      "Cantidad",
+      "Fecha de entrega",
+    ];
     const tableRows = [];
 
     data.forEach((item) => {
@@ -79,7 +89,7 @@ PDFGenerator.propTypes = {
       tamanio: PropTypes.string,
       decoracion: PropTypes.string,
       cantidad: PropTypes.string,
-      fecha_entrega: PropTypes.string
+      fecha_entrega: PropTypes.string,
       // Define más validaciones según la estructura de cada elemento en 'data' si es necesario
     })
   ),
